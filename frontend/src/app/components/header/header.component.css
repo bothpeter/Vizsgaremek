@@ -1,33 +1,50 @@
-header{
+header {
     display: flex;
     align-items: center;
     padding-inline: 16px;
-    background-color: #333;
+    background-color: black;
     color: white;
     justify-content: space-between;
     font-size: 18px;
 
-    nav{
-        width: 100%;
+    nav {
         display: flex;
         align-items: center;
+        margin-left: auto;
 
-        > span{
-            cursor: pointer;
-            &:hover{
-                color: #777;
-            }
-        }
-
-        ul{
+        ul {
             list-style: none;
-            
-            li{
+            display: flex;
+            gap: 16px;
+
+            li {
+                position: relative;
                 cursor: pointer;
-                &:hover{
-                    color: #777;
+                padding-bottom: 4px;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 1px;
+                    background-color: red;
+                    transition: width 0.3s ease;
+                }
+
+                &:hover::after,
+                &:focus-within::after {
+                    width: 75%;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    outline: none;
                 }
             }
         }
     }
 }
+
