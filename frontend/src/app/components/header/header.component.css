@@ -11,16 +11,17 @@ header {
         display: flex;
         align-items: center;
         margin-left: auto;
-        margin-top: 3px;
 
         ul {
             list-style: none;
             display: flex;
-            gap: 16px;
+            align-items: center;
 
             li {
                 position: relative;
                 cursor: pointer;
+                display: flex;
+                align-items: center;
                 padding-bottom: 2px;
 
                 &::after {
@@ -29,9 +30,9 @@ header {
                     bottom: 0;
                     left: 0;
                     width: 0%;
-                    height: 1.5px;
+                    height: 2px;
                     background-color: red;
-                    transition: width 0.3s ease;
+                    transition: 0.2s ease;
                     border-radius: 10px;
                 }
 
@@ -40,13 +41,47 @@ header {
                     width: 75%;
                 }
 
-                a {
-                    text-decoration: none;
-                    color: inherit;
-                    outline: none;
+                &.settings-icon, 
+                &.login-button {
+                    &::after {
+                        width: 0;
+                    }
+                }
+
+                &.settings-icon .icon-circle .bi {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: red;
+                }
+
+                &.settings-icon .icon-circle .bi:hover {
+                    background-color: rgb(198, 19, 19);
+                    transition: 0.1s ease;
+                }
+
+                &.settings-icon .icon-circle i {
+                    color: black;
+                    font-size: 24px;
+                }
+
+                &.login-button {
+                    background-color: red;
+                    color: black;
+                    font-weight: bold;
+                    padding: 9px 16px;
+                    border-radius: 8px;
+                    transition: 0.1s ease;
+                }
+                
+                &.login-button:hover {
+                    background-color: rgb(198, 19, 19);
+                    transition: 0.1s ease;
                 }
             }
         }
     }
 }
-
