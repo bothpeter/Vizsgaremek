@@ -11,6 +11,7 @@ header {
         display: flex;
         align-items: center;
         margin-left: auto;
+        margin-top: 3px;
 
         ul {
             list-style: none;
@@ -20,7 +21,7 @@ header {
             li {
                 position: relative;
                 cursor: pointer;
-                padding-bottom: 4px;
+                padding-bottom: 2px;
 
                 &::after {
                     content: '';
@@ -28,9 +29,10 @@ header {
                     bottom: 0;
                     left: 0;
                     width: 0%;
-                    height: 1px;
+                    height: 1.5px;
                     background-color: red;
                     transition: width 0.3s ease;
+                    border-radius: 10px;
                 }
 
                 &:hover::after,
