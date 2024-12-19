@@ -31,7 +31,7 @@ header {
                     left: 0;
                     width: 0%;
                     height: 2px;
-                    background-color: red;
+                    background-color: #FC282C;
                     transition: 0.2s ease;
                     border-radius: 10px;
                 }
@@ -55,7 +55,7 @@ header {
                     width: 40px;
                     height: 40px;
                     border-radius: 50%;
-                    background-color: red;
+                    background-color: #FC282C;
                 }
 
                 &.settings-icon .icon-circle .bi:hover {
@@ -69,7 +69,7 @@ header {
                 }
 
                 &.login-button {
-                    background-color: red;
+                    background-color: #FC282C;
                     color: black;
                     font-weight: bold;
                     padding: 9px 16px;
