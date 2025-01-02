@@ -9,7 +9,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('exercise', function () {
-    return 'fuck u';
+    return 'mukodik';
 });
 
 Route::get('exercise',[ExerciseController::class, 'index']);
