@@ -12,4 +12,6 @@ Route::get('exercise', function () {
     return 'mukodik';
 });
 
-Route::get('exercise',[ExerciseController::class, 'index']);
+Route::get('exercise',[ExerciseController::class, 'view_exercises']);
+
+Route::post('exercise',[ExerciseController::class, 'post_exercises']);
