@@ -66,11 +66,11 @@
     <div class="header">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="center">
     </div>
-
+        
     <div class="content">
         <div class="highlighted-div">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</div>
-        <div class="highlighted-div">Fetch Example 2</div>
-        <div class="highlighted-div">Fetch Example 3</div>
+        <hr>
+        <div class="highlighted-div">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</div>
     </div>
 </body>
 </html>
