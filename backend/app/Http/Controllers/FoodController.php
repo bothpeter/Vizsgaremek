@@ -12,7 +12,7 @@ class FoodController extends Controller
 
         $data = [
             'status' =>200,
-            'exercise'=> $food
+            'food'=> $food
         ];
         return response()->json($data,200);
     }
