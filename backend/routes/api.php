@@ -17,3 +17,4 @@ Route::get('exercise',[ExerciseController::class, 'view_exercises']);
 Route::post('exercise',[ExerciseController::class, 'post_exercises']);
 
 Route::get('food',[FoodController::class, 'view_foods']);
+Route::post('food',[FoodController::class, 'post_foods']);
