@@ -8,14 +8,15 @@ class Food extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
         'food_id',
-        'descriptipn',
+        'user_id',
+        'description',
         'type',
         'calorie',
         'fat',
         'protein',
         'carb',
-        'img_url',  
+        'img_url',
     ];
+    
 }

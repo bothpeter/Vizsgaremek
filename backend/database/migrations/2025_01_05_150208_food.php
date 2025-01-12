@@ -12,18 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('food', function (Blueprint $table) {
-            $table->id('food_id'); // Primary key
-            $table->unsignedBigInteger('user_id'); // Foreign key
-            $table->string('description'); // Corrected typo
+            $table->food_id();
+            $table->integer('user_id');
+            $table->string('description');
             $table->string('type');
-            $table->float('calorie')->nullable();
-            $table->float('fat')->nullable();
-            $table->float('protein')->nullable();
-            $table->float('carb')->nullable();
+            $table->integer('calorie');
+            $table->float('fat');
+            $table->float('protein');
+            $table->float('carb');
             $table->string('img_url')->nullable();
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

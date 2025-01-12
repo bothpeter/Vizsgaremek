@@ -18,10 +18,11 @@ class FoodController extends Controller
         return response()->json($data,200);
     }
 
-    public function post_food(Request $request){
+    public function post_foods(Request $request){
         $validator = Validator::make($request->all(),
         [
-            'description'=>'required'
+            'description'=>'required',
+            'type'=>'required'
         ]);
 
         if($validator->fails())
@@ -39,14 +40,15 @@ class FoodController extends Controller
         {
             $food = new Food();
 
-            $food->description=$request->description;
-            $food->type=$request->type;
-            $food->calorie=$request->calorie;
-            $food->fat=$request->fat;
-            $food->protein=$request->protein;
-            $food->carb=$request->carb;
+            $food->user_id = $request->user_id;
+            $food->description = $request->description;
+            $food->type = $request->type;
+            $food->calorie = $request->calorie;
+            $food->fat = $request->fat;
+            $food->protein = $request->protein;
+            $food->carb = $request->carb;
             $food->img_url = $request->img_url ?: null;
-            
+
             $food->save();
 
             $data=[
