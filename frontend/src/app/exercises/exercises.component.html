@@ -1,1 +1,9 @@
-<p>exercises works!</p>
+<div class="exercise-container">
+    <div *ngFor="let exercise of exercises" class="exercise-card">
+      <h3>{{ exercise.description }}</h3>
+      <p><strong>Muscle Group:</strong> {{ exercise.muscle_group }}</p>
+    </div>
+  </div>  
+<ng-template #loading>
+    <p>Loading exercises...</p>
+</ng-template>

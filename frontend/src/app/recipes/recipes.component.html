@@ -1,1 +1,12 @@
-<p>recipes works!</p>
+<div class="food-container">
+    <div class="food-card" *ngFor="let item of food">
+      <div class="food-description">
+        <h3>{{ item.description }}</h3>
+        <p>Calories: {{ item.calorie }} kcal</p>
+        <p>Protein: {{ item.protein }} g</p>
+        <p>Fat: {{ item.fat }} g</p>
+        <p>Carbs: {{ item.carb }} g</p>
+      </div>
+    </div>
+  </div>
+  
