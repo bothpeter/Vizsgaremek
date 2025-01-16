@@ -68,9 +68,9 @@
     </div>
         
     <div class="content">
-        <div class="highlighted-div">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</div>
+        <a href="http://127.0.0.1:8000/api/exercise" class="highlighted-div">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         <hr>
-        <div class="highlighted-div">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</div>
+        <a href="http://127.0.0.1:8000/api/food" class="highlighted-div">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
     </div>
 </body>
 </html>
