@@ -2,7 +2,6 @@ header {
     display: flex;
     align-items: center;
     padding-inline: 16px;
-    background-color: black;
     color: white;
     justify-content: space-between;
     font-size: 18px;
