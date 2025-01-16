@@ -10,6 +10,7 @@ class Food extends Model
     protected $fillable = [
         'food_id',
         'user_id',
+        'name',
         'description',
         'type',
         'calorie',
@@ -17,6 +18,7 @@ class Food extends Model
         'protein',
         'carb',
         'img_url',
+        'recipe'
     ];
     
 }

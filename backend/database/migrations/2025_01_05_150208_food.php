@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->food_id();
             $table->integer('user_id');
+            $table->string('name');
             $table->string('description');
             $table->string('type');
             $table->integer('calorie');
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->float('protein');
             $table->float('carb');
             $table->string('img_url')->nullable();
+            $table->string('recipe');
         });
     }
 

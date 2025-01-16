@@ -41,6 +41,7 @@ class FoodController extends Controller
             $food = new Food();
 
             $food->user_id = $request->user_id;
+            $food->name = $request->name;
             $food->description = $request->description;
             $food->type = $request->type;
             $food->calorie = $request->calorie;
@@ -48,6 +49,7 @@ class FoodController extends Controller
             $food->protein = $request->protein;
             $food->carb = $request->carb;
             $food->img_url = $request->img_url ?: null;
+            $food->recipe = $request->recipe;
 
             $food->save();
 
