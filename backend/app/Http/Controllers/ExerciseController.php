@@ -41,6 +41,7 @@ class ExerciseController extends Controller
         {
             $exercise = new Exercise();
 
+            $exercise->exercise_name=$request->exercise_name;
             $exercise->muscle_group=$request->muscle_group;
             $exercise->description=$request->description;
             $exercise->img_url = $request->img_url ?: null;

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->exercise_id();
+            $table->string('exercise_name');
             $table->string('muscle_group');
             $table->string('descriptipn');
             $table->string('img_url')->nullable();
