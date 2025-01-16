@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-exercises',
-  standalone: true, // Mark as standalone component
-  imports: [CommonModule], // Import CommonModule here
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.css']
 })

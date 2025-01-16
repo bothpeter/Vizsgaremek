@@ -1,9 +1,11 @@
-<div class="exercise-container">
-    <div *ngFor="let exercise of exercises" class="exercise-card">
-      <h3>{{ exercise.description }}</h3>
-      <p><strong>Muscle Group:</strong> {{ exercise.muscle_group }}</p>
+<div class="exercise-cards">
+  <div class="card" *ngFor="let exercise of exercises">
+    <img [src]="exercise.img_url" [alt]="exercise.exercise_name" />
+    <div class="card-content">
+      <h3>{{ exercise.exercise_name }}</h3>
+      <p><strong>Izomcsoport:</strong> {{ exercise.muscle_group }}</p>
+      <p><strong>Leírás:</strong> {{ exercise.description }}</p>
+      <p><strong>Típus:</strong> {{ exercise.type }}</p>
     </div>
-  </div>  
-<ng-template #loading>
-    <p>Loading exercises...</p>
-</ng-template>
+  </div>
+</div>

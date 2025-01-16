@@ -1,12 +1,21 @@
-<div class="food-container">
-    <div class="food-card" *ngFor="let item of food">
-      <div class="food-description">
-        <h3>{{ item.description }}</h3>
-        <p>Calories: {{ item.calorie }} kcal</p>
-        <p>Protein: {{ item.protein }} g</p>
-        <p>Fat: {{ item.fat }} g</p>
-        <p>Carbs: {{ item.carb }} g</p>
-      </div>
+<div class="food-cards">
+  <div class="card" *ngFor="let food of food">
+    <img
+      [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
+      [alt]="food.name"
+    />
+    <div class="card-content">
+      <h3>{{ food.name }}</h3>
+      <p><strong>Típus:</strong> {{ food.type | titlecase }}</p>
+      <p><strong>Leírás:</strong> {{ food.description }}</p>
+      <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
+      <p><strong>Fehérje:</strong> {{ food.protein }} g</p>
+      <p><strong>Zsír:</strong> {{ food.fat }} g</p>
+      <p><strong>Szénhidrát:</strong> {{ food.carb }} g</p>
+      <details>
+        <summary>Recept</summary>
+        <p>{{ food.recipe }}</p>
+      </details>
     </div>
   </div>
-  
+</div>
