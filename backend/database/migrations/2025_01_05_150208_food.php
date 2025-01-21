@@ -24,6 +24,16 @@ return new class extends Migration
             $table->string('img_url')->nullable();
             $table->string('recipe');
         });
+
+        Schema::create('food_ingredients', function (Blueprint $table) {
+            $table->food_ingredients_id();
+            $table->integer('food_id');
+            $table->string('ingredient_name');
+            $table->integer('calorie');
+            $table->float('fat');
+            $table->float('protein');
+            $table->float('carb');
+        });
     }
 
     /**
@@ -32,5 +42,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('food');
+        Schema::dropIfExists('food_ingredients');
     }
 };
