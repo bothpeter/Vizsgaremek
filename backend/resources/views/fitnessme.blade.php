@@ -73,6 +73,8 @@
         <a href="http://127.0.0.1:8000/api/food" class="highlighted-div">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients" class="highlighted-div">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/workout_plan" class="highlighted-div">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
     </div>
 </body>
 </html>

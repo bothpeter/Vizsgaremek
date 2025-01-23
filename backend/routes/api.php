@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\WorkoutController;
 use App\Models\FoodIngredients;
 
 Route::get('/user', function (Request $request) {
@@ -23,3 +24,6 @@ Route::post('food',[FoodController::class, 'post_foods']);
 
 Route::get('food_ingredients',[IngredientController::class, 'view_ingredients']);
 Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']);
+
+Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);
+Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
