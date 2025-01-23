@@ -30,3 +30,4 @@ Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);
 Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
 
 Route::get('meals',[MealsController::class, 'view_meals']);
+Route::post('meals',[MealsController::class, 'post_meals']);
