@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DietController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
@@ -31,3 +32,5 @@ Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
 
 Route::get('meals',[MealsController::class, 'view_meals']);
 Route::post('meals',[MealsController::class, 'post_meals']);
+
+Route::get('diet_plan',[DietController::class, 'view_diet_plan']);
