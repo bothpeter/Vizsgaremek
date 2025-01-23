@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\MealsController;
 use App\Http\Controllers\WorkoutController;
 use App\Models\FoodIngredients;
 
@@ -27,3 +28,5 @@ Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']
 
 Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);
 Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
+
+Route::get('meals',[MealsController::class, 'view_meals']);
