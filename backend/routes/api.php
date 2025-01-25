@@ -34,3 +34,4 @@ Route::get('meals',[MealsController::class, 'view_meals']);
 Route::post('meals',[MealsController::class, 'post_meals']);
 
 Route::get('diet_plan',[DietController::class, 'view_diet_plan']);
+Route::post('diet_plan',[DietController::class, 'post_diet_plan']);

@@ -46,11 +46,11 @@ class WorkoutController extends Controller
             $workout_plan->goodFor = $request->goodFor;
             $workout_plan->description = $request->description;
             $workout_plan->type = $request->type;
-            $workout_plan->exercise1_id = $request->exercise1;
-            $workout_plan->exercise2_id = $request->exercise2;
-            $workout_plan->exercise3_id = $request->exercise3;
-            $workout_plan->exercise4_id = $request->exercise4;
-            $workout_plan->exercise5_id = $request->exercise5;
+            $workout_plan->exercise1_id = $request->exercise1_id;
+            $workout_plan->exercise2_id = $request->exercise2_id;
+            $workout_plan->exercise3_id = $request->exercise3_id;
+            $workout_plan->exercise4_id = $request->exercise4_id;
+            $workout_plan->exercise5_id = $request->exercise5_id;
 
             $workout_plan->save();
 
