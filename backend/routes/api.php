@@ -7,8 +7,8 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MealsController;
+use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\WorkoutController;
-use App\Models\FoodIngredients;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,3 +35,12 @@ Route::post('meals',[MealsController::class, 'post_meals']);
 
 Route::get('diet_plan',[DietController::class, 'view_diet_plan']);
 Route::post('diet_plan',[DietController::class, 'post_diet_plan']);
+
+Route::get('user_like_exercise',[UserDataController::class, 'view_user_like_exercise']);
+Route::post('user_like_exercise',[UserDataController::class, 'post_user_like_exercise']);
+
+Route::get('user_like_food',[UserDataController::class, 'view_user_like_food']);
+Route::post('user_like_food',[UserDataController::class, 'post_user_like_food']);
+
+Route::get('user_physique',[UserDataController::class, 'view_user_physique']);
+Route::post('user_physique',[UserDataController::class, 'post_user_physique']);

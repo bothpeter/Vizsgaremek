@@ -79,6 +79,12 @@
         <a href="http://127.0.0.1:8000/api/workout_plan" class="highlighted-div">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/diet_plan" class="highlighted-div">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food" class="highlighted-div">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="highlighted-div">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_physique" class="highlighted-div">Url for physiques endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
     </div>
 </body>
 </html>
