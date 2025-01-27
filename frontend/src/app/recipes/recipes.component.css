@@ -10,8 +10,8 @@
   width: 300px;
   border: 1px solid #333;
   border-radius: 8px;
-  overflow: hidden;
   background-color: #1e1e1e;
+  overflow: hidden;
   cursor: pointer;
 }
 
@@ -29,27 +29,13 @@
 .card-content h3 {
   margin: 0 0 8px;
   font-size: 1.25em;
-  color: #ffffff;
+  color: #fff;
 }
 
 .card-content p {
   margin: 4px 0;
   font-size: 0.9em;
   color: #b0b0b0;
-}
-
-.popup-content {
-  background-color: #1e1e1e;
-  padding: 24px;
-  padding-top: 0 !important;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 1000px;
-  max-height: 80vh;
-  color: #ffffff;
-  position: relative;
-  overflow-y: auto;
-  scrollbar-color: #FC282C #1e1e1e;
 }
 
 .popup {
@@ -65,9 +51,21 @@
   z-index: 1000;
 }
 
+.popup-content {
+  position: relative;
+  background-color: #1e1e1e;
+  padding: 24px;
+  padding-top: 0;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 1000px;
+  max-height: 80vh;
+  color: #fff;
+  overflow-y: auto;
+}
 
 .popup-content ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -77,23 +75,22 @@
   padding: 8px;
   margin: 4px 0;
   border-radius: 4px;
-  color: #ffffff;
+  color: #fff;
 }
 
 .nutrition-row {
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 16px;
-  margin-bottom: 16px;
   flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+  justify-content: space-between;
 }
 
 .nutrition-item {
   background-color: #2a2a2a;
   padding: 8px 16px;
   border-radius: 4px;
-  color: #ffffff;
+  color: #fff;
   font-size: 1em;
   display: flex;
 }
@@ -103,45 +100,27 @@
   margin-right: 8px;
 }
 
-h4 {
+h4, p strong {
   color: #FC282C;
 }
 
-p strong {
-  color: #FC282C;
-}
-
-@media (max-width: 960px) {
-  .nutrition-item {
-    flex: 1 1 calc(50% - 12px);
-    /* 2 items per row on smaller screens */
-  }
-}
-
-.recipe {
+.recipe, .description {
   background-color: #2a2a2a;
   padding: 8px 16px;
   border-radius: 4px;
-  color: #ffffff;
-}
-
-.description {
-  background-color: #2a2a2a;
-  padding: 8px 16px;
-  border-radius: 4px;
-  color: #ffffff;
+  color: #fff;
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #FC282C;
-  color: #ffffff;
-  border: none;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: #FC282C;
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,7 +133,8 @@ p strong {
   background-color: rgb(198, 19, 19);
 }
 
-.close-btn i {
-  color: #000000;
-  /* Make the X black */
+@media (max-width: 960px) {
+  .nutrition-item {
+    flex: 1 1 calc(50% - 12px);
+  }
 }
