@@ -74,7 +74,11 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients" class="highlighted-div">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
         <hr>
+        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="highlighted-div">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/1</a>
+        <hr>
         <a href="http://127.0.0.1:8000/api/meals" class="highlighted-div">Url for meals endpoint :<br> http://127.0.0.1:8000/api/meals</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/meals/1" class="highlighted-div">Url for meals by userid endpoint :<br> http://127.0.0.1:8000/api/meals/1</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/workout_plan" class="highlighted-div">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
         <hr>
@@ -82,9 +86,15 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food" class="highlighted-div">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
         <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="highlighted-div">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/1</a>
+        <hr>
         <a href="http://127.0.0.1:8000/api/user_like_exercise" class="highlighted-div">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
         <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="highlighted-div">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/1</a>
+        <hr>
         <a href="http://127.0.0.1:8000/api/user_physique" class="highlighted-div">Url for physiques endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_physique/1" class="highlighted-div">Url for physiques by userid endpoint :<br> http://127.0.0.1:8000/api/user_physique/1</a>
     </div>
 </body>
 </html>

@@ -56,4 +56,14 @@ class MealsController extends Controller
         }
 
     }
+
+    public function view_meals_by_user_id($id){
+        $meal = Meals::where('user_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'meal'=> $meal
+        ];
+        return response()->json($data,200);
+    }
 }

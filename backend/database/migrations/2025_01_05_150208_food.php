@@ -29,6 +29,7 @@ return new class extends Migration
             $table->food_ingredients_id();
             $table->integer('food_id');
             $table->string('ingredient_name');
+            $table->text('amount');
             $table->integer('calorie');
             $table->float('fat');
             $table->float('protein');

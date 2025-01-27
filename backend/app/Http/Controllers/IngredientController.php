@@ -42,6 +42,7 @@ class IngredientController extends Controller
 
             $ingredients->food_id = $request->food_id;
             $ingredients->ingredient_name = $request->ingredient_name;
+            $ingredients->amount = $request->amount;
             $ingredients->calorie = $request->calorie;
             $ingredients->fat = $request->fat;
             $ingredients->protein = $request->protein;

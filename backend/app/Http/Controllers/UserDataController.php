@@ -115,4 +115,34 @@ class UserDataController extends Controller
 
         return response()->json($data,200);
     }
+
+    public function view_user_like_exercise_by_user_id($id){
+        $UserLikeExercise = UserLikeExercise::where('user_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'UserLikeExercise'=> $UserLikeExercise
+        ];
+        return response()->json($data,200);
+    }
+
+    public function view_user_like_food_by_user_id($id){
+        $UserLikeFood = UserLikeFood::where('user_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'UserLikeFood'=> $UserLikeFood
+        ];
+        return response()->json($data,200);
+    }
+
+    public function view_user_physique_by_user_id($id){
+        $UserPhysique = UserPhysique::where('user_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'UserPhysique'=> $UserPhysique
+        ];
+        return response()->json($data,200);
+    }
 }

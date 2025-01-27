@@ -11,6 +11,7 @@ class FoodIngredients extends Model
         'food_ingredients_id',
         'food_id',
         'ingredient_name',
+        'amount',
         'calorie',
         'fat',
         'protein',
