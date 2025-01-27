@@ -71,3 +71,44 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.popup-content {
+  background-color: #1e1e1e;
+  padding: 24px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  color: #ffffff;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #FC282C #1e1e1e;
+}
+
+.popup-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background-color: #FC282C;
+  border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
