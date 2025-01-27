@@ -4,21 +4,10 @@ html, body{
     margin: 0;
     padding: 0;
     background-color: #0f0f0f;
+    scrollbar-color: #FC282C #1e1e1e;
 }
 
 *{
     font-family: Arial, Helvetica, sans-serif;
     outline: none;
-}
-
-body::-webkit-scrollbar {
-    width: 10px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: #FC282C;
-}
-
-body::-webkit-scrollbar-track {
-    background-color: #1e1e1e;
 }
