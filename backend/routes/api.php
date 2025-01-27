@@ -25,6 +25,7 @@ Route::get('food',[FoodController::class, 'view_foods']);
 Route::post('food',[FoodController::class, 'post_foods']);
 
 Route::get('food_ingredients',[IngredientController::class, 'view_ingredients']);
+Route::get('food_ingredients/{id}',[IngredientController::class, 'view_ingredient_by_food_id']);
 Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']);
 
 Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);

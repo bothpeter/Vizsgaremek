@@ -59,4 +59,25 @@ class IngredientController extends Controller
         }
 
     }
+
+    public function view_ingredient_by_food_id($food_id){
+        $ingredients = FoodIngredients::where('food_id', $food_id)->get();
+
+        if($ingredients->isNotEmpty())
+        {
+            $data=[
+                'status'=>200,
+                'ingredients'=>$ingredients
+            ];
+            return response()->json($data,200);
+        }
+        else
+        {
+            $data=[
+                'status'=>404,
+                'message'=>'Ingredients not found for the given food ID'
+            ];
+            return response()->json($data,404);
+        }
+    }
 }
