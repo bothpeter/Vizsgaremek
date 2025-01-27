@@ -1,39 +1,49 @@
 <div class="food-cards">
-  <div class="card" *ngFor="let food of food" (click)="openPopup(food)">
-    <img
+	<div class="card" *ngFor="let food of food" (click)="openPopup(food)">
+		<!-- <img
       [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
       [alt]="food.name"
-    />
-    <div class="card-content">
-      <h3>{{ food.name }}</h3>
-      <p><strong>Leírás:</strong> {{ food.description }}</p>
-      <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
-      <p><strong>Fehérje:</strong> {{ food.protein }} g</p>
-      <p><strong>Zsír:</strong> {{ food.fat }} g</p>
-      <p><strong>Szénhidrát:</strong> {{ food.carb }} g</p>
-      <details>
-        <summary>Recept</summary>
-        <p>{{ food.recipe }}</p>
-      </details>
-    </div>
-  </div>
+    /> -->
+		<div class="card-content">
+			<h3>{{ food.name }}</h3>
+			<p><strong>Leírás:</strong> {{ food.description }}</p>
+			<p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
+		</div>
+	</div>
 </div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
-  <div class="popup-content" (click)="$event.stopPropagation()">
-    <h3>{{ selectedFood.name }}</h3>
-    <p><strong>Leírás:</strong> {{ selectedFood.description }}</p>
-    <p><strong>Kalória:</strong> {{ selectedFood.calorie }} kcal</p>
-    <p><strong>Fehérje:</strong> {{ selectedFood.protein }} g</p>
-    <p><strong>Zsír:</strong> {{ selectedFood.fat }} g</p>
-    <p><strong>Szénhidrát:</strong> {{ selectedFood.carb }} g</p>
-    <summary>Recept</summary>
-    <p>{{ selectedFood.recipe }}</p>
-    <h4>Hozzávalók:</h4>
-    <ul>
-      <li *ngFor="let ingredient of ingredients">
-        {{ ingredient.ingredient_name }}
-      </li>
-    </ul>
-  </div>
+	<div class="popup-content" (click)="$event.stopPropagation()">
+		<button class="close-btn" (click)="closePopup()">
+			<i class="fas fa-times"></i>
+		</button>
+
+		<h3>{{ selectedFood.name }}</h3>
+		<p class="description">{{ selectedFood.description }}</p>
+		<div class="nutrition-row">
+			<div class="nutrition-item">
+				<strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
+			</div>
+			<div class="nutrition-item">
+				<strong>Fehérje:</strong> {{ selectedFood.protein }} g
+			</div>
+			<div class="nutrition-item">
+				<strong>Zsír:</strong> {{ selectedFood.fat }} g
+			</div>
+			<div class="nutrition-item">
+				<strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
+			</div>
+		</div>
+
+		<h4>Hozzávalók:</h4>
+		<ul>
+			<li *ngFor="let ingredient of ingredients">
+				{{ ingredient.ingredient_name }}
+			</li>
+		</ul>
+
+		<h4>Elkészítés: </h4>
+		<p class="recipe">{{ selectedFood.recipe }}</p>
+
+	</div>
 </div>

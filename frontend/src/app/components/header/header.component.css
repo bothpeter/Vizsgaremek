@@ -11,6 +11,10 @@ header {
         align-items: center;
         margin-left: auto;
 
+        .login-ul{
+            padding-left: 30px;
+        }
+
         ul {
             list-style: none;
             display: flex;
@@ -40,7 +44,7 @@ header {
                     width: 75%;
                 }
 
-                &.settings-icon, 
+                &.settings-icon,
                 &.login-button {
                     &::after {
                         width: 0;
@@ -75,7 +79,7 @@ header {
                     border-radius: 8px;
                     transition: 0.1s ease;
                 }
-                
+
                 &.login-button:hover {
                     background-color: rgb(198, 19, 19);
                     transition: 0.1s ease;
