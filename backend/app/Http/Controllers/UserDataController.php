@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meals;
 use App\Models\UserLikeExercise;
 use App\Models\UserLikeFood;
 use App\Models\UserPhysique;
@@ -36,6 +37,16 @@ class UserDataController extends Controller
         $data = [
             'status' =>200,
             'UserPhysique'=> $UserPhysique
+        ];
+        return response()->json($data,200);
+    }
+
+    public function view_meals(){
+        $meal = Meals::all();
+
+        $data = [
+            'status' =>200,
+            'meal'=> $meal
         ];
         return response()->json($data,200);
     }
@@ -116,6 +127,45 @@ class UserDataController extends Controller
         return response()->json($data,200);
     }
 
+    public function post_meals(Request $request){
+        $validator = Validator::make($request->all(),
+        [
+            'user_id'=>'required',
+            'food_id'=>'required'
+        ]);
+
+        if($validator->fails())
+        {
+            $data=[
+                
+                "status"=>422,
+                "message"=>$validator->message()
+            ];
+            
+            return response()->json($data,422);
+        }
+
+        else
+        {
+            $meal = new Meals();
+
+            $meal->user_id = $request->user_id;
+            $meal->food_id = $request->food_id;
+            $meal->time = $request->time;
+
+            $meal->save();
+
+            $data=[
+                
+                'status'=>200,
+                'message'=>'Data uploaded'
+            ];
+
+            return response()->json($data,200);
+        }
+
+    }
+
     public function view_user_like_exercise_by_user_id($id){
         $UserLikeExercise = UserLikeExercise::where('user_id',$id)->get();
 
@@ -142,6 +192,16 @@ class UserDataController extends Controller
         $data = [
             'status' =>200,
             'UserPhysique'=> $UserPhysique
+        ];
+        return response()->json($data,200);
+    }
+
+    public function view_meals_by_user_id($id){
+        $meal = Meals::where('user_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'meal'=> $meal
         ];
         return response()->json($data,200);
     }
