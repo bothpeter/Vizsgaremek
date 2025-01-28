@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="login-card">
+        <h2>Üdv újra!</h2>
+        <p class="subtitle">Jelentkezz be a folytatáshoz</p>
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group">
+                <label for="username">Felhasználónév</label>
+                <input type="text" id="username" name="username" [(ngModel)]="username" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
+                <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
+                    A felhasználónév kötelező.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Jelszó</label>
+                <input type="password" id="password" name="password" [(ngModel)]="password" required #passwordInput="ngModel" placeholder="Add meg a jelszavad" />
+                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+                    A jelszó kötelező.
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="!loginForm.form.valid">Bejelentkezés</button>
+        </form>
+        <div class="footer">
+            <div>Nincs még fiókod? <strong routerLink="/register">Regisztrálj</strong></div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     background-color: #0f0f0f;
 }
 
-.login-card {
+.register-card {
     background-color: #1e1e1e;
     border-radius: 12px;
     padding: 2.5rem;
