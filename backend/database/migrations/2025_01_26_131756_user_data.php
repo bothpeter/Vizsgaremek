@@ -26,7 +26,7 @@ return new class extends Migration
             $table->float('height');
             $table->float('weight');
             $table->integer('age');
-            $table->string('type');
+            $table->string('gender');
         });
     }
 

@@ -26,7 +26,7 @@ class UserDataController extends Controller
 
         $data = [
             'status' =>200,
-            'UserLikeFood$UserLikeFood'=> $UserLikeFood
+            'UserLikeFood'=> $UserLikeFood
         ];
         return response()->json($data,200);
     }
@@ -74,15 +74,15 @@ class UserDataController extends Controller
 
         else
         {
-            $meal = new UserPhysique();
+            $userPhysique = new UserPhysique();
 
-            $meal->user_id = $request->user_id;
-            $meal->height = $request->height;
-            $meal->weight = $request->weight;
-            $meal->age = $request->age;
-            $meal->gender = $request->gender;
+            $userPhysique->user_id = $request->user_id;
+            $userPhysique->height = $request->height;
+            $userPhysique->weight = $request->weight;
+            $userPhysique->age = $request->age;
+            $userPhysique->gender = $request->gender;
 
-            $meal->save();
+            $userPhysique->save();
 
             $data=[
                 
