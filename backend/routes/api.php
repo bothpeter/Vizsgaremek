@@ -18,6 +18,7 @@ Route::get('exercise', function () {
 });
 
 Route::get('exercise',[ExerciseController::class, 'view_exercises']);
+Route::get('exercise/{id}',[ExerciseController::class, 'view_exercise_by_exercise_id']);
 Route::post('exercise',[ExerciseController::class, 'post_exercises']);
 
 Route::get('food',[FoodController::class, 'view_foods']);

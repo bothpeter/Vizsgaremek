@@ -18,6 +18,16 @@ class ExerciseController extends Controller
         return response()->json($data,200);
     }
 
+    public function view_exercise_by_exercise_id($id){
+        $exercise = Exercise::where('exercise_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'exercise'=> $exercise
+        ];
+        return response()->json($data,200);
+    }
+
     public function post_exercises(Request $request){
         $validator = Validator::make($request->all(),
         [

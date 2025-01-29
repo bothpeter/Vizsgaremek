@@ -47,9 +47,9 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
-
-        
-
+        .text {
+            color: white;
+        }
         .highlighted-div:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(241, 3, 3, 0.2), 0 6px 10px rgba(241, 3, 3, 0.2);
@@ -68,33 +68,71 @@
     </div>
         
     <div class="content">
-        <a href="http://127.0.0.1:8000/api/exercise" class="highlighted-div">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
+        <div class="highlighted-div">
+        <h2>Exercise</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food" class="highlighted-div">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
+        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients" class="highlighted-div">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
+        <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/id</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="highlighted-div">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/1</a>
+        <div class="highlighted-div">
+        <h2>Food</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/meals" class="highlighted-div">Url for meals endpoint :<br> http://127.0.0.1:8000/api/meals</a>
+        <a href="http://127.0.0.1:8000/api/food" class="text">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/meals/1" class="highlighted-div">Url for meals by userid endpoint :<br> http://127.0.0.1:8000/api/meals/1</a>
+        <div class="highlighted-div">
+        <h2>Food ingredients</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/workout_plan" class="highlighted-div">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
+        <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/diet_plan" class="highlighted-div">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
+        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/1</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food" class="highlighted-div">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
+        <div class="highlighted-div">
+        <h2>Workout Plan</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="highlighted-div">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/1</a>
+        <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="highlighted-div">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
+        <div class="highlighted-div">
+        <h2>Diet Plan</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="highlighted-div">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/1</a>
+        <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique" class="highlighted-div">Url for physiques endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <div class="highlighted-div">
+        <h2>Meals (the user eat this food)</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique/1" class="highlighted-div">Url for physiques by userid endpoint :<br> http://127.0.0.1:8000/api/user_physique/1</a>
+        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for meals endpoint :<br> http://127.0.0.1:8000/api/meals</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/meals/1" class="text">Url for meals by userid endpoint :<br> http://127.0.0.1:8000/api/meals/1</a>
+        </div>
+        <hr>
+        <div class="highlighted-div">
+        <h2>User liked foods</h2>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/1</a>
+        </div>
+        <hr>
+        <div class="highlighted-div">
+        <h2>User liked exercises</h2>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/1</a>
+        </div>
+        <hr>
+        <div class="highlighted-div">
+        <h2>User physique</h2>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for physiques endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_physique/1" class="text">Url for physiques by userid endpoint :<br> http://127.0.0.1:8000/api/user_physique/1</a>
+        </div>
     </div>
 </body>
 </html>
