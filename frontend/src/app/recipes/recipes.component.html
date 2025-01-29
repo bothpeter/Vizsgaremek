@@ -1,12 +1,9 @@
 <div class="food-cards">
 	<div class="card" *ngFor="let food of food" (click)="openPopup(food)">
-		<!-- <img
-      [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
-      [alt]="food.name"
-    /> -->
+		<img [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
+			[alt]="food.name" />
 		<div class="card-content">
 			<h3>{{ food.name }}</h3>
-			<p><strong>Leírás:</strong> {{ food.description }}</p>
 			<p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
 		</div>
 	</div>
@@ -38,6 +35,7 @@
 		<h4>Hozzávalók:</h4>
 		<ul>
 			<li *ngFor="let ingredient of ingredients">
+				{{ ingredient.amount }}
 				{{ ingredient.ingredient_name }}
 			</li>
 		</ul>
