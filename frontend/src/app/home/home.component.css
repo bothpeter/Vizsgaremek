@@ -1,45 +1,125 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px 0;
 }
 
+/* Hero Section */
 .hero {
+    color: #e0e0e0;
     text-align: center;
-    padding: 50px 20px;
-    background-color: #1e1e1e;
-    border-radius: 8px;
+    padding: 40px 0 80px 0;
+    height: 74vh;
+}
+
+.hero .logo {
+    width: 200px;
+    height: auto;
+    border-radius: 10%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #e0e0e0;
 }
 
 .hero h2 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
+    color: #e0e0e0;
 }
 
 .hero p {
     font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #b0b0b0; /* Világosabb szöveg a kiemeléshez */
 }
 
-.about, .features, .contact {
-    padding: 30px;
+.hero .cta-button {
+    background-color: #FC282C; /* Akcentus szín */
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.hero .cta-button:hover {
+    background-color: rgb(198, 19, 19); /* Akcentus hover szín */
+}
+
+/* About Section */
+.about {
+    background-color: #1e1e1e; /* Kiemelés szín */
+    padding: 60px 0;
+    text-align: center;
+}
+
+.about h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+.about p {
+    font-size: 1.1rem;
+    color: #b0b0b0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Features Section */
+.features {
+    background-color: #0f0f0f; /* Sötét háttér */
+    padding: 60px 0;
+    text-align: center;
+}
+
+.features h3 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #e0e0e0;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
 .feature {
-    background-color: #1e1e1e;
+    background-color: #1e1e1e; /* Kiemelés szín */
     padding: 20px;
     border-radius: 10px;
-    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sötét árnyék */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.feature i {
+    font-size: 2rem;
+    color: #FC282C; /* Akcentus szín */
+    margin-bottom: 15px;
 }
 
 .feature h4 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    color: #FC282C;
+    color: #e0e0e0;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #b0b0b0;
 }
 

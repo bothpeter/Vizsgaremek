@@ -1,44 +1,53 @@
 <section class="hero">
     <div class="container">
-        <h2>Az egészséges életmód kezdete</h2>
-        <p>Segítünk elérni céljaidat, legyen szó fogyásról, izomtömeg növelésről vagy fittentartásról.</p>
+        <img src="assets/logo_only.png" class="logo" alt="FitnessMe Logo">
+        <h1>FitnessMe</h1>
+        <h2>Az egészséges életmód kezdete itt kezdődik!</h2>
+        <p>Segítünk elérni céljaidat, legyen szó fogyásról, izomtömeg növelésről vagy egészséges fittségről.</p>
+        <a href="#features" class="cta-button">Fedezd fel a lehetőségeket</a>
     </div>
 </section>
 
 <section class="about" id="about">
     <div class="container">
-        <h3>Miért válaszd az oldalunkat?</h3>
-        <p>Weboldalunk segítségével egyszerűen alakíthatod ki az egészségesebb életmódot. Megmutatjuk a jól bevált utat céljaid eléréséhez, legyen szó testsúlycsökkentésről, izomépítésről vagy mindennapi vitalitásod növeléséről.</p>
+        <h3>Miért válaszd a FitnessMe-t?</h3>
+        <p>Weboldalunk segítségével egyszerűen alakíthatod ki az egészségesebb életmódot. Megmutatjuk a jól bevált utat céljaid eléréséhez, legyen szó testsúlycsökkentésről, izomépítésről vagy mindennapi energiaszinted növeléséről.</p>
     </div>
 </section>
 
 <section class="features" id="features">
     <div class="container">
-        <h3>Funkciók</h3>
+        <h3>Szolgáltatásaink</h3>
         <div class="features-grid">
-            <div class="feature">
+            <div routerLink="/calculator" class="feature">
+                <i class="fas fa-calculator"></i>
                 <h4>Kalória Kalkulátor</h4>
-                <p>Számítsd ki könnyedén a fogyáshoz, súlytartáshoz vagy hízáshoz szükséges kalória bevitelt.</p>
+                <p>Számítsd ki könnyedén a fogyáshoz, súlytartáshoz vagy hízáshoz szükséges napi kalória bevitelt.</p>
             </div>
-            <div class="feature">
-                <h4>Receptek</h4>
-                <p>Egészséges, otthon is könnyen elkészíthető diétás és tömegnövelő receptek.</p>
+            <div routerLink="/recipes" class="feature">
+                <i class="fas fa-utensils"></i>
+                <h4>Egészséges Receptek</h4>
+                <p>Fedezz fel egészséges, otthon is könnyen elkészíthető recepteket, amelyek segítenek céljaid elérésében.</p>
             </div>
-            <div class="feature">
+            <div routerLink="/" class="feature">
+                <i class="fas fa-dumbbell"></i>
                 <h4>Edzéstervek</h4>
-                <p>Használj előre összeállított edzésterveket, vagy készítsd el a sajátodat.</p>
+                <p>Használj előre összeállított edzésterveket, vagy készítsd el a sajátodat, hogy hatékonyabban érd el céljaidat.</p>
             </div>
-            <div class="feature">
+            <div routerLink="/exercises" class="feature">
+                <i class="fas fa-running"></i>
                 <h4>Gyakorlatok</h4>
-                <p>Fedezd fel a különböző izomcsoportokra ajánlott konditermes és saját testsúlyos gyakorlatokat.</p>
+                <p>Ismerd meg a különböző izomcsoportokra ajánlott gyakorlatokat, legyen szó konditermi vagy saját testsúlyos edzésről.</p>
             </div>
-            <div class="feature">
+            <div routerLink="/" class="feature">
+                <i class="fas fa-plus-circle"></i>
                 <h4>Saját Recept Hozzáadása</h4>
-                <p>Oszd meg kedvenc receptjeidet, és mentsd el a legjobbakat.</p>
+                <p>Oszd meg kedvenc receptjeidet, és mentsd el a legjobbakat, hogy mások is inspirálódjanak.</p>
             </div>
             <div class="feature">
-                <h4>Étel Összegzés</h4>
-                <p>Nyomon követheted az elfogyasztott ételeidet és azok kalóriáit.</p>
+                <i class="fas fa-chart-line"></i>
+                <h4>Étel Nyomon Követés</h4>
+                <p>Könnyedén nyomon követheted az elfogyasztott ételeidet és azok kalóriatartalmát.</p>
             </div>
         </div>
     </div>
