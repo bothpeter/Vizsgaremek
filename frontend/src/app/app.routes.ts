@@ -50,4 +50,16 @@ export const routes: Routes = [
             return import('./calculator/calculator.component').then((m) => m.CalculatorComponent);
         },
     },
+    {
+        path: 'diets',
+        loadComponent: () => {
+            return import('./diets/diets.component').then((m) => m.DietsComponent);
+        },
+    },
+    {
+        path: 'workouts',
+        loadComponent: () => {
+            return import('./workouts/workouts.component').then((m) => m.WorkoutsComponent);
+        },
+    },
 ];
