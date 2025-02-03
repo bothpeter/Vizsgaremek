@@ -1,11 +1,3 @@
-body {
-  background-color: #121212;
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .exercise-cards {
   display: flex;
   flex-wrap: wrap;
@@ -16,12 +8,11 @@ body {
 
 .card {
   width: 300px;
-  background-color: #1e1e1e;
   border: 1px solid #333;
   border-radius: 8px;
+  background-color: #1e1e1e;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .card img {
@@ -38,7 +29,7 @@ body {
 .card-content h3 {
   margin: 0 0 8px;
   font-size: 1.25em;
-  color: #ffffff;
+  color: #fff;
 }
 
 .card-content p {
@@ -47,13 +38,55 @@ body {
   color: #b0b0b0;
 }
 
-.card-content p strong {
+.card-content strong {
   color: #FC282C;
+  margin-right: 8px;
 }
 
-@media (max-width: 768px) {
-  .exercise-cards {
-    flex-direction: column;
-    align-items: center;
-  }
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  background-color: #1e1e1e;
+  padding: 24px;
+  padding-top: 0;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 17px;
+  right: 23px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: #FC282C;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: rgb(198, 19, 19);
 }

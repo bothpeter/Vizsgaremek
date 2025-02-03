@@ -10,13 +10,25 @@ import { CommonModule } from '@angular/common';
 })
 export class ExercisesComponent implements OnInit {
   exercises: any[] = [];
+  selectedExercise: any = null;
+  showPopup: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
     this.fetchExercises();
   }
+  
+  openPopup(exercise: any): void {
+    this.selectedExercise = exercise;
+    this.showPopup = true;
+  }
 
+  closePopup(): void {
+    this.showPopup = false;
+    this.selectedExercise = null;
+  }
+  
   fetchExercises(): void {
     const apiUrl = 'http://127.0.0.1:8000/api/exercise';
     fetch(apiUrl)
@@ -34,4 +46,5 @@ export class ExercisesComponent implements OnInit {
         console.error('Error fetching exercises:', error);
       });
   }
+
 }
