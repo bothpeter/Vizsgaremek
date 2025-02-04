@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('food', function (Blueprint $table) {
-            $table->food_id();
-            $table->integer('user_id');
+            $table->integer('food_id');
             $table->string('name');
             $table->string('description');
             $table->string('type');
@@ -26,7 +25,7 @@ return new class extends Migration
         });
 
         Schema::create('food_ingredients', function (Blueprint $table) {
-            $table->food_ingredients_id();
+            $table->integer('ingredient_id');
             $table->integer('food_id');
             $table->string('ingredient_name');
             $table->text('amount');

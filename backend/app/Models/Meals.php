@@ -13,4 +13,9 @@ class Meals extends Model
         'food_id',
         'time'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

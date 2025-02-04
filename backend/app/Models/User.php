@@ -47,4 +47,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function physique()
+    {
+        return $this->hasOne(UserPhysique::class);
+    }
+
+    public function likeFoods()
+    {
+        return $this->hasMany(UserLikeFood::class);
+    }
+
+    public function likeExercises()
+    {
+        return $this->hasMany(UserLikeExercise::class);
+    }
+
+    public function meals()
+    {
+        return $this->hasMany(Meals::class);
+    }
 }

@@ -11,4 +11,9 @@ class UserLikeFood extends Model
         'user_id',
         'food_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_likes_exercise', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('exercise_id');
         });
 
         Schema::create('user_likes_food', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('food_id');
         });
 
         Schema::create('user_physique', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->float('height');
             $table->float('weight');
             $table->integer('age');
@@ -31,7 +31,7 @@ return new class extends Migration
 
         Schema::create('meals', function (Blueprint $table) {
             $table->integer('meals_id');
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('food_id');
             $table->date('time');
         });

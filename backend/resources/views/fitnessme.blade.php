@@ -69,7 +69,7 @@
         
     <div class="content">
         <div class="highlighted-div">
-        <h2>User</h2>
+        <h2>User (only post methods)</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
         <hr>

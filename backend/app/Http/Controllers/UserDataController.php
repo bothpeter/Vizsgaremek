@@ -7,10 +7,18 @@ use App\Models\UserLikeExercise;
 use App\Models\UserLikeFood;
 use App\Models\UserPhysique;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Validator;
 
-class UserDataController extends Controller
+class UserDataController extends Controller implements HasMiddleware
 {
+    public static function middleware(){
+        return [
+            new Middleware('auth:sanctum')
+        ];
+    }
+    
     public function view_user_like_exercise(){
         $UserLikeExercise = UserLikeExercise::all();
 
@@ -52,118 +60,71 @@ class UserDataController extends Controller
     }
 
     public function post_user_physique(Request $request){
-        $validator = Validator::make($request->all(),
-        [
-            'user_id'=>'required',
-            'height'=>'required',
-            'weight'=>'required',
-            'age'=>'required',
-            'gender'=>'required'
-        ]);
+        $fields = $request->validate([
+            'user_id' => 'required',
+            'height' => 'required',
+            'weight' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+    ]);
 
-        if($validator->fails())
-        {
-            $data=[
-                
-                "status"=>422,
-                "message"=>$validator->messages()
-            ];
-            
-            return response()->json($data,422);
-        }
+        $userPhysique = $request->user()->physique()->create($fields);
 
-        else
-        {
-            $userPhysique = new UserPhysique();
-
-            $userPhysique->user_id = $request->user_id;
-            $userPhysique->height = $request->height;
-            $userPhysique->weight = $request->weight;
-            $userPhysique->age = $request->age;
-            $userPhysique->gender = $request->gender;
-
-            $userPhysique->save();
-
-            $data=[
-                
-                'status'=>200,
-                'message'=>'Data uploaded'
-            ];
-
-            return response()->json($data,200);
-        }
-
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'data' => $userPhysique
+        ], 200);
     }
 
     public function post_user_like_food(Request $request){
-        $UserLikeFood = new UserLikeFood();
+        $fields = $request->validate([
+            'user_id' => 'required',
+            'food_id' => 'required',
+        ]);
 
-        $UserLikeFood->user_id=$request->user_id;
-        $UserLikeFood->food_id=$request->food_id;
+        $userLikeFood = $request->user()->likeFood()->create($fields);
 
-        $UserLikeFood->save();
-
-        $data=[
-            'status'=>200,
-            'message'=>'Data uploaded'
-        ];
-
-        return response()->json($data,200);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'data' => $userLikeFood
+        ], 200);
     }
+    
 
     public function post_user_like_exercise(Request $request){
-        $UserLikeExercise = new UserLikeExercise();
+        $fields = $request->validate([
+            'user_id' => 'required',
+            'exercise_id' => 'required',
+        ]);
 
-        $UserLikeExercise->user_id=$request->user_id;
-        $UserLikeExercise->exercise_id=$request->exercise_id;
+        $userLikeExercise = $request->user()->likeExercise()->create($fields);
 
-        $UserLikeExercise->save();
-
-        $data=[
-            'status'=>200,
-            'message'=>'Data uploaded'
-        ];
-
-        return response()->json($data,200);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'data' => $userLikeExercise
+        ], 200);
     }
 
     public function post_meals(Request $request){
-        $validator = Validator::make($request->all(),
-        [
-            'user_id'=>'required',
-            'food_id'=>'required'
+        $fields = $request->validate([
+            'user_id' => 'required',
+            'meal_name' => 'required',
+            'calories' => 'required',
+            'protein' => 'required',
+            'carbs' => 'required',
+            'fat' => 'required',
         ]);
 
-        if($validator->fails())
-        {
-            $data=[
-                
-                "status"=>422,
-                "message"=>$validator->message()
-            ];
-            
-            return response()->json($data,422);
-        }
+        $meal = $request->user()->meals()->create($fields);
 
-        else
-        {
-            $meal = new Meals();
-
-            $meal->user_id = $request->user_id;
-            $meal->food_id = $request->food_id;
-            $meal->time = $request->time;
-
-            $meal->save();
-
-            $data=[
-                
-                'status'=>200,
-                'message'=>'Data uploaded'
-            ];
-
-            return response()->json($data,200);
-        }
-
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'data' => $meal
+        ], 200);
     }
 
     public function view_user_like_exercise_by_user_id($id){

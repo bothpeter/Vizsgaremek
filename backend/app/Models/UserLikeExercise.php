@@ -11,4 +11,9 @@ class UserLikeExercise extends Model
         'user_id',
         'exercise_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
