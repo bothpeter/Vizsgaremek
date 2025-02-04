@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('exercise_id');
             $table->string('exercise_name');
             $table->string('muscle_group');
-            $table->string('descriptipn');
+            $table->string('description');
             $table->string('img_url')->nullable();
             $table->string('type');
         });

@@ -83,7 +83,7 @@ class UserDataController extends Controller implements HasMiddleware
             'food_id' => 'required',
         ]);
 
-        $userLikeFood = $request->user()->likeFood()->create($fields);
+        $userLikeFood = $request->user()->likeFoods()->create($fields);
 
         return response()->json([
             'status' => 200,
@@ -92,14 +92,13 @@ class UserDataController extends Controller implements HasMiddleware
         ], 200);
     }
     
-
     public function post_user_like_exercise(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
             'exercise_id' => 'required',
         ]);
 
-        $userLikeExercise = $request->user()->likeExercise()->create($fields);
+        $userLikeExercise = $request->user()->likeExercises()->create($fields);
 
         return response()->json([
             'status' => 200,
