@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DietController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -13,9 +14,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('exercise', function () {
-    return 'mukodik';
-});
+Route::post('/register',[AuthController::class, 'register']);
+Route::post('/login',[AuthController::class, 'login']);
+Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::get('exercise',[ExerciseController::class, 'view_exercises']);
 Route::get('exercise/{id}',[ExerciseController::class, 'view_exercise_by_exercise_id']);

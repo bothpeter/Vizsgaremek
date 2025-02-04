@@ -69,6 +69,15 @@
         
     <div class="content">
         <div class="highlighted-div">
+        <h2>User</h2>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
+        </div>
+        <div class="highlighted-div">
         <h2>Exercise</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
