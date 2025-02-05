@@ -23,6 +23,7 @@ Route::get('exercise/{id}',[ExerciseController::class, 'view_exercise_by_exercis
 Route::post('exercise',[ExerciseController::class, 'post_exercises']);
 
 Route::get('food',[FoodController::class, 'view_foods']);
+Route::get('food/{id}',[FoodController::class, 'view_foods_by_id']);
 Route::post('food',[FoodController::class, 'post_foods']);
 
 Route::get('food_ingredients',[IngredientController::class, 'view_ingredients']);

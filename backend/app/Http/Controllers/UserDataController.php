@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meals;
+use App\Models\User;
 use App\Models\UserLikeExercise;
 use App\Models\UserLikeFood;
 use App\Models\UserPhysique;
@@ -77,20 +78,35 @@ class UserDataController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function post_user_like_food(Request $request){
+    public function post_user_like_food(Request $request)
+    {
         $fields = $request->validate([
-            'user_id' => 'required',
-            'food_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'food_id' => 'required|exists:foods,id',
         ]);
-
-        $userLikeFood = $request->user()->likeFoods()->create($fields);
-
+    
+        $user = User::find($fields['user_id']);
+    
+        if (!$user) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User not found',
+            ], 404);
+        }
+    
+        $userLikeFood = UserLikeFood::create([
+            'user_id' => $fields['user_id'],
+            'food_id' => $fields['food_id']
+        ]);
+    
         return response()->json([
             'status' => 200,
             'message' => 'Data uploaded',
             'data' => $userLikeFood
         ], 200);
     }
+    
+
     
     public function post_user_like_exercise(Request $request){
         $fields = $request->validate([

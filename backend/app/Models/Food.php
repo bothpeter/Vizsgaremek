@@ -9,7 +9,6 @@ class Food extends Model
     public $timestamps = false;
     protected $fillable = [
         'food_id',
-        'user_id',
         'name',
         'description',
         'type',

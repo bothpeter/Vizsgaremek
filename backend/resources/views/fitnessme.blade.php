@@ -89,6 +89,8 @@
         <h2>Food</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/food" class="text">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id:<br> http://127.0.0.1:8000/api/food/1</a>
         </div>
         <hr>
         <div class="highlighted-div">

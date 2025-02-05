@@ -21,6 +21,8 @@ class FoodController extends Controller
     public function post_foods(Request $request){
         $validator = Validator::make($request->all(),
         [
+            'food_id' => 'required',
+            'name' => 'required',
             'description'=>'required',
             'type'=>'required'
         ]);
@@ -30,7 +32,7 @@ class FoodController extends Controller
             $data=[
                 
                 "status"=>422,
-                "message"=>$validator->message()
+                "message"=>$validator->messages()
             ];
             
             return response()->json($data,422);
@@ -40,7 +42,7 @@ class FoodController extends Controller
         {
             $food = new Food();
 
-            $food->user_id = $request->user_id;
+            $food->food_id = $request->food_id;
             $food->name = $request->name;
             $food->description = $request->description;
             $food->type = $request->type;
@@ -62,5 +64,15 @@ class FoodController extends Controller
             return response()->json($data,200);
         }
 
+    }
+
+    public function view_foods_by_id($id){
+        $food = Food::where('food_id',$id)->get();
+
+        $data = [
+            'status' =>200,
+            'food'=> $food
+        ];
+        return response()->json($data,200);
     }
 }
