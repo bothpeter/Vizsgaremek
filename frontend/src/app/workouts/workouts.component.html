@@ -1,1 +1,32 @@
-<p>workouts works!</p>
+<div class="workout-cards">
+    <div class="card" *ngFor="let workout of workouts" (click)="openPopup(workout)">
+        <div class="card-content">
+            <h3>{{ workout.title }}</h3>
+            <p><strong>Leírás:</strong> {{ workout.goodFor }}</p>
+            <p><strong>Típus:</strong> {{ workout.type }}</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showPopup" class="popup" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closePopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3>{{ selectedWorkout.title }}</h3>
+        <p class="highlight">{{ selectedWorkout.goodFor }}</p>
+        <p class="highlight">{{ selectedWorkout.description }}</p>
+
+        <div class="exercises">
+            <h4>Gyakorlatok:</h4>
+            <div *ngFor="let exercise of selectedWorkout.exercises" class="exercise-card" (click)="toggleExerciseDetails(exercise)">
+                <div class="exercise-header">{{ exercise.exercise_name }} - {{ exercise.muscle_group }}</div>
+
+                <div *ngIf="exercise.isExpanded" class="exercise-details">
+                    <p>{{ exercise.description }}</p>
+                    <img [src]="exercise.img_url" [alt]="exercise.exercise_name" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
