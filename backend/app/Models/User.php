@@ -62,9 +62,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserLikeExercise::class);
     }
-
-    public function meals()
-    {
-        return $this->hasMany(Meals::class);
-    }
 }

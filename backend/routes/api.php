@@ -33,10 +33,6 @@ Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']
 Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);
 Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
 
-Route::get('meals',[UserDataController::class, 'view_meals']);
-Route::get('meals/{id}',[UserDataController::class, 'view_meals_by_user_id']);
-Route::post('meals',[UserDataController::class, 'post_meals']);
-
 Route::get('diet_plan',[DietController::class, 'view_diet_plan']);
 Route::post('diet_plan',[DietController::class, 'post_diet_plan']);
 

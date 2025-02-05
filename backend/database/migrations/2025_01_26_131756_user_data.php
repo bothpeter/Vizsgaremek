@@ -28,13 +28,6 @@ return new class extends Migration
             $table->integer('age');
             $table->string('gender');
         });
-
-        Schema::create('meals', function (Blueprint $table) {
-            $table->integer('meals_id');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('food_id');
-            $table->date('time');
-        });
     }
 
     /**
@@ -45,6 +38,5 @@ return new class extends Migration
         Schema::dropIfExists('user_likes_exercise');
         Schema::dropIfExists('user_likes_food');
         Schema::dropIfExists('user_physique');
-        Schema::dropIfExists('meals');
     }
 };

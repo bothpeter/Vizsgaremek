@@ -50,16 +50,6 @@ class UserDataController extends Controller implements HasMiddleware
         return response()->json($data,200);
     }
 
-    public function view_meals(){
-        $meal = Meals::all();
-
-        $data = [
-            'status' =>200,
-            'meal'=> $meal
-        ];
-        return response()->json($data,200);
-    }
-
     public function post_user_physique(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
@@ -78,36 +68,21 @@ class UserDataController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function post_user_like_food(Request $request)
-    {
+    public function post_user_like_food(Request $request){
         $fields = $request->validate([
             'user_id' => 'required|exists:users,id',
             'food_id' => 'required|exists:foods,id',
         ]);
-    
-        $user = User::find($fields['user_id']);
-    
-        if (!$user) {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User not found',
-            ], 404);
-        }
-    
-        $userLikeFood = UserLikeFood::create([
-            'user_id' => $fields['user_id'],
-            'food_id' => $fields['food_id']
-        ]);
-    
+
+        $userLikeFood = $request->user()->likeFoods()->create($fields);
+
         return response()->json([
             'status' => 200,
             'message' => 'Data uploaded',
             'data' => $userLikeFood
         ], 200);
     }
-    
-
-    
+     
     public function post_user_like_exercise(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
@@ -120,25 +95,6 @@ class UserDataController extends Controller implements HasMiddleware
             'status' => 200,
             'message' => 'Data uploaded',
             'data' => $userLikeExercise
-        ], 200);
-    }
-
-    public function post_meals(Request $request){
-        $fields = $request->validate([
-            'user_id' => 'required',
-            'meal_name' => 'required',
-            'calories' => 'required',
-            'protein' => 'required',
-            'carbs' => 'required',
-            'fat' => 'required',
-        ]);
-
-        $meal = $request->user()->meals()->create($fields);
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Data uploaded',
-            'data' => $meal
         ], 200);
     }
 
@@ -168,16 +124,6 @@ class UserDataController extends Controller implements HasMiddleware
         $data = [
             'status' =>200,
             'UserPhysique'=> $UserPhysique
-        ];
-        return response()->json($data,200);
-    }
-
-    public function view_meals_by_user_id($id){
-        $meal = Meals::where('user_id',$id)->get();
-
-        $data = [
-            'status' =>200,
-            'meal'=> $meal
         ];
         return response()->json($data,200);
     }
