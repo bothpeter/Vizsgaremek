@@ -40,7 +40,6 @@
 
 .card-content strong {
   color: #FC282C;
-  margin-right: 8px;
 }
 
 .popup {
@@ -72,7 +71,7 @@
 .close-btn {
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 23px;
   width: 40px;
   height: 40px;
   border: none;
