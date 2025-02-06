@@ -40,9 +40,10 @@ export class RecipesComponent implements OnInit {
   }
 
   openPopup(food: any): void {
+    console.log('Selected Food:', food);
     this.selectedFood = food;
     this.showPopup = true;
-    this.fetchIngredients(food.food_id);
+    this.fetchIngredients(food.id);
   }
 
   closePopup(): void {

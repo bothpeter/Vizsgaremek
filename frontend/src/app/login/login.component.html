@@ -4,8 +4,8 @@
         <p class="subtitle">Jelentkezz be a folytatáshoz</p>
         <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="form-group">
-                <label for="username">Felhasználónév</label>
-                <input type="text" id="username" name="username" [(ngModel)]="username" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
+                <label for="username">Email</label>
+                <input type="text" id="username" name="username" [(ngModel)]="loginObj.email" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
                 <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
                     A felhasználónév kötelező.
                 </div>
@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label for="password">Jelszó</label>
-                <input type="password" id="password" name="password" [(ngModel)]="password" required #passwordInput="ngModel" placeholder="Add meg a jelszavad" />
+                <input type="password" id="password" name="password" [(ngModel)]="loginObj.password" required #passwordInput="ngModel" placeholder="Add meg a jelszavad" />
                 <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
                     A jelszó kötelező.
                 </div>
