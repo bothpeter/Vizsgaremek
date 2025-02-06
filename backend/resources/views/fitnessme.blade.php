@@ -114,14 +114,6 @@
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>Meals (the user eat this food)</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for meals endpoint :<br> http://127.0.0.1:8000/api/meals</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/meals/1" class="text">Url for meals by userid endpoint :<br> http://127.0.0.1:8000/api/meals/1</a>
-        </div>
-        <hr>
-        <div class="highlighted-div">
         <h2>User liked foods</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>

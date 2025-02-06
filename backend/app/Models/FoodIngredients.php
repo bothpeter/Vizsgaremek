@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class FoodIngredients extends Model
 {
+    use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
     protected $fillable = [
-        'food_ingredients_id',
+        'ingredient_id',
         'food_id',
         'ingredient_name',
         'amount',
@@ -16,5 +20,6 @@ class FoodIngredients extends Model
         'fat',
         'protein',
         'carb',
+        'user_id'
     ];
 }

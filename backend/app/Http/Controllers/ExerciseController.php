@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exercise;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Validator;
 
-class ExerciseController extends Controller
+class ExerciseController extends Controller implements HasMiddleware
 {
+    public static function middleware(){
+        return [
+            new Middleware('auth:sanctum', except: ['view_exercises','view_exercise_by_exercise_id'])
+        ];
+    }
+
     public function view_exercises(){
         $exercise = Exercise::all();
 
@@ -29,44 +37,23 @@ class ExerciseController extends Controller
     }
 
     public function post_exercises(Request $request){
-        $validator = Validator::make($request->all(),
-        [
-        
-            'muscle_group'=>'required',
-            'description'=>'required'
+        $fields = $request->validate([
+            'exercise_id' => 'required',
+            'exercise_name' => 'required',
+            'muscle_group' => 'required',
+            'description' => 'required',
+            'img_url' => 'nullable',
+            'type' => 'required',
+            'user_id' => 'required'
         ]);
 
-        if($validator->fails())
-        {
-            $data=[
-                
-                "status"=>422,
-                "message"=>$validator->message()
-            ];
-            
-            return response()->json($data,422);
-        }
+        $exercise = $request->user()->exercise()->create($fields);
 
-        else
-        {
-            $exercise = new Exercise();
-
-            $exercise->exercise_name=$request->exercise_name;
-            $exercise->muscle_group=$request->muscle_group;
-            $exercise->description=$request->description;
-            $exercise->img_url = $request->img_url ?: null;
-            $exercise->type=$request->type;
-
-            $exercise->save();
-
-            $data=[
-                
-                'status'=>200,
-                'message'=>'Data uploaded'
-            ];
-
-            return response()->json($data,200);
-        }
-
+        $data = [
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'exercise' => $exercise
+        ];
+        return response()->json($data, 200);
     }
 }

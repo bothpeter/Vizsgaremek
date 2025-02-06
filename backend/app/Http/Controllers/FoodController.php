@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\Middleware;
+use Nette\Schema\Expect;
 
-class FoodController extends Controller
+class FoodController extends Controller implements HasMiddleware
 {
+
+    public static function middleware(){
+        return [
+            new Middleware('auth:sanctum', except: ['view_foods','view_foods_by_id'])
+        ];
+    }
+
     public function view_foods(){
         $food = Food::all();
 
@@ -19,51 +29,27 @@ class FoodController extends Controller
     }
 
     public function post_foods(Request $request){
-        $validator = Validator::make($request->all(),
-        [
-            'food_id' => 'required',
+        $fields = $request->validate([
+            'id' => 'required',
             'name' => 'required',
-            'description'=>'required',
-            'type'=>'required'
+            'description' => 'required',
+            'type' => 'required',
+            'calorie' => 'nullable',
+            'fat' => 'nullable',
+            'protein' => 'nullable',
+            'carb' => 'nullable',
+            'img_url' => 'nullable',
+            'recipe' => 'nullable',
+            'user_id' => 'required'
         ]);
 
-        if($validator->fails())
-        {
-            $data=[
-                
-                "status"=>422,
-                "message"=>$validator->messages()
-            ];
-            
-            return response()->json($data,422);
-        }
+        $food = $request->user()->food()->create($fields);
 
-        else
-        {
-            $food = new Food();
-
-            $food->food_id = $request->food_id;
-            $food->name = $request->name;
-            $food->description = $request->description;
-            $food->type = $request->type;
-            $food->calorie = $request->calorie;
-            $food->fat = $request->fat;
-            $food->protein = $request->protein;
-            $food->carb = $request->carb;
-            $food->img_url = $request->img_url ?: null;
-            $food->recipe = $request->recipe;
-
-            $food->save();
-
-            $data=[
-                
-                'status'=>200,
-                'message'=>'Data uploaded'
-            ];
-
-            return response()->json($data,200);
-        }
-
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'data' => $food
+        ], 200);
     }
 
     public function view_foods_by_id($id){
