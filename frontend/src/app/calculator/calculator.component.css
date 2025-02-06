@@ -1,19 +1,29 @@
 .calculator-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Aligning items at the top for better spacing */
+    align-items: flex-start;
     min-height: 70vh;
     background-color: #0f0f0f;
-    flex-wrap: wrap; /* Allowing the items to wrap on smaller screens */
-    gap: 20px; /* Adding some space between the cards */
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.calculator-card {
+.bmi-calculator-card {
     background-color: #1e1e1e;
     border-radius: 12px;
     padding: 2.5rem;
     width: 100%;
     max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.calorie-calculator-card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 700px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
 }
@@ -92,4 +102,20 @@ button:disabled {
     color: black;
     cursor: not-allowed;
     transform: none;
+}
+
+.calorie-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 20px;
+}
+
+.calorie-grid .form-group {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .calorie-grid {
+        grid-template-columns: 1fr;
+    }
 }

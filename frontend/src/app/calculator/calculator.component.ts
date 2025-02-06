@@ -20,9 +20,9 @@ export class CalculatorComponent {
   calorieWeight: string = '';
   calorieHeight: string = '';
   calorieAge: string = '';
-  calorieGender: string = 'male';
-  activityLevel: string = 'sedentary';
-  goal: string = 'maintain';
+  calorieGender: string = '';
+  activityLevel: string = '';
+  goal: string = '';
   calorieResult: number | null = null;
 
 

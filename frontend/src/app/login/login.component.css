@@ -102,3 +102,7 @@ button:disabled {
     font-weight: 500;
     cursor: pointer;
 }
+
+.forgot-password{
+    margin-top: 5px;
+}
