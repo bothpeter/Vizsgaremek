@@ -28,18 +28,16 @@ class IngredientController extends Controller implements HasMiddleware
 
     public function post_ingredients(Request $request){
         $fields = $request->validate([
-            'ingredient_id' => 'required',
             'food_id' => 'required',
             'ingredient_name' => 'required',
             'amount' => 'nullable',
             'calorie' => 'nullable',
             'fat' => 'nullable',
             'protein' => 'nullable',
-            'carb' => 'nullable',
-            'user_id' => 'required'
+            'carb' => 'nullable'
         ]);
 
-        $ingredient = FoodIngredients::create($fields);
+        $ingredient = $request->user()->foodIngredient()->create($fields);
 
         $data = [
             'status' => 200,

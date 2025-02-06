@@ -52,7 +52,6 @@ class UserDataController extends Controller implements HasMiddleware
 
     public function post_user_physique(Request $request){
         $fields = $request->validate([
-            'user_id' => 'required',
             'height' => 'required',
             'weight' => 'required',
             'age' => 'required',
@@ -70,8 +69,7 @@ class UserDataController extends Controller implements HasMiddleware
 
     public function post_user_like_food(Request $request){
         $fields = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'food_id' => 'required|exists:foods,id',
+            'food_id' => 'required',
         ]);
 
         $userLikeFood = $request->user()->likeFood()->create($fields);
@@ -85,11 +83,10 @@ class UserDataController extends Controller implements HasMiddleware
      
     public function post_user_like_exercise(Request $request){
         $fields = $request->validate([
-            'user_id' => 'required',
             'exercise_id' => 'required',
         ]);
 
-        $userLikeExercise = $request->user()->likeExercises()->create($fields);
+        $userLikeExercise = $request->user()->likeExercise()->create($fields);
 
         return response()->json([
             'status' => 200,

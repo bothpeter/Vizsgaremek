@@ -14,7 +14,6 @@ class Food extends Model
     public $timestamps = false;
     protected $table = 'foods';
     protected $fillable = [
-        'id',
         'name',
         'description',
         'type',
@@ -23,8 +22,7 @@ class Food extends Model
         'protein',
         'carb',
         'img_url',
-        'recipe',
-        'user_id'
+        'recipe'
     ];
 
     public function user()

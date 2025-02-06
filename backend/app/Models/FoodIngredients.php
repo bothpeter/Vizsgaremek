@@ -12,14 +12,17 @@ class FoodIngredients extends Model
     use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
     protected $fillable = [
-        'ingredient_id',
         'food_id',
         'ingredient_name',
         'amount',
         'calorie',
         'fat',
         'protein',
-        'carb',
-        'user_id'
+        'carb'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

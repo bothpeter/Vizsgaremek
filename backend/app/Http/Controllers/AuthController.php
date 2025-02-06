@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         return [
             'user' => $user,
-            'token' => $token->plainTextToken
+            'token' => base64_encode($token->plainTextToken)
         ];
     }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         return [
             'user' => $user,
-            'token' => $token->plainTextToken
+            'token' => base64_encode($token->plainTextToken)
         ];
     }
     

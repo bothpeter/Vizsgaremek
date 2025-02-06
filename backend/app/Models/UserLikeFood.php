@@ -8,7 +8,6 @@ class UserLikeFood extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
         'food_id'
     ];
 

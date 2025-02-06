@@ -8,7 +8,6 @@ class UserPhysique extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
         'height',
         'weight',
         'age',

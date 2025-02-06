@@ -13,13 +13,11 @@ class Exercise extends Model
     
     public $timestamps = false;
     protected $fillable = [
-        'exercise_id',
         'exercise_name',
         'muscle_group',
         'description',
         'img_url',
-        'type',
-        'user_id'
+        'type'
     ];
 
     public function user()

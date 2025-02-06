@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\WorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class WorkoutController extends Controller
+class WorkoutController extends Controller implements HasMiddleware
 {
+    public static function middleware(){
+        return [
+            new Middleware('auth:sanctum', except: ['view_workout_plan'])
+        ];
+    }
+
     public function view_workout_plan(){
         $workout_plan = WorkoutPlan::all();
 
@@ -19,49 +27,25 @@ class WorkoutController extends Controller
     }
 
     public function post_workout_plan(Request $request){
-        $validator = Validator::make($request->all(),
-        [
-            'title'=>'required',
-            'goodFor'=>'required',
-            'description'=>'required',
-            'type'=>'required'
+        $fields = $request->validate([
+            'title' => 'required',
+            'goodFor' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'exercise1_id' => 'nullable',
+            'exercise2_id' => 'nullable',
+            'exercise3_id' => 'nullable',
+            'exercise4_id' => 'nullable',
+            'exercise5_id' => 'nullable'
         ]);
 
-        if($validator->fails())
-        {
-            $data=[
-                
-                "status"=>422,
-                "message"=>$validator->message()
-            ];
-            
-            return response()->json($data,422);
-        }
+        $workout_plan = $request->user()->workoutPlan()->create($fields);
 
-        else
-        {
-            $workout_plan = new WorkoutPlan();
-
-            $workout_plan->title = $request->title;
-            $workout_plan->goodFor = $request->goodFor;
-            $workout_plan->description = $request->description;
-            $workout_plan->type = $request->type;
-            $workout_plan->exercise1_id = $request->exercise1_id;
-            $workout_plan->exercise2_id = $request->exercise2_id;
-            $workout_plan->exercise3_id = $request->exercise3_id;
-            $workout_plan->exercise4_id = $request->exercise4_id;
-            $workout_plan->exercise5_id = $request->exercise5_id;
-
-            $workout_plan->save();
-
-            $data=[
-                
-                'status'=>200,
-                'message'=>'Data uploaded'
-            ];
-
-            return response()->json($data,200);
-        }
-
+        $data = [
+            'status' => 200,
+            'message' => 'Data uploaded',
+            'workout_plan' => $workout_plan
+        ];
+        return response()->json($data, 200);
     }
 }

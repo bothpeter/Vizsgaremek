@@ -8,7 +8,6 @@ class UserLikeExercise extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
         'exercise_id'
     ];
 

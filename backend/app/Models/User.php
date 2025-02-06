@@ -58,7 +58,7 @@ class User extends Authenticatable
         return $this->hasMany(UserLikeFood::class);
     }
 
-    public function likeExercises()
+    public function likeExercise()
     {
         return $this->hasMany(UserLikeExercise::class);
     }
@@ -73,8 +73,18 @@ class User extends Authenticatable
         return $this->hasMany(Exercise::class);
     }
 
-    public function foodIngredients()
+    public function foodIngredient()
     {
         return $this->hasMany(FoodIngredients::class);
+    }
+
+    public function dietPlan()
+    {
+        return $this->hasMany(DietPlan::class);
+    }
+
+    public function workoutPlan()
+    {
+        return $this->hasMany(WorkoutPlan::class);
     }
 }

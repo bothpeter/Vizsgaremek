@@ -38,13 +38,11 @@ class ExerciseController extends Controller implements HasMiddleware
 
     public function post_exercises(Request $request){
         $fields = $request->validate([
-            'exercise_id' => 'required',
             'exercise_name' => 'required',
             'muscle_group' => 'required',
             'description' => 'required',
             'img_url' => 'nullable',
-            'type' => 'required',
-            'user_id' => 'required'
+            'type' => 'required'
         ]);
 
         $exercise = $request->user()->exercise()->create($fields);

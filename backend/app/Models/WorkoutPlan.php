@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class WorkoutPlan extends Model
 {
+    use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
     protected $fillable = [
         'title',
@@ -16,6 +20,11 @@ class WorkoutPlan extends Model
         'exercise2',
         'exercise3',
         'exercise4',
-        'exercise5',
+        'exercise5'
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

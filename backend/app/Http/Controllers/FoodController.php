@@ -30,7 +30,6 @@ class FoodController extends Controller implements HasMiddleware
 
     public function post_foods(Request $request){
         $fields = $request->validate([
-            'id' => 'required',
             'name' => 'required',
             'description' => 'required',
             'type' => 'required',
@@ -39,8 +38,7 @@ class FoodController extends Controller implements HasMiddleware
             'protein' => 'nullable',
             'carb' => 'nullable',
             'img_url' => 'nullable',
-            'recipe' => 'nullable',
-            'user_id' => 'required'
+            'recipe' => 'nullable'
         ]);
 
         $food = $request->user()->food()->create($fields);
