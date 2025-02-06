@@ -55,54 +55,56 @@
     <div class="calorie-calculator-card">
         <h2>Napi Kalória Kalkulátor</h2>
         <p class="subtitle">Add meg az adataidat és számold ki a napi kalória szükségletedet</p>
-        <form (ngSubmit)="onSubmitCalories()" #calorieForm="ngForm" class="calorie-grid">
-            <div class="form-group">
-                <label for="calorieWeight">Súly (kg)</label>
-                <input type="number" id="calorieWeight" name="calorieWeight" [(ngModel)]="calorieWeight" required
-                    #calorieWeightInput="ngModel" placeholder="Add meg a súlyodat" />
+        <form (ngSubmit)="onSubmitCalories()" #calorieForm="ngForm">
+            <div class="calorie-grid">
+                <div class="form-group">
+                    <label for="calorieWeight">Súly (kg)</label>
+                    <input type="number" id="calorieWeight" name="calorieWeight" [(ngModel)]="calorieWeight" required
+                        #calorieWeightInput="ngModel" placeholder="Add meg a súlyodat" />
+                </div>
+                <div class="form-group">
+                    <label for="calorieGender">Nem</label>
+                    <select id="calorieGender" name="calorieGender" [(ngModel)]="calorieGender" required>
+                        <option value="" disabled selected>Válaszd ki a nemedet</option>
+                        <option value="male">Férfi</option>
+                        <option value="female">Nő</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="calorieHeight">Magasság (cm)</label>
+                    <input type="number" id="calorieHeight" name="calorieHeight" [(ngModel)]="calorieHeight" required
+                        placeholder="Add meg a magasságodat" />
+                </div>
+                <div class="form-group">
+                    <label for="activityLevel">Aktivitás szintje</label>
+                    <select id="activityLevel" name="activityLevel" [(ngModel)]="activityLevel" required>
+                        <option value="" disabled selected>Válaszd ki az aktivitási szintedet</option>
+                        <option value="sedentary">Inaktív</option>
+                        <option value="light">Könnyű aktivitás</option>
+                        <option value="moderate">Mérsékelt aktivitás</option>
+                        <option value="active">Aktív</option>
+                        <option value="veryActive">Nagyon aktív</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="calorieAge">Kor (évek)</label>
+                    <input type="number" id="calorieAge" name="calorieAge" [(ngModel)]="calorieAge" required
+                        placeholder="Add meg az életkorodat" />
+                </div>
+                <div class="form-group">
+                    <label for="goal">Cél</label>
+                    <select id="goal" name="goal" [(ngModel)]="goal" required>
+                        <option value="" disabled selected>Válaszd ki a célodat</option>
+                        <option value="maintain">Súly fenntartása</option>
+                        <option value="lose">Fogyás</option>
+                        <option value="gain">Hízás</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="calorieGender">Nem</label>
-                <select id="calorieGender" name="calorieGender" [(ngModel)]="calorieGender" required>
-                    <option value="" disabled selected>Válaszd ki a nemedet</option>
-                    <option value="male">Férfi</option>
-                    <option value="female">Nő</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="calorieHeight">Magasság (cm)</label>
-                <input type="number" id="calorieHeight" name="calorieHeight" [(ngModel)]="calorieHeight" required
-                    placeholder="Add meg a magasságodat" />
-            </div>
-            <div class="form-group">
-                <label for="activityLevel">Aktivitás szintje</label>
-                <select id="activityLevel" name="activityLevel" [(ngModel)]="activityLevel" required>
-                    <option value="" disabled selected>Válaszd ki az aktivitási szintedet</option>
-                    <option value="sedentary">Inaktív</option>
-                    <option value="light">Könnyű aktivitás</option>
-                    <option value="moderate">Mérsékelt aktivitás</option>
-                    <option value="active">Aktív</option>
-                    <option value="veryActive">Nagyon aktív</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="calorieAge">Kor (évek)</label>
-                <input type="number" id="calorieAge" name="calorieAge" [(ngModel)]="calorieAge" required
-                    placeholder="Add meg az életkorodat" />
-            </div>
-            <div class="form-group">
-                <label for="goal">Cél</label>
-                <select id="goal" name="goal" [(ngModel)]="goal" required>
-                    <option value="" disabled selected>Válaszd ki a célodat</option>
-                    <option value="maintain">Súly fenntartása</option>
-                    <option value="lose">Fogyás</option>
-                    <option value="gain">Hízás</option>
-                </select>
-            </div>
+            <button type="submit" [disabled]="!calorieForm.form.valid">Kalkulálás</button>
         </form>
-        <button type="submit" [disabled]="!calorieForm.form.valid">Kalkulálás</button>
-        <h3>Napi Kalória Szükséglet:</h3>
         <div *ngIf="calorieResult !== null" class="result">
+            <h3>Napi Kalória Szükséglet:</h3>
             <p>{{ calorieResult }} kcal</p>
         </div>
     </div>
