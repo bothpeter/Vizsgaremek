@@ -54,7 +54,7 @@ export class WorkoutsComponent implements OnInit {
   }
 
   getWorkoutExercises(workout: any): any[] {
-    return [workout.exerccise1_id, workout.exerccise2_id, workout.exerccise3_id, workout.exerccise4_id, workout.exerccise5_id]
+    return [workout.exercise1_id, workout.exercise2_id, workout.exercise3_id, workout.exercise4_id, workout.exercise5_id]
       .filter(id => id)
       .map(id => {
         const exercise = this.exercises.find(ex => ex.exercise_id === id);

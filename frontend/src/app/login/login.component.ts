@@ -24,6 +24,7 @@ export class LoginComponent {
         const authToken = atob(res.token); //Decoded token from base64
         console.log(authToken)
         this.router.navigateByUrl('/')
+        alert("Sikeres Bejelentkezés")
       } else {
         console.log(res);
       }

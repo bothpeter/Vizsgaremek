@@ -7,7 +7,7 @@
                 <label for="username">Email</label>
                 <input type="text" id="username" name="username" [(ngModel)]="loginObj.email" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
                 <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
-                    A felhasználónév kötelező.
+                    Az Email kötelező.
                 </div>
             </div>
 
