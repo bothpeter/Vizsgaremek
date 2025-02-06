@@ -74,7 +74,7 @@ class UserDataController extends Controller implements HasMiddleware
             'food_id' => 'required|exists:foods,id',
         ]);
 
-        $userLikeFood = $request->user()->likeFoods()->create($fields);
+        $userLikeFood = $request->user()->likeFood()->create($fields);
 
         return response()->json([
             'status' => 200,

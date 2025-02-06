@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     public $timestamps = false;
+    protected $table = 'foods';
     protected $fillable = [
         'food_id',
         'name',

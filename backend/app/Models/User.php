@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->hasOne(UserPhysique::class);
     }
 
-    public function likeFoods()
+    public function likeFood()
     {
         return $this->hasMany(UserLikeFood::class);
     }
