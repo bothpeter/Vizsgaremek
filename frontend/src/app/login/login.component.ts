@@ -33,11 +33,11 @@ export class LoginComponent {
 }
 
 export class Login {
-  email: string;
+  login: string;
   password: string;
 
   constructor() {
-    this.email = '';
+    this.login = '';
     this.password = '';
   }
 }

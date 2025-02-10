@@ -21,9 +21,9 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'settings',
+        path: 'user',
         loadComponent: () => {
-            return import('./settings/settings.component').then((m) => m.SettingsComponent);
+            return import('./user/user.component').then((m) => m.UserComponent);
         },
     },
     {
