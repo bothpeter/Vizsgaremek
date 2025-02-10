@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export class RegisterComponent {
   emailError: string = '';
+  nameError: string = '';
 
   registerObj: Register;
 
@@ -23,6 +24,7 @@ export class RegisterComponent {
 
   onSubmit() {
     this.emailError = '';
+    this.nameError = '';
 
     if (this.registerObj.password !== this.registerObj.password_confirmation) {
       alert('A jelszavak nem egyeznek!');
@@ -34,17 +36,30 @@ export class RegisterComponent {
       return;
     }
 
-    this.http.post('http://127.0.0.1:8000/api/register', this.registerObj).subscribe((res: any) => {
-      if (res.token!=null) {
-        const authToken = atob(res.token); //Decoded token from base64
-        console.log(authToken)
-        this.router.navigateByUrl('/')
-        alert("Sikeres Regisztráció")
-      } else {
-        console.log(res.message);
-      }
-    });
+    this.http.post('http://127.0.0.1:8000/api/register', this.registerObj).subscribe(
+      (res: any) => {
+        if (res.token != null) {
+          const authToken = atob(res.token); // Decoded token from base64
+          this.router.navigateByUrl('/');
+        } else {
+          console.log(res.message);
+        }
+      },
+      (error) => {
+        if (error.status === 422 && error.error) {
+          const errors = error.error;
 
+          if (errors.name) {
+            this.nameError = "Ez a felhasználónév már foglalt.";
+          }
+          if (errors.email) {
+            this.emailError = "Ez az e-mail cím már foglalt.";
+          }
+        } else {
+          alert('Hiba történt a regisztráció során. Kérjük, próbáld újra később.');
+        }
+      }
+    );
   }
 
   validateEmail(email: string): boolean {

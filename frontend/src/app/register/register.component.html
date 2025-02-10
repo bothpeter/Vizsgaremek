@@ -9,6 +9,9 @@
                 <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
                     A felhasználónév kötelező.
                 </div>
+                <div *ngIf="nameError" class="error-message">
+                    {{ nameError }}
+                </div>
             </div>
 
             <div class="form-group">
