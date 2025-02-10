@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header-logged-in',
-  imports: [],
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './header-logged-in.component.html',
   styleUrl: './header-logged-in.component.css'
 })

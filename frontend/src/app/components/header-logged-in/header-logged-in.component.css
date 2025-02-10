@@ -1,0 +1,69 @@
+header {
+    display: flex;
+    align-items: center;
+    padding-inline: 16px;
+    color: white;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul li {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+header nav ul li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #FC282C;
+    transition: 0.2s ease;
+    border-radius: 10px;
+}
+
+header nav ul li:hover::after,
+header nav ul li:focus-within::after {
+    width: 75%;
+}
+
+header nav ul li.user-icon::after {
+    width: 0;
+}
+
+header nav ul li.user-icon .icon-circle .bi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #FC282C;
+}
+
+header nav ul li.user-icon .icon-circle .bi:hover {
+    background-color: rgb(198, 19, 19);
+    transition: 0.1s ease;
+}
+
+header nav ul li.user-icon .icon-circle i {
+    color: black;
+    font-size: 24px;
+}
