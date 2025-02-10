@@ -1,3 +1,4 @@
+/* Alap stílusok */
 header {
     display: flex;
     align-items: center;
@@ -10,13 +11,25 @@ header {
 nav {
     display: flex;
     align-items: center;
-    margin-left: auto;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 28px;
+    margin-bottom: 10px;
+    border-radius: 10%;
 }
 
 ul {
     list-style: none;
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 li {
@@ -25,6 +38,11 @@ li {
     display: flex;
     align-items: center;
     padding-bottom: 2px;
+    margin: 0 16px;
+}
+
+.nav-links {
+    margin-top: 5px;
 }
 
 li::after {
@@ -44,10 +62,6 @@ li:focus-within::after {
     width: 75%;
 }
 
-header nav ul li.login-button::after {
-    width: 0;
-}
-
 .login-button {
     background-color: #FC282C;
     color: black;
@@ -57,11 +71,86 @@ header nav ul li.login-button::after {
     transition: background-color 0.1s ease;
 }
 
+header nav ul li.login-button::after {
+    width: 0;
+}
+
 .login-button:hover {
     background-color: rgb(198, 19, 19);
     transition: 0.1s ease;
 }
 
-.login-button{
-    margin-right: 10px;
+.hamburger {
+    background-color: #FC282C;
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+}
+
+.bar {
+    width: 25px;
+    height: 4px;
+    background-color: black;
+    margin: 3px 0;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .login-button {
+        padding: 14px 22px;
+        margin-right: 10px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background-color: #1e1e1e;
+        width: 100%;
+        align-items: center;
+        padding: 10px 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+        opacity: 0;
+        box-shadow: 0px 8px 10px -1px rgba(0, 0, 0, 0.5);
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-links.active {
+        max-height: 500px;
+        opacity: 1;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        padding: 10px;
+    }
+
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .logo {
+        height: 50px;
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+
+    header {
+        padding-inline: 0;
+    }
 }

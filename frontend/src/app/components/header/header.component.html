@@ -1,30 +1,22 @@
 <header>
+    <img routerLink="/" class="logo" src="assets/logo_only.png" alt="Logo">
     <nav>
-        <ul>
-            <li routerLink="/">Kezdőlap</li>
+        <div class="hamburger" (click)="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links" [ngClass]="{ 'active': isMenuOpen }">
+            <li routerLink="/" (click)="closeMenu()">Kezdőlap</li>
+            <li routerLink="/calculator" (click)="closeMenu()">Kalkulátor</li>
+            <li routerLink="/recipes" (click)="closeMenu()">Receptek</li>
+            <li routerLink="/diets" (click)="closeMenu()">Étrendek</li>
+            <li routerLink="/exercises" (click)="closeMenu()">Gyakorlatok</li>
+            <li routerLink="/workouts" (click)="closeMenu()">Edzéstervek</li>
+            <li routerLink="/contacts" (click)="closeMenu()">Kapcsolat</li>
         </ul>
         <ul>
-            <li routerLink="/calculator">Kalkulátor</li>
-        </ul>
-        <ul>
-            <li routerLink="/recipes">Receptek</li>
-        </ul>
-        <ul>
-            <li routerLink="/diets">Étrendek</li>
-        </ul>
-        <ul>
-            <li routerLink="/exercises">Gyakorlatok</li>
-        </ul>
-        <ul>
-            <li routerLink="/workouts">Edzéstervek</li>
-        </ul>
-        <ul>
-            <li routerLink="/contacts">Kapcsolat</li>
-        </ul>
-        <ul class="login-ul">
-            <li routerLink="/login" class="login-button">
-                Bejelentkezés
-            </li>
+            <li routerLink="/login" class="login-button" (click)="closeMenu()">Bejelentkezés</li>
         </ul>
     </nav>
 </header>
