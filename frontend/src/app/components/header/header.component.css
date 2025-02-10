@@ -90,6 +90,11 @@ header nav ul li.login-button::after {
     transition: background-color 0.1s ease;
 }
 
+.hamburger:hover {
+    background-color: rgb(198, 19, 19);
+    transition: 0.1s ease;
+}
+
 .bar {
     width: 25px;
     height: 4px;
