@@ -5,8 +5,7 @@
         <form (ngSubmit)="onSubmitBMI()" #bmiForm="ngForm">
             <div class="form-group">
                 <label for="weight">Súly (kg)</label>
-                <input type="number" id="weight" name="weight" [(ngModel)]="weight" required #weightInput="ngModel"
-                    placeholder="Add meg a súlyodat" />
+                <input min="0" type="number" id="weight" name="weight" [(ngModel)]="weight" required #weightInput="ngModel" placeholder="Add meg a súlyodat" />
                 <div *ngIf="weightInput.invalid && (weightInput.dirty || weightInput.touched)" class="error-message">
                     A súly megadása kötelező.
                 </div>
@@ -14,17 +13,15 @@
 
             <div class="form-group">
                 <label for="height">Magasság (cm)</label>
-                <input type="number" id="height" name="height" [(ngModel)]="height" required #heightInput="ngModel"
-                    placeholder="Add meg a magasságodat" />
+                <input min="0" type="number" id="height" name="height" [(ngModel)]="height" required #heightInput="ngModel" placeholder="Add meg a magasságodat" />
                 <div *ngIf="heightInput.invalid && (heightInput.dirty || heightInput.touched)" class="error-message">
                     A magasság megadása kötelező.
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="age">Kor</label>
-                <input type="number" id="age" name="age" [(ngModel)]="age" required #ageInput="ngModel"
-                    placeholder="Add meg az életkorodat" />
+                <label for="age">Életkor</label>
+                <input min="0" type="number" id="age" name="age" [(ngModel)]="age" required #ageInput="ngModel" placeholder="Add meg az életkorodat" />
                 <div *ngIf="ageInput.invalid && (ageInput.dirty || ageInput.touched)" class="error-message">
                     Az életkor megadása kötelező.
                 </div>
@@ -59,8 +56,10 @@
             <div class="calorie-grid">
                 <div class="form-group">
                     <label for="calorieWeight">Súly (kg)</label>
-                    <input type="number" id="calorieWeight" name="calorieWeight" [(ngModel)]="calorieWeight" required
-                        #calorieWeightInput="ngModel" placeholder="Add meg a súlyodat" />
+                    <input min="0" type="number" id="calorieWeight" name="calorieWeight" [(ngModel)]="calorieWeight" required #calorieWeightInput="ngModel" placeholder="Add meg a súlyodat" />
+                    <div *ngIf="calorieWeightInput.invalid && (calorieWeightInput.dirty || calorieWeightInput.touched)" class="error-message">
+                        A súly megadása kötelező.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="calorieGender">Nem</label>
@@ -72,8 +71,10 @@
                 </div>
                 <div class="form-group">
                     <label for="calorieHeight">Magasság (cm)</label>
-                    <input type="number" id="calorieHeight" name="calorieHeight" [(ngModel)]="calorieHeight" required
-                        placeholder="Add meg a magasságodat" />
+                    <input min="0" type="number" id="calorieHeight" name="calorieHeight" [(ngModel)]="calorieHeight" required #calorieHeightInput="ngModel" placeholder="Add meg a magasságodat" />
+                    <div *ngIf="calorieHeightInput.invalid && (calorieHeightInput.dirty || calorieHeightInput.touched)" class="error-message">
+                        A magasság megadása kötelező.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="activityLevel">Aktivitás szintje</label>
@@ -87,9 +88,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="calorieAge">Kor (évek)</label>
-                    <input type="number" id="calorieAge" name="calorieAge" [(ngModel)]="calorieAge" required
-                        placeholder="Add meg az életkorodat" />
+                    <label for="calorieAge">Életkor</label>
+                    <input min="0" type="number" id="calorieAge" name="calorieAge" [(ngModel)]="calorieAge" required #calorieAgeInput="ngModel" placeholder="Add meg az életkorodat" />
+                    <div *ngIf="calorieAgeInput.invalid && (calorieAgeInput.dirty || calorieAgeInput.touched)" class="error-message">
+                        Az életkor megadása kötelező.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="goal">Cél</label>

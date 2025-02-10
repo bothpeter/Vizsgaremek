@@ -88,9 +88,9 @@ export class CalculatorComponent {
       let calories = bmr * activityMultiplier;
 
       if (this.goal === 'lose') {
-        calories -= 500;  // Subtract 500 calories for weight loss
+        calories -= 500;
       } else if (this.goal === 'gain') {
-        calories += 500;  // Add 500 calories for weight gain
+        calories += 500;
       }
 
       this.calorieResult = Math.round(calories);
