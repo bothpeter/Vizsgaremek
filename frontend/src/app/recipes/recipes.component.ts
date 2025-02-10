@@ -32,7 +32,6 @@ export class RecipesComponent implements OnInit {
       })
       .then((data) => {
         this.food = data.food;
-        console.log(this.food);
       })
       .catch((error) => {
         console.error('Error fetching food:', error);
@@ -40,7 +39,6 @@ export class RecipesComponent implements OnInit {
   }
 
   openPopup(food: any): void {
-    console.log('Selected Food:', food);
     this.selectedFood = food;
     this.showPopup = true;
     this.fetchIngredients(food.id);
@@ -63,7 +61,6 @@ export class RecipesComponent implements OnInit {
       })
       .then((data) => {
         this.ingredients = data.ingredients;
-        console.log(this.ingredients);
       })
       .catch((error) => {
         console.error('Error fetching ingredients:', error);

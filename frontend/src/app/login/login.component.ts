@@ -5,7 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,6 +13,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginError: string = '';
   loginObj: Login;
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
@@ -21,17 +21,26 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.http.post('http://127.0.0.1:8000/api/login', this.loginObj).subscribe((res: any) => {
-      if (res.token!=null) {
-        const authToken = atob(res.token); //Decoded token from base64
-        this.authService.login(authToken); //Update the login state
-        console.log(authToken)
-        this.router.navigateByUrl('/')
-        alert("Sikeres Bejelentkezés")
-      } else {
-        console.log(res);
+    this.loginError = '';
+
+    this.http.post('http://127.0.0.1:8000/api/login', this.loginObj).subscribe(
+      (res: any) => {
+        if (res.token != null) {
+          const authToken = atob(res.token); // Decoded token from base64
+          this.authService.login(authToken); // Update the login state
+          this.router.navigateByUrl('/');
+        } else {
+          console.log(res);
+        }
+      },
+      (error) => {
+        if (error.status === 401 && error.error.message === "Bad credentials") {
+          this.loginError = "Hibás email, név vagy jelszó.";
+        } else {
+          alert("Hiba történt a bejelentkezés során. Kérjük, próbáld újra később.");
+        }
       }
-    });
+    );
   }
 }
 

@@ -5,87 +5,63 @@ header {
     color: white;
     justify-content: space-between;
     font-size: 18px;
+}
 
+nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
 
-    nav {
-        display: flex;
-        align-items: center;
-        margin-left: auto;
+ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
 
-        .login-ul{
-            padding-left: 30px;
-        }
+li {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2px;
+}
 
-        ul {
-            list-style: none;
-            display: flex;
-            align-items: center;
+li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #FC282C;
+    transition: 0.2s ease;
+    border-radius: 10px;
+}
 
-            li {
-                position: relative;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                padding-bottom: 2px;
+li:hover::after,
+li:focus-within::after {
+    width: 75%;
+}
 
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 0%;
-                    height: 2px;
-                    background-color: #FC282C;
-                    transition: 0.2s ease;
-                    border-radius: 10px;
-                }
+header nav ul li.login-button::after {
+    width: 0;
+}
 
-                &:hover::after,
-                &:focus-within::after {
-                    width: 75%;
-                }
+.login-button {
+    background-color: #FC282C;
+    color: black;
+    font-weight: bold;
+    padding: 9px 16px;
+    border-radius: 8px;
+    transition: background-color 0.1s ease;
+}
 
-                &.settings-icon,
-                &.login-button {
-                    &::after {
-                        width: 0;
-                    }
-                }
+.login-button:hover {
+    background-color: rgb(198, 19, 19);
+    transition: 0.1s ease;
+}
 
-                &.settings-icon .icon-circle .bi {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    background-color: #FC282C;
-                }
-
-                &.settings-icon .icon-circle .bi:hover {
-                    background-color: rgb(198, 19, 19);
-                    transition: 0.1s ease;
-                }
-
-                &.settings-icon .icon-circle i {
-                    color: black;
-                    font-size: 24px;
-                }
-
-                &.login-button {
-                    background-color: #FC282C;
-                    color: black;
-                    font-weight: bold;
-                    padding: 9px 16px;
-                    border-radius: 8px;
-                    transition: background-color 0.1s ease;
-                }
-
-                &.login-button:hover {
-                    background-color: rgb(198, 19, 19);
-                    transition: 0.1s ease;
-                }
-            }
-        }
-    }
+.login-button{
+    margin-right: 10px;
 }

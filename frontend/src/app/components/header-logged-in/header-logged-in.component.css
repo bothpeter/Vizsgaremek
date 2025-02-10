@@ -7,19 +7,19 @@ header {
     font-size: 18px;
 }
 
-header nav {
+nav {
     display: flex;
     align-items: center;
     margin-left: auto;
 }
 
-header nav ul {
+ul {
     list-style: none;
     display: flex;
     align-items: center;
 }
 
-header nav ul li {
+li {
     position: relative;
     cursor: pointer;
     display: flex;
@@ -27,7 +27,7 @@ header nav ul li {
     padding-bottom: 2px;
 }
 
-header nav ul li::after {
+li::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -39,8 +39,8 @@ header nav ul li::after {
     border-radius: 10px;
 }
 
-header nav ul li:hover::after,
-header nav ul li:focus-within::after {
+li:hover::after,
+li:focus-within::after {
     width: 75%;
 }
 
@@ -48,7 +48,7 @@ header nav ul li.user-icon::after {
     width: 0;
 }
 
-header nav ul li.user-icon .icon-circle .bi {
+.user-icon .icon-circle .bi {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,12 +58,16 @@ header nav ul li.user-icon .icon-circle .bi {
     background-color: #FC282C;
 }
 
-header nav ul li.user-icon .icon-circle .bi:hover {
+.user-icon .icon-circle .bi:hover {
     background-color: rgb(198, 19, 19);
     transition: 0.1s ease;
 }
 
-header nav ul li.user-icon .icon-circle i {
+.user-icon .icon-circle i {
     color: black;
     font-size: 24px;
+}
+
+.user-icon{
+    margin-right: 20px;
 }

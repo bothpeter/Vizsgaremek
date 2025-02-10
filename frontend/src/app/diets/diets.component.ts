@@ -34,7 +34,6 @@ export class DietsComponent implements OnInit {
       })
       .then((data) => {
         this.diets = data.workout_plan;
-        console.log(this.diets);
       })
       .catch((error) => {
         console.error('Error fetching diets:', error);
@@ -64,7 +63,6 @@ export class DietsComponent implements OnInit {
       })
       .then((data) => {
         this.foods = data.food.filter((food: any) => foodIds.includes(food.id));
-        console.log(this.foods);
       })
       .catch((error) => {
         console.error('Error fetching foods:', error);
@@ -94,7 +92,6 @@ export class DietsComponent implements OnInit {
       })
       .then((data) => {
         this.ingredients = data.ingredients;
-        console.log(this.ingredients);
       })
       .catch((error) => {
         console.error('Error fetching ingredients:', error);

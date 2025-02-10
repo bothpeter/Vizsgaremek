@@ -1,4 +1,3 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -28,7 +27,6 @@ export class AuthService {
           this.isLoggedIn = false;
           localStorage.removeItem('authToken');
           this.router.navigateByUrl('/login');
-          alert('Sikeres kijelentkezés!');
         },
         error: (err) => {
           console.error('Logout failed:', err);

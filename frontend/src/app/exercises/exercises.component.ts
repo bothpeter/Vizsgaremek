@@ -40,7 +40,6 @@ export class ExercisesComponent implements OnInit {
       })
       .then((data) => {
         this.exercises = data.exercise;
-        console.log(this.exercises);
       })
       .catch((error) => {
         console.error('Error fetching exercises:', error);
