@@ -1,9 +1,12 @@
-<ng-container *ngIf="authService.isAuthenticated(); else loggedOutHeader">
-  <app-header-logged-in></app-header-logged-in>
-</ng-container>
-<ng-template #loggedOutHeader>
-  <app-header></app-header>
-</ng-template>
-<main>
-  <router-outlet />
-</main>
+<div class="page-container">
+  <ng-container *ngIf="authService.isAuthenticated(); else loggedOutHeader">
+    <app-header-logged-in></app-header-logged-in>
+  </ng-container>
+  <ng-template #loggedOutHeader>
+    <app-header></app-header>
+  </ng-template>
+  <main>
+    <router-outlet />
+  </main>
+</div>
+<app-footer />

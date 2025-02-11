@@ -85,7 +85,7 @@ header nav ul li.login-button::after {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    padding: 10px 14px;
+    padding: 11px 14px;
     border-radius: 8px;
     transition: background-color 0.1s ease;
 }

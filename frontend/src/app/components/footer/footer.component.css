@@ -1,0 +1,139 @@
+.footer {
+    background-color: #0f0f0f;
+    color: #e0e0e0;
+    padding: 60px 0 20px 0;
+    border-top: 1px solid #1e1e1e;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section {
+    text-align: center;
+}
+
+.footer-logo {
+    width: 150px;
+    height: auto;
+    border-radius: 10%;
+    margin-bottom: 20px;
+}
+
+.footer-text {
+    font-size: 1rem;
+    color: #b0b0b0;
+    max-width: 250px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.footer-heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    position: relative;
+}
+
+.footer-heading::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: #FC282C;
+    margin: 10px auto 0;
+    border-radius: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 15px;
+}
+
+.footer-link {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: color 0.1s ease;
+    cursor: pointer;
+}
+
+.footer-link:hover {
+    color: #FC282C;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #b0b0b0;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.social-icon:hover {
+    color: #FC282C;
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 20px;
+}
+
+.footer-copy {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin: 0;
+}
+
+.horizontal-links, .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+}
+
+.horizontal-links li, .footer-links li {
+    margin: 0;
+}
+
+.horizontal-links .footer-link, .footer-links .footer-link {
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    transition: background-color 0.1s ease, color 0.1s ease;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.horizontal-links .footer-link:hover, .footer-links .footer-link:hover {
+    background-color: #FC282C;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .horizontal-links, .footer-links {
+        gap: 10px;
+    }
+
+    .horizontal-links .footer-link, .footer-links .footer-link {
+        padding: 5px 8px;
+        font-size: 0.9rem;
+    }
+}
