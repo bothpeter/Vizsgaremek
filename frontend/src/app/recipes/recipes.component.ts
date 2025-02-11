@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SortByTypePipe } from '../pipes/sort-by-type.pipe';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SortByTypePipe],
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  styleUrls: ['./recipes.component.css'],
 })
-
 export class RecipesComponent implements OnInit {
   food: any[] = [];
   selectedFood: any = null;
   ingredients: any[] = [];
   showPopup: boolean = false;
+  selectedType: string = 'all';
 
   constructor() {}
 
@@ -66,5 +67,8 @@ export class RecipesComponent implements OnInit {
         console.error('Error fetching ingredients:', error);
       });
   }
-  
+
+  changeType(type: string): void {
+    this.selectedType = type;
+  }
 }

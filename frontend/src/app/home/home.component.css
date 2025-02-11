@@ -1,4 +1,3 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 
 .container {
@@ -8,7 +7,6 @@
     padding: 20px 0;
 }
 
-/* Hero Section */
 .hero {
     color: #e0e0e0;
     text-align: center;
@@ -37,11 +35,11 @@
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-    color: #b0b0b0; /* Világosabb szöveg a kiemeléshez */
+    color: #b0b0b0;
 }
 
 .hero .cta-button {
-    background-color: #FC282C; /* Akcentus szín */
+    background-color: #FC282C;
     color: black;
     padding: 10px 20px;
     border-radius: 5px;
@@ -51,12 +49,11 @@
 }
 
 .hero .cta-button:hover {
-    background-color: rgb(198, 19, 19); /* Akcentus hover szín */
+    background-color: rgb(198, 19, 19);
 }
 
-/* About Section */
 .about {
-    background-color: #1e1e1e; /* Kiemelés szín */
+    background-color: #1e1e1e;
     padding: 60px 0;
     text-align: center;
 }
@@ -74,9 +71,8 @@
     margin: 0 auto;
 }
 
-/* Features Section */
 .features {
-    background-color: #0f0f0f; /* Sötét háttér */
+    background-color: #0f0f0f;
     padding: 60px 0;
     text-align: center;
 }
@@ -94,10 +90,10 @@
 }
 
 .feature {
-    background-color: #1e1e1e; /* Kiemelés szín */
+    background-color: #1e1e1e;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sötét árnyék */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -108,7 +104,7 @@
 
 .feature i {
     font-size: 2rem;
-    color: #FC282C; /* Akcentus szín */
+    color: #FC282C;
     margin-bottom: 15px;
 }
 
