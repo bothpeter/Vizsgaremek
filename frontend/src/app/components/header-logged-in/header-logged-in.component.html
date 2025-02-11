@@ -6,14 +6,13 @@
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-
         <ul class="nav-links" [ngClass]="{ 'active': isMenuOpen }">
             <li routerLink="/" (click)="closeMenu()">Kezdőlap</li>
             <li routerLink="/calculator" (click)="closeMenu()">Kalkulátor</li>
             <li routerLink="/recipes" (click)="closeMenu()">Receptek</li>
             <li routerLink="/exercises" (click)="closeMenu()">Gyakorlatok</li>
-            <li routerLink="/diets" (click)="closeMenu()">Étrendek</li>
             <li routerLink="/workouts" (click)="closeMenu()">Edzéstervek</li>
+            <li routerLink="/diets" (click)="closeMenu()">Étrendek</li>
         </ul>
         <ul>
             <li routerLink="/user" class="user-icon" (click)="closeMenu()">

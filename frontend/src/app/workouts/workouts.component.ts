@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SortWorkoutsPipe } from '../pipes/sort-workouts.pipe';
 
 @Component({
   selector: 'app-workouts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SortWorkoutsPipe],
   templateUrl: './workouts.component.html',
   styleUrls: ['./workouts.component.css']
 })
@@ -13,6 +14,7 @@ export class WorkoutsComponent implements OnInit {
   exercises: any[] = [];
   selectedWorkout: any = null;
   showPopup: boolean = false;
+  selectedType: string = 'all';
 
   constructor() { }
 
@@ -68,5 +70,9 @@ export class WorkoutsComponent implements OnInit {
 
   toggleExerciseDetails(exercise: any): void {
     exercise.isExpanded = !exercise.isExpanded;
+  }
+
+  changeType(type: string): void {
+    this.selectedType = type;
   }
 }
