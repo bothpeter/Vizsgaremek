@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_likes_exercise', function (Blueprint $table) {
+        Schema::create('user_like_exercises', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('exercise_id');
         });
 
-        Schema::create('user_likes_food', function (Blueprint $table) {
+        Schema::create('user_like_foods', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('food_id');
@@ -38,8 +38,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_likes_exercise');
-        Schema::dropIfExists('user_likes_food');
+        Schema::dropIfExists('user_like_exercise');
+        Schema::dropIfExists('user_like_foods');
         Schema::dropIfExists('user_physique');
     }
 };

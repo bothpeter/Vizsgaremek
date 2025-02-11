@@ -11,6 +11,7 @@ class WorkoutPlan extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
+    protected $table = 'workout_plans';
     protected $fillable = [
         'title',
         'goodFor',

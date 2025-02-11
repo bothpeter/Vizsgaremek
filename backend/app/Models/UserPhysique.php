@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserPhysique extends Model
 {
     public $timestamps = false;
+    protected $table = 'user_physique';
     protected $fillable = [
         'height',
         'weight',

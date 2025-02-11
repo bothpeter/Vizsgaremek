@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workout_plan', function (Blueprint $table) {
+        Schema::create('workout_plans', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('title');
             $table->string('goodFor');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('user_id');
         });
 
-        Schema::create('diet_plan', function (Blueprint $table) {
+        Schema::create('diet_plans', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('title');
             $table->string('description');
@@ -43,7 +43,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workout_plan');
-        Schema::dropIfExists('diet_plan');
+        Schema::dropIfExists('workout_plans');
+        Schema::dropIfExists('diet_plans');
     }
 };
