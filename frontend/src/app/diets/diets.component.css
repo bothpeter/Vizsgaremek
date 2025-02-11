@@ -65,35 +65,52 @@
     position: relative;
     background-color: #1e1e1e;
     padding: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-radius: 8px;
+    border-radius: 12px;
     width: 80%;
     max-width: 60%;
-    max-height: 80vh;
+    max-height: 90vh;
     color: #fff;
     overflow-y: auto;
 }
 
-.description, .recipe{
-    background-color: #2a2a2a;
-    padding: 8px 16px;
-    border-radius: 4px;
-    color: #fff;
+.popup-top {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.popup-content ul {
-    padding: 0;
-    list-style: none;
+.popup-left {
+    flex: 1;
 }
 
+.popup-left h3 {
+    margin: 0;
+    font-size: 1.75em;
+    color: #FC282C;
+}
 
-.popup-content li {
-    background-color: #2a2a2a;
-    padding: 8px;
-    margin: 4px 0;
-    border-radius: 4px;
-    color: #fff;
+.popup-left .description {
+    font-size: 1em;
+    color: #b0b0b0;
+    margin-top: 8px;
+}
+
+.popup-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popup-right img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.popup-bottom {
+    margin-top: 20px;
 }
 
 .nutrition-row {
@@ -101,7 +118,6 @@
     flex-wrap: wrap;
     gap: 16px;
     margin: 16px 0;
-    justify-content: space-between;
 }
 
 .nutrition-item {
@@ -110,23 +126,49 @@
     border-radius: 4px;
     color: #fff;
     font-size: 1em;
-    display: flex;
+    flex: 1 1 calc(25% - 16px);
+    text-align: center;
 }
 
 .nutrition-item strong {
     color: #FC282C;
-    margin-right: 8px;
 }
 
-h4,
-p strong {
+.popup-bottom h4 {
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.25em;
     color: #FC282C;
+}
+
+.popup-bottom ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popup-bottom li {
+    background-color: #2a2a2a;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.popup-bottom .recipe {
+    background-color: #2a2a2a;
+    padding: 12px;
+    border-radius: 4px;
+    color: #fff;
+    white-space: pre-line;
+    margin: 0;
 }
 
 .close-btn {
     position: absolute;
     top: 10px;
-    right: 23px;
+    right: 10px;
     width: 40px;
     height: 40px;
     border: none;
@@ -136,7 +178,7 @@ p strong {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -145,12 +187,19 @@ p strong {
     background-color: rgb(198, 19, 19);
 }
 
-@media (max-width: 960px) {
-    .card {
-        width: 100%;
+@media (max-width: 768px) {
+    .popup-top {
+        flex-direction: column;
+    }
+
+    .popup-right img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 16px;
     }
 
     .nutrition-item {
-        flex: 1 1 calc(50% - 12px);
+        flex: 1 1 calc(50% - 8px);
     }
 }
+

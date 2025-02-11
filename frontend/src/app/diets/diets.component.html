@@ -10,59 +10,79 @@
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
     <div class="popup-content" (click)="$event.stopPropagation()">
-        <button class="close-btn" (click)="closePopup()">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <h3>{{ selectedDiet.title }}</h3>
-        <p class="description">{{ selectedDiet.description }}</p>
-        <p class="description"><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
-
+      <button class="close-btn" (click)="closePopup()">
+        <i class="fas fa-times"></i>
+      </button>
+  
+      <!-- Top Section: Diet Title and Description -->
+      <div class="popup-top">
+        <div class="popup-left">
+          <h3>{{ selectedDiet.title }}</h3>
+          <p class="description">{{ selectedDiet.description }}</p>
+          <p class="description"><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
+        </div>
+      </div>
+  
+      <!-- Bottom Section: Associated Foods -->
+      <div class="popup-bottom">
         <h4>Ételek:</h4>
         <div class="food-cards">
-            <div class="card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
-                <img [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
-                    [alt]="food.name" />
-                <div class="card-content">
-                    <h3>{{ food.name }}</h3>
-                    <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
-                </div>
+          <div class="card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
+            <img [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
+                 [alt]="food.name" />
+            <div class="card-content">
+              <h3>{{ food.name }}</h3>
+              <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 <div *ngIf="showFoodPopup" class="popup" (click)="closeFoodPopup()">
     <div class="popup-content" (click)="$event.stopPropagation()">
-        <button class="close-btn" (click)="closeFoodPopup()">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <h3>{{ selectedFood.name }}</h3>
-        <p class="description">{{ selectedFood.description }}</p>
-        <div class="nutrition-row">
-            <div class="nutrition-item">
-                <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
-            </div>
-            <div class="nutrition-item">
-                <strong>Fehérje:</strong> {{ selectedFood.protein }} g
-            </div>
-            <div class="nutrition-item">
-                <strong>Zsír:</strong> {{ selectedFood.fat }} g
-            </div>
-            <div class="nutrition-item">
-                <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
-            </div>
+      <button class="close-btn" (click)="closeFoodPopup()">
+        <i class="fas fa-times"></i>
+      </button>
+  
+      <div class="popup-top">
+        <div class="popup-left">
+          <h3>{{ selectedFood.name }}</h3>
+          <p class="description">{{ selectedFood.description }}</p>
         </div>
-
+  
+        <div class="popup-right">
+          <img [src]="selectedFood.img_url ? selectedFood.img_url : 'https://via.placeholder.com/400x300?text=No+Image'"
+               [alt]="selectedFood.name" />
+        </div>
+      </div>
+  
+      <div class="popup-bottom">
+        <div class="nutrition-row">
+          <div class="nutrition-item">
+            <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
+          </div>
+          <div class="nutrition-item">
+            <strong>Fehérje:</strong> {{ selectedFood.protein }} g
+          </div>
+          <div class="nutrition-item">
+            <strong>Zsír:</strong> {{ selectedFood.fat }} g
+          </div>
+          <div class="nutrition-item">
+            <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
+          </div>
+        </div>
+  
         <h4>Hozzávalók:</h4>
         <ul>
-            <li *ngFor="let ingredient of ingredients">
-                {{ ingredient.amount }} {{ ingredient.ingredient_name }}
-            </li>
+          <li *ngFor="let ingredient of ingredients">
+            {{ ingredient.amount }} {{ ingredient.ingredient_name }}
+          </li>
         </ul>
-
+  
         <h4>Elkészítés:</h4>
         <p class="recipe">{{ selectedFood.recipe }}</p>
+      </div>
     </div>
-</div>
+  </div>
