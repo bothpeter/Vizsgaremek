@@ -1,9 +1,68 @@
+.sorting-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.sorting-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1e1e1e;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.sorting-dropdown label {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-select select:hover {
+  border-color: #FC282C;
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #fff;
+  font-size: 0.8em;
+}
+
 .exercise-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
   padding: 16px;
+  margin-bottom: 35px;
 }
 
 .card {
@@ -68,9 +127,37 @@
   overflow-y: auto;
 }
 
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-content li {
+  background-color: #2a2a2a;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.details {
+  background-color: #2a2a2a;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.description {
+  background-color: #2a2a2a;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #fff;
+}
+
 .close-btn {
   position: absolute;
-  top: 8px;
+  top: 10px;
   right: 23px;
   width: 40px;
   height: 40px;
@@ -90,13 +177,18 @@
   background-color: rgb(198, 19, 19);
 }
 
-.description, .details{
-  background-color: #2a2a2a;
-  padding: 8px 16px;
-  border-radius: 4px;
-  color: #fff;
-}
+@media (max-width: 960px) {
+  .nutrition-item {
+    flex: 1 1 calc(50% - 12px);
+  }
 
-strong{
-  color: #FC282C;
+  .sorting-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sorting-dropdown {
+    width: 80%;
+  }
+
 }

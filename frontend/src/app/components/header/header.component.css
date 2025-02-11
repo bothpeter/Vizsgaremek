@@ -1,4 +1,3 @@
-/* Alap stílusok */
 header {
     display: flex;
     align-items: center;
@@ -128,13 +127,14 @@ header nav ul li.login-button::after {
         transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
         opacity: 0;
         box-shadow: 0px 8px 10px -1px rgba(0, 0, 0, 0.5);
-        border-radius: 0 0 10px 10px;
+        z-index: 1000;
+        pointer-events: none;
     }
 
     .nav-links.active {
         max-height: 500px;
         opacity: 1;
-        border-radius: 0 0 10px 10px;
+        pointer-events: auto;
     }
 
     .nav-links li {

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SortByTypePipe } from '../pipes/sort-by-type.pipe';
+import { sortFoodsPipe } from '../pipes/sort-foods.pipe';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [CommonModule, SortByTypePipe],
+  imports: [CommonModule, sortFoodsPipe],
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css'],
 })
