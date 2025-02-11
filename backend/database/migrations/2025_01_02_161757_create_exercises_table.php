@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('img_url')->nullable();
             $table->string('type');
+            $table->string('user_id');
         });
     }
 

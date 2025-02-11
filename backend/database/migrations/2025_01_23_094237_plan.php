@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('goodFor');
             $table->string('description');
             $table->string('type');
-            $table->integer('exerccise1_id');
-            $table->integer('exerccise2_id');
-            $table->integer('exerccise3_id');
-            $table->integer('exerccise4_id');
-            $table->integer('exerccise5_id');
+            $table->integer('exercise1_id');
+            $table->integer('exercise2_id');
+            $table->integer('exercise3_id');
+            $table->integer('exercise4_id');
+            $table->integer('exercise5_id');
+            $table->string('user_id');
         });
 
         Schema::create('diet_plan', function (Blueprint $table) {
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->integer('food1_id');
             $table->integer('food2_id');
             $table->integer('food3_id');
+            $table->string('user_id');
         });
     }
 
