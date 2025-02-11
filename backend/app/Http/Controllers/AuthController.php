@@ -125,8 +125,16 @@ class AuthController extends Controller
 
         $resetRequest = PasswordReset::where('email', $user->email)->first();
 
-        if (!$resetRequest || $resetRequest->token != $request->token) {
+        if (!$resetRequest) {
+            return response()->json(['error' => 'An Error Occurred. Please Try again.', 'message' => 'No reset request found.'], 400);
+        }
+
+        if ($resetRequest->token != $request->token) {
             return response()->json(['error' => 'An Error Occurred. Please Try again.', 'message' => 'Token mismatch.'], 400);
+        }
+
+        if ($resetRequest->expires_at->lt(now())) {
+            return response()->json(['error' => 'Token Expired', 'message' => 'The reset token has expired.'], 400);
         }
 
         $user->update([

@@ -76,6 +76,10 @@
         <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgetted password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
         </div>
         <div class="highlighted-div">
         <h2>Exercise</h2>
