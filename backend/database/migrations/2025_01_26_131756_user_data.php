@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_likes_exercise', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('exercise_id');
         });
 
         Schema::create('user_likes_food', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('food_id');
         });
 
         Schema::create('user_physique', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->float('height');
             $table->float('weight');

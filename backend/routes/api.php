@@ -18,6 +18,9 @@ Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 Route::post('/logout',[AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+Route::post('/forgot_password',[AuthController::class, 'forgot']);
+Route::post('/reset_password',[AuthController::class, 'reset']);
+
 Route::get('exercise',[ExerciseController::class, 'view_exercises']);
 Route::get('exercise/{id}',[ExerciseController::class, 'view_exercise_by_exercise_id']);
 Route::post('exercise',[ExerciseController::class, 'post_exercises']);

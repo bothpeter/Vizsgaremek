@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('workout_plan', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->string('title');
             $table->string('goodFor');
             $table->string('description');
@@ -24,6 +25,7 @@ return new class extends Migration
         });
 
         Schema::create('diet_plan', function (Blueprint $table) {
+            $table->integer('id')->autoIncrement();
             $table->string('title');
             $table->string('description');
             $table->string('foods');
