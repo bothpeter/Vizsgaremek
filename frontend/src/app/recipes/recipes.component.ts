@@ -41,31 +41,31 @@ export class RecipesComponent implements OnInit {
 
   openPopup(food: any): void {
     this.selectedFood = food;
-    this.showPopup = true;
     this.fetchIngredients(food.id);
   }
-
+  
   closePopup(): void {
     this.showPopup = false;
     this.selectedFood = null;
     this.ingredients = [];
   }
-
+  
   fetchIngredients(foodId: number): void {
     const apiUrl = `http://127.0.0.1:8000/api/food_ingredients/${foodId}`;
     fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        this.ingredients = data.ingredients;
-      })
-      .catch((error) => {
-        console.error('Error fetching ingredients:', error);
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      this.showPopup = true;
+      this.ingredients = data.ingredients;
+    })
+    .catch((error) => {
+      console.error('Error fetching ingredients:', error);
+    });
   }
 
   changeType(type: string): void {

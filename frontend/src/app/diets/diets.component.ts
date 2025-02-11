@@ -42,7 +42,6 @@ export class DietsComponent implements OnInit {
 
   openPopup(diet: any): void {
     this.selectedDiet = diet;
-    this.showPopup = true;
     this.fetchFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
   }
 
@@ -62,6 +61,7 @@ export class DietsComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
+        this.showPopup = true;
         this.foods = data.food.filter((food: any) => foodIds.includes(food.id));
       })
       .catch((error) => {
@@ -71,7 +71,6 @@ export class DietsComponent implements OnInit {
 
   openFoodPopup(food: any): void {
     this.selectedFood = food;
-    this.showFoodPopup = true;
     this.fetchIngredients(food.id);
   }
 
@@ -91,6 +90,7 @@ export class DietsComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
+        this.showFoodPopup = true;
         this.ingredients = data.ingredients;
       })
       .catch((error) => {

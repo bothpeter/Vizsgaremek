@@ -30,24 +30,19 @@
 		<i class="fas fa-times"></i>
 	  </button>
   
-	  <!-- Top Section: Image, Title, and Description -->
 	  <div class="popup-top">
-		<!-- Left Side: Title and Description -->
 		<div class="popup-left">
 		  <h3>{{ selectedFood.name }}</h3>
 		  <p class="description">{{ selectedFood.description }}</p>
 		</div>
   
-		<!-- Right Side: Image -->
 		<div class="popup-right">
 		  <img [src]="selectedFood.img_url ? selectedFood.img_url : 'https://via.placeholder.com/400x300?text=No+Image'"
 			   [alt]="selectedFood.name" />
 		</div>
 	  </div>
   
-	  <!-- Bottom Section: Nutrition, Ingredients, and Recipe -->
 	  <div class="popup-bottom">
-		<!-- Nutrition Information -->
 		<div class="nutrition-row">
 		  <div class="nutrition-item">
 			<strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
@@ -63,7 +58,6 @@
 		  </div>
 		</div>
   
-		<!-- Ingredients -->
 		<h4>Hozzávalók:</h4>
 		<ul>
 		  <li *ngFor="let ingredient of ingredients">
@@ -71,7 +65,6 @@
 		  </li>
 		</ul>
   
-		<!-- Recipe -->
 		<h4>Elkészítés:</h4>
 		<p class="recipe">{{ selectedFood.recipe }}</p>
 	  </div>
