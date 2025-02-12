@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Exercise;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class ExerciseController extends Controller implements HasMiddleware
@@ -53,5 +54,12 @@ class ExerciseController extends Controller implements HasMiddleware
             'exercise' => $exercise
         ];
         return response()->json($data, 200);
+    }
+
+    public function delete_exercise(Exercise $exercise){
+        Gate::authorize('delete', $exercise);
+        $exercise->delete();
+
+        return ['message' => 'Exercise deleted'];
     }
 }

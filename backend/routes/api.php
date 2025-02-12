@@ -24,6 +24,7 @@ Route::post('/reset_password',[AuthController::class, 'reset']);
 Route::get('exercise',[ExerciseController::class, 'view_exercises']);
 Route::get('exercise/{id}',[ExerciseController::class, 'view_exercise_by_exercise_id']);
 Route::post('exercise',[ExerciseController::class, 'post_exercises']);
+Route::delete('exercise/{id}',[ExerciseController::class, 'delete_exercise']);
 
 Route::get('food',[FoodController::class, 'view_foods']);
 Route::get('food/{id}',[FoodController::class, 'view_foods_by_id']);

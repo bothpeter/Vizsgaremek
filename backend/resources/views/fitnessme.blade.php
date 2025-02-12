@@ -71,6 +71,8 @@
         <div class="highlighted-div">
         <h2>User (only post methods)</h2>
         <hr>
+        <a href="http://127.0.0.1:8000/api/user" class="text">Url for user check by its token : http://127.0.0.1:8000/api/user</a>
+        <hr>
         <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
@@ -87,6 +89,8 @@
         <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/id</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise</a>
         </div>
         <hr>
         <div class="highlighted-div">

@@ -24,18 +24,6 @@ return new class extends Migration
             $table->integer('exercise5_id');
             $table->string('user_id');
         });
-
-        Schema::create('diet_plans', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
-            $table->string('title');
-            $table->string('description');
-            $table->string('foods');
-            $table->float('kcal');
-            $table->integer('food1_id');
-            $table->integer('food2_id');
-            $table->integer('food3_id');
-            $table->string('user_id');
-        });
     }
 
     /**
@@ -44,6 +32,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('workout_plans');
-        Schema::dropIfExists('diet_plans');
     }
 };
