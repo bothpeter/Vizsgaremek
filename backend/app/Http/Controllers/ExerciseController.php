@@ -56,10 +56,19 @@ class ExerciseController extends Controller implements HasMiddleware
         return response()->json($data, 200);
     }
 
-    public function delete_exercise(Exercise $exercise){
-        Gate::authorize('delete', $exercise);
-        $exercise->delete();
+    public function delete_exercise(Request $request, $id)
+    {
+        $exercise = Exercise::find($id);
 
-        return ['message' => 'Exercise deleted'];
+        if ($exercise) {
+            if ($exercise->user_id == $request->user()->id) {
+                $exercise->delete();
+                return response()->json(['message' => 'Exercise deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'Exercise not found'], 404);
+        }
     }
 }

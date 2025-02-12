@@ -12,6 +12,7 @@ class Exercise extends Model
     use HasFactory, Notifiable, HasApiTokens;
     
     public $timestamps = false;
+    protected $primaryKey = 'exercise_id';
     protected $fillable = [
         'exercise_name',
         'muscle_group',
