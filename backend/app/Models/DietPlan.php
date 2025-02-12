@@ -12,6 +12,7 @@ class DietPlan extends Model
     use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
     protected $table = 'diet_plans';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'title',
         'description',

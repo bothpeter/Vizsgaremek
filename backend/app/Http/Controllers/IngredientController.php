@@ -67,4 +67,20 @@ class IngredientController extends Controller implements HasMiddleware
             return response()->json($data,404);
         }
     }
+
+    public function delete_ingredient(Request $request, $id)
+    {
+        $ingredient = FoodIngredients::find($id);
+
+        if ($ingredient) {
+            if ($ingredient->user_id == $request->user()->id) {
+                $ingredient->delete();
+                return response()->json(['message' => 'ingredient deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'ingredient not found'], 404);
+        }
+    }
 }

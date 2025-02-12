@@ -88,9 +88,9 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/id</a>
+        <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/(id)</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise</a>
+        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -98,7 +98,9 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/food" class="text">Url for food endpoint :<br> http://127.0.0.1:8000/api/food</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id:<br> http://127.0.0.1:8000/api/food/1</a>
+        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id:<br> http://127.0.0.1:8000/api/food/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for delete food endpoint by food id:<br> http://127.0.0.1:8000/api/food/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -106,19 +108,25 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/1</a>
+        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by ingredient id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
         <h2>Workout Plan</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts by workout id endpoint :<br> http://127.0.0.1:8000/api/workout_plan/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
         <h2>Diet Plan</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/diet_plan/" class="text">Url for delete diets by delete id endpoint :<br> http://127.0.0.1:8000/api/diet_plan/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">

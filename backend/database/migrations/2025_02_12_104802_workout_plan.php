@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('goodFor');
             $table->string('description');
             $table->string('type');
-            $table->integer('exercise1_id');
-            $table->integer('exercise2_id');
-            $table->integer('exercise3_id');
-            $table->integer('exercise4_id');
-            $table->integer('exercise5_id');
+            $table->integer('exercise1_id')->nullable();
+            $table->integer('exercise2_id')->nullable();
+            $table->integer('exercise3_id')->nullable();
+            $table->integer('exercise4_id')->nullable();
+            $table->integer('exercise5_id')->nullable();
             $table->string('user_id');
         });
     }

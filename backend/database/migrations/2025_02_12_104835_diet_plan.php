@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('foods');
             $table->float('kcal');
-            $table->integer('food1_id');
-            $table->integer('food2_id');
-            $table->integer('food3_id');
+            $table->integer('food1_id')->nullable();
+            $table->integer('food2_id')->nullable();
+            $table->integer('food3_id')->nullable();
             $table->string('user_id');
         });
     }

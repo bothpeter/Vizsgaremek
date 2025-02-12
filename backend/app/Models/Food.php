@@ -13,6 +13,7 @@ class Food extends Model
     
     public $timestamps = false;
     protected $table = 'foods';
+    protected $primaryKey = 'food_id';
     protected $fillable = [
         'name',
         'description',

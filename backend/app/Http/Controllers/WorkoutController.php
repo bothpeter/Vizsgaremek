@@ -48,4 +48,20 @@ class WorkoutController extends Controller implements HasMiddleware
         ];
         return response()->json($data, 200);
     }
+
+    public function delete_workout(Request $request, $id)
+    {
+        $workout = WorkoutPlan::find($id);
+
+        if ($workout) {
+            if ($workout->user_id == $request->user()->id) {
+                $workout->delete();
+                return response()->json(['message' => 'workout deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'workout not found'], 404);
+        }
+    }
 }

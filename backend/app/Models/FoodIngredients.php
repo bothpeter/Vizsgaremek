@@ -11,6 +11,7 @@ class FoodIngredients extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
     public $timestamps = false;
+    protected $primaryKey = 'ingredient_id';
     protected $fillable = [
         'food_id',
         'ingredient_name',

@@ -46,4 +46,20 @@ class DietController extends Controller implements HasMiddleware
         ];
         return response()->json($data, 200);
     }
+
+    public function delete_diet(Request $request, $id)
+    {
+        $diet = DietPlan::find($id);
+
+        if ($diet) {
+            if ($diet->user_id == $request->user()->id) {
+                $diet->delete();
+                return response()->json(['message' => 'diet deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'diet not found'], 404);
+        }
+    }
 }
