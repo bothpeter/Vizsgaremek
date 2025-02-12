@@ -51,10 +51,12 @@ Route::delete('diet_plan/{id}',[DietController::class, 'delete_diet']);
 Route::get('user_like_exercise',[UserLikeExerciseController::class, 'view_user_like_exercise']);
 Route::get('user_like_exercise/{id}',[UserLikeExerciseController::class, 'view_user_like_exercise_by_user_id']);
 Route::post('user_like_exercise',[UserLikeExerciseController::class, 'post_user_like_exercise']);
+Route::delete('user_like_exercise/{id}',[UserLikeExerciseController::class, 'delete_user_like_exercise']);
 
 Route::get('user_like_food',[UserLikeFoodController::class, 'view_user_like_food']);
 Route::get('user_like_food/{id}',[UserLikeFoodController::class, 'view_user_like_food_by_user_id']);
 Route::post('user_like_food',[UserLikeFoodController::class, 'post_user_like_food']);
+Route::delete('user_like_food/{id}',[UserLikeFoodController::class, 'delete_user_like_food']);
 
 Route::get('user_physique',[UserPhysiqueController::class, 'view_user_physique']);
 Route::get('user_physique/{id}',[UserPhysiqueController::class, 'view_user_physique_by_user_id']);

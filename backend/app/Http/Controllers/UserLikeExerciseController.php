@@ -54,5 +54,19 @@ class UserLikeExerciseController extends Controller implements HasMiddleware
         return response()->json($data,200);
     }
 
+    public function delete_user_like_exercise(Request $request, $id)
+    {
+        $exercise = UserLikeExercise::find($id);
 
+        if ($exercise) {
+            if ($exercise->user_id == $request->user()->id) {
+                $exercise->delete();
+                return response()->json(['message' => 'exercise deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'exercise not found'], 404);
+        }
+    }
 }

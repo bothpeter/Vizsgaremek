@@ -54,4 +54,20 @@ class UserLikeFoodController extends Controller implements HasMiddleware
         return response()->json($data,200);
     }
 
+    public function delete_user_like_food(Request $request, $id)
+    {
+        $food = UserLikeFood::find($id);
+
+        if ($food) {
+            if ($food->user_id == $request->user()->id) {
+                $food->delete();
+                return response()->json(['message' => 'food deleted'], 200);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
+        } else {
+            return response()->json(['message' => 'food not found'], 404);
+        }
+    }
+
 }

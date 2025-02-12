@@ -134,7 +134,9 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/1</a>
+        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for delete liked foods endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_food/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -142,7 +144,10 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/1</a>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for delete liked exercises endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_exercise/(id)</a>
+
         </div>
         <hr>
         <div class="highlighted-div">
