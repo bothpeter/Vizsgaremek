@@ -25,6 +25,7 @@ export const routes: Routes = [
         loadComponent: () => {
             return import('./user/user.component').then((m) => m.UserComponent);
         },
+        data: { hideFooter: true },
     },
     {
         path: 'contacts',
