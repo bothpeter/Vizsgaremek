@@ -2,7 +2,7 @@
     <div class="register-card">
         <h2>Regisztráció</h2>
         <p class="subtitle">Hozz létre egy fiókot a folytatáshoz</p>
-        <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm" (keydown.enter)="onSubmit()">
             <div class="form-group">
                 <label for="username">Felhasználónév</label>
                 <input type="text" id="username" name="username" [(ngModel)]="registerObj.name" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />

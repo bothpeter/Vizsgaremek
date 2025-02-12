@@ -10,9 +10,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(token: string) {
+  login(token: string, userId: string) {
     this.isLoggedIn = true;
     localStorage.setItem('authToken', token);
+    localStorage.setItem('userId', userId);
   }
 
   logout() {
@@ -26,6 +27,7 @@ export class AuthService {
         next: () => {
           this.isLoggedIn = false;
           localStorage.removeItem('authToken');
+          localStorage.removeItem('userId');
           this.router.navigateByUrl('/login');
         },
         error: (err) => {

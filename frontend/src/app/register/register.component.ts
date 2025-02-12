@@ -40,7 +40,7 @@ export class RegisterComponent {
       (res: any) => {
         if (res.token != null) {
           const authToken = atob(res.token); // Decoded token from base64
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/login');
         } else {
           console.log(res.message);
         }

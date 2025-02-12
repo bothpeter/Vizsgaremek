@@ -62,4 +62,16 @@ export const routes: Routes = [
             return import('./workouts/workouts.component').then((m) => m.WorkoutsComponent);
         },
     },
+    {
+        path: 'forgot-password',
+        loadComponent: () => {
+            return import('./forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent);
+        },
+    },
+    {
+        path: 'reset-password',
+        loadComponent: () => {
+            return import('./reset-password/reset-password.component').then((m) => m.ResetPasswordComponent);
+        },
+    },
 ];

@@ -26,8 +26,10 @@ export class LoginComponent {
     this.http.post('http://127.0.0.1:8000/api/login', this.loginObj).subscribe(
       (res: any) => {
         if (res.token != null) {
+          const userId = res.user.id;
           const authToken = atob(res.token); // Decoded token from base64
-          this.authService.login(authToken); // Update the login state
+          this.authService.login(authToken, userId);
+
           this.router.navigateByUrl('/');
         } else {
           console.log(res);
