@@ -118,7 +118,7 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts by workout id endpoint :<br> http://127.0.0.1:8000/api/workout_plan/(id)</a>
+        <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts endpoint by workout id :<br> http://127.0.0.1:8000/api/workout_plan/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -126,7 +126,7 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/diet_plan/" class="text">Url for delete diets by delete id endpoint :<br> http://127.0.0.1:8000/api/diet_plan/(id)</a>
+        <a href="http://127.0.0.1:8000/api/diet_plan/" class="text">Url for delete diets endpoint by diets id  :<br> http://127.0.0.1:8000/api/diet_plan/(id)</a>
         </div>
         <hr>
         <div class="highlighted-div">
