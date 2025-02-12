@@ -27,8 +27,9 @@ export class LoginComponent {
       (res: any) => {
         if (res.token != null) {
           const userId = res.user.id;
+          const userName = res.user.name;
           const authToken = atob(res.token); // Decoded token from base64
-          this.authService.login(authToken, userId);
+          this.authService.login(authToken, userId, userName);
 
           this.router.navigateByUrl('/');
         } else {

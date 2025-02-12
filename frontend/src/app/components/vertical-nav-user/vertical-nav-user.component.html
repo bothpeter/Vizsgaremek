@@ -1,0 +1,26 @@
+<div class="vertical-nav-container">
+    <div class="user-profile">
+        <span class="username">Hello, <span>{{ username }}</span></span>
+    </div>
+
+    <ul>
+        <li routerLink="/user" class="nav-item">
+            <i class="fas fa-user"></i> Személyes adatok
+        </li>
+        <li class="nav-item">
+            <i class="fas fa-dumbbell"></i> Kedvelt receptek
+        </li>
+        <li class="nav-item">
+            <i class="fas fa-utensils"></i> Kedvelt gyakorlatok
+        </li>
+        <li class="nav-item">
+            <i class="fas fa-lock"></i> Jelszó módosítása
+        </li>
+        <li class="nav-item">
+            <i class="fas fa-cog"></i> Beállítások
+        </li>
+        <li class="nav-item logout" (click)="onLogout()">
+            <i class="fas fa-sign-out-alt"></i> Kijelentkezés
+        </li>
+    </ul>
+</div>
