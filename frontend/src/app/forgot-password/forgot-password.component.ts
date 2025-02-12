@@ -23,9 +23,8 @@ export class ForgotPasswordComponent {
 
     this.http.post('http://127.0.0.1:8000/api/forgot_password', payload).subscribe(
       (res: any) => {
-        this.apiResponse = 'A kód elküldve az e-mail címedre. Kérjük, ellenőrizd a postaládádat.';
-        localStorage.setItem('resetEmail', this.email); // Save email to local storage
-        this.router.navigateByUrl('/reset-password'); // Redirect to reset-password page
+        localStorage.setItem('resetEmail', this.email);
+        this.router.navigateByUrl('/reset-password');
       },
       (error) => {
         if (error.status === 404 && error.error.message === "No record found") {

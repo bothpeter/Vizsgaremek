@@ -16,12 +16,26 @@ export class ResetPasswordComponent {
   password: string = '';
   password_confirmation: string = '';
   apiResponse: string = '';
+  passwordError: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     this.apiResponse = '';
-    const email = localStorage.getItem('resetEmail'); // E-mail lekérése a helyi tárolóból
+    this.passwordError = '';
+
+    if (this.password !== this.password_confirmation) {
+      this.passwordError = 'A jelszavak nem egyeznek.';
+      return;
+    }
+
+    const passwordValidation = this.validatePassword(this.password);
+    if (!passwordValidation.isValid) {
+      this.passwordError = passwordValidation.errorMessage;
+      return;
+    }
+
+    const email = localStorage.getItem('resetEmail');
     const payload = {
       email: email,
       token: this.token,
@@ -32,8 +46,8 @@ export class ResetPasswordComponent {
     this.http.post('http://127.0.0.1:8000/api/reset_password', payload).subscribe(
       (res: any) => {
         this.apiResponse = res.message;
-        localStorage.removeItem('resetEmail'); // E-mail törlése a helyi tárolóból
-        this.router.navigateByUrl('/login'); // Átirányítás a bejelentkezési oldalra
+        localStorage.removeItem('resetEmail');
+        this.router.navigateByUrl('/login');
       },
       (error) => {
         if (error.status === 404 && error.error.message === "Token mismatch") {
@@ -43,5 +57,35 @@ export class ResetPasswordComponent {
         }
       }
     );
+  }
+
+  validatePassword(password: string): { isValid: boolean, errorMessage: string } {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+      return { isValid: false, errorMessage: 'A jelszónak legalább 8 karakter hosszúnak kell lennie.' };
+    }
+    if (!hasUpperCase) {
+      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy nagybetűt.' };
+    }
+    if (!hasNumber) {
+      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy számot.' };
+    }
+    if (!hasSpecialChar) {
+      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy speciális karaktert.' };
+    }
+
+    this.passwordError = '';
+    return { isValid: true, errorMessage: '' };
+  }
+
+  onPasswordChange() {
+    if (this.password === this.password_confirmation) {
+      this.passwordError = '';
+    }
+    this.validatePassword(this.password);
   }
 }

@@ -1,12 +1,14 @@
-<div class="register-container" >
+<div class="register-container">
     <div class="register-card">
         <h2>Regisztráció</h2>
         <p class="subtitle">Hozz létre egy fiókot a folytatáshoz</p>
         <form (ngSubmit)="onSubmit()" #registerForm="ngForm" (keydown.enter)="onSubmit()">
             <div class="form-group">
                 <label for="username">Felhasználónév</label>
-                <input type="text" id="username" name="username" [(ngModel)]="registerObj.name" required #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
-                <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
+                <input type="text" id="username" name="username" [(ngModel)]="registerObj.name" required
+                    #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
+                <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
+                    class="error-message">
                     A felhasználónév kötelező.
                 </div>
                 <div *ngIf="nameError" class="error-message">
@@ -16,7 +18,8 @@
 
             <div class="form-group">
                 <label for="email">E-mail cím</label>
-                <input type="email" id="email" name="email" [(ngModel)]="registerObj.email" required #emailInput="ngModel" placeholder="Add meg az e-mail címed" />
+                <input type="email" id="email" name="email" [(ngModel)]="registerObj.email" required
+                    #emailInput="ngModel" placeholder="Add meg az e-mail címed" />
                 <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
                     Az e-mail cím kötelező és érvényes formátumú kell legyen.
                 </div>
@@ -27,21 +30,35 @@
 
             <div class="form-group">
                 <label for="password">Jelszó</label>
-                <input type="password" id="password" name="password" [(ngModel)]="registerObj.password" required #passwordInput="ngModel" placeholder="Add meg a jelszavad" />
-                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+                <input type="password" id="password" name="password" [(ngModel)]="registerObj.password" required
+                    #passwordInput="ngModel" placeholder="Add meg a jelszavad" (input)="onPasswordChange()" />
+                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
+                    class="error-message">
                     A jelszó kötelező.
+                </div>
+                <div *ngIf="passwordError" class="error-message">
+                    {{ passwordError }}
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="confirmPassword">Jelszó megerősítése</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="registerObj.password_confirmation" required #confirmPasswordInput="ngModel" placeholder="Erősítsd meg a jelszavad" />
-                <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)" class="error-message">
+                <input type="password" id="confirmPassword" name="confirmPassword"
+                    [(ngModel)]="registerObj.password_confirmation" required #confirmPasswordInput="ngModel"
+                    placeholder="Erősítsd meg a jelszavad" (input)="onPasswordChange()" />
+                <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)"
+                    class="error-message">
                     A jelszó megerősítése kötelező.
+                </div>
+                <div *ngIf="registerObj.password !== registerObj.password_confirmation" class="error-message">
+                    A jelszavak nem egyeznek.
                 </div>
             </div>
 
-            <button type="submit" [disabled]="!registerForm.form.valid">Regisztráció</button>
+            <button type="submit"
+                [disabled]="!registerForm.form.valid || registerObj.password !== registerObj.password_confirmation">
+                Regisztráció
+            </button>
         </form>
         <div class="footer">
             <div>Már van fiókod? <strong routerLink="/login">Jelentkezz be</strong></div>
