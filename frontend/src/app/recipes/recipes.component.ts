@@ -41,7 +41,7 @@ export class RecipesComponent implements OnInit {
 
   openPopup(food: any): void {
     this.selectedFood = food;
-    this.fetchIngredients(food.id);
+    this.fetchIngredients(food.food_id);
   }
   
   closePopup(): void {

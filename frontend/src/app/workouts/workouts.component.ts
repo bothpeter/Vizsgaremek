@@ -23,14 +23,15 @@ export class WorkoutsComponent implements OnInit {
   }
 
   openPopup(workout: any): void {
-    if (this.exercises.length === 0) return;
 
     this.selectedWorkout = {
       ...workout,
       exercises: this.getWorkoutExercises(workout)
     };
+
     this.showPopup = true;
   }
+
 
   closePopup(): void {
     this.showPopup = false;

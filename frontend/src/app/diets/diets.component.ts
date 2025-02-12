@@ -62,7 +62,7 @@ export class DietsComponent implements OnInit {
       })
       .then((data) => {
         this.showPopup = true;
-        this.foods = data.food.filter((food: any) => foodIds.includes(food.id));
+        this.foods = data.food.filter((food: any) => foodIds.includes(food.food_id));
       })
       .catch((error) => {
         console.error('Error fetching foods:', error);
@@ -71,7 +71,7 @@ export class DietsComponent implements OnInit {
 
   openFoodPopup(food: any): void {
     this.selectedFood = food;
-    this.fetchIngredients(food.id);
+    this.fetchIngredients(food.food_id);
   }
 
   closeFoodPopup(): void {
