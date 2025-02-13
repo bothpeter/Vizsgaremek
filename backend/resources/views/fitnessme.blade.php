@@ -132,9 +132,7 @@
         <div class="highlighted-div">
         <h2>User liked foods</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for liked foods by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_food/(id)</a>
+        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food/</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for delete liked foods endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_food/(id)</a>
         </div>
@@ -144,8 +142,6 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for liked exercises by userid endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise/(id)</a>
-        <hr>
         <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for delete liked exercises endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_exercise/(id)</a>
 
         </div>
@@ -153,7 +149,7 @@
         <div class="highlighted-div">
         <h2>User physique</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for physiques endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for user physique endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_physique/1" class="text">Url for physiques by userid endpoint :<br> http://127.0.0.1:8000/api/user_physique/1</a>
         </div>
