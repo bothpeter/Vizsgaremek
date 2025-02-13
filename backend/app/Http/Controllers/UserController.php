@@ -22,9 +22,9 @@ class UserController extends Controller implements HasMiddleware
 
     public function update_user(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'text',
+            'name' => 'string',
+            'email' => 'email',
+            'password' => 'string',
         ]);
 
         if ($validator->fails()) {
