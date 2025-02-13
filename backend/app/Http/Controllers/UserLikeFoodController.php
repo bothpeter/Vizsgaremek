@@ -20,16 +20,6 @@ class UserLikeFoodController extends Controller implements HasMiddleware
         ];
     }
 
-    public function view_user_like_food(){
-        $UserLikeFood = UserLikeFood::all();
-
-        $data = [
-            'status' =>200,
-            'UserLikeFood'=> $UserLikeFood
-        ];
-        return response()->json($data,200);
-    }
-
     public function post_user_like_food(Request $request){
         $fields = $request->validate([
             'food_id' => 'required',

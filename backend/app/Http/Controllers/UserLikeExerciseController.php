@@ -20,16 +20,6 @@ class UserLikeExerciseController extends Controller implements HasMiddleware
         ];
     }
 
-    public function view_user_like_exercise(){
-        $UserLikeExercise = UserLikeExercise::all();
-
-        $data = [
-            'status' =>200,
-            'UserLikeExercise'=> $UserLikeExercise
-        ];
-        return response()->json($data,200);
-    }
-
     public function post_user_like_exercise(Request $request){
         $fields = $request->validate([
             'exercise_id' => 'required',
