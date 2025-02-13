@@ -42,9 +42,36 @@ class UserPhysiqueController extends Controller implements HasMiddleware
         $UserPhysique = UserPhysique::where('user_id', $user->id)->get();
 
         $data = [
-            'status' =>200,
-            'UserPhysique'=> $UserPhysique
+            'status' => 200,
+            'UserPhysique' => $UserPhysique
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
+    }
+
+    public function update_user_physique(Request $request){
+        $fields = $request->validate([
+            'height' => 'required',
+            'weight' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $user = $request->user();
+        $userPhysique = UserPhysique::where('user_id', $user->id)->first();
+
+        if ($userPhysique) {
+            $userPhysique->update($fields);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data updated',
+                'data' => $userPhysique
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User physique not found'
+            ], 404);
+        }
     }
 }

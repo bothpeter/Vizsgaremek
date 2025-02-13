@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLikeExerciseController;
 use App\Http\Controllers\UserLikeFoodController;
 use App\Http\Controllers\UserPhysiqueController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\WorkoutController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::put('/user',[UserController::class, 'update_user'])->middleware('auth:sanctum');
 
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
@@ -55,3 +57,4 @@ Route::delete('user_like_food/{id}',[UserLikeFoodController::class, 'delete_user
 
 Route::get('user_physique',[UserPhysiqueController::class, 'view_user_physique']);
 Route::post('user_physique',[UserPhysiqueController::class, 'post_user_physique']);
+Route::put('user_physique',[UserPhysiqueController::class, 'update_user_physique']);

@@ -91,6 +91,8 @@
         <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/(id)</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for add exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -101,16 +103,18 @@
         <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id:<br> http://127.0.0.1:8000/api/food/(id)</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for delete food endpoint by food id:<br> http://127.0.0.1:8000/api/food/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/food" class="text">Url for add food endpoint : http://127.0.0.1:8000/api/food</a>
         </div>
         <hr>
         <div class="highlighted-div">
         <h2>Food ingredients</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for food ingredients endpoint :<br> http://127.0.0.1:8000/api/food_ingredients</a>
-        <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/(id)</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by ingredient id endpoint :<br> http://127.0.0.1:8000/api/food_ingredients/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for add food_ingredients endpoint : http://127.0.0.1:8000/api/food_ingredients</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -119,6 +123,8 @@
         <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint :<br> http://127.0.0.1:8000/api/workout_plan</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts endpoint by workout id :<br> http://127.0.0.1:8000/api/workout_plan/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for add workout_plan endpoint : http://127.0.0.1:8000/api/workout_plan</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -127,12 +133,16 @@
         <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/diet_plan/" class="text">Url for delete diets endpoint by diets id  :<br> http://127.0.0.1:8000/api/diet_plan/(id)</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for add diets endpoint :<br> http://127.0.0.1:8000/api/diet_plan</a>
         </div>
         <hr>
         <div class="highlighted-div">
         <h2>User liked foods</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food/</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for add liked foods endpoint :<br> http://127.0.0.1:8000/api/user_like_food/</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for delete liked foods endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_food/(id)</a>
         </div>
@@ -143,7 +153,8 @@
         <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for delete liked exercises endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_exercise/(id)</a>
-
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for add liked exercises endpoint by id  :<br> http://127.0.0.1:8000/api/user_like_exercise</a>
         </div>
         <hr>
         <div class="highlighted-div">
@@ -151,7 +162,10 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for user physique endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique/1" class="text">Url for physiques by userid endpoint :<br> http://127.0.0.1:8000/api/user_physique/1</a>
+        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for add user physique endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for update physique endpoint :<br> http://127.0.0.1:8000/api/user_physique</a>
+        <hr>
         </div>
     </div>
 </body>
