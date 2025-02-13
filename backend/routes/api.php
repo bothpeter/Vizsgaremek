@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\IngredientController;
-use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\UserLikeExerciseController;
 use App\Http\Controllers\UserLikeFoodController;
 use App\Http\Controllers\UserPhysiqueController;
 use App\Http\Controllers\WorkoutController;
-use App\Models\UserLikeExercise;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
