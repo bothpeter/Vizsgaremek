@@ -34,12 +34,13 @@ class UserLikeFoodController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function view_user_like_food_by_user_id($id){
-        $UserLikeFood = UserLikeFood::where('user_id',$id)->get();
+    public function view_user_like_food(Request $request){
+        $user = $request->user();
+        $userLikeExercise = UserLikeExercise::where('user_id', $user->id)->get();
 
         $data = [
             'status' =>200,
-            'UserLikeFood'=> $UserLikeFood
+            'userLikeExercise'=> $userLikeExercise
         ];
         return response()->json($data,200);
     }

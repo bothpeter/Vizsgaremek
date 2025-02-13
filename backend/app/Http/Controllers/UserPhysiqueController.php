@@ -37,7 +37,7 @@ class UserPhysiqueController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function view_user_physique_by_user_id(Request $request){
+    public function view_user_physique(Request $request){
         $user = $request->user();
         $UserPhysique = UserPhysique::where('user_id', $user->id)->get();
 

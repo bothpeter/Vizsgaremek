@@ -34,12 +34,13 @@ class UserLikeExerciseController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function view_user_like_exercise_by_user_id($id){
-        $UserLikeExercise = UserLikeExercise::where('user_id',$id)->get();
+    public function view_user_like_exercise(Request $request){
+        $user = $request->user();
+        $userLikeExercise = UserLikeExercise::where('user_id', $user->id)->get();
 
         $data = [
             'status' =>200,
-            'UserLikeExercise'=> $UserLikeExercise
+            'userLikeExercise'=> $userLikeExercise
         ];
         return response()->json($data,200);
     }
