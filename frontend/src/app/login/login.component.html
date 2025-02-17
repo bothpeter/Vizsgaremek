@@ -4,10 +4,10 @@
         <p class="subtitle">Jelentkezz be a folytatáshoz</p>
         <form (ngSubmit)="onSubmit()" #loginForm="ngForm" (keydown.enter)="onSubmit()">
             <div class="form-group">
-                <label for="username">E-mail vagy név</label>
+                <label for="username">E-mail vagy felhasználónév</label>
                 <input type="text" id="username" name="username" [(ngModel)]="loginObj.login" required #usernameInput="ngModel" placeholder="Add meg az e-mail címed vagy a neved" />
                 <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
-                    Az Email vagy a név kötelező.
+                    Az E-mail vagy a felhasználónév kötelező.
                 </div>
                 <div *ngIf="loginError" class="error-message">
                     {{ loginError }}

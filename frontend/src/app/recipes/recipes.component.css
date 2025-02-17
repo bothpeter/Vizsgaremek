@@ -55,6 +55,7 @@
   font-size: 0.8em;
 }
 
+/* Kártyák stílusai */
 .food-cards {
   display: flex;
   flex-wrap: wrap;
@@ -65,6 +66,7 @@
 }
 
 .card {
+  position: relative;
   width: 300px;
   border-radius: 8px;
   background-color: #1e1e1e;
@@ -100,6 +102,36 @@
   color: #FC282C;
 }
 
+.like-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1e1e1e;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.1s ease;
+}
+
+.like-button:hover {
+  background-color: #2e2e2e;
+}
+
+.like-button i {
+  font-size: 20px;
+  color: #ccc;
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+
+.like-button .liked {
+  color: #FC282C;
+}
+
 .popup {
   position: fixed;
   top: 0;
@@ -128,12 +160,12 @@
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: scale(0.9);
+    opacity: 0;
+    transform: scale(0.9);
   }
   to {
-      opacity: 1;
-      transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -267,7 +299,7 @@
     flex: 1 1 calc(50% - 8px);
   }
 
-  .popup-content{
+  .popup-content {
     max-width: 100%;
   }
 
@@ -279,7 +311,7 @@
     margin-bottom: 0;
   }
 
-  .close-btn{
+  .close-btn {
     width: 50px;
     height: 50px;
     font-size: 25px;
