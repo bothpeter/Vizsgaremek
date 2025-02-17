@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('fat');
             $table->float('protein');
             $table->float('carb');
-            $table->string('img_url')->nullable();
+            $table->binary('img_url')->nullable();
             $table->string('recipe');
             $table->string('user_id');
         });

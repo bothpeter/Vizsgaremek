@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('exercise_name');
             $table->string('muscle_group');
             $table->string('description');
-            $table->string('img_url')->nullable();
+            $table->mediumBlob('img')->nullable();
             $table->string('type');
             $table->string('user_id');
         });
