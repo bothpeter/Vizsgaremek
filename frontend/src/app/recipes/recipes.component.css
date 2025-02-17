@@ -266,4 +266,22 @@
   .nutrition-item {
     flex: 1 1 calc(50% - 8px);
   }
+
+  .popup-content{
+    max-width: 100%;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .sorting-container {
+    margin-bottom: 0;
+  }
+
+  .close-btn{
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
 }
