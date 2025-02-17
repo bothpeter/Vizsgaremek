@@ -42,19 +42,32 @@ class ExerciseController extends Controller implements HasMiddleware
             'exercise_name' => 'required',
             'muscle_group' => 'required',
             'description' => 'required',
-            'img' => 'nullable',
+            'img' => 'nullable|image',
             'type' => 'required'
         ]);
-
+    
+        if ($request->hasFile('img')) {
+            // Store image in storage/app/public/exercises and save the file path in the database
+            $filePath = $request->file('img')->store('exercises', 'public');
+            $fields['img'] = $filePath;
+        }
+    
+        // Save data to database
         $exercise = $request->user()->exercise()->create($fields);
-
-        $data = [
+    
+        return response()->json([
             'status' => 200,
             'message' => 'Data uploaded',
-            'exercise' => $exercise
-        ];
-        return response()->json($data, 200);
+            'exercise' => [
+                'exercise_name' => $exercise->exercise_name,
+                'muscle_group' => $exercise->muscle_group,
+                'description' => $exercise->description,
+                'img' => $exercise->img ? url('storage/' . $exercise->img) : null, // Return full URL
+                'type' => $exercise->type,
+            ]
+        ], 200);
     }
+    
 
     public function delete_exercise(Request $request, $id)
     {

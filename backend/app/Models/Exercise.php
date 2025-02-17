@@ -17,7 +17,7 @@ class Exercise extends Model
         'exercise_name',
         'muscle_group',
         'description',
-        'img_url',
+        'img',
         'type'
     ];
 
