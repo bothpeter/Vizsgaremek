@@ -73,6 +73,7 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card-content {
     padding: 16px;
 }
@@ -126,6 +127,7 @@
         opacity: 0;
         transform: scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -206,4 +208,28 @@ h4 {
     color: #FC282C;
     font-size: 1.3em;
     margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .popup-top {
+        flex-direction: column;
+    }
+
+    .popup-content {
+        max-width: 100%;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .sorting-container {
+        margin-bottom: 0;
+    }
+
+    .close-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
 }
