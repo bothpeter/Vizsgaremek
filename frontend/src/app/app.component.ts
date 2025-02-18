@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { HeaderLoggedInComponent } from './components/header-logged-in/header-logged-in.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
+import { LikedRecipesComponent } from './liked-recipes/liked-recipes.component';
 
 @Component({
   selector: 'app-root',

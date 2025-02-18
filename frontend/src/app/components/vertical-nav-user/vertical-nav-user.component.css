@@ -3,8 +3,6 @@
     flex-direction: column;
     width: 230px;
     height: calc(100vh - 120px);
-    background-color: #0f0f0f;
-    color: rgb(44, 37, 37);
     padding: 20px;
 }
 
@@ -29,7 +27,7 @@ ul {
     border-radius: 5px;
     display: flex;
     align-items: center;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.1s ease, color 0.1s ease;
     color: white;
     text-decoration: none;
     background-color: #1e1e1e;
@@ -38,8 +36,8 @@ ul {
 
 .nav-item i {
     margin-right: 10px;
-    font-size: 1.2em;
     color: #FC282C;
+    font-size: 19px;
 }
 
 .nav-item:hover {
@@ -62,4 +60,26 @@ ul {
 
 .logout:hover {
     background-color: rgb(198, 19, 19);
+}
+
+@media (max-width: 768px) {
+    .nav-item span {
+        display: none;
+    }
+
+    .nav-item i {
+        margin-right: 0;
+    }
+
+    .vertical-nav-container {
+        width: 55px;
+        padding: 10px;
+    }
+    .vertical-nav-container i {
+        padding: 3px;
+    }
+
+    .username {
+        display: none;
+    }
 }

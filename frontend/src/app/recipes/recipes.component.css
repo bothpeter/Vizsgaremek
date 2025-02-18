@@ -108,14 +108,15 @@
   right: 10px;
   background-color: #1e1e1e;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1;
-  transition: background-color 0.1s ease;
+  transition: background-color 0.1s ease, box-shadow 0.1s ease;
+  overflow: hidden;
 }
 
 .like-button:hover {
@@ -123,9 +124,11 @@
 }
 
 .like-button i {
-  font-size: 20px;
+  font-size: 25px;
   color: #ccc;
   transition: color 0.1s ease, transform 0.1s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .like-button .liked {
@@ -213,7 +216,7 @@
 .nutrition-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 4px;
   margin: 16px 0;
 }
 
@@ -275,7 +278,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -311,9 +314,19 @@
     margin-bottom: 0;
   }
 
+  .sorting-dropdown {
+    justify-content: center;
+    width: 100%;
+  }
+
   .close-btn {
     width: 50px;
     height: 50px;
-    font-size: 25px;
+    font-size: 30px;
+  }
+
+  .popup-left {
+    width: 90%;
   }
 }
+

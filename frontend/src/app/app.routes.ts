@@ -75,4 +75,11 @@ export const routes: Routes = [
             return import('./reset-password/reset-password.component').then((m) => m.ResetPasswordComponent);
         },
     },
+    {
+        path: 'liked-recipes',
+        loadComponent: () => {
+            return import('./liked-recipes/liked-recipes.component').then((m) => m.LikedRecipesComponent);
+        },
+        data: { hideFooter: true },
+    },
 ];
