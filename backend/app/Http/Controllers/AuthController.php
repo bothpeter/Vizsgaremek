@@ -60,7 +60,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Bad credentials'], 401);
         }
 
-        $token = $user->createToken($user->name, ['*'], now()->addDay());
+        $token = $user->createToken($user->name, ['*'], now()->addWeek());
 
         return [
             'user' => $user,
