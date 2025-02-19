@@ -47,12 +47,10 @@ class ExerciseController extends Controller implements HasMiddleware
         ]);
     
         if ($request->hasFile('img')) {
-            // Store image in storage/app/public/exercises and save the file path in the database
             $filePath = $request->file('img')->store('exercises', 'public');
-            $fields['img'] = url('storage/' . $filePath); // Store full URL
+            $fields['img'] = url('storage/' . $filePath);
         }
     
-        // Save data to database
         $exercise = $request->user()->exercise()->create($fields);
     
         return response()->json([
@@ -62,7 +60,7 @@ class ExerciseController extends Controller implements HasMiddleware
                 'exercise_name' => $exercise->exercise_name,
                 'muscle_group' => $exercise->muscle_group,
                 'description' => $exercise->description,
-                'img' => $exercise->img ? url('storage/' . $exercise->img) : null, // Return full URL
+                'img' => $exercise->img ? url('storage/' . $exercise->img) : null,
                 'type' => $exercise->type,
             ]
         ], 200);
