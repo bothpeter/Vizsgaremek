@@ -9,7 +9,7 @@
             <div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
                 <i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
             </div>
-            <img [src]="food.img_url ? food.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
+            <img [src]="food.img ? food.img : 'https://via.placeholder.com/300x200?text=No+Image'"
                 [alt]="food.name" />
             <div class="card-content">
                 <h3>{{ food.name }}</h3>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="popup-right">
-                    <img [src]="selectedFood.img_url ? selectedFood.img_url : 'https://via.placeholder.com/400x300?text=No+Image'"
+                    <img [src]="selectedFood.img ? selectedFood.img : 'https://via.placeholder.com/400x300?text=No+Image'"
                         [alt]="selectedFood.name" />
                 </div>
             </div>

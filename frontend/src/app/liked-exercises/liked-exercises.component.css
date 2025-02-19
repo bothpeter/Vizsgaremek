@@ -1,5 +1,5 @@
-.diet-cards,
-.food-cards {
+.exercise-cards {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -8,13 +8,14 @@
 }
 
 .card {
+    position: relative;
     width: 300px;
     border-radius: 8px;
     background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: column;
 }
 
 .card img {
@@ -24,12 +25,12 @@
     border-bottom: 1px solid #333;
 }
 
-.food-cards .card img {
-    height: 150px;
-}
-
 .card-content {
     padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-content h3 {
@@ -45,6 +46,39 @@
 }
 
 .card-content p strong {
+    color: #FC282C;
+}
+
+.like-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #1e1e1e;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
+    overflow: hidden;
+}
+
+.like-button:hover {
+    background-color: #2e2e2e;
+}
+
+.like-button i {
+    font-size: 25px;
+    color: #ccc;
+    transition: color 0.1s ease, transform 0.1s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.like-button .liked {
     color: #FC282C;
 }
 
@@ -79,7 +113,6 @@
         opacity: 0;
         transform: scale(0.9);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -127,14 +160,13 @@
     margin-top: 20px;
 }
 
-.nutrition-row {
+.details-row {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin: 16px 0;
 }
 
-.nutrition-item {
+.details-item {
     background-color: #2a2a2a;
     padding: 8px 16px;
     border-radius: 4px;
@@ -144,7 +176,7 @@
     text-align: center;
 }
 
-.nutrition-item strong {
+.details-item strong {
     color: #FC282C;
 }
 
@@ -156,21 +188,7 @@
     color: #FC282C;
 }
 
-.popup-bottom ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.popup-bottom li {
-    background-color: #2a2a2a;
-    padding: 8px;
-    margin: 4px 0;
-    border-radius: 4px;
-    color: #fff;
-}
-
-.popup-bottom .recipe {
+.popup-bottom .instructions {
     background-color: #2a2a2a;
     padding: 12px;
     border-radius: 4px;
@@ -202,9 +220,12 @@
 }
 
 @media (max-width: 768px) {
+    .popup-content {
+        max-width: 100%;
+    }
+
     .popup-top {
         flex-direction: column;
-        gap: 0;
     }
 
     .popup-right img {
@@ -213,26 +234,32 @@
         margin-top: 16px;
     }
 
-    .nutrition-item {
-        flex: 1 1 calc(50% - 8px);
-    }
-
-    .popup-content {
+    .popup-right img {
         max-width: 100%;
+        height: auto;
     }
 
-    .card {
-        width: 100%;
+    .popup-left{
+        width: 90%;
     }
 
-    .sorting-container {
-        margin-bottom: 0;
+    .details-row{
+        flex-direction: column;
     }
 
-    .close-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
+    .popup-top{
+        gap: 0;
     }
+}
 
+.page-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.no-liked-exercises {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
 }

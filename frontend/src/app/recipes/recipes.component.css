@@ -290,6 +290,7 @@
 @media (max-width: 768px) {
   .popup-top {
     flex-direction: column;
+    gap: 0;
   }
 
   .popup-right img {

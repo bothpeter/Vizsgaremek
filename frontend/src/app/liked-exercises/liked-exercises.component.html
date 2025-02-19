@@ -1,0 +1,51 @@
+<div class="page-container">
+    <app-vertical-nav-user></app-vertical-nav-user>
+    <div class="exercise-cards">
+        <div *ngIf="likedExercises.length === 0" class="no-liked-exercises">
+            <p>Nincsenek kedvelt gyakorlataid.</p>
+        </div>
+
+        <div class="card" *ngFor="let exercise of likedExercises" (click)="openPopup(exercise)">
+            <div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">
+                <i class="fas fa-heart" [ngClass]="{'liked': exercise.isLiked}"></i>
+            </div>
+            <img [src]="exercise.img ? exercise.img : 'https://via.placeholder.com/300x200?text=No+Image'"
+                [alt]="exercise.name" />
+            <div class="card-content">
+                <h3>{{ exercise.name }}</h3>
+                <p><strong>Kategória:</strong> {{ exercise.type }}</p>
+                <p><strong>Izomcsoport:</strong> {{ exercise.muscle_group }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showPopup" class="popup" (click)="closePopup()">
+        <div class="popup-content" (click)="$event.stopPropagation()">
+            <button class="close-btn" (click)="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+    
+            <div class="popup-top">
+                <div class="popup-left">
+                    <h3>{{ selectedExercise.exercise_name }}</h3>
+                    <p class="description">{{ selectedExercise.description }}</p>
+                </div>
+    
+                <div class="popup-right">
+                    <img [src]="selectedExercise.img ? selectedExercise.img : 'https://via.placeholder.com/400x300?text=No+Image'"
+                        [alt]="selectedExercise.name" />
+                </div>
+            </div>
+    
+            <div class="popup-bottom">
+                <div class="details-row">
+                    <div class="details-item">
+                        <strong>Kategória:</strong> {{ selectedExercise.type }}
+                    </div>
+                    <div class="details-item">
+                        <strong>Izomcsoport:</strong> {{ selectedExercise.muscle_group }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

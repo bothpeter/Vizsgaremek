@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-liked-recipes',

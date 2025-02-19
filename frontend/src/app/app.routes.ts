@@ -82,4 +82,11 @@ export const routes: Routes = [
         },
         data: { hideFooter: true },
     },
+    {
+        path: 'liked-exercises',
+        loadComponent: () => {
+            return import('./liked-exercises/liked-exercises.component').then((m) => m.LikedExercisesComponent);
+        },
+        data: { hideFooter: true },
+    },
 ];

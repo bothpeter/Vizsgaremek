@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="sorting-dropdown">
-			<label>Szűrés típus szerint:</label>
+			<label>Szűrés kategória szerint:</label>
 			<div class="custom-select">
 				<select id="exerciseType" (change)="changeType($any($event.target).value)">
 					<option value="all">Összes</option>
@@ -22,17 +22,17 @@
 		</div>
 	</div>
 
-
-	<div class="card" *ngFor="let exercise of exercises | sortExercises: selectedType : selectedMuscleGroup"
-		(click)="openPopup(exercise)">
-		<img [src]="exercise.img_url ? exercise.img_url : 'https://via.placeholder.com/300x200?text=No+Image'"
-			[alt]="exercise.exercise_name" />
-		<div class="card-content">
-			<h3>{{ exercise.exercise_name }}</h3>
-			<p><strong>Típus:</strong> {{ exercise.type }}</p>
-			<p><strong>Izomcsoport:</strong> {{ exercise.muscle_group }}</p>
+	<div class="card" *ngFor="let exercise of exercises | sortExercises: selectedType : selectedMuscleGroup" (click)="openPopup(exercise)">
+		<div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">
+		  <i class="fas fa-heart" [ngClass]="{'liked': exercise.isLiked}"></i>
 		</div>
-	</div>
+		<img [src]="exercise.img ? exercise.img : 'https://via.placeholder.com/300x200?text=No+Image'" [alt]="exercise.exercise_name" />
+		<div class="card-content">
+		  <h3>{{ exercise.exercise_name }}</h3>
+		  <p><strong>Kategória:</strong> {{ exercise.type }}</p>
+		  <p><strong>Izomcsoport:</strong> {{ exercise.muscle_group }}</p>
+		</div>
+	  </div>
 </div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
@@ -40,9 +40,28 @@
 		<button class="close-btn" (click)="closePopup()">
 			<i class="fas fa-times"></i>
 		</button>
-		<h3>{{ selectedExercise.exercise_name }}</h3>
-		<p class="description">{{ selectedExercise.description }}</p>
-		<div class="details"><strong>Típus:</strong> {{ selectedExercise.type }}</div>
-		<div class="details"><strong>Izomcsoport:</strong> {{ selectedExercise.muscle_group }}</div>
+
+		<div class="popup-top">
+			<div class="popup-left">
+				<h3>{{ selectedExercise.exercise_name }}</h3>
+				<p class="description">{{ selectedExercise.description }}</p>
+			</div>
+
+			<div class="popup-right">
+				<img [src]="selectedExercise.img ? selectedExercise.img : 'https://via.placeholder.com/400x300?text=No+Image'"
+					[alt]="selectedExercise.name" />
+			</div>
+		</div>
+
+		<div class="popup-bottom">
+			<div class="details-row">
+				<div class="details-item">
+					<strong>Kategória:</strong> {{ selectedExercise.type }}
+				</div>
+				<div class="details-item">
+					<strong>Izomcsoport:</strong> {{ selectedExercise.muscle_group }}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
