@@ -89,4 +89,11 @@ export const routes: Routes = [
         },
         data: { hideFooter: true },
     },
+    {
+        path: 'settings',
+        loadComponent: () => {
+            return import('./settings/settings.component').then((m) => m.SettingsComponent);
+        },
+        data: { hideFooter: true },
+    },
 ];

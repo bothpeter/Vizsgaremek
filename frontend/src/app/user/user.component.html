@@ -1,1 +1,42 @@
-<app-vertical-nav-user></app-vertical-nav-user>
+<div class="page-container">
+    <app-vertical-nav-user></app-vertical-nav-user>
+    <div class="container">
+        <div class="user-container">
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h2>{{ userName }}</h2>
+                    <p>{{ userEmail }}</p>
+                </div>
+            </div>
+    
+            <div *ngIf="userPhysique; else noPhysique">
+                <h3>Fizikai Adatok:</h3>
+                <div class="info-card">
+                    <div class="info-item">
+                        <i class="fas fa-ruler-vertical"></i>
+                        <p><strong>Magasság:</strong> {{ userPhysique.height }} cm</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-weight"></i>
+                        <p><strong>Súly:</strong> {{ userPhysique.weight }} kg</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <p><strong>Kor:</strong> {{ userPhysique.age }} év</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-venus-mars"></i>
+                        <p><strong>Nem:</strong> {{ userPhysique.gender === 'ferfi' ? 'Férfi' : 'Nő' }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <ng-template #noPhysique>
+                <p class="error-message">{{ errorMessage }}</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

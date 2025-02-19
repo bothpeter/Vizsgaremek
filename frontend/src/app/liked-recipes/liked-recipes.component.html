@@ -2,7 +2,7 @@
     <app-vertical-nav-user></app-vertical-nav-user>
     <div class="food-cards">
         <div *ngIf="likedFoods.length === 0" class="no-liked-foods">
-            <p>Nincsenek kedvenc receptjeid.</p>
+            <p>Nincsenek kedvelt receptjeid.</p>
         </div>
 
         <div class="card" *ngFor="let food of likedFoods" (click)="openPopup(food)">

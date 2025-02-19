@@ -1,0 +1,119 @@
+.page-container {
+    display: flex;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 120px);
+    width: 100%;
+    align-items: flex-start;
+}
+
+.settings-container {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.subtitle {
+    color: #a0a0a0;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #0f0f0f;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border-color: #FC282C;
+    box-shadow: 0 0 0 3px rgba(252, 40, 44, 0.2);
+}
+
+.error-message {
+    color: #FC282C;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.success-message {
+    color: #4caf50;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #FC282C;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: rgb(198, 19, 19);
+}
+
+button:disabled {
+    background-color: #444;
+    color: black;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 600px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
