@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         $user = User::create($fields);
 
-        $token = $user->createToken($user->name, ['*'], now()->addHour());
+        $token = $user->createToken($user->name, ['*'], now()->addMinute());
 
         return [
             'user' => $user,
@@ -60,7 +60,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Bad credentials'], 401);
         }
 
-        $token = $user->createToken($user->name, ['*'], now()->addHour());
+        $token = $user->createToken($user->name, ['*'], now()->addDay());
 
         return [
             'user' => $user,
