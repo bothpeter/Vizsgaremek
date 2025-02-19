@@ -22,8 +22,8 @@ class UserController extends Controller implements HasMiddleware
 
     public function update_user(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'string',
-            'email' => 'email',
+            'name' => 'string|unique:users',
+            'email' => 'email|unique:users',
             'password' => 'string',
         ]);
 
@@ -48,7 +48,7 @@ class UserController extends Controller implements HasMiddleware
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => 'User physique not found'
+                'message' => 'User not found'
             ], 404);
         }
     }
