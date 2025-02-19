@@ -22,8 +22,8 @@ class UserController extends Controller implements HasMiddleware
 
     public function update_user(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'string|unique:users|nullable',
-            'email' => 'email|unique:users|nullable',
+            'name' => 'string|unique:users,name,' . $request->user()->id . '|nullable',
+            'email' => 'email|unique:users,email,' . $request->user()->id . '|nullable',
             'password' => 'string|nullable',
         ]);
 
@@ -35,21 +35,20 @@ class UserController extends Controller implements HasMiddleware
         }
 
         $user = $request->user();
-        $user = User::where('id', $user->id)->first();
+        $data = array_filter($validator->validated(), function($value) {
+            return !is_null($value);
+        });
 
-        if ($user) {
-            $user->update($validator->validated());
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data updated',
-                'data' => $user
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User not found'
-            ], 404);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
+
+        $user->update($data);
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data updated',
+            'data' => $user
+        ], 200);
     }
 }
