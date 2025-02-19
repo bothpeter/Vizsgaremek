@@ -55,14 +55,7 @@ class ExerciseController extends Controller implements HasMiddleware
     
         return response()->json([
             'status' => 200,
-            'message' => 'Data uploaded',
-            'exercise' => [
-                'exercise_name' => $exercise->exercise_name,
-                'muscle_group' => $exercise->muscle_group,
-                'description' => $exercise->description,
-                'img' => $exercise->img ? url('storage/' . $exercise->img) : null,
-                'type' => $exercise->type,
-            ]
+            'message' => 'Exercise uploaded',
         ], 200);
     }
     
