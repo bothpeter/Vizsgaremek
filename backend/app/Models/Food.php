@@ -22,7 +22,7 @@ class Food extends Model
         'fat',
         'protein',
         'carb',
-        'img_url',
+        'img',
         'recipe'
     ];
 

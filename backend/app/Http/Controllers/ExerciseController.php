@@ -49,7 +49,7 @@ class ExerciseController extends Controller implements HasMiddleware
         if ($request->hasFile('img')) {
             // Store image in storage/app/public/exercises and save the file path in the database
             $filePath = $request->file('img')->store('exercises', 'public');
-            $fields['img'] = $filePath;
+            $fields['img'] = url('storage/' . $filePath); // Store full URL
         }
     
         // Save data to database
