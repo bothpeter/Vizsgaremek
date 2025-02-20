@@ -96,4 +96,11 @@ export const routes: Routes = [
         },
         data: { hideFooter: true },
     },
+    {
+        path: 'change-password',
+        loadComponent: () => {
+            return import('./change-password/change-password.component').then((m) => m.ChangePasswordComponent);
+        },
+        data: { hideFooter: true },
+    },
 ];

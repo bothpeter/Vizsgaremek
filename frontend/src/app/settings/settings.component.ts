@@ -19,15 +19,17 @@ export class SettingsComponent implements OnInit {
     age: null,
     gender: ''
   };
-  errorMessage: string = '';
-  successMessage: string = '';
+  
+  nameError: string = '';
+  emailError: string = '';
+  generalMessage: string = '';
+  isError: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('userName') || '';
     this.userEmail = localStorage.getItem('userEmail') || '';
-
     this.fetchUserPhysique();
   }
 
@@ -48,27 +50,23 @@ export class SettingsComponent implements OnInit {
           this.userPhysique = response.UserPhysique[0];
         }
       },
-      (error) => {
-        this.errorMessage = 'Hiba történt az adatok lekérése során.';
+      () => {
+        this.generalMessage = 'Fizikai adatok frissítése sikertelen.';
+        this.isError = true;
       }
     );
   }
 
-  isFormInvalid(): boolean {
-    return (
-      !this.userName ||
-      !this.userEmail ||
-      !this.userPhysique.height ||
-      !this.userPhysique.weight ||
-      !this.userPhysique.age ||
-      !this.userPhysique.gender
-    );
-  }
-
   saveUserData(): void {
+    this.nameError = '';
+    this.emailError = '';
+    this.generalMessage = '';
+    this.isError = false;
+
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
-      this.errorMessage = 'Nincs érvényes hitelesítési token.';
+      this.generalMessage = 'Nincs érvényes hitelesítési token.';
+      this.isError = true;
       return;
     }
 
@@ -76,6 +74,9 @@ export class SettingsComponent implements OnInit {
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json'
     });
+
+    let userSuccess = false;
+    let physiqueSuccess = false;
 
     this.http.put(
       'http://127.0.0.1:8000/api/user',
@@ -86,15 +87,25 @@ export class SettingsComponent implements OnInit {
         if (response.status === 200) {
           localStorage.setItem('userName', this.userName);
           localStorage.setItem('userEmail', this.userEmail);
-          this.successMessage = 'Felhasználói adatok sikeresen frissítve!';
+          userSuccess = true;
+          this.updateGeneralMessage(userSuccess, physiqueSuccess);
         }
       },
       (error) => {
-        this.errorMessage = 'Hiba történt a felhasználói adatok mentése során.';
+        if (error.status === 422 && error.error.errors) {
+          const errors = error.error.errors;
+          if (errors.name) this.nameError = 'A név már foglalt.';
+          if (errors.email) this.emailError = 'Az e-mail már foglalt.';
+        } else {
+          this.generalMessage = 'Személyes adatok frissítése sikertelen.';
+          this.isError = true;
+        }
       }
     );
 
-    const apiEndpoint = this.userPhysique.id ? 'http://127.0.0.1:8000/api/user_physique' : 'http://127.0.0.1:8000/api/user_physique';
+    const apiEndpoint = this.userPhysique.id 
+      ? 'http://127.0.0.1:8000/api/user_physique' 
+      : 'http://127.0.0.1:8000/api/user_physique';
     const method = this.userPhysique.id ? 'put' : 'post';
 
     this.http[method](
@@ -109,13 +120,26 @@ export class SettingsComponent implements OnInit {
     ).subscribe(
       (response: any) => {
         if (response.status === 200) {
-          this.successMessage = 'Fizikai adatok sikeresen frissítve!';
-          this.fetchUserPhysique();
+          physiqueSuccess = true;
+          this.updateGeneralMessage(userSuccess, physiqueSuccess);
         }
       },
-      (error) => {
-        this.errorMessage = 'Hiba történt a fizikai adatok mentése során.';
+      () => {
+        this.generalMessage = 'Fizikai adatok frissítése sikertelen.';
+        this.isError = true;
       }
     );
+  }
+
+  updateGeneralMessage(userSuccess: boolean, physiqueSuccess: boolean) {
+    if (userSuccess && physiqueSuccess) {
+      this.generalMessage = 'Adatok frissítése sikeres.';
+      this.isError = false;
+    } else {
+      this.generalMessage = '';
+      if (!userSuccess) this.generalMessage += 'Személyes adatok frissítése sikertelen.\n';
+      if (!physiqueSuccess) this.generalMessage += 'Fizikai adatok frissítése sikertelen.';
+      this.isError = true;
+    }
   }
 }

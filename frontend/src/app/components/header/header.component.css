@@ -69,6 +69,7 @@ li:focus-within::after {
     padding: 9px 16px;
     border-radius: 8px;
     transition: background-color 0.1s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header nav ul li.login-button::after {

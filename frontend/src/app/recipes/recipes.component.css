@@ -12,6 +12,7 @@
   background-color: #1e1e1e;
   padding: 12px 20px;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sorting-dropdown label {
@@ -72,6 +73,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card img {
@@ -116,6 +118,8 @@
   z-index: 1;
   transition: background-color 0.1s ease, box-shadow 0.1s ease;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
 }
 
 .like-button:hover {
@@ -158,6 +162,8 @@
   color: #fff;
   overflow-y: auto;
   animation: fadeIn 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
 }
 
 @keyframes fadeIn {
@@ -207,6 +213,7 @@
   height: auto;
   border-radius: 8px;
   object-fit: cover;
+  
 }
 
 .popup-bottom {

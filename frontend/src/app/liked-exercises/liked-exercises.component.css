@@ -16,6 +16,7 @@
     overflow: hidden;
     cursor: pointer;
     flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card img {
@@ -64,6 +65,7 @@
     z-index: 1;
     transition: background-color 0.1s ease, box-shadow 0.1s ease;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .like-button:hover {
@@ -106,6 +108,7 @@
     color: #fff;
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @keyframes fadeIn {
