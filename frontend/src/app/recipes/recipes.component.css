@@ -337,3 +337,125 @@
     width: 90%;
   }
 }
+
+/* Existing styles... */
+
+.add-food-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #FC282C;
+  color: #fff;
+  font-size: 2em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.add-food-button:hover {
+  background-color: #e02024;
+}
+
+.popup-content h2 {
+  margin-bottom: 20px;
+  color: #FC282C;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #2a2a2a;
+  color: #fff;
+  font-size: 1em;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.ingredient-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-ingredient-btn,
+.remove-ingredient-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #FC282C;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-ingredient-btn:hover,
+.remove-ingredient-btn:hover {
+  background-color: #e02024;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #FC282C;
+  color: #fff;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #e02024;
+}
+
+/* Existing styles... */
+
+.file-upload-container {
+  border: 2px dashed #444;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #2a2a2a;
+  transition: border-color 0.3s ease;
+}
+
+.file-upload-container:hover {
+  border-color: #FC282C;
+}
+
+.file-upload-label {
+  display: block;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}

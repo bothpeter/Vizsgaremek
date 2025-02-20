@@ -19,9 +19,11 @@ export class SettingsComponent implements OnInit {
     age: null,
     gender: ''
   };
-  
+
+  selectedFile: File | null = null; // For profile picture
   nameError: string = '';
   emailError: string = '';
+  profilePictureError: string = '';
   generalMessage: string = '';
   isError: boolean = false;
 
@@ -57,9 +59,17 @@ export class SettingsComponent implements OnInit {
     );
   }
 
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
   saveUserData(): void {
     this.nameError = '';
     this.emailError = '';
+    this.profilePictureError = '';
     this.generalMessage = '';
     this.isError = false;
 
@@ -71,24 +81,30 @@ export class SettingsComponent implements OnInit {
     }
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${authToken}`
     });
 
-    let userSuccess = false;
-    let physiqueSuccess = false;
+    // Create FormData for the request
+    const formData = new FormData();
+    if (this.selectedFile) {
+      formData.append('progress_picture', this.selectedFile);
+    }
+    formData.append('name', this.userName);
+    formData.append('email', this.userEmail);
+    formData.append('height', this.userPhysique.height);
+    formData.append('weight', this.userPhysique.weight);
+    formData.append('age', this.userPhysique.age);
+    formData.append('gender', this.userPhysique.gender);
 
-    this.http.put(
-      'http://127.0.0.1:8000/api/user',
-      { name: this.userName, email: this.userEmail },
-      { headers }
-    ).subscribe(
+    
+
+    this.http.put('http://127.0.0.1:8000/api/user', formData, { headers }).subscribe(
       (response: any) => {
         if (response.status === 200) {
           localStorage.setItem('userName', this.userName);
           localStorage.setItem('userEmail', this.userEmail);
-          userSuccess = true;
-          this.updateGeneralMessage(userSuccess, physiqueSuccess);
+          this.generalMessage = 'Adatok frissítése sikeres.';
+          this.isError = false;
         }
       },
       (error) => {
@@ -96,50 +112,12 @@ export class SettingsComponent implements OnInit {
           const errors = error.error.errors;
           if (errors.name) this.nameError = 'A név már foglalt.';
           if (errors.email) this.emailError = 'Az e-mail már foglalt.';
+          if (errors.progress_picture) this.profilePictureError = 'A profilkép feltöltése kötelező.';
         } else {
           this.generalMessage = 'Személyes adatok frissítése sikertelen.';
           this.isError = true;
         }
       }
     );
-
-    const apiEndpoint = this.userPhysique.id 
-      ? 'http://127.0.0.1:8000/api/user_physique' 
-      : 'http://127.0.0.1:8000/api/user_physique';
-    const method = this.userPhysique.id ? 'put' : 'post';
-
-    this.http[method](
-      apiEndpoint,
-      {
-        height: this.userPhysique.height,
-        weight: this.userPhysique.weight,
-        age: this.userPhysique.age,
-        gender: this.userPhysique.gender
-      },
-      { headers }
-    ).subscribe(
-      (response: any) => {
-        if (response.status === 200) {
-          physiqueSuccess = true;
-          this.updateGeneralMessage(userSuccess, physiqueSuccess);
-        }
-      },
-      () => {
-        this.generalMessage = 'Fizikai adatok frissítése sikertelen.';
-        this.isError = true;
-      }
-    );
-  }
-
-  updateGeneralMessage(userSuccess: boolean, physiqueSuccess: boolean) {
-    if (userSuccess && physiqueSuccess) {
-      this.generalMessage = 'Adatok frissítése sikeres.';
-      this.isError = false;
-    } else {
-      this.generalMessage = '';
-      if (!userSuccess) this.generalMessage += 'Személyes adatok frissítése sikertelen.\n';
-      if (!physiqueSuccess) this.generalMessage += 'Fizikai adatok frissítése sikertelen.';
-      this.isError = true;
-    }
   }
 }

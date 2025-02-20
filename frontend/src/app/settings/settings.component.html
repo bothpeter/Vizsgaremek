@@ -38,6 +38,19 @@
                             <option value="no">Nő</option>
                         </select>
                     </div>
+
+                    <!-- Add file input for profile picture -->
+                    <div class="form-group">
+                        <label for="profilePicture">Profilkép</label>
+                        <input
+                            id="profilePicture"
+                            type="file"
+                            name="profilePicture"
+                            (change)="onFileSelected($event)"
+                            accept="image/*"
+                        />
+                        <div *ngIf="profilePictureError" class="error-message">{{ profilePictureError }}</div>
+                    </div>
                 </div>
 
                 <button type="submit" [disabled]="!settingsForm.form.valid">Mentés</button>

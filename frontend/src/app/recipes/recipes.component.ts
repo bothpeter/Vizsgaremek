@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { sortFoodsPipe } from '../pipes/sort-foods.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [CommonModule, sortFoodsPipe],
+  imports: [CommonModule, sortFoodsPipe, FormsModule],
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css'],
 })
@@ -16,6 +17,19 @@ export class RecipesComponent implements OnInit {
   ingredients: any[] = [];
   showPopup: boolean = false;
   selectedType: string = 'all';
+  showAddFoodPopup: boolean = false;
+  newFood: any = {
+    name: '',
+    description: '',
+    type: 'reggeli',
+    calorie: 0,
+    fat: 0,
+    protein: 0,
+    carb: 0,
+    imgFile: null,
+    recipe: '',
+    ingredients: [],
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -41,28 +55,28 @@ export class RecipesComponent implements OnInit {
       });
   }
 
-fetchLikedFoods(): void {
-  const authToken = localStorage.getItem('authToken');
-  if (!authToken) return;
+  fetchLikedFoods(): void {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) return;
 
-  const apiUrl = 'http://127.0.0.1:8000/api/user_like_food';
-  this.http.get(apiUrl, { headers: { Authorization: `Bearer ${authToken}` } })
-    .subscribe(
-      (data: any) => {
-        if (data && data.UserLikeFood && Array.isArray(data.UserLikeFood)) {
-          const likedFoodIds = data.UserLikeFood.map((item: any) => item.food_id);
-          this.food.forEach((food) => {
-            food.isLiked = likedFoodIds.includes(food.food_id);
-          });
-        } else {
-          console.error('Invalid response format:', data);
+    const apiUrl = 'http://127.0.0.1:8000/api/user_like_food';
+    this.http.get(apiUrl, { headers: { Authorization: `Bearer ${authToken}` } })
+      .subscribe(
+        (data: any) => {
+          if (data && data.UserLikeFood && Array.isArray(data.UserLikeFood)) {
+            const likedFoodIds = data.UserLikeFood.map((item: any) => item.food_id);
+            this.food.forEach((food) => {
+              food.isLiked = likedFoodIds.includes(food.food_id);
+            });
+          } else {
+            console.error('Invalid response format:', data);
+          }
+        },
+        (error) => {
+          console.error('Error fetching liked foods:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching liked foods:', error);
-      }
-    );
-}
+      );
+  }
 
   toggleLike(food: any): void {
     const authToken = localStorage.getItem('authToken');
@@ -128,5 +142,111 @@ fetchLikedFoods(): void {
 
   changeType(type: string): void {
     this.selectedType = type;
+  }
+
+  openAddFoodPopup(): void {
+    this.showAddFoodPopup = true;
+  }
+
+  closeAddFoodPopup(): void {
+    this.showAddFoodPopup = false;
+    this.resetNewFoodForm();
+  }
+
+  resetNewFoodForm(): void {
+    this.newFood = {
+      name: '',
+      description: '',
+      type: 'reggeli',
+      calorie: 0,
+      fat: 0,
+      protein: 0,
+      carb: 0,
+      imgFile: null,
+      recipe: '',
+      ingredients: [],
+    };
+  }
+
+  addIngredient(): void {
+    this.newFood.ingredients.push({ ingredient_name: '', amount: '' });
+  }
+
+  removeIngredient(index: number): void {
+    this.newFood.ingredients.splice(index, 1);
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.newFood.imgFile = file;
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      this.newFood.imgFile = file;
+    }
+  }
+
+  addFood(): void {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      alert('Please log in to add food.');
+      return;
+    }
+
+    // Determine the new food_id
+    const newFoodId = Math.max(...this.food.map((f) => f.food_id)) + 1;
+
+    // Prepare FormData for the food and image
+    const formData = new FormData();
+    formData.append('name', this.newFood.name);
+    formData.append('description', this.newFood.description);
+    formData.append('type', this.newFood.type);
+    formData.append('calorie', this.newFood.calorie.toString());
+    formData.append('fat', this.newFood.fat.toString());
+    formData.append('protein', this.newFood.protein.toString());
+    formData.append('carb', this.newFood.carb.toString());
+    if (this.newFood.imgFile) {
+      formData.append('img', this.newFood.imgFile);
+    }
+    formData.append('recipe', this.newFood.recipe);
+
+    // Send the food data to the API
+    this.http.post('http://127.0.0.1:8000/api/food', formData, { headers: { Authorization: `Bearer ${authToken}` } })
+      .subscribe(
+        () => {
+          // Add the new food to the local list
+          this.food.push({ ...this.newFood, food_id: newFoodId });
+
+          // Send ingredients to the API
+          this.newFood.ingredients.forEach((ingredient: any) => {
+            const ingredientPayload = {
+              food_id: newFoodId,
+              ingredient_name: ingredient.ingredient_name,
+              amount: ingredient.amount,
+            };
+
+            this.http.post('http://127.0.0.1:8000/api/food_ingredients', ingredientPayload, { headers: { Authorization: `Bearer ${authToken}` } })
+              .subscribe(
+                () => console.log('Ingredient added successfully'),
+                (error) => console.error('Error adding ingredient:', error)
+              );
+          });
+
+          // Reset the form and close the popup
+          this.closeAddFoodPopup();
+        },
+        (error) => {
+          console.error('Error adding food:', error);
+        }
+      );
   }
 }

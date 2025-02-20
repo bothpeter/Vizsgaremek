@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     height: calc(100vh - 120px);
@@ -70,6 +70,24 @@ select {
 
 input:focus,
 select:focus {
+    border-color: #FC282C;
+    box-shadow: 0 0 0 3px rgba(252, 40, 44, 0.2);
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #0f0f0f;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+input[type="file"]:focus {
     border-color: #FC282C;
     box-shadow: 0 0 0 3px rgba(252, 40, 44, 0.2);
 }
