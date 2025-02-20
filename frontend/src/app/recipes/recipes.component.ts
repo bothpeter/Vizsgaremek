@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { sortFoodsPipe } from '../pipes/sort-foods.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-recipes',
@@ -28,7 +28,7 @@ export class RecipesComponent implements OnInit {
     carb: 0,
     imgFile: null,
     recipe: '',
-    ingredients: [],
+    ingredients: [{ ingredient_name: '', amount: '' }],
   };
 
   constructor(private http: HttpClient) {}
@@ -164,7 +164,7 @@ export class RecipesComponent implements OnInit {
       carb: 0,
       imgFile: null,
       recipe: '',
-      ingredients: [],
+      ingredients: [{ ingredient_name: '', amount: '' }],
     };
   }
 
@@ -219,14 +219,11 @@ export class RecipesComponent implements OnInit {
     }
     formData.append('recipe', this.newFood.recipe);
 
-    // Send the food data to the API
     this.http.post('http://127.0.0.1:8000/api/food', formData, { headers: { Authorization: `Bearer ${authToken}` } })
       .subscribe(
         () => {
-          // Add the new food to the local list
           this.food.push({ ...this.newFood, food_id: newFoodId });
 
-          // Send ingredients to the API
           this.newFood.ingredients.forEach((ingredient: any) => {
             const ingredientPayload = {
               food_id: newFoodId,
@@ -241,7 +238,6 @@ export class RecipesComponent implements OnInit {
               );
           });
 
-          // Reset the form and close the popup
           this.closeAddFoodPopup();
         },
         (error) => {

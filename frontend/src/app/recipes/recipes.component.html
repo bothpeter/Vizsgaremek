@@ -1,167 +1,160 @@
 <div class="food-cards">
 	<div class="sorting-container">
-	  <div class="sorting-dropdown">
-		<label>Szűrés típus szerint:</label>
-		<div class="custom-select">
-		  <select id="foodType" (change)="changeType($any($event.target).value)">
-			<option value="all">Összes</option>
-			<option value="reggeli">Reggeli</option>
-			<option value="ebed">Ebéd</option>
-			<option value="vacsora">Vacsora</option>
-		  </select>
-		  <span class="custom-arrow">▼</span>
+		<div class="sorting-dropdown">
+			<label>Szűrés típus szerint:</label>
+			<div class="custom-select">
+				<select id="foodType" (change)="changeType($any($event.target).value)">
+					<option value="all">Összes</option>
+					<option value="reggeli">Reggeli</option>
+					<option value="ebed">Ebéd</option>
+					<option value="vacsora">Vacsora</option>
+				</select>
+				<span class="custom-arrow">▼</span>
+			</div>
 		</div>
-	  </div>
 	</div>
-  
-	<div class="card" *ngFor="let food of food | sortFoods: selectedType" (click)="openPopup(food)">
-	  <div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
-		<i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
-	  </div>
-	  <img [src]="food.img ? food.img : 'https://via.placeholder.com/300x200?text=No+Image'" [alt]="food.name" />
-	  <div class="card-content">
-		<h3>{{ food.name }}</h3>
-		<p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
-	  </div>
-	</div>
-  </div>
-  
-  <div *ngIf="showPopup" class="popup" (click)="closePopup()">
-	<div class="popup-content" (click)="$event.stopPropagation()">
-	  <button class="close-btn" (click)="closePopup()">
-		<i class="fas fa-times"></i>
-	  </button>
-  
-	  <div class="popup-top">
-		<div class="popup-left">
-		  <h3>{{ selectedFood.name }}</h3>
-		  <p class="description">{{ selectedFood.description }}</p>
-		</div>
-  
-		<div class="popup-right">
-		  <img [src]="selectedFood.img ? selectedFood.img : 'https://via.placeholder.com/400x300?text=No+Image'"
-			   [alt]="selectedFood.name" />
-		</div>
-	  </div>
-  
-	  <div class="popup-bottom">
-		<div class="nutrition-row">
-		  <div class="nutrition-item">
-			<strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
-		  </div>
-		  <div class="nutrition-item">
-			<strong>Fehérje:</strong> {{ selectedFood.protein }} g
-		  </div>
-		  <div class="nutrition-item">
-			<strong>Zsír:</strong> {{ selectedFood.fat }} g
-		  </div>
-		  <div class="nutrition-item">
-			<strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
-		  </div>
-		</div>
-  
-		<h4>Hozzávalók:</h4>
-		<ul>
-		  <li *ngFor="let ingredient of ingredients">
-			{{ ingredient.amount }} {{ ingredient.ingredient_name }}
-		  </li>
-		</ul>
-  
-		<h4>Elkészítés:</h4>
-		<p class="recipe">{{ selectedFood.recipe }}</p>
-	  </div>
-	</div>
-  </div>
 
-  <!-- Add Food Button -->
-  <button class="add-food-button" (click)="openAddFoodPopup()">+</button>
-  
-  <!-- Add Food Popup -->
-  <div *ngIf="showAddFoodPopup" class="popup" (click)="closeAddFoodPopup()">
+	<div class="card" *ngFor="let food of food | sortFoods: selectedType" (click)="openPopup(food)">
+		<div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
+			<i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
+		</div>
+		<img [src]="food.img ? food.img : 'https://via.placeholder.com/300x200?text=Nincs+Kép'" [alt]="food.name" />
+		<div class="card-content">
+			<h3>{{ food.name }}</h3>
+			<p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="showPopup" class="popup" (click)="closePopup()">
+	<div class="popup-content" (click)="$event.stopPropagation()">
+		<button class="close-btn" (click)="closePopup()">
+			<i class="fas fa-times"></i>
+		</button>
+
+		<div class="popup-top">
+			<div class="popup-left">
+				<h3>{{ selectedFood.name }}</h3>
+				<p class="description">{{ selectedFood.description }}</p>
+			</div>
+
+			<div class="popup-right">
+				<img [src]="selectedFood.img ? selectedFood.img : 'https://via.placeholder.com/400x300?text=No+Image'"
+					[alt]="selectedFood.name" />
+			</div>
+		</div>
+
+		<div class="popup-bottom">
+			<div class="nutrition-row">
+				<div class="nutrition-item">
+					<strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
+				</div>
+				<div class="nutrition-item">
+					<strong>Fehérje:</strong> {{ selectedFood.protein }} g
+				</div>
+				<div class="nutrition-item">
+					<strong>Zsír:</strong> {{ selectedFood.fat }} g
+				</div>
+				<div class="nutrition-item">
+					<strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
+				</div>
+			</div>
+
+			<h4>Hozzávalók:</h4>
+			<ul>
+				<li *ngFor="let ingredient of ingredients">
+					{{ ingredient.amount }} {{ ingredient.ingredient_name }}
+				</li>
+			</ul>
+
+			<h4>Elkészítés:</h4>
+			<p class="recipe">{{ selectedFood.recipe }}</p>
+		</div>
+	</div>
+</div>
+
+<button class="add-food-button" (click)="openAddFoodPopup()">+</button>
+
+<div *ngIf="showAddFoodPopup" class="popup" (click)="closeAddFoodPopup()">
 	<div class="popup-content" (click)="$event.stopPropagation()">
 	  <button class="close-btn" (click)="closeAddFoodPopup()">
 		<i class="fas fa-times"></i>
 	  </button>
-  
-	  <h2>Add New Food Item</h2>
-  
-	  <!-- Food Details Form -->
-	  <form (ngSubmit)="addFood()">
-		<div class="form-group">
-		  <label for="name">Name:</label>
-		  <input id="name" [(ngModel)]="newFood.name" name="name" required />
-		</div>
-  
-		<div class="form-group">
-		  <label for="description">Description:</label>
-		  <textarea id="description" [(ngModel)]="newFood.description" name="description" required></textarea>
-		</div>
-  
-		<div class="form-group">
-		  <label for="type">Type:</label>
-		  <select id="type" [(ngModel)]="newFood.type" name="type" required>
-			<option value="reggeli">Reggeli</option>
-			<option value="ebed">Ebéd</option>
-			<option value="vacsora">Vacsora</option>
-		  </select>
-		</div>
-  
-		<div class="form-group">
-		  <label for="calorie">Calorie (kcal):</label>
-		  <input id="calorie" type="number" [(ngModel)]="newFood.calorie" name="calorie" required />
-		</div>
-  
-		<div class="form-group">
-		  <label for="fat">Fat (g):</label>
-		  <input id="fat" type="number" [(ngModel)]="newFood.fat" name="fat" required />
-		</div>
-  
-		<div class="form-group">
-		  <label for="protein">Protein (g):</label>
-		  <input id="protein" type="number" [(ngModel)]="newFood.protein" name="protein" required />
-		</div>
-  
-		<div class="form-group">
-		  <label for="carb">Carb (g):</label>
-		  <input id="carb" type="number" [(ngModel)]="newFood.carb" name="carb" required />
-		</div>
-  
-		<!-- Image Upload Section -->
-		<div class="form-group">
-		  <label for="image">Image:</label>
-		  <div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-			<input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
-			<label for="image" class="file-upload-label">
-			  <span *ngIf="!newFood.imgFile">Drag & drop or click to upload</span>
-			  <span *ngIf="newFood.imgFile">{{ newFood.imgFile.name }}</span>
-			</label>
-		  </div>
-		</div>
-  
-		<div class="form-group">
-		  <label for="recipe">Recipe:</label>
-		  <textarea id="recipe" [(ngModel)]="newFood.recipe" name="recipe" required></textarea>
-		</div>
-  
-		<!-- Ingredients Section -->
-		<h3>Ingredients</h3>
-		<div *ngFor="let ingredient of newFood.ingredients; let i = index" class="ingredient-row">
+	  <h2>Új étel hozzáadása</h2>
+	  <div class="add-food-container">
+		<form (ngSubmit)="addFood()" class="grid-form" #addFoodForm="ngForm" >
 		  <div class="form-group">
-			<label for="ingredient-name-{{i}}">Ingredient Name:</label>
-			<input id="ingredient-name-{{i}}" [(ngModel)]="ingredient.ingredient_name" name="ingredient-name-{{i}}" required />
+			<label for="name">Név:</label>
+			<input id="name" [(ngModel)]="newFood.name" name="name" required />
 		  </div>
-  
 		  <div class="form-group">
-			<label for="ingredient-amount-{{i}}">Amount:</label>
-			<input id="ingredient-amount-{{i}}" [(ngModel)]="ingredient.amount" name="ingredient-amount-{{i}}" required />
+			<label for="carb">Szénhidrát (g):</label>
+			<input id="carb" type="number" [(ngModel)]="newFood.carb" name="carb" required />
+		  </div>
+		  
+		  <div class="form-group">
+			  <label for="type">Típus:</label>
+			  <select id="type" [(ngModel)]="newFood.type" name="type" required>
+				  <option value="reggeli">Reggeli</option>
+				  <option value="ebed">Ebéd</option>
+				  <option value="vacsora">Vacsora</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="calorie">Kalória (kcal):</label>
+				<input id="calorie" type="number" [(ngModel)]="newFood.calorie" name="calorie" required />
+			</div>
+			
+			<div class="form-group">
+				<label for="fat">Zsír (g):</label>
+				<input id="fat" type="number" [(ngModel)]="newFood.fat" name="fat" required />
+			</div>
+			<div class="form-group">
+				<label for="protein">Fehérje (g):</label>
+				<input id="protein" type="number" [(ngModel)]="newFood.protein" name="protein" required />
+			</div>
+			
+			<div class="form-group">
+			  <label for="description">Leírás:</label>
+			  <textarea id="description" [(ngModel)]="newFood.description" name="description" required></textarea>
+			</div>
+
+		  <div class="form-group">
+			<label for="image">Kép:</label>
+			<div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+				<label for="image" class="file-upload-label">
+					<span *ngIf="!newFood.imgFile">Húzd ide a képet, vagy kattints a feltöltéshez</span>
+					<span *ngIf="newFood.imgFile">{{ newFood.imgFile.name }}</span>
+					<input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
+			  </label>
+			</div>
 		  </div>
   
-		  <button type="button" class="remove-ingredient-btn" (click)="removeIngredient(i)">Remove</button>
-		</div>
+		  <div class="form-group full-width">
+			<label for="recipe">Recept:</label>
+			<textarea id="recipe" [(ngModel)]="newFood.recipe" name="recipe" required></textarea>
+		  </div>
   
-		<button type="button" class="add-ingredient-btn" (click)="addIngredient()">+ Add Ingredient</button>
+		  <div class="form-group full-width">
+			<h3>Hozzávalók</h3>
+			<div *ngFor="let ingredient of newFood.ingredients; let i = index" class="ingredient-row">
+			  <div class="form-group">
+				<label for="ingredient-name-{{i}}">Hozzávaló neve:</label>
+				<input id="ingredient-name-{{i}}" [(ngModel)]="ingredient.ingredient_name" name="ingredient-name-{{i}}" required />
+			  </div>
+			  <div class="form-group">
+				<label for="ingredient-amount-{{i}}">Mennyiség:</label>
+				<input id="ingredient-amount-{{i}}" [(ngModel)]="ingredient.amount" name="ingredient-amount-{{i}}" required />
+			  </div>
+			  <button type="button" class="remove-ingredient-btn" (click)="removeIngredient(i)">Törlés</button>
+			</div>
+			<button type="button" class="add-ingredient-btn" (click)="addIngredient()">+ Hozzávaló hozzáadása</button>
+		  </div>
   
-		<button type="submit" class="submit-btn">Add Food</button>
-	  </form>
+		  <div class="form-group full-width">
+			<button type="submit" [disabled]="!addFoodForm.form.valid" class="submit-btn">Étel hozzáadása</button>
+		  </div>
+		</form>
+	  </div>
 	</div>
   </div>
