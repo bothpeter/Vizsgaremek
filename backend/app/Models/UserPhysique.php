@@ -9,6 +9,7 @@ class UserPhysique extends Model
     public $timestamps = false;
     protected $table = 'user_physique';
     protected $fillable = [
+        'progress_picture',
         'height',
         'weight',
         'age',

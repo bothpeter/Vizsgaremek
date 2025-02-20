@@ -26,6 +26,7 @@ return new class extends Migration
         Schema::create('user_physique', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('progress_picture')->nullable();
             $table->float('height');
             $table->float('weight');
             $table->integer('age');
