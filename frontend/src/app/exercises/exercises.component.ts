@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { SortExercisesPipe } from '../pipes/sort-exercises.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-exercises',
   standalone: true,
-  imports: [CommonModule, SortExercisesPipe],
+  imports: [CommonModule, SortExercisesPipe, FormsModule],
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.css'],
 })
@@ -23,6 +24,15 @@ export class ExercisesComponent implements OnInit {
     this.fetchExercises();
     this.fetchLikedExercises();
   }
+
+  showAddExercisePopup: boolean = false;
+  newExercise: any = {
+    exercise_name: '',
+    muscle_group: '',
+    description: '',
+    type: 'cardio',
+    imgFile: null,
+  };
 
   fetchExercises(): void {
     const apiUrl = 'http://127.0.0.1:8000/api/exercise';
@@ -113,5 +123,70 @@ export class ExercisesComponent implements OnInit {
           }
         );
     }
+  }
+  openAddExercisePopup(): void {
+    this.showAddExercisePopup = true;
+  }
+
+  closeAddExercisePopup(): void {
+    this.showAddExercisePopup = false;
+    this.resetNewExerciseForm();
+  }
+
+  resetNewExerciseForm(): void {
+    this.newExercise = {
+      exercise_name: '',
+      muscle_group: '',
+      description: '',
+      type: 'cardio',
+      imgFile: null,
+    };
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.newExercise.imgFile = file;
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      this.newExercise.imgFile = file;
+    }
+  }
+
+  addExercise(): void {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      alert('Kérjük, jelentkezz be az új gyakorlat hozzáadásához!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('exercise_name', this.newExercise.exercise_name);
+    formData.append('muscle_group', this.newExercise.muscle_group);
+    formData.append('description', this.newExercise.description);
+    if (this.newExercise.imgFile) {
+      formData.append('img', this.newExercise.imgFile);
+    }
+    formData.append('type', this.newExercise.type);
+
+    this.http.post('http://127.0.0.1:8000/api/exercise', formData, { headers: { Authorization: `Bearer ${authToken}` } })
+      .subscribe(
+        () => {
+          this.fetchExercises();
+          this.closeAddExercisePopup();
+        },
+        (error) => {
+          console.error('Error adding exercise:', error);
+        }
+      );
   }
 }

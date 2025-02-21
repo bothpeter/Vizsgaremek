@@ -6,6 +6,7 @@
 				<select id="muscleGroup" (change)="changeMuscleGroup($any($event.target).value)">
 					<option value="all">Összes</option>
 					<option value="Láb">Láb</option>
+					<option value="Has">Has</option>
 				</select>
 				<span class="custom-arrow">▼</span>
 			</div>
@@ -15,6 +16,7 @@
 			<div class="custom-select">
 				<select id="exerciseType" (change)="changeType($any($event.target).value)">
 					<option value="all">Összes</option>
+					<option value="konditermi edzes">Konditermi edzés</option>
 					<option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
 				</select>
 				<span class="custom-arrow">▼</span>
@@ -64,4 +66,51 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<button class="add-exercise-button" (click)="openAddExercisePopup()">+</button>
+
+<div *ngIf="showAddExercisePopup" class="popup" (click)="closeAddExercisePopup()">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeAddExercisePopup()">
+      <i class="fas fa-times"></i>
+    </button>
+    <h2>Új gyakorlat hozzáadása</h2>
+    <div class="add-exercise-container">
+      <form (ngSubmit)="addExercise()" class="grid-form" #addExerciseForm="ngForm">
+        <div class="form-group">
+          <label for="exercise_name">Gyakorlat neve:</label>
+          <input id="exercise_name" [(ngModel)]="newExercise.exercise_name" name="exercise_name" required />
+        </div>
+        <div class="form-group">
+          <label for="muscle_group">Izomcsoport:</label>
+          <input id="muscle_group" [(ngModel)]="newExercise.muscle_group" name="muscle_group" required />
+        </div>
+		<div class="form-group">
+			<label for="description">Leírás:</label>
+			<textarea id="description" [(ngModel)]="newExercise.description" name="description" required></textarea>
+		</div>
+		<div class="form-group">
+			<label for="image">Kép:</label>
+			<div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+				<label for="image" class="file-upload-label">
+					<span *ngIf="!newExercise.imgFile">Húzd ide a képet, vagy kattints a feltöltéshez</span>
+					<span *ngIf="newExercise.imgFile">{{ newExercise.imgFile.name }}</span>
+					<input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+		  <label for="type">Kategória:</label>
+		  <select id="type" [(ngModel)]="newExercise.type" name="type" required>
+			<option value="konditermi edzes">Konditermi edzés</option>
+			<option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
+		  </select>
+		</div>
+        <div class="form-group full-width">
+			<button type="submit" [disabled]="!addExerciseForm.form.valid" class="submit-btn">Gyakorlat hozzáadása</button>
+        </div>
+	</form>
+</div>
+</div>
 </div>
