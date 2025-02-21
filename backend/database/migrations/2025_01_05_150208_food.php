@@ -30,11 +30,11 @@ return new class extends Migration
             $table->integer('food_id');
             $table->string('ingredient_name');
             $table->text('amount');
-            $table->integer('calorie');
-            $table->float('fat');
-            $table->float('protein');
-            $table->float('carb');
-            $table->string('user_id');
+            $table->integer('calorie')->nullable();
+            $table->float('fat')->nullable();
+            $table->float('protein')->nullable();
+            $table->float('carb')->nullable();
+            $table->string('user_id')->nullable();
         });
     }
 
