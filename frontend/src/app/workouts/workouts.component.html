@@ -1,47 +1,90 @@
 <div class="workout-cards">
-  <div class="sorting-container">
-    <div class="sorting-dropdown">
-      <label for="workoutType">Szűrés típus szerint:</label>
-      <div class="custom-select">
-        <select id="workoutType" (change)="changeType($any($event.target).value)">
-          <option value="all">Összes</option>
-          <option value="Edzőtermi edzés">Edzőtermi edzés</option>
-          <option value="Saját testsúlyos edzés.">Saját testsúlyos edzés</option>
-        </select>
-        <span class="custom-arrow">▼</span>
-      </div>
+    <div class="sorting-container">
+        <div class="sorting-dropdown">
+            <label for="workoutType">Szűrés típus szerint:</label>
+            <div class="custom-select">
+                <select id="workoutType" (change)="changeType($any($event.target).value)">
+                    <option value="all">Összes</option>
+                    <option value="Edzőtermi edzés">Edzőtermi edzés</option>
+                    <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
+                </select>
+                <span class="custom-arrow">▼</span>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="card" *ngFor="let workout of workouts | sortWorkouts: selectedType" (click)="openPopup(workout)">
-    <div class="card-content">
-      <h3>{{ workout.title }}</h3>
-      <p><strong>Leírás:</strong> {{ workout.goodFor }}</p>
-      <p><strong>Típus:</strong> {{ workout.type }}</p>
+    <div class="card" *ngFor="let workout of workouts | sortWorkouts: selectedType" (click)="openPopup(workout)">
+        <div class="card-content">
+            <h3>{{ workout.title }}</h3>
+            <p><strong>Leírás:</strong> {{ workout.goodFor }}</p>
+            <p><strong>Típus:</strong> {{ workout.type }}</p>
+        </div>
     </div>
-  </div>
 </div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
-  <div class="popup-content" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="closePopup()">
-      <i class="fas fa-times"></i>
-    </button>
-    <h3>{{ selectedWorkout.title }}</h3>
-    <p class="highlight">{{ selectedWorkout.goodFor }}</p>
-    <p class="highlight">{{ selectedWorkout.description }}</p>
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closePopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3>{{ selectedWorkout.title }}</h3>
+        <p class="highlight">{{ selectedWorkout.goodFor }}</p>
+        <p class="highlight">{{ selectedWorkout.description }}</p>
 
-    <div class="exercises">
-      <h4>Gyakorlatok:</h4>
-      <div *ngFor="let exercise of selectedWorkout.exercises" class="exercise-card"
-        (click)="toggleExerciseDetails(exercise)">
-        <div class="exercise-header">{{ exercise.exercise_name }} - {{ exercise.muscle_group }}</div>
+        <div class="exercises">
+            <h4>Gyakorlatok:</h4>
+            <div *ngFor="let exercise of selectedWorkout.exercises" class="exercise-card"
+                (click)="toggleExerciseDetails(exercise)">
+                <div class="exercise-header">{{ exercise.exercise_name }} - {{ exercise.muscle_group }}</div>
 
-        <div *ngIf="exercise.isExpanded" class="exercise-details">
-          <p>{{ exercise.description }}</p>
-          <img [src]="exercise.img" [alt]="exercise.exercise_name" />
+                <div *ngIf="exercise.isExpanded" class="exercise-details">
+                    <p>{{ exercise.description }}</p>
+                    <img [src]="exercise.img" [alt]="exercise.exercise_name" />
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<button class="add-workout-button" (click)="openAddWorkoutPopup()">+</button>
+<!-- Add Workout Popup -->
+<div *ngIf="showAddWorkoutPopup" class="popup" (click)="closeAddWorkoutPopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeAddWorkoutPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2>Új edzésprogram hozzáadása</h2>
+        <form (ngSubmit)="addWorkout()" class="grid-form" #addWorkoutForm="ngForm">
+            <div class="form-group">
+                <label for="title">Cím:</label>
+                <input id="title" [(ngModel)]="newWorkout.title" name="title" required />
+            </div>
+            <div class="form-group">
+                <label for="goodFor">Leírás:</label>
+                <input id="goodFor" [(ngModel)]="newWorkout.goodFor" name="goodFor" required />
+            </div>
+            <div class="form-group">
+                <label for="description">Részletes leírás:</label>
+                <textarea id="description" [(ngModel)]="newWorkout.description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="type">Típus:</label>
+                <select id="type" [(ngModel)]="newWorkout.type" name="type" required>
+                    <option value="Edzőtermi edzés">Edzőtermi edzés</option>
+                    <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gyakorlatok kiválasztása:</label>
+                <div *ngFor="let exercise of exercises" class="exercise-checkbox">
+                    <input type="checkbox" [id]="'exercise' + exercise.exercise_id" [value]="exercise.exercise_id"
+                        (change)="onExerciseSelect($event, exercise.exercise_id)" />
+                    <label [for]="'exercise' + exercise.exercise_id">{{ exercise.exercise_name }}</label>
+                </div>
+            </div>
+            <div class="form-group full-width">
+                <button type="submit" [disabled]="!addWorkoutForm.form.valid" class="submit-btn">Edzésprogram hozzáadása</button>
+            </div>
+        </form>
+    </div>
 </div>
