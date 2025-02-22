@@ -47,8 +47,9 @@ class ExerciseController extends Controller implements HasMiddleware
         ]);
     
         if ($request->hasFile('img')) {
-            $filePath = $request->file('img')->store('exercises', 'public');
-            $fields['img'] = url('storage/' . $filePath);
+            $image = $request->file('img');
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+            $fields['img'] = $imageData;
         }
     
         $exercise = $request->user()->exercise()->create($fields);
@@ -56,6 +57,7 @@ class ExerciseController extends Controller implements HasMiddleware
         return response()->json([
             'status' => 200,
             'message' => 'Exercise uploaded',
+            'exercise' => $exercise
         ], 200);
     }
     
