@@ -1,23 +1,22 @@
 <div class="page-container">
     <app-vertical-nav-user></app-vertical-nav-user>
     <div class="container">
+        
         <div class="settings-container">
             <h2>Beállítások</h2>
             <p class="subtitle">Itt módosíthatod a felhasználói és fizikai adataidat</p>
-
+        
             <form (ngSubmit)="saveUserData()" #settingsForm="ngForm">
                 <div class="settings-grid">
                     <div class="form-group">
                         <label for="name">Felhasználónév</label>
                         <input id="name" name="name" [(ngModel)]="userName" required placeholder="Add meg a neved" />
-                        <div *ngIf="nameError" class="error-message">{{ nameError }}</div>
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
                         <input id="email" name="email" [(ngModel)]="userEmail" required placeholder="Add meg az e-mail címed" />
-                        <div *ngIf="emailError" class="error-message">{{ emailError }}</div>
                     </div>
-
+        
                     <div class="form-group">
                         <label for="height">Magasság (cm)</label>
                         <input id="height" name="height" [(ngModel)]="userPhysique.height" type="number" required placeholder="Add meg a magasságod" />
@@ -38,27 +37,23 @@
                             <option value="no">Nő</option>
                         </select>
                     </div>
-
-                    <!-- Add file input for profile picture -->
                     <div class="form-group">
-                        <label for="profilePicture">Profilkép</label>
+                        <label for="progress_picture">Profilkép</label>
                         <input
-                            id="profilePicture"
+                            id="progress_picture"
+                            name="progress_picture"
                             type="file"
-                            name="profilePicture"
                             (change)="onFileSelected($event)"
                             accept="image/*"
                         />
-                        <div *ngIf="profilePictureError" class="error-message">{{ profilePictureError }}</div>
                     </div>
                 </div>
-
+        
                 <button type="submit" [disabled]="!settingsForm.form.valid">Mentés</button>
             </form>
-
-            <div *ngIf="generalMessage" [ngClass]="{'error-message': isError, 'success-message': !isError}">
-                {{ generalMessage }}
-            </div>
+        
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+            <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
         </div>
     </div>
 </div>
