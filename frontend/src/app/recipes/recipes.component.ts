@@ -237,8 +237,8 @@ export class RecipesComponent implements OnInit {
                 (error) => console.error('Error adding ingredient:', error)
               );
           });
-
           this.closeAddFoodPopup();
+          window.location.reload();
         },
         (error) => {
           console.error('Error adding food:', error);
