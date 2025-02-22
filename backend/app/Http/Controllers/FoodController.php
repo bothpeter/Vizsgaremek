@@ -37,7 +37,7 @@ class FoodController extends Controller implements HasMiddleware
             'fat' => 'nullable',
             'protein' => 'nullable',
             'carb' => 'nullable',
-            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
             'recipe' => 'nullable'
         ]);
     

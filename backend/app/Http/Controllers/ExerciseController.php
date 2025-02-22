@@ -42,7 +42,7 @@ class ExerciseController extends Controller implements HasMiddleware
             'exercise_name' => 'required',
             'muscle_group' => 'required',
             'description' => 'required',
-            'img' => 'nullable|image',
+            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
             'type' => 'required'
         ]);
     
