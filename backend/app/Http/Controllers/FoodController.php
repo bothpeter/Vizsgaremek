@@ -37,22 +37,26 @@ class FoodController extends Controller implements HasMiddleware
             'fat' => 'nullable',
             'protein' => 'nullable',
             'carb' => 'nullable',
-            'img' => 'nullable|image',
+            'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'recipe' => 'nullable'
         ]);
-
+    
         if ($request->hasFile('img')) {
-            $filePath = $request->file('img')->store('foods', 'public');
-            $fields['img'] = url('storage/' . $filePath);
+            $image = $request->file('img');
+            $imageData = file_get_contents($image->getRealPath());
+            $mimeType = $image->getClientMimeType();
+            $fields['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
-
+    
         $food = $request->user()->food()->create($fields);
-
+    
         return response()->json([
             'status' => 200,
             'message' => 'Food uploaded',
+            'food' => $food
         ], 200);
     }
+    
 
     public function view_foods_by_id($id){
         $food = Food::where('food_id',$id)->get();
