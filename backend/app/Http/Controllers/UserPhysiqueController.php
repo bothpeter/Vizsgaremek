@@ -62,11 +62,11 @@ class UserPhysiqueController extends Controller implements HasMiddleware
         Log::info('File Info:', ['file' => $request->file('progress_picture')]);
     
         $validator = Validator::make($request->all(), [
-            'progress_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'height' => 'required',
-            'weight' => 'required',
-            'age' => 'required',
-            'gender' => 'required',
+            'progress_picture' => 'sometimes|image',
+            'height' => 'sometimes',
+            'weight' => 'sometimes',
+            'age' => 'sometimes',
+            'gender' => 'sometimes',
         ]);
     
         if ($validator->fails()) {
