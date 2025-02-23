@@ -33,8 +33,9 @@ class UserPhysiqueController extends Controller implements HasMiddleware
 
         if ($request->hasFile('progress_picture')) {
             $image = $request->file('progress_picture');
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            $fields['progress_picture'] = $imageData;
+            $imageData = file_get_contents($image->getRealPath());
+            $mimeType = $image->getClientMimeType();
+            $fields['progress_picture'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
 
         $userPhysique = $request->user()->physique()->create($fields);
@@ -86,17 +87,31 @@ class UserPhysiqueController extends Controller implements HasMiddleware
     
         if ($request->hasFile('progress_picture')) {
             $image = $request->file('progress_picture');
-    
-            if ($request->hasFile('img')) {
-                $image = $request->file('img');
-                $imageData = file_get_contents($image->getRealPath());
-                $mimeType = $image->getClientMimeType();
-                $updateData['progress_picture'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+        
+            if ($image->isValid()) {
+            $imageData = file_get_contents($image->getRealPath());
+            $mimeType = $image->getClientMimeType();
+            $updateData['progress_picture'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
             } else {
-                return response()->json([
-                    'status' => 422,
-                    'errors' => ['progress_picture' => 'Invalid image file']
-                ], 422);
+            return response()->json([
+                'status' => 422,
+                'errors' => ['progress_picture' => 'Invalid image file']
+            ], 422);
+            }
+        }
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+        
+            if ($image->isValid()) {
+            $imageData = file_get_contents($image->getRealPath());
+            $mimeType = $image->getClientMimeType();
+            $updateData['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
+            } else {
+            return response()->json([
+                'status' => 422,
+                'errors' => ['img' => 'Invalid image file']
+            ], 422);
             }
         }
     
