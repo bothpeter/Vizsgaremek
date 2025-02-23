@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +20,10 @@ class ExerciseFactory extends Factory
         return [
             'exercise_name' => $this->faker->word,
             'muscle_group' => $this->faker->word,
-            'description' => $this->faker->word,
-            'img' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'img' => $this->faker->imageUrl(),
             'type' => $this->faker->word,
-            'user_id' => $this->faker->word,
+            'user_id' => User::factory(),
         ];
     }
 }

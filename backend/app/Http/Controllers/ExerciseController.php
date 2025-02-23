@@ -29,7 +29,10 @@ class ExerciseController extends Controller implements HasMiddleware
 
     public function view_exercise_by_exercise_id($id){
         $exercise = Exercise::where('exercise_id',$id)->get();
-
+        
+        if($exercise->isEmpty()){
+            return response()->json(['message' => 'Exercise not found'], 404);
+        }
         $data = [
             'status' =>200,
             'exercise'=> $exercise

@@ -2,76 +2,114 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\Http\Controllers\ExerciseController;
 use Illuminate\Http\Request;
 use App\Models\Exercise;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Mockery;
 
-    class ExerciseControllerTest extends TestCase
+    class ExerciseControllerTest extends BaseTestCase
     {
-        protected function setUp(): void
+        
+        use RefreshDatabase;
+
+        public function setUp(): void
         {
             parent::setUp();
-            DB::shouldReceive('connection')->andReturn(Mockery::mock(\Illuminate\Database\Connection::class));
-            DB::shouldReceive('table')->andReturnSelf();
-            DB::shouldReceive('get')->andReturn(collect([]));
+            $this->artisan('migrate');
         }
     
-        protected function tearDown(): void
+        public function test_view_exercises()
         {
-            Mockery::close();
-            parent::tearDown();
+            Exercise::factory()->count(5)->create();
+        
+            $response = $this->getJson('/api/exercise');
+        
+            $response->assertStatus(200)
+                 ->assertJson([
+                 'status' => 200,
+                 'exercise' => true,
+                 ])
+                 ->assertJsonCount(5, 'exercise');
         }
 
-    public function test_view_exercises()
-    {
-        $exerciseMock = Mockery::mock('alias:App\Models\Exercise');
-        $exerciseMock->shouldReceive('all')->andReturn(collect([]));
+        public function test_view_exercises_by_exercise_id()
+        {
+            Exercise::factory()->create();
 
-        $controller = new ExerciseController();
-        $response = $controller->view_exercises();
+            $response = $this->getJson('/api/exercise/' . 1);
+            $response->assertStatus(200)
+                 ->assertJson([
+                 'status' => 200,
+                 'exercise' => true,
+                 ]);
 
-        $this->assertEquals(200, $response->status());
-        $this->assertArrayHasKey('exercise', $response->getData(true));
-    }
+            $response = $this->getJson('/api/exercise/999');
+            $response->assertStatus(404)
+                 ->assertJson([
+                 'message' => "Exercise not found",
+                 ]);
+        }
 
-    public function test_view_exercise_by_exercise_id()
-    {
-        $controller = new ExerciseController();
-        $response = $controller->view_exercise_by_exercise_id(1);
+        public function test_post_exercises()
+        {
+            $user = User::factory()->create();
+            $this->actingAs($user, 'sanctum');
 
-        $this->assertEquals(200, $response->status());
-        $this->assertArrayHasKey('exercise', $response->getData(true));
-    }
+            $data = [
+                'exercise_name' => 'Push Up',
+                'muscle_group' => 'Chest',
+                'description' => 'A basic push up exercise',
+                'type' => 'Strength'
+            ];
 
-    public function test_post_exercises()
-    {
-        $request = Request::create('/post_exercises', 'POST', [
-            'exercise_name' => 'Push Up',
-            'muscle_group' => 'Chest',
-            'description' => 'A basic push up exercise',
-            'type' => 'Strength'
-        ]);
+            $response = $this->postJson('/api/exercise', $data);
 
-        $user = Auth::user();
-        $controller = new ExerciseController();
-        $response = $controller->post_exercises($request);
+            $response->assertStatus(200)
+                     ->assertJson([
+                         'status' => 200,
+                         'message' => 'Exercise uploaded',
+                         'exercise' => true,
+                     ]);
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals('Exercise uploaded', $response->getData(true)['message']);
-    }
+            $this->assertDatabaseHas('exercises', [
+                'exercise_name' => 'Push Up',
+                'muscle_group' => 'Chest',
+                'description' => 'A basic push up exercise',
+                'type' => 'Strength',
+                'user_id' => $user->id
+            ]);
+        }
 
-    public function test_delete_exercise()
-    {
-        $request = Request::create('/delete_exercise/1', 'DELETE');
-        $user = Auth::user();
-        $controller = new ExerciseController();
-        $response = $controller->delete_exercise($request, 1);
+        public function test_delete_exercise_cases()
+        {
+            $user = User::factory(1)->create();
+            $this->actingAs($user, 'sanctum');
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals('Exercise deleted', $response->getData(true)['message']);
-    }
+            // Case 1: Successfully delete exercise
+            $exercise = Exercise::factory()->create(['user_id' => $user->id]);
+            $response = $this->deleteJson('/api/exercise/' . $exercise->id);
+            $response->assertStatus(200)
+             ->assertJson(['message' => 'Exercise deleted']);
+            $this->assertDatabaseMissing('exercises', ['id' => $exercise->id]);
+
+            // Case 2: Unauthorized delete attempt
+            $otherUser = User::factory()->create();
+            $exercise = Exercise::factory()->create(['user_id' => $otherUser->id]);
+            $response = $this->deleteJson('/api/exercise/' . $exercise->id);
+            $response->assertStatus(403)
+             ->assertJson(['message' => 'Unauthorized']);
+            $this->assertDatabaseHas('exercises', ['id' => $exercise->id]);
+
+            // Case 3: Exercise not found
+            $response = $this->deleteJson('/api/exercise/999');
+            $response->assertStatus(404)
+             ->assertJson(['message' => 'Exercise not found']);
+        }
+
 }

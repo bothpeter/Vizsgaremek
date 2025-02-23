@@ -24,7 +24,7 @@ class UserPhysiqueController extends Controller implements HasMiddleware
     
     public function post_user_physique(Request $request){
         $fields = $request->validate([
-            'progress_picture' => 'required|image',
+            'progress_picture' => 'sometimes|image',
             'height' => 'required',
             'weight' => 'required',
             'age' => 'required',
@@ -56,14 +56,25 @@ class UserPhysiqueController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function update_user_physique(Request $request){
-        $fields = $request->validate([
-            'progress_picture' => 'sometimes|image',
-            'height' => 'sometimes',
-            'weight' => 'sometimes',
-            'age' => 'sometimes',
-            'gender' => 'sometimes',
+    public function update_user_physique(Request $request) {
+        Log::info('Full Request Data:', $request->all());
+        Log::info('File Present:', ['progress_picture' => $request->hasFile('progress_picture')]);
+        Log::info('File Info:', ['file' => $request->file('progress_picture')]);
+    
+        $validator = Validator::make($request->all(), [
+            'progress_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'height' => 'required',
+            'weight' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
         ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->errors()
+            ], 422);
+        }
     
         $user = $request->user();
         $userPhysique = UserPhysique::where('user_id', $user->id)->first();
@@ -75,22 +86,30 @@ class UserPhysiqueController extends Controller implements HasMiddleware
             ], 404);
         }
     
+        $updateData = $validator->validated();
+    
         if ($request->hasFile('progress_picture')) {
             $image = $request->file('progress_picture');
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            $mimeType = $image->getMimeType(); 
-            $fields['progress_picture'] = "data:$mimeType;base64,$imageData";
+    
+            if ($image->isValid()) {
+                $imageData = base64_encode(file_get_contents($image->getRealPath()));
+                $updateData['progress_picture'] = $imageData;
+            } else {
+                return response()->json([
+                    'status' => 422,
+                    'errors' => ['progress_picture' => 'Invalid image file']
+                ], 422);
+            }
         }
     
-        if (!empty($fields)) {
-            $userPhysique->update($fields);
-        }
+        $userPhysique->update($updateData);
     
         return response()->json([
             'status' => 200,
             'message' => 'Data updated',
-            'data' => $userPhysique
+            'data' => $userPhysique->fresh()
         ], 200);
     }
+    
     
 }
