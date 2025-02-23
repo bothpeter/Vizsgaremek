@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SortWorkoutsPipe } from '../pipes/sort-workouts.pipe';
-import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-workouts',
@@ -23,18 +23,93 @@ export class WorkoutsComponent implements OnInit {
         goodFor: '',
         description: '',
         type: 'Edzőtermi edzés',
-        exercise1_id: null,
-        exercise2_id: null,
-        exercise3_id: null,
-        exercise4_id: null,
-        exercise5_id: null,
+        exercises: [{ exercise_id: null }], // Initialize with one exercise
     };
-    selectedExercises: number[] = [];
 
     constructor(private http: HttpClient) { }
 
     ngOnInit(): void {
         this.fetchExercises().then(() => this.fetchWorkouts());
+    }
+
+    fetchExercises(): Promise<void> {
+        return fetch('http://127.0.0.1:8000/api/exercise')
+            .then(response => response.json())
+            .then(data => {
+                this.exercises = data.exercise;
+            })
+            .catch(error => console.error('Error fetching exercises:', error));
+    }
+
+    fetchWorkouts(): void {
+        fetch('http://127.0.0.1:8000/api/workout_plan')
+            .then(response => response.json())
+            .then(data => {
+                this.workouts = data.workout_plan;
+            })
+            .catch(error => console.error('Error fetching workout plans:', error));
+    }
+
+    addExercise(): void {
+        if (this.newWorkout.exercises.length < 5) {
+            this.newWorkout.exercises.push({ exercise_id: null });
+        }
+    }
+
+    removeExercise(index: number): void {
+        if (this.newWorkout.exercises.length > 1) {
+            this.newWorkout.exercises.splice(index, 1);
+        }
+    }
+
+    openAddWorkoutPopup(): void {
+        this.showAddWorkoutPopup = true;
+    }
+
+    closeAddWorkoutPopup(): void {
+        this.showAddWorkoutPopup = false;
+        this.resetNewWorkoutForm();
+    }
+
+    resetNewWorkoutForm(): void {
+        this.newWorkout = {
+            title: '',
+            goodFor: '',
+            description: '',
+            type: 'Edzőtermi edzés',
+            exercises: [{ exercise_id: null }], // Reset to one exercise
+        };
+    }
+
+    addWorkout(): void {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+            alert('Kérjük, jelentkezz be az új edzésprogram hozzáadásához!');
+            return;
+        }
+
+        // Map exercises to the required format
+        const payload = {
+            ...this.newWorkout,
+            exercise1_id: this.newWorkout.exercises[0]?.exercise_id || null,
+            exercise2_id: this.newWorkout.exercises[1]?.exercise_id || null,
+            exercise3_id: this.newWorkout.exercises[2]?.exercise_id || null,
+            exercise4_id: this.newWorkout.exercises[3]?.exercise_id || null,
+            exercise5_id: this.newWorkout.exercises[4]?.exercise_id || null,
+        };
+
+        this.http.post('http://127.0.0.1:8000/api/workout_plan', payload, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+            .subscribe(
+                (response) => {
+                    this.fetchWorkouts();
+                    this.closeAddWorkoutPopup();
+                },
+                (error) => {
+                    console.error('Error adding workout:', error);
+                }
+            );
     }
 
     openPopup(workout: any): void {
@@ -48,24 +123,6 @@ export class WorkoutsComponent implements OnInit {
     closePopup(): void {
         this.showPopup = false;
         this.selectedWorkout = null;
-    }
-
-    fetchWorkouts(): void {
-        fetch('http://127.0.0.1:8000/api/workout_plan')
-            .then(response => response.json())
-            .then(data => {
-                this.workouts = data.workout_plan;
-            })
-            .catch(error => console.error('Error fetching workout plans:', error));
-    }
-
-    fetchExercises(): Promise<void> {
-        return fetch('http://127.0.0.1:8000/api/exercise')
-            .then(response => response.json())
-            .then(data => {
-                this.exercises = data.exercise;
-            })
-            .catch(error => console.error('Error fetching exercises:', error));
     }
 
     getWorkoutExercises(workout: any): any[] {
@@ -88,69 +145,4 @@ export class WorkoutsComponent implements OnInit {
     changeType(type: string): void {
         this.selectedType = type;
     }
-
-    openAddWorkoutPopup(): void {
-        this.showAddWorkoutPopup = true;
-    }
-
-    closeAddWorkoutPopup(): void {
-        this.showAddWorkoutPopup = false;
-        this.resetNewWorkoutForm();
-    }
-
-    resetNewWorkoutForm(): void {
-        this.newWorkout = {
-            title: '',
-            goodFor: '',
-            description: '',
-            type: 'Edzőtermi edzés',
-            exercise1_id: null,
-            exercise2_id: null,
-            exercise3_id: null,
-            exercise4_id: null,
-            exercise5_id: null,
-        };
-        this.selectedExercises = [];
-    }
-
-    onExerciseSelect(event: any, exerciseId: number): void {
-        if (event.target.checked) {
-          this.selectedExercises.push(exerciseId);
-        } else {
-          this.selectedExercises = this.selectedExercises.filter(id => id !== exerciseId);
-        }
-        console.log('Selected Exercises:', this.selectedExercises); // Debug
-      }
-
-      addWorkout(): void {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-          alert('Kérjük, jelentkezz be az új edzésprogram hozzáadásához!');
-          return;
-        }
-      
-        // Assign selected exercises to the new workout
-        this.newWorkout.exercise1_id = this.selectedExercises[0] || null;
-        this.newWorkout.exercise2_id = this.selectedExercises[1] || null;
-        this.newWorkout.exercise3_id = this.selectedExercises[2] || null;
-        this.newWorkout.exercise4_id = this.selectedExercises[3] || null;
-        this.newWorkout.exercise5_id = this.selectedExercises[4] || null;
-      
-        // Debug: Check if exercises are assigned correctly
-        console.log('New Workout Data:', this.newWorkout);
-      
-        this.http.post('http://127.0.0.1:8000/api/workout_plan', this.newWorkout, {
-          headers: { Authorization: `Bearer ${authToken}` }
-        })
-          .subscribe(
-            (response) => {
-              console.log('Workout added successfully:', response);
-              this.fetchWorkouts();
-              this.closeAddWorkoutPopup();
-            },
-            (error) => {
-              console.error('Error adding workout:', error);
-            }
-          );
-      }
 }

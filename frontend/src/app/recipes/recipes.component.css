@@ -400,23 +400,25 @@
   border: none;
   border-radius: 6px;
   background-color: #FC282C;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   transition: background-color 0.1s ease;
   font-size: 1rem;
   font-weight: 600;
-  margin-top: 8px;
-  color: #000;
 }
 
-.add-ingredient-btn:hover,
-.remove-ingredient-btn:hover {
-  background-color: rgb(198, 19, 19);
+.remove-ingredient-btn {
+  margin-top: 8px;
 }
 
 .add-ingredient-btn {
   margin-bottom: 22px;
   width: 250px;
+}
+
+.add-ingredient-btn:hover,
+.remove-ingredient-btn:hover {
+  background-color: rgb(198, 19, 19);
 }
 
 .submit-btn {
@@ -466,7 +468,8 @@ input[type="file"] {
   display: none;
 }
 
-.submit-btn:disabled, .remove-ingredient-btn:disabled {
+.submit-btn:disabled,
+.remove-ingredient-btn:disabled {
   background-color: #444;
   color: #000;
   cursor: not-allowed;

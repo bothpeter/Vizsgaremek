@@ -342,3 +342,47 @@ h4 {
     color: #000;
     cursor: not-allowed;
 }
+
+.exercise-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.exercise-row .form-group {
+    flex: 1;
+}
+
+.add-exercise-btn,
+.remove-exercise-btn {
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background-color: #FC282C;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.remove-exercise-btn {
+    margin-top: 8px;
+}
+
+.add-exercise-btn {
+    margin-bottom: 22px;
+    width: 250px;
+}
+
+.add-exercise-btn:hover,
+.remove-exercise-btn:hover {
+    background-color: rgb(198, 19, 19);
+}
+
+.add-exercise-btn:disabled,
+.remove-exercise-btn:disabled {
+    background-color: #444;
+    color: #000;
+    cursor: not-allowed;
+}
