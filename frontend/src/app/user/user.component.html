@@ -3,9 +3,13 @@
     <div class="container">
         <div class="user-container">
             <div class="profile-header">
-                <div class="profile-picture">
-                    <i class="fas fa-user"></i>
-                </div>
+                <div class="profile-picture" [class.no-box-shadow]="userPhysique?.progress_picture">
+                    <div *ngIf="!userPhysique?.progress_picture" class="default-icon">
+                      <i class="fas fa-user"></i>
+                    </div>
+                  
+                    <img *ngIf="userPhysique?.progress_picture" [src]="userPhysique.progress_picture" alt="Profile Picture" />
+                  </div>
                 <div class="profile-info">
                     <h2>{{ userName }}</h2>
                     <p>{{ userEmail }}</p>

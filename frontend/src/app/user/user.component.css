@@ -40,6 +40,17 @@
     box-shadow: 0 4px 10px rgba(255, 50, 50, 0.5);
 }
 
+.profile-picture.no-box-shadow {
+    box-shadow: none !important;
+  }
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .profile-info {
     flex: 1;
 }
@@ -98,3 +109,4 @@ h3 {
     display: flex;
     justify-content: center;
 }
+

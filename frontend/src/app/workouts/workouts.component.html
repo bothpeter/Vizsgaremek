@@ -47,8 +47,8 @@
 </div>
 
 <button class="add-workout-button" (click)="openAddWorkoutPopup()">+</button>
-<!-- Add Workout Popup -->
-<div *ngIf="showAddWorkoutPopup" class="popup" (click)="closeAddWorkoutPopup()">
+
+<div *ngIf="showAddWorkoutPopup" class="popup">
     <div class="popup-content" (click)="$event.stopPropagation()">
         <button class="close-btn" (click)="closeAddWorkoutPopup()">
             <i class="fas fa-times"></i>

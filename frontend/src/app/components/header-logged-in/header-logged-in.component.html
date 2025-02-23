@@ -17,9 +17,10 @@
         <ul>
             <li routerLink="/user" class="user-icon" (click)="closeMenu()">
                 <div class="icon-circle">
-                    <i class="bi bi-person-fill"></i>
+                  <img *ngIf="profilePicture" [src]="profilePicture" alt="Profile Picture" class="profile-pic" />
+                  <i *ngIf="!profilePicture" class="bi bi-person-fill"></i>
                 </div>
-            </li>
+              </li>
         </ul>
     </nav>
 </header>

@@ -72,7 +72,7 @@
 
 <button class="add-exercise-button" (click)="openAddExercisePopup()">+</button>
 
-<div *ngIf="showAddExercisePopup" class="popup" (click)="closeAddExercisePopup()">
+<div *ngIf="showAddExercisePopup" class="popup">
 	<div class="popup-content" (click)="$event.stopPropagation()">
 		<button class="close-btn" (click)="closeAddExercisePopup()">
 			<i class="fas fa-times"></i>
@@ -86,7 +86,10 @@
 				</div>
 				<div class="form-group">
 					<label for="muscle_group">Izomcsoport:</label>
-					<input id="muscle_group" [(ngModel)]="newExercise.muscle_group" name="muscle_group" required />
+					<select id="muscle_group" [(ngModel)]="newExercise.muscle_group" name="muscle_group" required>
+						<option value="Láb">Láb</option>
+						<option value="Has">Has</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="description">Leírás:</label>
