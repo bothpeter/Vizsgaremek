@@ -6,7 +6,7 @@
                 <select id="workoutType" (change)="changeType($any($event.target).value)">
                     <option value="all">Összes</option>
                     <option value="Edzőtermi edzés">Edzőtermi edzés</option>
-                    <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
+                    <option value="Saját testsúlyos edzés.">Saját testsúlyos edzés</option>
                 </select>
                 <span class="custom-arrow">▼</span>
             </div>
@@ -71,18 +71,17 @@
                 <label for="type">Típus:</label>
                 <select id="type" [(ngModel)]="newWorkout.type" name="type" required>
                     <option value="Edzőtermi edzés">Edzőtermi edzés</option>
-                    <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
+                    <option value="Saját testsúlyos edzés.">Saját testsúlyos edzés</option>
                 </select>
             </div>
 
-            <!-- Exercise Selection -->
             <div class="form-group full-width">
                 <h3>Gyakorlatok</h3>
                 <div *ngFor="let exercise of newWorkout.exercises; let i = index" class="exercise-row">
                     <div class="form-group">
                         <label for="exercise-{{i}}">Gyakorlat {{i + 1}}:</label>
                         <select id="exercise-{{i}}" [(ngModel)]="exercise.exercise_id" name="exercise-{{i}}" required>
-                            <option *ngFor="let ex of exercises" [value]="ex.exercise_id">{{ ex.exercise_name }}</option>
+                            <option *ngFor="let ex of exercises" [value]="ex.exercise_id">{{ ex.exercise_name }} - {{ ex.muscle_group }}</option>
                         </select>
                     </div>
                     <button type="button" class="remove-exercise-btn" (click)="removeExercise(i)" [disabled]="newWorkout.exercises.length === 1">

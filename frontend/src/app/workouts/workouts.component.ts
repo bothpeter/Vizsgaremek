@@ -23,7 +23,7 @@ export class WorkoutsComponent implements OnInit {
         goodFor: '',
         description: '',
         type: 'Edzőtermi edzés',
-        exercises: [{ exercise_id: null }], // Initialize with one exercise
+        exercises: [{ exercise_id: null }],
     };
 
     constructor(private http: HttpClient) { }
@@ -77,7 +77,7 @@ export class WorkoutsComponent implements OnInit {
             goodFor: '',
             description: '',
             type: 'Edzőtermi edzés',
-            exercises: [{ exercise_id: null }], // Reset to one exercise
+            exercises: [{ exercise_id: null }],
         };
     }
 
@@ -88,7 +88,6 @@ export class WorkoutsComponent implements OnInit {
             return;
         }
 
-        // Map exercises to the required format
         const payload = {
             ...this.newWorkout,
             exercise1_id: this.newWorkout.exercises[0]?.exercise_id || null,

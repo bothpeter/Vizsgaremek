@@ -6,6 +6,9 @@
 				<select id="muscleGroup" (change)="changeMuscleGroup($any($event.target).value)">
 					<option value="all">Összes</option>
 					<option value="Láb">Láb</option>
+					<option value="Mell">Mell</option>
+					<option value="Kar">Kar</option>
+					<option value="Hát">Hát</option>
 					<option value="Has">Has</option>
 				</select>
 				<span class="custom-arrow">▼</span>
@@ -16,7 +19,7 @@
 			<div class="custom-select">
 				<select id="exerciseType" (change)="changeType($any($event.target).value)">
 					<option value="all">Összes</option>
-					<option value="konditermi edzes">Konditermi edzés</option>
+					<option value="edzotermi edzes">Edzőtermi edzés</option>
 					<option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
 				</select>
 				<span class="custom-arrow">▼</span>
@@ -88,6 +91,9 @@
 					<label for="muscle_group">Izomcsoport:</label>
 					<select id="muscle_group" [(ngModel)]="newExercise.muscle_group" name="muscle_group" required>
 						<option value="Láb">Láb</option>
+						<option value="Mell">Mell</option>
+						<option value="Kar">Kar</option>
+						<option value="Hát">Hát</option>
 						<option value="Has">Has</option>
 					</select>
 				</div>
@@ -109,7 +115,7 @@
 				<div class="form-group">
 					<label for="type">Kategória:</label>
 					<select id="type" [(ngModel)]="newExercise.type" name="type" required>
-						<option value="konditermi edzes">Konditermi edzés</option>
+						<option value="edzotermi edzes">Edzőtermi edzés</option>
 						<option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
 					</select>
 				</div>

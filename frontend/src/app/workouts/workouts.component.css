@@ -114,7 +114,6 @@
     position: relative;
     background-color: #1e1e1e;
     padding: 24px;
-    padding-top: 0;
     border-radius: 12px;
     width: 80%;
     max-width: 60%;
@@ -123,6 +122,12 @@
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.popup-content h3 {
+    margin-top: 0;
+    color: #FC282C;
+    font-size: 1.75em;
 }
 
 @keyframes fadeIn {
@@ -267,8 +272,8 @@ h4 {
 }
 
 .popup-content h2 {
-    margin-bottom: 20px;
     color: #FC282C;
+    margin-top: 0;
 }
 
 .grid-form {
