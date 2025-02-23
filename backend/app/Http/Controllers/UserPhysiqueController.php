@@ -57,10 +57,6 @@ class UserPhysiqueController extends Controller implements HasMiddleware
     }
 
     public function update_user_physique(Request $request) {
-        Log::info('Full Request Data:', $request->all());
-        Log::info('File Present:', ['progress_picture' => $request->hasFile('progress_picture')]);
-        Log::info('File Info:', ['file' => $request->file('progress_picture')]);
-    
         $validator = Validator::make($request->all(), [
             'progress_picture' => 'sometimes|image',
             'height' => 'sometimes',
@@ -91,9 +87,11 @@ class UserPhysiqueController extends Controller implements HasMiddleware
         if ($request->hasFile('progress_picture')) {
             $image = $request->file('progress_picture');
     
-            if ($image->isValid()) {
-                $imageData = base64_encode(file_get_contents($image->getRealPath()));
-                $updateData['progress_picture'] = $imageData;
+            if ($request->hasFile('img')) {
+                $image = $request->file('img');
+                $imageData = file_get_contents($image->getRealPath());
+                $mimeType = $image->getClientMimeType();
+                $updateData['progress_picture'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
             } else {
                 return response()->json([
                     'status' => 422,

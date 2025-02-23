@@ -51,8 +51,9 @@ class ExerciseController extends Controller implements HasMiddleware
     
         if ($request->hasFile('img')) {
             $image = $request->file('img');
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            $fields['img'] = $imageData;
+            $imageData = file_get_contents($image->getRealPath());
+            $mimeType = $image->getClientMimeType();
+            $fields['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
     
         $exercise = $request->user()->exercise()->create($fields);
