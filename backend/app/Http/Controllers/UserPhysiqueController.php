@@ -99,21 +99,6 @@ class UserPhysiqueController extends Controller implements HasMiddleware
             ], 422);
             }
         }
-
-        if ($request->hasFile('img')) {
-            $image = $request->file('img');
-        
-            if ($image->isValid()) {
-            $imageData = file_get_contents($image->getRealPath());
-            $mimeType = $image->getClientMimeType();
-            $updateData['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
-            } else {
-            return response()->json([
-                'status' => 422,
-                'errors' => ['img' => 'Invalid image file']
-            ], 422);
-            }
-        }
     
         $userPhysique->update($updateData);
     

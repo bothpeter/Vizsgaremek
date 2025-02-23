@@ -27,17 +27,23 @@ class WorkoutController extends Controller implements HasMiddleware
     }
 
     public function post_workout_plan(Request $request){
-        $fields = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'goodFor' => 'required',
             'description' => 'required',
             'type' => 'required',
-            'exercise1_id' => 'nullable',
-            'exercise2_id' => 'nullable',
-            'exercise3_id' => 'nullable',
-            'exercise4_id' => 'nullable',
-            'exercise5_id' => 'nullable'
+            'exercise1_id' => 'sometimes',
+            'exercise2_id' => 'sometimes',
+            'exercise3_id' => 'sometimes',
+            'exercise4_id' => 'sometimes',
+            'exercise5_id' => 'sometimes'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $fields = $validator->validated();
 
         $workout_plan = $request->user()->workoutPlan()->create($fields);
 

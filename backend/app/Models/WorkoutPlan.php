@@ -18,11 +18,11 @@ class WorkoutPlan extends Model
         'goodFor',
         'description',
         'type',
-        'exercise1',
-        'exercise2',
-        'exercise3',
-        'exercise4',
-        'exercise5'
+        'exercise1_id',
+        'exercise2_id',
+        'exercise3_id',
+        'exercise4_id',
+        'exercise5_id'
     ];
 
     public function user()
