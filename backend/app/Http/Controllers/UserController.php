@@ -24,7 +24,7 @@ class UserController extends Controller implements HasMiddleware
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes',
             'email' => 'sometimes',
-            'password' => 'sometimes',
+            'password' => 'sometimes|confirmed',
         ]);
 
         if ($validator->fails()) {

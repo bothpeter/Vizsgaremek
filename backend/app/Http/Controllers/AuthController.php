@@ -32,11 +32,8 @@ class AuthController extends Controller
 
         $user = User::create($fields);
 
-        $token = $user->createToken($user->name, ['*'], now()->addMinute());
-
         return [
             'user' => $user,
-            'token' => base64_encode($token->plainTextToken)
         ];
     }
 
