@@ -10,10 +10,10 @@ import { AuthService } from './auth.service';
 export class ApiService {
     private baseUrl = 'http://127.0.0.1:8000/api';
 
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient) { }
 
     private getHeaders(): HttpHeaders {
-        const authToken = this.authService.getAuthToken();
+        const authToken = localStorage.getItem('authToken');
         return new HttpHeaders({
             Authorization: `Bearer ${authToken}`,
         });

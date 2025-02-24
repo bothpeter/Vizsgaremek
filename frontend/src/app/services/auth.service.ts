@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from './api.service';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
     private isLoggedIn = false;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private router: Router, private apiService: ApiService) { }
 
     getAuthToken(): string | null {
         return localStorage.getItem('authToken');
@@ -24,13 +25,9 @@ export class AuthService {
     }
 
     logout() {
-        const authToken = localStorage.getItem('authToken');
+        const authToken = this.getAuthToken();
         if (authToken) {
-            this.http.post('http://127.0.0.1:8000/api/logout', {}, {
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                },
-            }).subscribe({
+            this.apiService.post('logout', {}).subscribe({
                 next: () => {
                     this.isLoggedIn = false;
                     localStorage.removeItem('authToken');
@@ -39,8 +36,8 @@ export class AuthService {
                     localStorage.removeItem('userEmail');
                     this.router.navigateByUrl('/login');
                 },
-                error: (err) => {
-                    console.error('Logout failed:', err);
+                error: (error) => {
+                    console.error('Logout failed:', error);
                     alert('Kijelentkezés sikertelen!');
                 },
             });
