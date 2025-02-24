@@ -42,7 +42,7 @@ export class LoginComponent {
                 if (error.status === 401 && error.error.message === "Bad credentials") {
                     this.loginError = "Hibás email, név vagy jelszó.";
                 } else {
-                    alert("Hiba történt a bejelentkezés során. Kérjük, próbáld újra később.");
+                    this.loginError = "Hiba történt a bejelentkezés során. Kérjük, próbáld újra később.";
                 }
             }
         });
