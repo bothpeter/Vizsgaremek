@@ -2,7 +2,7 @@
     <div class="login-card">
         <h2>Üdv újra!</h2>
         <p class="subtitle">Jelentkezz be a folytatáshoz</p>
-        <form (ngSubmit)="onSubmit()" #loginForm="ngForm" (keydown.enter)="onSubmit()">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="form-group">
                 <label for="username">E-mail vagy felhasználónév</label>
                 <input type="text" id="username" name="username" [(ngModel)]="loginObj.login" required #usernameInput="ngModel" placeholder="Add meg az e-mail címed vagy a neved" />

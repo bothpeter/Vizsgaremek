@@ -14,6 +14,7 @@ import { AuthService } from '../services/auth.service';
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.css']
 })
+
 export class ChangePasswordComponent {
     password: string = '';
     password_confirmation: string = '';

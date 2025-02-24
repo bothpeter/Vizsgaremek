@@ -13,6 +13,10 @@ export class ExerciseService {
         return this.apiService.get('exercise');
     }
 
+    getExercise(exerciseId: number): Observable<any> {
+        return this.apiService.get(`exercise/${exerciseId}`);
+    }
+
     getLikedExercises(): Observable<any> {
         return this.apiService.get('user_like_exercise');
     }

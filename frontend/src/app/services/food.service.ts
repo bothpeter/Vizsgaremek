@@ -13,6 +13,10 @@ export class FoodService {
         return this.apiService.get('food');
     }
 
+    getFood(foodId: number): Observable<any> {
+        return this.apiService.get(`food/${foodId}`);
+    }
+
     getLikedFoods(): Observable<any> {
         return this.apiService.get('user_like_food');
     }
