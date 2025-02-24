@@ -1,32 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { DietService } from '../services/diet.service';
+import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-diets',
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './diets.component.html',
-    styleUrls: ['./diets.component.css']
+    styleUrls: ['./diets.component.css'],
 })
+
 export class DietsComponent implements OnInit {
     diets: any[] = [];
-    selectedDiet: any = null;
-    foods: any[] = [];
-    showPopup: boolean = false;
-    selectedFood: any = null;
-    showFoodPopup: boolean = false;
     ingredients: any[] = [];
-    showAddDietPopup: boolean = false;
     allFoods: any[] = [];
+    foods: any[] = [];
+    selectedDiet: any = null;
+    selectedFood: any = null;
+    showPopup: boolean = false;
+    showFoodPopup: boolean = false;
+
+    showAddDietPopup: boolean = false;
     newDiet: any = {
         title: '',
         description: '',
         foods: [{ food_id: null }],
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private dietService: DietService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.fetchDiets();
@@ -34,27 +37,66 @@ export class DietsComponent implements OnInit {
     }
 
     fetchDiets(): void {
-        const apiUrl = 'http://127.0.0.1:8000/api/diet_plan';
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                this.diets = data.workout_plan;
-            })
-            .catch((error) => {
-                console.error('Error fetching diets:', error);
-            });
+        this.dietService.getDiets().subscribe({
+            next: (data) => (this.diets = data.workout_plan),
+            error: (error) => console.error('Error fetching diets:', error),
+        });
     }
 
     fetchAllFoods(): void {
-        const apiUrl = 'http://127.0.0.1:8000/api/food';
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                this.allFoods = data.food;
-            })
-            .catch((error) => {
-                console.error('Error fetching foods:', error);
-            });
+        this.dietService.getFoods().subscribe({
+            next: (data) => (this.allFoods = data.food),
+            error: (error) => console.error('Error fetching foods:', error),
+        });
+    }
+
+    fetchIngredients(foodId: number): void {
+        this.dietService.getIngredients(foodId).subscribe({
+            next: (data) => {
+                this.showFoodPopup = true;
+                this.ingredients = data.ingredients
+            },
+            error: (error) => console.error('Error fetching ingredients:', error),
+        });
+    }
+
+    addDiet(): void {
+        if (!this.authService.isAuthenticated()) {
+            alert('Kérjük, jelentkezzen be az étrend hozzáadásához!');
+            return;
+        }
+
+        const selectedFoods = this.newDiet.foods.map((food: any) =>
+            Number(food.food_id)
+        );
+        
+        const calorieValues = selectedFoods.map((id: number) => {
+            const food = this.allFoods.find((f) => f.food_id === id);
+            return food ? food.calorie : 0;
+        });
+
+        const totalKcal = calorieValues.reduce(
+            (sum: number, calorie: number) => sum + calorie,
+            0
+        );
+
+        const payload = {
+            title: this.newDiet.title,
+            description: this.newDiet.description,
+            foods: 'idk what to send here',
+            kcal: totalKcal,
+            food1_id: selectedFoods[0] || null,
+            food2_id: selectedFoods[1] || null,
+            food3_id: selectedFoods[2] || null,
+        };
+
+        this.dietService.addDiet(payload).subscribe({
+            next: () => {
+                this.fetchDiets();
+                this.closeAddDietPopup();
+            },
+            error: (error) => console.error('Error adding diet:', error),
+        });
     }
 
     openAddDietPopup(): void {
@@ -74,60 +116,10 @@ export class DietsComponent implements OnInit {
         };
     }
 
-    addFood(): void {
-        if (this.newDiet.foods.length < 3) {
-            this.newDiet.foods.push({ food_id: null });
-        }
-    }
-
-    removeFood(index: number): void {
-        if (this.newDiet.foods.length > 1) {
-            this.newDiet.foods.splice(index, 1);
-        }
-    }
-
-    addDiet(): void {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-            alert('Kérjük, jelentkezz be az új étrend hozzáadásához!');
-            return;
-        }
-    
-        const selectedFoods = this.newDiet.foods.map((food: any) => Number(food.food_id));
-    
-        const calorieValues = selectedFoods.map((id: number) => {
-            const food = this.allFoods.find((f) => f.food_id === id);
-            return food ? food.calorie : 0;
-        });
-    
-        const totalKcal = calorieValues.reduce((sum: number, calorie: number) => sum + calorie, 0);
-
-        const payload = {
-            title: this.newDiet.title,
-            description: this.newDiet.description,
-            foods: 'idk what to send here',
-            kcal: totalKcal,
-            food1_id: selectedFoods[0] || null,
-            food2_id: selectedFoods[1] || null,
-            food3_id: selectedFoods[2] || null,
-        };
-    
-        this.http.post('http://127.0.0.1:8000/api/diet_plan', payload, {
-            headers: { Authorization: `Bearer ${authToken}` }
-        })
-            .subscribe(
-                (response) => {
-                    this.fetchDiets();
-                    this.closeAddDietPopup();
-                },
-                (error) => {
-                    console.error('Error adding diet:', error);
-                }
-            );
-    }
     openPopup(diet: any): void {
         this.selectedDiet = diet;
         this.fetchFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
+        this.showPopup = true;
     }
 
     closePopup(): void {
@@ -137,21 +129,9 @@ export class DietsComponent implements OnInit {
     }
 
     fetchFoods(foodIds: number[]): void {
-        const apiUrl = 'http://127.0.0.1:8000/api/food';
-        fetch(apiUrl)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                this.showPopup = true;
-                this.foods = data.food.filter((food: any) => foodIds.includes(food.food_id));
-            })
-            .catch((error) => {
-                console.error('Error fetching foods:', error);
-            });
+        this.foods = this.allFoods.filter((food) =>
+            foodIds.includes(food.food_id)
+        );
     }
 
     openFoodPopup(food: any): void {
@@ -165,21 +145,15 @@ export class DietsComponent implements OnInit {
         this.ingredients = [];
     }
 
-    fetchIngredients(foodId: number): void {
-        const apiUrl = `http://127.0.0.1:8000/api/food_ingredients/${foodId}`;
-        fetch(apiUrl)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                this.showFoodPopup = true;
-                this.ingredients = data.ingredients;
-            })
-            .catch((error) => {
-                console.error('Error fetching ingredients:', error);
-            });
+    addFood(): void {
+        if (this.newDiet.foods.length < 3) {
+            this.newDiet.foods.push({ food_id: null });
+        }
+    }
+
+    removeFood(index: number): void {
+        if (this.newDiet.foods.length > 1) {
+            this.newDiet.foods.splice(index, 1);
+        }
     }
 }

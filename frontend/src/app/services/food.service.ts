@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { Observable } from 'rxjs';
+
+@Injectable({
+    providedIn: 'root',
+})
+
+export class FoodService {
+    constructor(private apiService: ApiService) { }
+
+    getFoods(): Observable<any> {
+        return this.apiService.get('food');
+    }
+
+    getLikedFoods(): Observable<any> {
+        return this.apiService.get('user_like_food');
+    }
+
+    toggleLike(foodId: number, isLiked: boolean): Observable<any> {
+        const endpoint = `user_like_food/${foodId}`;
+        return isLiked
+            ? this.apiService.delete(endpoint)
+            : this.apiService.post('user_like_food', { food_id: foodId });
+    }
+
+    addFood(formData: FormData): Observable<any> {
+        return this.apiService.postFormData('food', formData);
+    }
+
+    getIngredients(foodId: number): Observable<any> {
+        return this.apiService.get(`food_ingredients/${foodId}`);
+    }
+
+    addIngredient(payload: any): Observable<any> {
+        return this.apiService.post('food_ingredients', payload);
+    }
+}

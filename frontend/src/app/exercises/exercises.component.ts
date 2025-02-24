@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { ExerciseService } from '../services/exercise.service';
+import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { SortExercisesPipe } from '../pipes/sort-exercises.pipe';
 import { FormsModule } from '@angular/forms';
+import { SortExercisesPipe } from '../pipes/sort-exercises.pipe';
 
 @Component({
     selector: 'app-exercises',
     standalone: true,
-    imports: [CommonModule, SortExercisesPipe, FormsModule],
+    imports: [CommonModule, FormsModule, SortExercisesPipe],
     templateUrl: './exercises.component.html',
     styleUrls: ['./exercises.component.css'],
 })
+
 export class ExercisesComponent implements OnInit {
     exercises: any[] = [];
     selectedExercise: any = null;
-    showPopup: boolean = false;
     selectedType: string = 'all';
     selectedMuscleGroup: string = 'all';
-    
+    showPopup: boolean = false;
+
     showAddExercisePopup: boolean = false;
     newExercise: any = {
         exercise_name: '',
@@ -27,52 +29,90 @@ export class ExercisesComponent implements OnInit {
         imgFile: null,
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private exerciseService: ExerciseService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.fetchExercises();
         this.fetchLikedExercises();
     }
 
-
     fetchExercises(): void {
-        const apiUrl = 'http://127.0.0.1:8000/api/exercise';
-        fetch(apiUrl)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                this.exercises = data.exercise;
-            })
-            .catch((error) => {
-                console.error('Error fetching exercises:', error);
-            });
+        this.exerciseService.getExercises().subscribe({
+            next: (data) => (this.exercises = data.exercise),
+            error: (error) => console.error('Error fetching exercises:', error),
+        });
     }
 
     fetchLikedExercises(): void {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) return;
+        if (!this.authService.isAuthenticated()) return;
 
-        const apiUrl = 'http://127.0.0.1:8000/api/user_like_exercise';
-        this.http.get(apiUrl, { headers: { Authorization: `Bearer ${authToken}` } })
-            .subscribe(
-                (data: any) => {
-                    if (data && data.userLikeExercise && Array.isArray(data.userLikeExercise)) {
-                        const likedExerciseIds = data.userLikeExercise.map((item: any) => item.exercise_id);
-                        this.exercises.forEach((exercise) => {
-                            exercise.isLiked = likedExerciseIds.includes(exercise.exercise_id);
-                        });
-                    } else {
-                        console.error('Invalid response format:', data);
-                    }
-                },
-                (error) => {
-                    console.error('Error fetching liked exercises:', error);
-                }
-            );
+        this.exerciseService.getLikedExercises().subscribe({
+            next: (data) => {
+                const likedExerciseIds = data.userLikeExercise.map(
+                    (item: any) => item.exercise_id
+                );
+                this.exercises.forEach((exercise) => {
+                    exercise.isLiked = likedExerciseIds.includes(exercise.exercise_id);
+                });
+            },
+            error: (error) => console.error('Error fetching liked exercises:', error),
+        });
+    }
+
+    toggleLike(exercise: any): void {
+        if (!this.authService.isAuthenticated()) {
+            alert('Kérjük, jelentkezzen be a kedveléshez!');
+            return;
+        }
+
+        this.exerciseService
+            .toggleLike(exercise.exercise_id, exercise.isLiked)
+            .subscribe({
+                next: () => (exercise.isLiked = !exercise.isLiked),
+                error: (error) => console.error('Error toggling like:', error),
+            });
+    }
+
+    addExercise(): void {
+        if (!this.authService.isAuthenticated()) {
+            alert('Kérjük, jelentkezzen be, a gyakorlat hozzáadásához!');
+            return;
+        }
+
+        const formData = new FormData();
+        Object.keys(this.newExercise).forEach(key => {
+            formData.append(key, this.newExercise[key]);
+        });
+        if (this.newExercise.imgFile) {
+            formData.append('img', this.newExercise.imgFile);
+        }
+
+        this.exerciseService.addExercise(formData).subscribe({
+            next: () => {
+                this.fetchExercises();
+                this.closeAddExercisePopup();
+            },
+            error: (error) => console.error('Error adding exercise:', error),
+        });
+    }
+
+    openAddExercisePopup(): void {
+        this.showAddExercisePopup = true;
+    }
+
+    closeAddExercisePopup(): void {
+        this.showAddExercisePopup = false;
+        this.resetNewExerciseForm();
+    }
+
+    resetNewExerciseForm(): void {
+        this.newExercise = {
+            exercise_name: '',
+            muscle_group: '',
+            description: '',
+            type: 'cardio',
+            imgFile: null,
+        };
     }
 
     openPopup(exercise: any): void {
@@ -93,57 +133,6 @@ export class ExercisesComponent implements OnInit {
         this.selectedMuscleGroup = muscleGroup;
     }
 
-    toggleLike(exercise: any): void {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-            alert('Please log in to like this exercise!');
-            return;
-        }
-
-        if (exercise.isLiked) {
-            const apiUrl = `http://127.0.0.1:8000/api/user_like_exercise/${exercise.exercise_id}`;
-            this.http.delete(apiUrl, { headers: { Authorization: `Bearer ${authToken}` } })
-                .subscribe(
-                    () => {
-                        exercise.isLiked = false;
-                    },
-                    (error) => {
-                        console.error('Error unliking exercise:', error);
-                    }
-                );
-        } else {
-            const apiUrl = 'http://127.0.0.1:8000/api/user_like_exercise';
-            const payload = { exercise_id: exercise.exercise_id };
-            this.http.post(apiUrl, payload, { headers: { Authorization: `Bearer ${authToken}` } })
-                .subscribe(
-                    () => {
-                        exercise.isLiked = true;
-                    },
-                    (error) => {
-                        console.error('Error liking exercise:', error);
-                    }
-                );
-        }
-    }
-    openAddExercisePopup(): void {
-        this.showAddExercisePopup = true;
-    }
-
-    closeAddExercisePopup(): void {
-        this.showAddExercisePopup = false;
-        this.resetNewExerciseForm();
-    }
-
-    resetNewExerciseForm(): void {
-        this.newExercise = {
-            exercise_name: '',
-            muscle_group: '',
-            description: '',
-            type: 'cardio',
-            imgFile: null,
-        };
-    }
-
     onFileSelected(event: any): void {
         const file = event.target.files[0];
         if (file) {
@@ -161,33 +150,5 @@ export class ExercisesComponent implements OnInit {
         if (file) {
             this.newExercise.imgFile = file;
         }
-    }
-
-    addExercise(): void {
-        const authToken = localStorage.getItem('authToken');
-        if (!authToken) {
-            alert('Kérjük, jelentkezz be az új gyakorlat hozzáadásához!');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('exercise_name', this.newExercise.exercise_name);
-        formData.append('muscle_group', this.newExercise.muscle_group);
-        formData.append('description', this.newExercise.description);
-        if (this.newExercise.imgFile) {
-            formData.append('img', this.newExercise.imgFile);
-        }
-        formData.append('type', this.newExercise.type);
-
-        this.http.post('http://127.0.0.1:8000/api/exercise', formData, { headers: { Authorization: `Bearer ${authToken}` } })
-            .subscribe(
-                () => {
-                    this.fetchExercises();
-                    this.closeAddExercisePopup();
-                },
-                (error) => {
-                    console.error('Error adding exercise:', error);
-                }
-            );
     }
 }

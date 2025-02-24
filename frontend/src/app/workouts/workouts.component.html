@@ -81,20 +81,24 @@
                     <div class="form-group">
                         <label for="exercise-{{i}}">Gyakorlat {{i + 1}}:</label>
                         <select id="exercise-{{i}}" [(ngModel)]="exercise.exercise_id" name="exercise-{{i}}" required>
-                            <option *ngFor="let ex of exercises" [value]="ex.exercise_id">{{ ex.exercise_name }} - {{ ex.muscle_group }}</option>
+                            <option *ngFor="let ex of exercises" [value]="ex.exercise_id">{{ ex.exercise_name }} - {{
+                                ex.muscle_group }}</option>
                         </select>
                     </div>
-                    <button type="button" class="remove-exercise-btn" (click)="removeExercise(i)" [disabled]="newWorkout.exercises.length === 1">
+                    <button type="button" class="remove-exercise-btn" (click)="removeExercise(i)"
+                        [disabled]="newWorkout.exercises.length === 1">
                         Törlés
                     </button>
                 </div>
-                <button type="button" class="add-exercise-btn" (click)="addExercise()" [disabled]="newWorkout.exercises.length >= 5">
+                <button type="button" class="add-exercise-btn" (click)="addExercise()"
+                    [disabled]="newWorkout.exercises.length >= 5">
                     + Gyakorlat hozzáadása
                 </button>
             </div>
 
             <div class="form-group full-width">
-                <button type="submit" [disabled]="!addWorkoutForm.form.valid" class="submit-btn">Edzésprogram hozzáadása</button>
+                <button type="submit" [disabled]="!addWorkoutForm.form.valid" class="submit-btn">Edzésterv
+                    hozzáadása</button>
             </div>
         </form>
     </div>
