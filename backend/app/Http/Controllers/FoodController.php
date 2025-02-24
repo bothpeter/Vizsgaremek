@@ -61,11 +61,15 @@ class FoodController extends Controller implements HasMiddleware
     public function view_foods_by_id($id){
         $food = Food::where('food_id',$id)->get();
 
-        $data = [
-            'status' =>200,
-            'food'=> $food
-        ];
-        return response()->json($data,200);
+        if ($food) {
+            $data = [
+                'status' =>200,
+                'food'=> $food
+            ];
+            return response()->json($data,200);
+        } else {
+            return response()->json(['message' => 'Food not found'], 404);
+        }
     }
 
     public function delete_food(Request $request, $id)

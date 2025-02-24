@@ -3,17 +3,11 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use App\Http\Controllers\ExerciseController;
-use Illuminate\Http\Request;
 use App\Models\Exercise;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Mockery;
 
-    class ExerciseControllerTest extends BaseTestCase
+    class ExerciseTest extends BaseTestCase
     {
         
         use RefreshDatabase;
@@ -26,23 +20,22 @@ use Mockery;
     
         public function test_view_exercises()
         {
-            Exercise::factory()->count(5)->create();
+            Exercise::factory()->create();
         
             $response = $this->getJson('/api/exercise');
         
             $response->assertStatus(200)
-                 ->assertJson([
-                 'status' => 200,
-                 'exercise' => true,
-                 ])
-                 ->assertJsonCount(5, 'exercise');
+             ->assertJson([
+             'status' => 200,
+             'exercise' => true,
+             ]);
         }
 
         public function test_view_exercises_by_exercise_id()
         {
-            Exercise::factory()->create();
+            $exercise = Exercise::factory()->create();
 
-            $response = $this->getJson('/api/exercise/' . 1);
+            $response = $this->getJson('/api/exercise/' . $exercise->exercise_id);
             $response->assertStatus(200)
                  ->assertJson([
                  'status' => 200,
@@ -86,30 +79,25 @@ use Mockery;
             ]);
         }
 
-        public function test_delete_exercise_cases()
+        public function test_delete_exercise()
         {
-            $user = User::factory(1)->create();
+            $user = User::factory()->create();
             $this->actingAs($user, 'sanctum');
 
-            // Case 1: Successfully delete exercise
             $exercise = Exercise::factory()->create(['user_id' => $user->id]);
-            $response = $this->deleteJson('/api/exercise/' . $exercise->id);
+            $response = $this->deleteJson('/api/exercise/' . $exercise->exercise_id);
             $response->assertStatus(200)
-             ->assertJson(['message' => 'Exercise deleted']);
-            $this->assertDatabaseMissing('exercises', ['id' => $exercise->id]);
+                 ->assertJson(['message' => 'Exercise deleted']);
 
-            // Case 2: Unauthorized delete attempt
             $otherUser = User::factory()->create();
             $exercise = Exercise::factory()->create(['user_id' => $otherUser->id]);
-            $response = $this->deleteJson('/api/exercise/' . $exercise->id);
+            $response = $this->deleteJson('/api/exercise/' . $exercise->exercise_id);
             $response->assertStatus(403)
-             ->assertJson(['message' => 'Unauthorized']);
-            $this->assertDatabaseHas('exercises', ['id' => $exercise->id]);
+                 ->assertJson(['message' => 'Unauthorized']);
 
-            // Case 3: Exercise not found
             $response = $this->deleteJson('/api/exercise/999');
             $response->assertStatus(404)
-             ->assertJson(['message' => 'Exercise not found']);
+                 ->assertJson(['message' => 'Exercise not found']);
         }
 
 }

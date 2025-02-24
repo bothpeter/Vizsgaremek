@@ -18,6 +18,7 @@ class ExerciseFactory extends Factory
     public function definition(): array
     {
         return [
+            'exercise_id' => $this->faker->randomNumber(1, 10),
             'exercise_name' => $this->faker->word,
             'muscle_group' => $this->faker->word,
             'description' => $this->faker->sentence,
