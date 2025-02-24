@@ -71,7 +71,7 @@
         <div class="highlighted-div">
         <h2>User (only post methods)</h2>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user" class="text">Url for user check by its token : http://127.0.0.1:8000/api/user</a>
+        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
         <hr>
@@ -81,7 +81,7 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgetted password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
+        <a href="http://127.0.0.1:8000/api/user" class="text">Url to delete user endpoint : http://127.0.0.1:8000/api/user</a>
         </div>
         <div class="highlighted-div">
         <h2>Exercise</h2>

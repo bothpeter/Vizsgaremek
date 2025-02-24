@@ -52,4 +52,17 @@ class UserController extends Controller implements HasMiddleware
             ], 404);
         }
     }
+
+    public function delete_user(Request $request)
+    {
+        $user = $request->user();
+        $user = User::where('id', $user->id)->first();
+
+        if ($user) {
+            $user->delete();
+            return response()->json(['message' => 'User deleted'], 200);
+        } else {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    }
 }
