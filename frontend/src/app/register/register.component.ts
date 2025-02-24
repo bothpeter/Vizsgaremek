@@ -2,119 +2,78 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RegisterService } from '../services/register.service';
+import { ValidationService } from '../services/validation.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink, HttpClientModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    standalone: true,
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
 })
+
 export class RegisterComponent {
-  emailError: string = '';
-  nameError: string = '';
-  passwordError: string = '';
+    emailError: string = '';
+    nameError: string = '';
+    passwordError: string = '';
 
-  registerObj: Register;
+    registerObj: Register = {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+    };
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.registerObj = new Register();
-  }
+    constructor(private router: Router, private registerService: RegisterService, private validationService: ValidationService) { }
 
-  onSubmit() {
-    this.emailError = '';
-    this.nameError = '';
-    this.passwordError = '';
+    onSubmit(): void {
+        this.emailError = '';
+        this.nameError = '';
+        this.passwordError = '';
 
-    if (this.registerObj.password !== this.registerObj.password_confirmation) {
-      alert('A jelszavak nem egyeznek!');
-      return;
-    }
-
-    const passwordValidation = this.validatePassword(this.registerObj.password);
-    if (!passwordValidation.isValid) {
-      this.passwordError = passwordValidation.errorMessage;
-      return;
-    }
-
-    if (!this.validateEmail(this.registerObj.email)) {
-      this.emailError = 'Az e-mail cím érvénytelen formátumú.';
-      return;
-    }
-
-    this.http.post('http://127.0.0.1:8000/api/register', this.registerObj).subscribe(
-      (res: any) => {
-        if (res.token != null) {
-          const authToken = atob(res.token); // Decoded token from base64
-          this.router.navigateByUrl('/login');
-        } else {
-          console.log(res.message);
+        if (!this.validationService.validateEmail(this.registerObj.email)) {
+            this.emailError = 'Az e-mail cím érvénytelen formátumú.';
+            return;
         }
-      },
-      (error) => {
-        if (error.status === 422 && error.error) {
-          const errors = error.error;
 
-          if (errors.name) {
-            this.nameError = "Ez a felhasználónév már foglalt.";
-          }
-          if (errors.email) {
-            this.emailError = "Ez az e-mail cím már foglalt.";
-          }
-        } else {
-          alert('Hiba történt a regisztráció során. Kérjük, próbáld újra később.');
+        const passwordValidation = this.validationService.validatePassword(this.registerObj.password);
+        if (!passwordValidation.isValid) {
+            this.passwordError = passwordValidation.errorMessage;
+            return;
         }
-      }
-    );
-  }
 
-  validateEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
-  }
-
-  validatePassword(password: string): { isValid: boolean, errorMessage: string } {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasNumber = /[0-9]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    if (password.length < minLength) {
-      return { isValid: false, errorMessage: 'A jelszónak legalább 8 karakter hosszúnak kell lennie.' };
-    }
-    if (!hasUpperCase) {
-      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy nagybetűt.' };
-    }
-    if (!hasNumber) {
-      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy számot.' };
-    }
-    if (!hasSpecialChar) {
-      return { isValid: false, errorMessage: 'A jelszónak tartalmaznia kell legalább egy speciális karaktert.' };
+        this.registerService.register(this.registerObj).subscribe({
+            next: () => {
+                this.router.navigateByUrl('/login');
+            },
+            error: (error) => {
+                if (error.name) {
+                    this.nameError = 'Ez a felhasználónév már foglalt.';
+                }
+                if (error.email) {
+                    this.emailError = 'Ez az e-mail cím már foglalt.';
+                }
+            },
+        });
     }
 
-    this.passwordError = '';
-    return { isValid: true, errorMessage: '' };
-  }
-
-  onPasswordChange() {
-    if (this.registerObj.password === this.registerObj.password_confirmation) {
-      this.passwordError = '';
+    onPasswordChange(): void {
+        if (this.registerObj.password === this.registerObj.password_confirmation) {
+            this.passwordError = '';
+        }
+        const passwordValidation = this.validationService.validatePassword(this.registerObj.password);
+        if (!passwordValidation.isValid) {
+            this.passwordError = passwordValidation.errorMessage;
+        } else {
+            this.passwordError = '';
+        }
     }
-    this.validatePassword(this.registerObj.password);
-  }
 }
 
-export class Register {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-
-  constructor() {
-    this.name = '';
-    this.email = '';
-    this.password = '';
-    this.password_confirmation = '';
-  }
+export interface Register {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
 }
