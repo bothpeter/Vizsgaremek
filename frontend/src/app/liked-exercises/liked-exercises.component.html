@@ -9,8 +9,7 @@
             <div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">
                 <i class="fas fa-heart" [ngClass]="{'liked': exercise.isLiked}"></i>
             </div>
-            <img [src]="exercise.img ? exercise.img : 'https://via.placeholder.com/300x200?text=No+Image'"
-                [alt]="exercise.exercise_name" />
+            <img [src]="exercise.img" [alt]="exercise.exercise_name" />
             <div class="card-content">
                 <h3>{{ exercise.exercise_name }}</h3>
                 <p><strong>Kategória:</strong> {{ exercise.type }}</p>
@@ -32,8 +31,7 @@
                 </div>
     
                 <div class="popup-right">
-                    <img [src]="selectedExercise.img ? selectedExercise.img : 'https://via.placeholder.com/400x300?text=No+Image'"
-                        [alt]="selectedExercise.exercise_name" />
+                    <img [src]="selectedExercise.img" [alt]="selectedExercise.exercise_name" />
                 </div>
             </div>
     

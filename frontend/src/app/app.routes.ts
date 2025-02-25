@@ -103,4 +103,11 @@ export const routes: Routes = [
         },
         data: { hideFooter: true },
     },
+    {
+        path: 'manage-uploads',
+        loadComponent: () => {
+            return import('./manage-uploads/manage-uploads.component').then((m) => m.ManageUploadsComponent);
+        },
+        data: { hideFooter: true },
+    },
 ];
