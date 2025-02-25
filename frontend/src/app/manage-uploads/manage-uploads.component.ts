@@ -208,8 +208,13 @@ export class ManageUploadsComponent implements OnInit {
     deleteFood(foodId: number): void {
         this.apiService.delete(`food/${foodId}`).subscribe({
             next: () => {
-                this.uploadedFoods = this.uploadedFoods.filter(food => food.food_id !== foodId);
-                this.allUploads = this.allUploads.filter(item => item.food_id !== foodId);
+                this.apiService.delete(`food_ingredients/${foodId}`).subscribe({
+                    next: () => {
+                        this.uploadedFoods = this.uploadedFoods.filter(food => food.food_id !== foodId);
+                        this.allUploads = this.allUploads.filter(item => item.food_id !== foodId);
+                    },
+                    error: (error) => console.error('Error deleting food ingredients:', error),
+                });
             },
             error: (error) => console.error('Error deleting food:', error),
         });
@@ -228,9 +233,7 @@ export class ManageUploadsComponent implements OnInit {
     deleteWorkout(workoutId: number): void {
         this.apiService.delete(`workout_plan/${workoutId}`).subscribe({
             next: () => {
-                // Remove the deleted workout from the uploadedWorkouts array
                 this.uploadedWorkouts = this.uploadedWorkouts.filter(workout => workout.id !== workoutId);
-                // Also remove it from the allUploads array if needed
                 this.allUploads = this.allUploads.filter(item => item.id !== workoutId);
             },
             error: (error) => console.error('Error deleting workout:', error),
@@ -240,9 +243,7 @@ export class ManageUploadsComponent implements OnInit {
     deleteDiet(dietId: number): void {
         this.apiService.delete(`diet_plan/${dietId}`).subscribe({
             next: () => {
-                // Remove the deleted diet from the uploadedDiets array
                 this.uploadedDiets = this.uploadedDiets.filter(diet => diet.id !== dietId);
-                // Also remove it from the allUploads array if needed
                 this.allUploads = this.allUploads.filter(item => item.id !== dietId);
             },
             error: (error) => console.error('Error deleting diet:', error),
