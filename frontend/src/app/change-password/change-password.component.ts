@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
 import { ValidationService } from '../services/validation.service';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
@@ -10,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
     selector: 'app-change-password',
     standalone: true,
-    imports: [FormsModule, CommonModule, VerticalNavUserComponent],
+    imports: [FormsModule, CommonModule],
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.css']
 })

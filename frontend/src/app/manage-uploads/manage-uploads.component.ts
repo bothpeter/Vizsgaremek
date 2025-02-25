@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
 import { CommonModule } from '@angular/common';
 import { FoodService } from '../services/food.service';
 import { AuthService } from '../services/auth.service';
@@ -9,7 +8,7 @@ import { WorkoutService } from '../services/workout.service';
 
 @Component({
     selector: 'app-manage-uploads',
-    imports: [VerticalNavUserComponent, CommonModule],
+    imports: [CommonModule],
     templateUrl: './manage-uploads.component.html',
     styleUrl: './manage-uploads.component.css'
 })

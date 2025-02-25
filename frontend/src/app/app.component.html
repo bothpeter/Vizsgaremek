@@ -6,13 +6,13 @@
         <app-header></app-header>
     </ng-template>
     <main>
-        <ng-container *ngIf="showVerticalNav; else mainRouterOutlet">
+        <ng-container *ngIf="showVerticalNav; else defaultRouterOutlet">
             <div class="user-page-container">
                 <app-vertical-nav-user></app-vertical-nav-user>
                 <router-outlet></router-outlet>
             </div>
         </ng-container>
-        <ng-template #mainRouterOutlet>
+        <ng-template #defaultRouterOutlet>
             <router-outlet></router-outlet>
         </ng-template>
     </main>

@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
 
 @Component({
     selector: 'app-user',
-    imports: [CommonModule, VerticalNavUserComponent],
+    imports: [CommonModule],
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css']
 })

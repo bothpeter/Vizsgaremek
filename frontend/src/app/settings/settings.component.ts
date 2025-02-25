@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ValidationService } from '../services/validation.service';
 
 @Component({
     selector: 'app-settings',
-    imports: [VerticalNavUserComponent, CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.css']
 })

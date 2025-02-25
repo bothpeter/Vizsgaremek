@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { VerticalNavUserComponent } from '../components/vertical-nav-user/vertical-nav-user.component';
 import { ExerciseService } from '../services/exercise.service';
 
 @Component({
     selector: 'app-liked-exercises',
     standalone: true,
-    imports: [CommonModule, RouterModule, VerticalNavUserComponent],
+    imports: [CommonModule, RouterModule],
     templateUrl: './liked-exercises.component.html',
     styleUrls: ['./liked-exercises.component.css'],
 })
