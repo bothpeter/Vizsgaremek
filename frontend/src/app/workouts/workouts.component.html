@@ -14,9 +14,10 @@
     </div>
 
     <div class="card" *ngFor="let workout of workouts | sortWorkouts: selectedType" (click)="openPopup(workout)">
+        <div class="workout-cover">
+            <span>{{ workout.title }}</span>
+        </div>
         <div class="card-content">
-            <h3>{{ workout.title }}</h3>
-            <p><strong>Leírás:</strong> {{ workout.goodFor }}</p>
             <p><strong>Típus:</strong> {{ workout.type }}</p>
         </div>
     </div>
@@ -27,7 +28,7 @@
         <button class="close-btn" (click)="closePopup()">
             <i class="fas fa-times"></i>
         </button>
-        <h3>{{ selectedWorkout.title }}</h3>
+        <h3 class="title">{{ selectedWorkout.title }}</h3>
         <p class="highlight">{{ selectedWorkout.goodFor }}</p>
         <p class="highlight">{{ selectedWorkout.description }}</p>
 

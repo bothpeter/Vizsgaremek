@@ -20,6 +20,7 @@ export class ManageUploadsComponent implements OnInit {
     diets: any[] = [];
 
     allUploads: any[] = [];
+
     uploadedFoods: any[] = [];
     uploadedExercises: any[] = [];
     uploadedWorkouts: any[] = [];
@@ -27,8 +28,13 @@ export class ManageUploadsComponent implements OnInit {
 
     selectedFood: any = null;
     selectedExercise: any = null;
+    selectedWorkout: any = null;
+    selectedDiet: any = null;
+
     showFoodPopup: boolean = false;
     showExercisePopup: boolean = false;
+    showWorkoutPopup: boolean = false;
+    showDietPopup: boolean = false;
 
     constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private authService: AuthService) { }
 
@@ -106,6 +112,36 @@ export class ManageUploadsComponent implements OnInit {
         });
     }
 
+    openWorkoutPopup(workout: any): void {
+        this.selectedWorkout = {
+            ...workout,
+            exercises: this.getWorkoutExercises(workout),
+        };
+        this.showWorkoutPopup = true;
+    }
+
+    closeWorkoutPopup(): void {
+        this.showWorkoutPopup = false;
+        this.selectedWorkout = null;
+    }
+
+    toggleExerciseDetails(exercise: any): void {
+        exercise.isExpanded = !exercise.isExpanded;
+    }
+
+    getWorkoutExercises(workout: any): any[] {
+        return [workout.exercise1_id, workout.exercise2_id, workout.exercise3_id, workout.exercise4_id, workout.exercise5_id,]
+            .filter((id) => id)
+            .map((id) => {
+                const exercise = this.exercises.find((ex) => ex.exercise_id === id);
+                if (exercise) {
+                    exercise.isExpanded = false;
+                }
+                return exercise;
+            })
+            .filter((ex) => ex);
+    }
+
     fetchDiets(): void {
         const userId = localStorage.getItem('userId');
         this.dietService.getDiets().subscribe({
@@ -115,6 +151,27 @@ export class ManageUploadsComponent implements OnInit {
                 this.diets = data.workout_plan;
             },
             error: (error) => console.error('Error fetching diets:', error),
+        });
+    }
+
+    openDietPopup(diet: any): void {
+        this.selectedDiet = diet;
+        this.fetchDietFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
+    }
+    
+    closeDietPopup(): void {
+        this.showDietPopup = false;
+        this.selectedDiet = null;
+        this.foods = [];
+    }
+    
+    fetchDietFoods(foodIds: number[]): void {
+        this.foodService.getFoods().subscribe({
+            next: (data) => {
+                this.foods = data.food.filter((food: any) => foodIds.includes(food.food_id));
+                this.showDietPopup = true;
+            },
+            error: (error) => console.error('Error fetching foods:', error),
         });
     }
 }

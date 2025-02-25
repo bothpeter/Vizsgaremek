@@ -20,10 +20,28 @@
             <p><strong>Izomcsoport:</strong> {{ uploadedExercise.muscle_group }}</p>
         </div>
     </div>
+
+    <div class="workout-card" *ngFor="let uploadedWorkout of uploadedWorkouts" (click)="openWorkoutPopup(uploadedWorkout)">
+        <div class="workout-cover">
+            <span>{{ uploadedWorkout.title }}</span>
+        </div>
+        <div class="workout-card-content">
+            <p><strong>Típus:</strong> {{ uploadedWorkout.type }}</p>
+        </div>
+    </div>
+
+    <div class="diet-card" *ngFor="let uploadedDiet of uploadedDiets" (click)="openDietPopup(uploadedDiet)">
+        <div class="diet-cover">
+            <span>{{ uploadedDiet.title }}</span>
+        </div>
+        <div class="diet-card-content">
+            <p><strong>Kalória:</strong> {{ uploadedDiet.kcal }} kcal</p>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="showFoodPopup" class="food-popup" (click)="closeFoodPopup()">
-    <div class="food-popup-content" (click)="$event.stopPropagation()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
         <button class="close-btn" (click)="closeFoodPopup()">
             <i class="fas fa-times"></i>
         </button>
@@ -68,8 +86,8 @@
     </div>
 </div>
 
-<div *ngIf="showExercisePopup" class="exercise-popup" (click)="closeExercisePopup()">
-    <div class="exercise-popup-content" (click)="$event.stopPropagation()">
+<div *ngIf="showExercisePopup" class="popup" (click)="closeExercisePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
         <button class="close-btn" (click)="closeExercisePopup()">
             <i class="fas fa-times"></i>
         </button>
@@ -92,6 +110,59 @@
                 </div>
                 <div class="exercise-details-item">
                     <strong>Izomcsoport:</strong> {{ selectedExercise.muscle_group }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showWorkoutPopup" class="popup" (click)="closeWorkoutPopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeWorkoutPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 class="workout-popup-title">{{ selectedWorkout.title }}</h3>
+        <p class="workout-highlight">{{ selectedWorkout.goodFor }}</p>
+        <p class="workout-highlight">{{ selectedWorkout.description }}</p>
+
+        <div class="workout-exercises">
+            <h4>Gyakorlatok:</h4>
+            <div *ngFor="let exercise of selectedWorkout.exercises" class="workout-exercise-card"
+                (click)="toggleExerciseDetails(exercise)">
+                <div class="workout-exercise-header">{{ exercise.exercise_name }} - {{ exercise.muscle_group }}</div>
+
+                <div *ngIf="exercise.isExpanded" class="workout-exercise-details">
+                    <p>{{ exercise.description }}</p>
+                    <img [src]="exercise.img" [alt]="exercise.exercise_name" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showDietPopup" class="popup" (click)="closeDietPopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeDietPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="diet-popup-top">
+            <div class="diet-popup-left">
+                <h3>{{ selectedDiet.title }}</h3>
+                <p class="diet-description">{{ selectedDiet.description }}</p>
+                <p class="diet-description"><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
+            </div>
+        </div>
+
+        <div class="diet-popup-bottom">
+            <h4>Ételek:</h4>
+            <div class="diet-food-cards">
+                <div class="diet-card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
+                    <img [src]="food.img" [alt]="food.name" />
+                    <div class="diet-card-content">
+                        <h3>{{ food.name }}</h3>
+                        <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
+                    </div>
                 </div>
             </div>
         </div>

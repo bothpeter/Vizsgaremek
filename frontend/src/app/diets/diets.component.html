@@ -1,8 +1,9 @@
 <div class="diet-cards">
     <div class="card" *ngFor="let diet of diets" (click)="openPopup(diet)">
+        <div class="diet-cover">
+            <span>{{ diet.title }}</span>
+        </div>
         <div class="card-content">
-            <h3>{{ diet.title }}</h3>
-            <p><strong>Leírás:</strong> {{ diet.description }}</p>
             <p><strong>Kalória:</strong> {{ diet.kcal }} kcal</p>
         </div>
     </div>
