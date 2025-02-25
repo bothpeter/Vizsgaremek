@@ -26,7 +26,7 @@ class FoodFactory extends Factory
             'fat' => $this->faker->randomFloat(2, 0, 9999),
             'protein' => $this->faker->randomFloat(2, 0, 9999),
             'carb' => $this->faker->randomFloat(2, 0, 9999),
-            'img' => $this->faker->word,
+            'img' => $this->faker->image(),
             'recipe' => $this->faker->text,
             'user_id'=>User::factory(),
         ];

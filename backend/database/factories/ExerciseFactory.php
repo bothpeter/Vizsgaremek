@@ -22,7 +22,7 @@ class ExerciseFactory extends Factory
             'exercise_name' => $this->faker->word,
             'muscle_group' => $this->faker->word,
             'description' => $this->faker->sentence,
-            'img' => $this->faker->imageUrl(),
+            'img' => $this->faker->image(),
             'type' => $this->faker->word,
             'user_id' => User::factory(),
         ];
