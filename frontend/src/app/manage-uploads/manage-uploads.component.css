@@ -5,9 +5,7 @@
     font-size: 18px;
 }
 
-
-
-.popup{
+.popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,7 +18,7 @@
     z-index: 1000;
 }
 
-.food-popup{
+.food-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -596,11 +594,17 @@
     padding-bottom: 10px;
 }
 
-.uploads-container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+:host {
+    display: block;
     width: 100%;
+}
+
+.uploads-container {
+    display: block;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    height: calc(100vh - 120px);
 
 }
 
@@ -620,28 +624,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100vw - 550px);
-    height: calc(100vh - 240px);
+    width: calc(100vw - 518px);
+    height: calc(100vh - 205px);
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000;
+    /* Ensure it's above other content */
 }
 
 .spinner {
-    border: 8px solid rgba(255, 255, 255, 0.1); /* Light gray border */
-    border-top: 8px solid #FC282C; /* Accent color for the spinner */
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    /* Light gray border */
+    border-top: 8px solid #FC282C;
+    /* Accent color for the spinner */
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 1s linear infinite; /* Smooth spinning animation */
+    animation: spin 1s linear infinite;
+    /* Smooth spinning animation */
 }
 
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 1024px) {
+
     .food-card,
     .exercise-card,
     .workout-card,
@@ -652,6 +667,7 @@
 }
 
 @media (max-width: 768px) {
+
     .food-card,
     .exercise-card,
     .workout-card,
@@ -685,9 +701,6 @@
 }
 
 .delete-btn:hover {
-    background-color: #2e2e2e;
-}
-
-.delete-btn i:hover{
-    color: #FC282C;
+    background-color: #FC282C;
+    color: #000;
 }

@@ -1,8 +1,13 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
 .container {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(85vw - 270px);
     box-sizing: border-box;
 }
 

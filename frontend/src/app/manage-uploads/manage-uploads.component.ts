@@ -228,18 +228,22 @@ export class ManageUploadsComponent implements OnInit {
     deleteWorkout(workoutId: number): void {
         this.apiService.delete(`workout_plan/${workoutId}`).subscribe({
             next: () => {
-                this.uploadedWorkouts = this.uploadedWorkouts.filter(workout => workout.workout_plan_id !== workoutId);
-                this.allUploads = this.allUploads.filter(item => item.workout_plan_id !== workoutId);
+                // Remove the deleted workout from the uploadedWorkouts array
+                this.uploadedWorkouts = this.uploadedWorkouts.filter(workout => workout.id !== workoutId);
+                // Also remove it from the allUploads array if needed
+                this.allUploads = this.allUploads.filter(item => item.id !== workoutId);
             },
             error: (error) => console.error('Error deleting workout:', error),
         });
     }
-
+    
     deleteDiet(dietId: number): void {
         this.apiService.delete(`diet_plan/${dietId}`).subscribe({
             next: () => {
-                this.uploadedDiets = this.uploadedDiets.filter(diet => diet.diet_plan_id !== dietId);
-                this.allUploads = this.allUploads.filter(item => item.diet_plan_id !== dietId);
+                // Remove the deleted diet from the uploadedDiets array
+                this.uploadedDiets = this.uploadedDiets.filter(diet => diet.id !== dietId);
+                // Also remove it from the allUploads array if needed
+                this.allUploads = this.allUploads.filter(item => item.id !== dietId);
             },
             error: (error) => console.error('Error deleting diet:', error),
         });

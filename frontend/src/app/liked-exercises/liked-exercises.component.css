@@ -2,13 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    justify-content: flex-start;
+    justify-content: center !important;
     padding: 16px;
 }
 
 .card {
     position: relative;
     width: 300px;
+    height: 340px;
     border-radius: 8px;
     background-color: #1e1e1e;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);

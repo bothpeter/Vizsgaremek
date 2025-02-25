@@ -7,12 +7,14 @@
         <p>Nincsenek feltöltéseid.</p>
     </div>
 
-    <div class="asd">
-        <div *ngIf="!loading" class="section-title-cards-container">
+    <div class="cards-container">
+        <div *ngIf="uploadedFoods.length > 0 && !loading" class="section-title-cards-container">
             <h1 class="section-title">Receptek</h1>
             <div class="cards">
                 <div class="food-card" *ngFor="let uploadedFood of uploadedFoods" (click)="openFoodPopup(uploadedFood)">
-                    <button class="delete-btn" (click)="deleteFood(uploadedFood.food_id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <button class="delete-btn" (click)="deleteFood(uploadedFood.food_id); $event.stopPropagation()">
+                        <i class="fas fa-times"></i>
+                    </button>
                     <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
                     <div class="food-card-content">
                         <h3>{{ uploadedFood.name }}</h3>
@@ -22,11 +24,15 @@
             </div>
         </div>
 
-        <div *ngIf="!loading" class="section-title-cards-container">
+        <div *ngIf="uploadedExercises.length > 0 && !loading" class="section-title-cards-container">
             <h1 class="section-title">Gyakorlatok</h1>
             <div class="cards">
-                <div class="exercise-card" *ngFor="let uploadedExercise of uploadedExercises" (click)="openExercisePopup(uploadedExercise)">
-                    <button class="delete-btn" (click)="deleteExercise(uploadedExercise.exercise_id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                <div class="exercise-card" *ngFor="let uploadedExercise of uploadedExercises"
+                    (click)="openExercisePopup(uploadedExercise)">
+                    <button class="delete-btn"
+                        (click)="deleteExercise(uploadedExercise.exercise_id); $event.stopPropagation()">
+                        <i class="fas fa-times"></i>
+                    </button>
                     <img [src]="uploadedExercise.img" [alt]="uploadedExercise.exercise_name" />
                     <div class="exercise-card-content">
                         <h3>{{ uploadedExercise.exercise_name }}</h3>
@@ -37,11 +43,14 @@
             </div>
         </div>
 
-        <div *ngIf="!loading" class="section-title-cards-container">
+        <div *ngIf="uploadedWorkouts.length > 0 && !loading" class="section-title-cards-container">
             <h1 class="section-title">Edzéstervek</h1>
             <div class="cards">
-                <div class="workout-card" *ngFor="let uploadedWorkout of uploadedWorkouts" (click)="openWorkoutPopup(uploadedWorkout)">
-                    <button class="delete-btn" (click)="deleteWorkout(uploadedWorkout.id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                <div class="workout-card" *ngFor="let uploadedWorkout of uploadedWorkouts"
+                    (click)="openWorkoutPopup(uploadedWorkout)">
+                    <button class="delete-btn" (click)="deleteWorkout(uploadedWorkout.id); $event.stopPropagation()">
+                        <i class="fas fa-times"></i>
+                    </button>
                     <div class="workout-cover">
                         <span>{{ uploadedWorkout.title }}</span>
                     </div>
@@ -52,11 +61,13 @@
             </div>
         </div>
 
-        <div *ngIf="!loading" class="section-title-cards-container">
+        <div *ngIf="uploadedDiets.length > 0 && !loading" class="section-title-cards-container">
             <h1 class="section-title">Étrendek</h1>
             <div class="cards">
                 <div class="diet-card" *ngFor="let uploadedDiet of uploadedDiets" (click)="openDietPopup(uploadedDiet)">
-                    <button class="delete-btn" (click)="deleteDiet(uploadedDiet.id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <button class="delete-btn" (click)="deleteDiet(uploadedDiet.id); $event.stopPropagation()">
+                        <i class="fas fa-times"></i>
+                    </button>
                     <div class="diet-cover">
                         <span>{{ uploadedDiet.title }}</span>
                     </div>
