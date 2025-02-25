@@ -1,5 +1,9 @@
 <div class="food-cards">
-    <div *ngIf="likedFoods.length === 0" class="no-liked-foods">
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <div *ngIf="!loading && likedFoods.length === 0" class="no-liked-foods">
         <p>Nincsenek kedvelt receptjeid.</p>
     </div>
 

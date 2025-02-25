@@ -18,6 +18,8 @@ export class LikedRecipesComponent implements OnInit {
     selectedFood: any = null;
     showPopup: boolean = false;
     errorMessage: string = '';
+    loading: boolean = false;
+
 
     constructor(private foodService: FoodService) { }
 
@@ -26,6 +28,7 @@ export class LikedRecipesComponent implements OnInit {
     }
 
     fetchLikedFoods(): void {
+        this.loading = true;
         this.foodService.getLikedFoods().subscribe({
             next: (res: any) => {
                 if (res.status === 200 && Array.isArray(res.UserLikeFood)) {
@@ -43,17 +46,21 @@ export class LikedRecipesComponent implements OnInit {
                                     console.error('Invalid food details response:', response);
                                 }
                             });
+                            this.loading = false;
                         },
                         error: (error) => {
                             console.error('Error fetching food details:', error);
+                            this.loading = false;
                         }
                     });
                 } else {
                     console.error('Invalid liked foods response:', res);
+                    this.loading = false;
                 }
             },
             error: (error) => {
                 console.error('Error fetching liked foods:', error);
+                this.loading = false;
             }
         });
     }

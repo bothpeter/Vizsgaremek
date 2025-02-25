@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    justify-content: flex-start;
+    justify-content: center !important;
     padding: 16px;
 }
 
@@ -282,14 +282,35 @@
     }
 }
 
-.page-container {
-    display: flex;
-    align-items: flex-start;
-}
-
 .no-liked-foods {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
+}
+
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - 550px);
+    height: calc(100vh - 240px);
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.1); /* Light gray border */
+    border-top: 8px solid #FC282C; /* Accent color for the spinner */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite; /* Smooth spinning animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

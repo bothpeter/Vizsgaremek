@@ -1,5 +1,9 @@
 <div class="exercise-cards">
-    <div *ngIf="likedExercises.length === 0" class="no-liked-exercises">
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <div *ngIf="!loading && likedExercises.length === 0" class="no-liked-exercises">
         <p>Nincsenek kedvelt gyakorlataid.</p>
     </div>
 
