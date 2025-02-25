@@ -40,12 +40,16 @@ ul {
     font-size: 19px;
 }
 
-.nav-item:hover {
+.nav-item:hover,
+.nav-item:focus,
+.nav-item.active {
     background-color: #FC282C;
     color: black;
 }
 
-.nav-item:hover i {
+.nav-item:hover i,
+.nav-item:focus i,
+.nav-item.active i {
     color: black;
 }
 

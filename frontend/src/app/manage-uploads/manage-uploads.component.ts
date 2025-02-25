@@ -14,16 +14,22 @@ import { WorkoutService } from '../services/workout.service';
     styleUrl: './manage-uploads.component.css'
 })
 export class ManageUploadsComponent implements OnInit {
-    allFoods: any[] = [];
-    allExercises: any[] = [];
-    allDiets: any[] = [];
-    allWorkouts: any[] = [];
+    foods: any[] = [];
+    ingredients: any[] = [];
+    exercises: any[] = [];
+    workouts: any[] = [];
+    diets: any[] = [];
 
-    allUploadsByUser: any[] = [];
-    foodsUploadedByUser: any[] = [];
-    exercisesUploadedByUser: any[] = [];
-    dietsUploadedByUser: any[] = [];
-    workoutsUploadedByUser: any[] = [];
+    allUploads: any[] = [];
+    uploadedFoods: any[] = [];
+    uploadedExercises: any[] = [];
+    uploadedWorkouts: any[] = [];
+    uploadedDiets: any[] = [];
+
+    selectedFood: any = null;
+    selectedExercise: any = null;
+    showFoodPopup: boolean = false;
+    showExercisePopup: boolean = false;
 
     constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private authService: AuthService) { }
 
@@ -38,29 +44,66 @@ export class ManageUploadsComponent implements OnInit {
         const userId = localStorage.getItem('userId');
         this.foodService.getFoods().subscribe({
             next: (data) => {
-                this.foodsUploadedByUser = data.food.filter((food: any) => food.user_id == userId);
-                this.allUploadsByUser = [...this.allUploadsByUser, ...this.foodsUploadedByUser];
-                this.allFoods = data.food;
-                console.log('Foods By User:', this.foodsUploadedByUser);
-                console.log('All uploads:', this.allUploadsByUser);
-                console.log('All foods:', this.allFoods);
+                this.uploadedFoods = data.food.filter((food: any) => food.user_id == userId);
+                this.allUploads = [...this.allUploads, ...this.uploadedFoods];
+                this.foods = data.food;
             },
             error: (error) => console.error('Error fetching food:', error),
         });
+    }
+
+    fetchIngredients(foodId: number): void {
+        this.foodService.getIngredients(foodId).subscribe({
+            next: (data) => {
+                this.showFoodPopup = true;
+                this.ingredients = data.ingredients;
+            },
+            error: (error) => console.error('Error fetching ingredients:', error),
+        });
+    }
+
+    openFoodPopup(food: any): void {
+        this.selectedFood = food;
+        this.fetchIngredients(food.food_id);
+    }
+
+    closeFoodPopup(): void {
+        this.showFoodPopup = false;
+        this.selectedFood = null;
+        this.ingredients = [];
     }
 
     fetchExercises(): void {
         const userId = localStorage.getItem('userId');
         this.exerciseService.getExercises().subscribe({
             next: (data) => {
-                this.exercisesUploadedByUser = data.exercise.filter((exercise: any) => exercise.user_id == userId);
-                this.allUploadsByUser = [...this.allUploadsByUser, ...this.exercisesUploadedByUser];
-                this.allExercises = data.exercise;
-                console.log('Exercises By User:', this.exercisesUploadedByUser);
-                console.log('All uploads:', this.allUploadsByUser);
-                console.log('All exercises:', this.allExercises);
+                this.uploadedExercises = data.exercise.filter((exercise: any) => exercise.user_id == userId);
+                this.allUploads = [...this.allUploads, ...this.uploadedExercises];
+                this.exercises = data.exercise;
             },
             error: (error) => console.error('Error fetching exercises:', error),
+        });
+    }
+
+    openExercisePopup(exercise: any): void {
+        this.selectedExercise = exercise;
+        this.showExercisePopup = true;
+    }
+
+    closeExercisePopup(): void {
+        this.showExercisePopup = false;
+        this.selectedExercise = null;
+    }
+
+    fetchWorkouts(): void {
+        const userId = localStorage.getItem('userId');
+        this.workoutService.getWorkouts().subscribe({
+            next: (data) => {
+                this.uploadedWorkouts = data.workout_plan.filter((workout: any) => workout.user_id == userId);
+                this.allUploads = [...this.allUploads, ...this.uploadedWorkouts];
+                this.workouts = data.workout_plan;
+            },
+            error: (error) => console.error('Error fetching workouts:', error),
         });
     }
 
@@ -68,29 +111,11 @@ export class ManageUploadsComponent implements OnInit {
         const userId = localStorage.getItem('userId');
         this.dietService.getDiets().subscribe({
             next: (data) => {
-                this.dietsUploadedByUser = data.workout_plan.filter((diet: any) => diet.user_id == userId);
-                this.allUploadsByUser = [...this.allUploadsByUser, ...this.dietsUploadedByUser];
-                this.allDiets = data.workout_plan;
-                console.log('Diets By User:', this.dietsUploadedByUser);
-                console.log('All uploads:', this.allUploadsByUser);
-                console.log('All diets:', this.allDiets);
+                this.uploadedDiets = data.workout_plan.filter((diet: any) => diet.user_id == userId);
+                this.allUploads = [...this.allUploads, ...this.uploadedDiets];
+                this.diets = data.workout_plan;
             },
             error: (error) => console.error('Error fetching diets:', error),
-        });
-    }
-
-    fetchWorkouts(): void {
-        const userId = localStorage.getItem('userId');
-        this.workoutService.getWorkouts().subscribe({
-            next: (data) => {
-                this.workoutsUploadedByUser = data.workout_plan.filter((workout: any) => workout.user_id == userId);
-                this.allUploadsByUser = [...this.allUploadsByUser, ...this.workoutsUploadedByUser];
-                this.allWorkouts = data.workout_plan;
-                console.log('Workouts By User:', this.workoutsUploadedByUser);
-                console.log('All uploads:', this.allUploadsByUser);
-                console.log('All workouts:', this.allWorkouts);
-            },
-            error: (error) => console.error('Error fetching workouts:', error),
         });
     }
 }

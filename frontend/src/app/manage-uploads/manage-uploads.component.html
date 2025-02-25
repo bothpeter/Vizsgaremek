@@ -1,8 +1,99 @@
-<div class="page-container">
-    <app-vertical-nav-user></app-vertical-nav-user>
-    <div class="upload-container">
-        <div *ngIf="allUploadsByUser.length === 0" class="no-liked-foods">
-            <p>Nincsenek kedvelt receptjeid.</p>
+<div class="uploads-container">
+    <div *ngIf="allUploads.length === 0" class="no-uploads">
+        <p>Nincsenek feltöltéseid.</p>
+    </div>
+
+    <div class="food-card" *ngFor="let uploadedFood of uploadedFoods" (click)="openFoodPopup(uploadedFood)">
+        <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
+        <div class="food-card-content">
+            <h3>{{ uploadedFood.name }}</h3>
+            <p><strong>Kalória:</strong> {{ uploadedFood.calorie }} kcal</p>
+        </div>
+    </div>
+
+    <div class="exercise-card" *ngFor="let uploadedExercise of uploadedExercises"
+        (click)="openExercisePopup(uploadedExercise)">
+        <img [src]="uploadedExercise.img" [alt]="uploadedExercise.exercise_name" />
+        <div class="exercise-card-content">
+            <h3>{{ uploadedExercise.exercise_name }}</h3>
+            <p><strong>Kategória:</strong> {{ uploadedExercise.type }}</p>
+            <p><strong>Izomcsoport:</strong> {{ uploadedExercise.muscle_group }}</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showFoodPopup" class="food-popup" (click)="closeFoodPopup()">
+    <div class="food-popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeFoodPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="food-popup-top">
+            <div class="food-popup-left">
+                <h3>{{ selectedFood.name }}</h3>
+                <p class="food-description">{{ selectedFood.description }}</p>
+            </div>
+
+            <div class="food-popup-right">
+                <img [src]="selectedFood.img" [alt]="selectedFood.name" />
+            </div>
+        </div>
+
+        <div class="food-popup-bottom">
+            <div class="nutrition-row">
+                <div class="nutrition-item">
+                    <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
+                </div>
+                <div class="nutrition-item">
+                    <strong>Fehérje:</strong> {{ selectedFood.protein }} g
+                </div>
+                <div class="nutrition-item">
+                    <strong>Zsír:</strong> {{ selectedFood.fat }} g
+                </div>
+                <div class="nutrition-item">
+                    <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
+                </div>
+            </div>
+
+            <h4>Hozzávalók:</h4>
+            <ul>
+                <li *ngFor="let ingredient of ingredients">
+                    {{ ingredient.amount }} {{ ingredient.ingredient_name }}
+                </li>
+            </ul>
+
+            <h4>Elkészítés:</h4>
+            <p class="food-recipe">{{ selectedFood.recipe }}</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showExercisePopup" class="exercise-popup" (click)="closeExercisePopup()">
+    <div class="exercise-popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeExercisePopup()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="exercise-popup-top">
+            <div class="exercise-popup-left">
+                <h3>{{ selectedExercise.exercise_name }}</h3>
+                <p class="exercise-description">{{ selectedExercise.description }}</p>
+            </div>
+
+            <div class="exercise-popup-right">
+                <img [src]="selectedExercise.img" [alt]="selectedExercise.exercise_name" />
+            </div>
+        </div>
+
+        <div class="exercise-popup-bottom">
+            <div class="exercise-details-row">
+                <div class="exercise-details-item">
+                    <strong>Kategória:</strong> {{ selectedExercise.type }}
+                </div>
+                <div class="exercise-details-item">
+                    <strong>Izomcsoport:</strong> {{ selectedExercise.muscle_group }}
+                </div>
+            </div>
         </div>
     </div>
 </div>

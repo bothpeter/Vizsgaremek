@@ -1,65 +1,62 @@
-<div class="page-container">
-    <app-vertical-nav-user></app-vertical-nav-user>
-    <div class="food-cards">
-        <div *ngIf="likedFoods.length === 0" class="no-liked-foods">
-            <p>Nincsenek kedvelt receptjeid.</p>
-        </div>
-
-        <div class="card" *ngFor="let food of likedFoods" (click)="openPopup(food)">
-            <div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
-                <i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
-            </div>
-            <img [src]="food.img" [alt]="food.name" />
-            <div class="card-content">
-                <h3>{{ food.name }}</h3>
-                <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
-            </div>
-        </div>
+<div class="food-cards">
+    <div *ngIf="likedFoods.length === 0" class="no-liked-foods">
+        <p>Nincsenek kedvelt receptjeid.</p>
     </div>
 
-    <div *ngIf="showPopup" class="popup" (click)="closePopup()">
-        <div class="popup-content" (click)="$event.stopPropagation()">
-            <button class="close-btn" (click)="closePopup()">
-                <i class="fas fa-times"></i>
-            </button>
+    <div class="card" *ngFor="let food of likedFoods" (click)="openPopup(food)">
+        <div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
+            <i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
+        </div>
+        <img [src]="food.img" [alt]="food.name" />
+        <div class="card-content">
+            <h3>{{ food.name }}</h3>
+            <p><strong>Kalória:</strong> {{ food.calorie }} kcal</p>
+        </div>
+    </div>
+</div>
 
-            <div class="popup-top">
-                <div class="popup-left">
-                    <h3>{{ selectedFood.name }}</h3>
-                    <p class="description">{{ selectedFood.description }}</p>
+<div *ngIf="showPopup" class="popup" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closePopup()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="popup-top">
+            <div class="popup-left">
+                <h3>{{ selectedFood.name }}</h3>
+                <p class="description">{{ selectedFood.description }}</p>
+            </div>
+
+            <div class="popup-right">
+                <img [src]="selectedFood.img" [alt]="selectedFood.name" />
+            </div>
+        </div>
+
+        <div class="popup-bottom">
+            <div class="nutrition-row">
+                <div class="nutrition-item">
+                    <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
                 </div>
-
-                <div class="popup-right">
-                    <img [src]="selectedFood.img" [alt]="selectedFood.name" />
+                <div class="nutrition-item">
+                    <strong>Fehérje:</strong> {{ selectedFood.protein }} g
+                </div>
+                <div class="nutrition-item">
+                    <strong>Zsír:</strong> {{ selectedFood.fat }} g
+                </div>
+                <div class="nutrition-item">
+                    <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
                 </div>
             </div>
 
-            <div class="popup-bottom">
-                <div class="nutrition-row">
-                    <div class="nutrition-item">
-                        <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
-                    </div>
-                    <div class="nutrition-item">
-                        <strong>Fehérje:</strong> {{ selectedFood.protein }} g
-                    </div>
-                    <div class="nutrition-item">
-                        <strong>Zsír:</strong> {{ selectedFood.fat }} g
-                    </div>
-                    <div class="nutrition-item">
-                        <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
-                    </div>
-                </div>
+            <h4>Hozzávalók:</h4>
+            <ul>
+                <li *ngFor="let ingredient of ingredients">
+                    {{ ingredient.amount }} {{ ingredient.ingredient_name }}
+                </li>
+            </ul>
 
-                <h4>Hozzávalók:</h4>
-                <ul>
-                    <li *ngFor="let ingredient of ingredients">
-                        {{ ingredient.amount }} {{ ingredient.ingredient_name }}
-                    </li>
-                </ul>
-
-                <h4>Elkészítés:</h4>
-                <p class="recipe">{{ selectedFood.recipe }}</p>
-            </div>
+            <h4>Elkészítés:</h4>
+            <p class="recipe">{{ selectedFood.recipe }}</p>
         </div>
     </div>
 </div>

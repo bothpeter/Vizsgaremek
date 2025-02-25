@@ -21,13 +21,6 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'user',
-        loadComponent: () => {
-            return import('./user/user.component').then((m) => m.UserComponent);
-        },
-        data: { hideFooter: true },
-    },
-    {
         path: 'contacts',
         loadComponent: () => {
             return import('./contacts/contacts.component').then((m) => m.ContactsComponent);
@@ -76,38 +69,45 @@ export const routes: Routes = [
         },
     },
     {
+        path: 'user',
+        loadComponent: () => {
+            return import('./user/user.component').then((m) => m.UserComponent);
+        },
+        data: { hideFooter: true, showVerticalNav: true },
+    },
+    {
         path: 'liked-recipes',
         loadComponent: () => {
             return import('./liked-recipes/liked-recipes.component').then((m) => m.LikedRecipesComponent);
         },
-        data: { hideFooter: true },
+        data: { hideFooter: true, showVerticalNav: true },
     },
     {
         path: 'liked-exercises',
         loadComponent: () => {
             return import('./liked-exercises/liked-exercises.component').then((m) => m.LikedExercisesComponent);
         },
-        data: { hideFooter: true },
+        data: { hideFooter: true, showVerticalNav: true },
     },
     {
         path: 'settings',
         loadComponent: () => {
             return import('./settings/settings.component').then((m) => m.SettingsComponent);
         },
-        data: { hideFooter: true },
+        data: { hideFooter: true, showVerticalNav: true },
     },
     {
         path: 'change-password',
         loadComponent: () => {
             return import('./change-password/change-password.component').then((m) => m.ChangePasswordComponent);
         },
-        data: { hideFooter: true },
+        data: { hideFooter: true, showVerticalNav: true },
     },
     {
         path: 'manage-uploads',
         loadComponent: () => {
             return import('./manage-uploads/manage-uploads.component').then((m) => m.ManageUploadsComponent);
         },
-        data: { hideFooter: true },
+        data: { hideFooter: true, showVerticalNav: true },
     },
 ];

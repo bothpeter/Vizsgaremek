@@ -43,7 +43,7 @@ export class SettingsComponent implements OnInit {
                 if (res.status === 200 && res.UserPhysique.length > 0) {
                     this.userPhysique = res.UserPhysique[0];
                 } else {
-                    this.errorMessage = 'Nincs elérhető adat a felhasználó fizikumáról. A beállításokban tudod beállítani a fizikumodat.';
+                    console.error('Nincs elérhető adat a felhasználó fizikumáról. A beállításokban tudod beállítani a fizikumodat.');
                 }
             },
             error: () => {
