@@ -1,41 +1,70 @@
+<div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+</div>
+
 <div class="uploads-container">
-    <div *ngIf="allUploads.length === 0" class="no-uploads">
+    <div *ngIf="allUploads.length === 0 && !loading" class="no-uploads">
         <p>Nincsenek feltöltéseid.</p>
     </div>
 
-    <div class="food-card" *ngFor="let uploadedFood of uploadedFoods" (click)="openFoodPopup(uploadedFood)">
-        <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
-        <div class="food-card-content">
-            <h3>{{ uploadedFood.name }}</h3>
-            <p><strong>Kalória:</strong> {{ uploadedFood.calorie }} kcal</p>
+    <div class="asd">
+        <div *ngIf="!loading" class="section-title-cards-container">
+            <h1 class="section-title">Receptek</h1>
+            <div class="cards">
+                <div class="food-card" *ngFor="let uploadedFood of uploadedFoods" (click)="openFoodPopup(uploadedFood)">
+                    <button class="delete-btn" (click)="deleteFood(uploadedFood.food_id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
+                    <div class="food-card-content">
+                        <h3>{{ uploadedFood.name }}</h3>
+                        <p><strong>Kalória:</strong> {{ uploadedFood.calorie }} kcal</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="exercise-card" *ngFor="let uploadedExercise of uploadedExercises"
-        (click)="openExercisePopup(uploadedExercise)">
-        <img [src]="uploadedExercise.img" [alt]="uploadedExercise.exercise_name" />
-        <div class="exercise-card-content">
-            <h3>{{ uploadedExercise.exercise_name }}</h3>
-            <p><strong>Kategória:</strong> {{ uploadedExercise.type }}</p>
-            <p><strong>Izomcsoport:</strong> {{ uploadedExercise.muscle_group }}</p>
+        <div *ngIf="!loading" class="section-title-cards-container">
+            <h1 class="section-title">Gyakorlatok</h1>
+            <div class="cards">
+                <div class="exercise-card" *ngFor="let uploadedExercise of uploadedExercises" (click)="openExercisePopup(uploadedExercise)">
+                    <button class="delete-btn" (click)="deleteExercise(uploadedExercise.exercise_id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <img [src]="uploadedExercise.img" [alt]="uploadedExercise.exercise_name" />
+                    <div class="exercise-card-content">
+                        <h3>{{ uploadedExercise.exercise_name }}</h3>
+                        <p><strong>Kategória:</strong> {{ uploadedExercise.type }}</p>
+                        <p><strong>Izomcsoport:</strong> {{ uploadedExercise.muscle_group }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="workout-card" *ngFor="let uploadedWorkout of uploadedWorkouts" (click)="openWorkoutPopup(uploadedWorkout)">
-        <div class="workout-cover">
-            <span>{{ uploadedWorkout.title }}</span>
+        <div *ngIf="!loading" class="section-title-cards-container">
+            <h1 class="section-title">Edzéstervek</h1>
+            <div class="cards">
+                <div class="workout-card" *ngFor="let uploadedWorkout of uploadedWorkouts" (click)="openWorkoutPopup(uploadedWorkout)">
+                    <button class="delete-btn" (click)="deleteWorkout(uploadedWorkout.id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <div class="workout-cover">
+                        <span>{{ uploadedWorkout.title }}</span>
+                    </div>
+                    <div class="workout-card-content">
+                        <p><strong>Típus:</strong> {{ uploadedWorkout.type }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="workout-card-content">
-            <p><strong>Típus:</strong> {{ uploadedWorkout.type }}</p>
-        </div>
-    </div>
 
-    <div class="diet-card" *ngFor="let uploadedDiet of uploadedDiets" (click)="openDietPopup(uploadedDiet)">
-        <div class="diet-cover">
-            <span>{{ uploadedDiet.title }}</span>
-        </div>
-        <div class="diet-card-content">
-            <p><strong>Kalória:</strong> {{ uploadedDiet.kcal }} kcal</p>
+        <div *ngIf="!loading" class="section-title-cards-container">
+            <h1 class="section-title">Étrendek</h1>
+            <div class="cards">
+                <div class="diet-card" *ngFor="let uploadedDiet of uploadedDiets" (click)="openDietPopup(uploadedDiet)">
+                    <button class="delete-btn" (click)="deleteDiet(uploadedDiet.id); $event.stopPropagation()"><i class="fas fa-times"></i></button>
+                    <div class="diet-cover">
+                        <span>{{ uploadedDiet.title }}</span>
+                    </div>
+                    <div class="diet-card-content">
+                        <p><strong>Kalória:</strong> {{ uploadedDiet.kcal }} kcal</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

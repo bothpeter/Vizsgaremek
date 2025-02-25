@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoodService } from '../services/food.service';
-import { AuthService } from '../services/auth.service';
 import { ExerciseService } from '../services/exercise.service';
 import { DietService } from '../services/diet.service';
 import { WorkoutService } from '../services/workout.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
     selector: 'app-manage-uploads',
@@ -36,9 +36,12 @@ export class ManageUploadsComponent implements OnInit {
     showWorkoutPopup: boolean = false;
     showDietPopup: boolean = false;
 
-    constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private authService: AuthService) { }
+    loading: boolean = false;
+
+    constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private apiService: ApiService) { }
 
     ngOnInit(): void {
+        this.loading = true;
         this.fetchFoods();
         this.fetchExercises();
         this.fetchDiets();
@@ -52,8 +55,12 @@ export class ManageUploadsComponent implements OnInit {
                 this.uploadedFoods = data.food.filter((food: any) => food.user_id == userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedFoods];
                 this.foods = data.food;
+                this.checkLoadingComplete();
             },
-            error: (error) => console.error('Error fetching food:', error),
+            error: (error) => {
+                console.error('Error fetching food:', error);
+                this.checkLoadingComplete();
+            }
         });
     }
 
@@ -85,8 +92,12 @@ export class ManageUploadsComponent implements OnInit {
                 this.uploadedExercises = data.exercise.filter((exercise: any) => exercise.user_id == userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedExercises];
                 this.exercises = data.exercise;
+                this.checkLoadingComplete();
             },
-            error: (error) => console.error('Error fetching exercises:', error),
+            error: (error) => {
+                console.error('Error fetching exercises:', error);
+                this.checkLoadingComplete();
+            }
         });
     }
 
@@ -107,8 +118,12 @@ export class ManageUploadsComponent implements OnInit {
                 this.uploadedWorkouts = data.workout_plan.filter((workout: any) => workout.user_id == userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedWorkouts];
                 this.workouts = data.workout_plan;
+                this.checkLoadingComplete();
             },
-            error: (error) => console.error('Error fetching workouts:', error),
+            error: (error) => {
+                console.error('Error fetching workouts:', error);
+                this.checkLoadingComplete();
+            }
         });
     }
 
@@ -149,8 +164,12 @@ export class ManageUploadsComponent implements OnInit {
                 this.uploadedDiets = data.workout_plan.filter((diet: any) => diet.user_id == userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedDiets];
                 this.diets = data.workout_plan;
+                this.checkLoadingComplete();
             },
-            error: (error) => console.error('Error fetching diets:', error),
+            error: (error) => {
+                console.error('Error fetching diets:', error);
+                this.checkLoadingComplete();
+            }
         });
     }
 
@@ -172,6 +191,57 @@ export class ManageUploadsComponent implements OnInit {
                 this.showDietPopup = true;
             },
             error: (error) => console.error('Error fetching foods:', error),
+        });
+    }
+
+    checkLoadingComplete(): void {
+        if (
+            this.foods.length > 0 &&
+            this.exercises.length > 0 &&
+            this.workouts.length > 0 &&
+            this.diets.length > 0
+        ) {
+            this.loading = false;
+        }
+    }
+
+    deleteFood(foodId: number): void {
+        this.apiService.delete(`food/${foodId}`).subscribe({
+            next: () => {
+                this.uploadedFoods = this.uploadedFoods.filter(food => food.food_id !== foodId);
+                this.allUploads = this.allUploads.filter(item => item.food_id !== foodId);
+            },
+            error: (error) => console.error('Error deleting food:', error),
+        });
+    }
+
+    deleteExercise(exerciseId: number): void {
+        this.apiService.delete(`exercise/${exerciseId}`).subscribe({
+            next: () => {
+                this.uploadedExercises = this.uploadedExercises.filter(exercise => exercise.exercise_id !== exerciseId);
+                this.allUploads = this.allUploads.filter(item => item.exercise_id !== exerciseId);
+            },
+            error: (error) => console.error('Error deleting exercise:', error),
+        });
+    }
+
+    deleteWorkout(workoutId: number): void {
+        this.apiService.delete(`workout_plan/${workoutId}`).subscribe({
+            next: () => {
+                this.uploadedWorkouts = this.uploadedWorkouts.filter(workout => workout.workout_plan_id !== workoutId);
+                this.allUploads = this.allUploads.filter(item => item.workout_plan_id !== workoutId);
+            },
+            error: (error) => console.error('Error deleting workout:', error),
+        });
+    }
+
+    deleteDiet(dietId: number): void {
+        this.apiService.delete(`diet_plan/${dietId}`).subscribe({
+            next: () => {
+                this.uploadedDiets = this.uploadedDiets.filter(diet => diet.diet_plan_id !== dietId);
+                this.allUploads = this.allUploads.filter(item => item.diet_plan_id !== dietId);
+            },
+            error: (error) => console.error('Error deleting diet:', error),
         });
     }
 }

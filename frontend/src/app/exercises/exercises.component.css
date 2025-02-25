@@ -96,7 +96,7 @@
 
 .card-content p {
   margin: 4px 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: #b0b0b0;
 }
 
@@ -221,12 +221,12 @@
 .details-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 10px;
 }
 
 .details-item {
   background-color: #2a2a2a;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 4px;
   color: #fff;
   font-size: 1em;
