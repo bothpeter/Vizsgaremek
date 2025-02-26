@@ -69,6 +69,12 @@ export const routes: Routes = [
         },
     },
     {
+        path: 'calorie-counter',
+        loadComponent: () => {
+            return import('./calorie-counter/calorie-counter.component').then((m) => m.CalorieCounterComponent);
+        },
+    },
+    {
         path: 'user',
         loadComponent: () => {
             return import('./user/user.component').then((m) => m.UserComponent);

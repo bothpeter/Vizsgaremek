@@ -392,3 +392,58 @@
     color: #eae4e4;
     text-transform: uppercase;
 }
+
+.popup-bottom .fas, .fa-fire {
+    color: #FC282C;
+    margin-right: 5px;
+}
+
+.diet-cover {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(45deg, #1e1e1e, #2a2a2a); /* Alap gradient háttér */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.diet-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #FC282C, #B22222, #FC282C);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.diet-cover:hover::before {
+    opacity: 1;
+}
+
+.diet-cover:hover {
+    transform: scale(1.05);
+}
+
+.diet-cover span {
+    padding: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #eae4e4;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.diet-cover:hover span {
+    color: #fff;
+}

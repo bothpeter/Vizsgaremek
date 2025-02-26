@@ -18,7 +18,7 @@
                     <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
                     <div class="food-card-content">
                         <h3>{{ uploadedFood.name }}</h3>
-                        <p><strong>Kalória:</strong> {{ uploadedFood.calorie }} kcal</p>
+                        <p><i class="fas fa-fire"></i> {{ uploadedFood.calorie }} kcal</p>
                     </div>
                 </div>
             </div>
@@ -113,15 +113,15 @@
                 </div>
             </div>
 
-            <h4>Hozzávalók:</h4>
+            <h4><i class="fas fa-list"></i> Hozzávalók:</h4>
             <ul>
                 <li *ngFor="let ingredient of ingredients">
                     {{ ingredient.amount }} {{ ingredient.ingredient_name }}
                 </li>
             </ul>
 
-            <h4>Elkészítés:</h4>
-            <p class="food-recipe">{{ selectedFood.recipe }}</p>
+            <h4><i class="fas fa-book"></i> Elkészítés:</h4>
+            <p class="recipe">{{ selectedFood.recipe }}</p>
         </div>
     </div>
 </div>

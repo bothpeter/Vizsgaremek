@@ -93,7 +93,7 @@
 
 .card-content p {
   margin: 4px 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: #b0b0b0;
 }
 
@@ -518,4 +518,9 @@ input[type="file"] {
 
 .add-meal-button .added {
     transform: rotate(360deg); /* Spin animation */
+}
+
+.popup-bottom .fas, .fa-fire {
+    color: #FC282C;
+    margin-right: 5px;
 }

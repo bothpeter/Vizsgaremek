@@ -9,6 +9,7 @@
     align-items: center;
     font-size: 1.3em;
     height: 100%;
+    color: #b0b0b0;
 }
 
 .popup {
@@ -554,7 +555,7 @@
     color: #fff;
 }
 
-.popup-bottom .recipe {
+.recipe {
     background-color: #2a2a2a;
     padding: 12px;
     border-radius: 4px;
@@ -694,4 +695,9 @@
 .delete-btn:hover {
     background-color: #FC282C;
     color: #000;
+}
+
+.popup-bottom .fas, .fa-fire {
+    color: #FC282C;
+    margin-right: 5px;
 }

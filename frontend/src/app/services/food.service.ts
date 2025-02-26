@@ -41,7 +41,7 @@ export class FoodService {
     }
 
     toggleMeal(foodId: number, date: string, isAdded: boolean): Observable<any> {
-        const endpoint = `meals${isAdded ? `/${foodId}` : ''}`;
+        const endpoint = `meals/${foodId}`;
         const payload = isAdded ? null : { food_id: foodId, date };
         return isAdded
             ? this.apiService.delete(endpoint)

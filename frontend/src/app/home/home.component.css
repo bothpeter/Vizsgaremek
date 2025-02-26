@@ -3,9 +3,12 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px 0;
+    margin-bottom: 120px;
 }
 
 .hero {
+    display: flex;
+    align-items: center;
     color: #e0e0e0;
     text-align: center;
     padding: 40px 0 80px 0;

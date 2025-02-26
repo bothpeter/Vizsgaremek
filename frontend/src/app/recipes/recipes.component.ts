@@ -12,7 +12,6 @@ import { sortFoodsPipe } from '../pipes/sort-foods.pipe';
     templateUrl: './recipes.component.html',
     styleUrls: ['./recipes.component.css'],
 })
-
 export class RecipesComponent implements OnInit {
     foods: any[] = [];
     ingredients: any[] = [];
@@ -39,6 +38,7 @@ export class RecipesComponent implements OnInit {
     ngOnInit(): void {
         this.fetchFoods();
         this.fetchLikedFoods();
+        this.fetchMeals(); // Fetch meals on initialization
     }
 
     fetchFoods(): void {
@@ -77,7 +77,10 @@ export class RecipesComponent implements OnInit {
 
         this.foodService.getMeals().subscribe({
             next: (data) => {
-                const mealFoodIds = data.meals.map((meal: any) => meal.food_id);
+                // Extract the food IDs from the Meals array
+                const mealFoodIds = data.Meals.map((meal: any) => meal.food_id);
+
+                // Update the isAddedToMeal property for each food item
                 this.foods.forEach((food) => {
                     food.isAddedToMeal = mealFoodIds.includes(food.food_id);
                 });
@@ -112,6 +115,7 @@ export class RecipesComponent implements OnInit {
             error: (error) => console.error('Error toggling meal:', error),
         });
     }
+
 
     addFood(): void {
         if (!this.authService.isAuthenticated()) {
