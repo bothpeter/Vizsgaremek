@@ -29,6 +29,11 @@ export class LikedExercisesComponent implements OnInit {
         this.exerciseService.getLikedExercises().subscribe({
             next: (res: any) => {
                 if (res.status === 200 && Array.isArray(res.userLikeExercise)) {
+                    if (res.userLikeExercise.length === 0) {
+                        this.loading = false;
+                        return;
+                    }
+
                     const exerciseDetailsObservables = res.userLikeExercise.map((item: any) =>
                         this.exerciseService.getExercise(item.exercise_id)
                     );

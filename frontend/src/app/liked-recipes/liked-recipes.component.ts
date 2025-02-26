@@ -32,6 +32,11 @@ export class LikedRecipesComponent implements OnInit {
         this.foodService.getLikedFoods().subscribe({
             next: (res: any) => {
                 if (res.status === 200 && Array.isArray(res.UserLikeFood)) {
+                    if (res.UserLikeFood.length === 0) {
+                        this.loading = false;
+                        return;
+                    }
+                    
                     const foodDetailsObservables = res.UserLikeFood.map((item: any) =>
                         this.foodService.getFood(item.food_id)
                     );

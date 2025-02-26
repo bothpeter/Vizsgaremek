@@ -1,8 +1,14 @@
+:host{
+    display: block;
+    width: 100%;
+}
+
 .no-uploads {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 1.3em;
+    height: 100%;
 }
 
 .popup {
@@ -594,17 +600,13 @@
     padding-bottom: 10px;
 }
 
-:host {
-    display: block;
-    width: 100%;
-}
-
 .uploads-container {
-    display: block;
+    display: flex;
     flex-wrap: wrap;
     gap: 16px;
+    justify-content: center;
     padding: 16px;
-
+    height: calc(100vh - 112px);
 }
 
 .section-title-cards-container {
@@ -623,35 +625,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100vw - 518px);
-    height: calc(100vh - 205px);
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
-    /* Ensure it's above other content */
 }
 
 .spinner {
     border: 8px solid rgba(255, 255, 255, 0.1);
-    /* Light gray border */
     border-top: 8px solid #FC282C;
-    /* Accent color for the spinner */
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 1s linear infinite;
-    /* Smooth spinning animation */
 }
 
-
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 1024px) {

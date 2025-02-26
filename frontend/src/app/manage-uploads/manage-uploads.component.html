@@ -1,9 +1,9 @@
-<div *ngIf="loading" class="loading-spinner">
-    <div class="spinner"></div>
-</div>
-
 <div class="uploads-container">
-    <div *ngIf="allUploads.length === 0 && !loading" class="no-uploads">
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <div *ngIf="!loading  && allUploads.length === 0" class="no-uploads">
         <p>Nincsenek feltöltéseid.</p>
     </div>
 
