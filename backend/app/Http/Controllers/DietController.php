@@ -47,7 +47,7 @@ class DietController extends Controller implements HasMiddleware
         return response()->json($data, 200);
     }
 
-    public function delete_diet(Request $request, $id)
+    public function delete_diet_plan(Request $request, $id)
     {
         $diet = DietPlan::find($id);
 

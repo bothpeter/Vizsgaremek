@@ -43,7 +43,7 @@ Route::delete('workout_plan/{id}',[WorkoutController::class, 'delete_workout']);
 
 Route::get('diet_plan',[DietController::class, 'view_diet_plan']);
 Route::post('diet_plan',[DietController::class, 'post_diet_plan']);
-Route::delete('diet_plan/{id}',[DietController::class, 'delete_diet']);
+Route::delete('diet_plan/{id}',[DietController::class, 'delete_diet_plan']);
 
 Route::get('user_like_exercise',[UserLikeExerciseController::class, 'view_user_like_exercise']);
 Route::post('user_like_exercise',[UserLikeExerciseController::class, 'post_user_like_exercise']);
