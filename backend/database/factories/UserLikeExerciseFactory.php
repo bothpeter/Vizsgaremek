@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class UserLikeExerciseFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->randomNumber(),
+            'id' => $this->faker->randomNumber(),
+            'user_id' => User::factory(),
             'exercise_id' => $this->faker->randomNumber(),
         ];
     }

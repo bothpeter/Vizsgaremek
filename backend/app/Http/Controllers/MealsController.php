@@ -19,7 +19,7 @@ class MealsController extends Controller implements HasMiddleware
         ];
     }
 
-    public function view_meals_by_user_id(Request $request)
+    public function view_meals_by_user_token(Request $request)
     {
         $user = $request->user();
 
@@ -57,5 +57,25 @@ class MealsController extends Controller implements HasMiddleware
             'message' => 'Meal uploaded',
             'data' => $meals
         ], 200);
+    }
+
+    public function delete_meals_by_food_id(Request $request, $id)
+    {
+        $user = $request->user();
+        $meals = Meals::where('user_id', $user->id)
+            ->where('food_id', $id)
+            ->delete();
+
+        if ($meals) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Meal deleted'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Meal not found'
+            ], 404);
+        }
     }
 }

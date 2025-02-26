@@ -169,6 +169,15 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for update user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
         </div>
+        <div class="highlighted-div">
+        <h2>Meals</h2>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for view meals by user token endpoint : http://127.0.0.1:8000/api/meals</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for post meals endpoint : http://127.0.0.1:8000/api/meals</a>
+        <hr>
+        <a href="http://127.0.0.1:8000/api/meals/1" class="text">Url for delete meals by user food endpoint : http://127.0.0.1:8000/api/meals/1</a>
+        </div>
     </div>
 </body>
 </html>

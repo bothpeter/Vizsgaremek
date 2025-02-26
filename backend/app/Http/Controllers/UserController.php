@@ -61,6 +61,7 @@ class UserController extends Controller implements HasMiddleware
         if ($user) {
             $user->delete();
             $user->tokens()->delete();
+
             return response()->json(['message' => 'User deleted'], 200);
         } else {
             return response()->json(['message' => 'User not found'], 404);

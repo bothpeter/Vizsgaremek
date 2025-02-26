@@ -59,3 +59,4 @@ Route::put('user_physique',[UserPhysiqueController::class, 'update_user_physique
 
 Route::get('meals',[MealsController::class, 'view_meals_by_user_id']);
 Route::post('meals',[MealsController::class, 'post_meals']);
+Route::delete('meals/{id}',[MealsController::class, 'delete_meals_by_food_id']);
