@@ -29,6 +29,7 @@ class UserPhysiqueController extends Controller implements HasMiddleware
             'weight' => 'required',
             'age' => 'required',
             'gender' => 'required',
+            'daily_calorie_intake' => 'required'
         ]);
 
         if ($request->hasFile('progress_picture')) {
@@ -64,6 +65,7 @@ class UserPhysiqueController extends Controller implements HasMiddleware
             'weight' => 'sometimes',
             'age' => 'sometimes',
             'gender' => 'sometimes',
+            'daily_calorie_intake' => 'sometimes'
         ]);
     
         if ($validator->fails()) {

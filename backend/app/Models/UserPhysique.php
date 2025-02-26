@@ -13,7 +13,8 @@ class UserPhysique extends Model
         'height',
         'weight',
         'age',
-        'gender'
+        'gender',
+        'daily_calorie_intake',
     ];
 
     public function user()
