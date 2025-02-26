@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ValidationService } from '../services/validation.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-settings',
@@ -27,7 +28,7 @@ export class SettingsComponent implements OnInit {
     errorMessage: string = '';
     successMessage: string = '';
 
-    constructor(private apiService: ApiService, private validationService: ValidationService) { }
+    constructor(private apiService: ApiService, private validationService: ValidationService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.userName = localStorage.getItem('userName') || '';
@@ -105,5 +106,12 @@ export class SettingsComponent implements OnInit {
             this.selectedFile = file;
             this.userPhysique.progress_picture = file;
         }
-    }    
+    }
+
+    confirmDeleteUser(): void {
+        const confirmation = confirm('Biztosan törölni szeretnéd a fiókod? Ez a művelet nem visszavonható!');
+        if (confirmation) {
+            this.authService.deleteUser();
+        }
+    }
 }

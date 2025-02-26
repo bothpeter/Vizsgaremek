@@ -49,4 +49,30 @@ export class AuthService {
     isAuthenticated(): boolean {
         return !!this.getAuthToken();
     }
+
+    deleteUser(): void {
+        const authToken = this.getAuthToken();
+        if (authToken) {
+            
+            this.apiService.delete('user').subscribe({
+                next: () => {
+                    console.log('User deleted successfully.');
+                    alert('Felhasználó sikeresen törölve!');
+                },
+                error: (error) => {
+                    console.error('User deletion failed:', error);
+                    alert('Felhasználó törlése sikertelen!');
+                },
+            });
+            
+            this.isLoggedIn = false;
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            this.router.navigateByUrl('/login');
+        } else {
+            alert('Nincs bejelentkezett felhasználó!');
+        }
+    }
 }

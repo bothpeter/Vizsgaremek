@@ -15,6 +15,9 @@
     </div>
 
     <div class="card" *ngFor="let food of foods | sortFoods: selectedType" (click)="openPopup(food)">
+        <div class="add-meal-button" (click)="toggleMeal(food); $event.stopPropagation()">
+            <i class="fas" [ngClass]="{'fa-plus': !food.isAddedToMeal, 'fa-check': food.isAddedToMeal, 'added': food.isAddedToMeal}"></i>
+        </div>
         <div class="like-button" (click)="toggleLike(food); $event.stopPropagation()">
             <i class="fas fa-heart" [ngClass]="{'liked': food.isLiked}"></i>
         </div>

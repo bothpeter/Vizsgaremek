@@ -39,4 +39,16 @@ export class FoodService {
     addIngredient(payload: any): Observable<any> {
         return this.apiService.post('food_ingredients', payload);
     }
+
+    toggleMeal(foodId: number, date: string, isAdded: boolean): Observable<any> {
+        const endpoint = `meals${isAdded ? `/${foodId}` : ''}`;
+        const payload = isAdded ? null : { food_id: foodId, date };
+        return isAdded
+            ? this.apiService.delete(endpoint)
+            : this.apiService.post('meals', payload);
+    }
+
+    getMeals(): Observable<any> {
+        return this.apiService.get('meals');
+    }
 }

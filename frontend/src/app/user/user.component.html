@@ -18,22 +18,26 @@
         <div *ngIf="userPhysique; else noPhysique">
             <h3>Fizikai Adatok:</h3>
             <div class="info-card">
-                <div class="info-item">
-                    <i class="fas fa-ruler-vertical"></i>
-                    <p><strong>Magasság:</strong> {{ userPhysique.height }} cm</p>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-weight"></i>
-                    <p><strong>Súly:</strong> {{ userPhysique.weight }} kg</p>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-birthday-cake"></i>
-                    <p><strong>Kor:</strong> {{ userPhysique.age }} év</p>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-venus-mars"></i>
-                    <p><strong>Nem:</strong> {{ userPhysique.gender === 'ferfi' ? 'Férfi' : 'Nő' }}</p>
-                </div>
+            <div class="info-item">
+                <i class="fas fa-ruler-vertical"></i>
+                <p><strong>Magasság:</strong> {{ userPhysique.height }} cm</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-weight"></i>
+                <p><strong>Súly:</strong> {{ userPhysique.weight }} kg</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-birthday-cake"></i>
+                <p><strong>Kor:</strong> {{ userPhysique.age }} év</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-venus-mars"></i>
+                <p><strong>Nem:</strong> {{ userPhysique.gender === 'ferfi' ? 'Férfi' : 'Nő' }}</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-utensils"></i>
+                <p><strong>Napi kalória bevitel:</strong> {{ userPhysique.daily_calorie_intake }} kcal</p>
+            </div>
             </div>
         </div>
 

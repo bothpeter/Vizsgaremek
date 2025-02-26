@@ -72,6 +72,20 @@ export class RecipesComponent implements OnInit {
         });
     }
 
+    fetchMeals(): void {
+        if (!this.authService.isAuthenticated()) return;
+
+        this.foodService.getMeals().subscribe({
+            next: (data) => {
+                const mealFoodIds = data.meals.map((meal: any) => meal.food_id);
+                this.foods.forEach((food) => {
+                    food.isAddedToMeal = mealFoodIds.includes(food.food_id);
+                });
+            },
+            error: (error) => console.error('Error fetching meals:', error),
+        });
+    }
+
     toggleLike(food: any): void {
         if (!this.authService.isAuthenticated()) {
             alert('Kérjük, jelentkezzen be a kedveléshez!');
@@ -81,6 +95,21 @@ export class RecipesComponent implements OnInit {
         this.foodService.toggleLike(food.food_id, food.isLiked).subscribe({
             next: () => (food.isLiked = !food.isLiked),
             error: (error) => console.error('Error toggling like:', error),
+        });
+    }
+
+    toggleMeal(food: any): void {
+        if (!this.authService.isAuthenticated()) {
+            alert('Kérjük, jelentkezzen be az étel hozzáadásához!');
+            return;
+        }
+
+        const date = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        this.foodService.toggleMeal(food.food_id, date, food.isAddedToMeal).subscribe({
+            next: () => {
+                food.isAddedToMeal = !food.isAddedToMeal;
+            },
+            error: (error) => console.error('Error toggling meal:', error),
         });
     }
 

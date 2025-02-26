@@ -484,3 +484,38 @@ input[type="file"] {
 .form-group.full-width {
   grid-column: span 2;
 }
+
+.add-meal-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #1e1e1e;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-meal-button:hover {
+    background-color: #2e2e2e;
+}
+
+.add-meal-button i {
+    font-size: 25px;
+    color: #ccc;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.add-meal-button .fa-check {
+    color: #4CAF50; /* Green color for checkmark */
+}
+
+.add-meal-button .added {
+    transform: rotate(360deg); /* Spin animation */
+}
