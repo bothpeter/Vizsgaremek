@@ -15,6 +15,8 @@ class UserPhysique extends Model
         'age',
         'gender',
         'daily_calorie_intake',
+        'activity_level',
+        'goal',
     ];
 
     public function user()

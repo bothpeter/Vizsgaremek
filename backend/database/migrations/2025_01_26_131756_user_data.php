@@ -32,6 +32,8 @@ return new class extends Migration
             $table->integer('age');
             $table->string('gender');
             $table->float('daily_calorie_intake');
+            $table->string('activity_level');
+            $table->string('goal');
         });
     }
 
