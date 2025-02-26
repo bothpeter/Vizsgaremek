@@ -79,24 +79,25 @@ class FoodIngredientsTest extends BaseTestCase
         ]);
     }
 
-    public function test_delete_ingredient()
+    public function test_delete_ingredients_by_food_id()
     {
         $user = User::factory()->create();
         $this->actingAs($user, 'sanctum');
 
-        $food_ingredient = FoodIngredients::factory()->create(['user_id' => $user->id]);
-        $response = $this->deleteJson('/api/food_ingredients/' . $food_ingredient->ingredient_id);
+        $food_ingredients = FoodIngredients::factory()->create(['user_id' => $user->id, 'food_id' => 1]);
+        $response = $this->deleteJson('/api/food_ingredients/' . $food_ingredients->food_id);
+
         $response->assertStatus(200)
-            ->assertJson(['message' => 'ingredient deleted']);
+            ->assertJson(['message' => 'Ingredients deleted']);
 
         $otherUser = User::factory()->create();
-        $food_ingredient = FoodIngredients::factory()->create(['user_id' => $otherUser->id]);
-        $response = $this->deleteJson('/api/food_ingredients/' . $food_ingredient->ingredient_id);
+        $food_ingredients = FoodIngredients::factory()->create(['user_id' => $otherUser->id, 'food_id' => 2]);
+        $response = $this->deleteJson('/api/food_ingredients/' . $food_ingredients->food_id);
         $response->assertStatus(403)
             ->assertJson(['message' => 'Unauthorized']);
 
         $response = $this->deleteJson('/api/food_ingredients/999');
         $response->assertStatus(404)
-            ->assertJson(['message' => 'ingredient not found']);
+            ->assertJson(['message' => 'Ingredients not found for the given food ID']);
     }
 }

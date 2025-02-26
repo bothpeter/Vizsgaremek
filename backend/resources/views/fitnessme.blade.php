@@ -117,7 +117,7 @@
         <hr>
         <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for add food ingredients endpoint : http://127.0.0.1:8000/api/food_ingredients</a>
         <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by ingredient id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
+        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by food id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
         </div>
         <hr>
         <div class="highlighted-div">

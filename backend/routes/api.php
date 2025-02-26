@@ -34,7 +34,7 @@ Route::delete('food/{id}',[FoodController::class, 'delete_food']);
 
 Route::get('food_ingredients/{id}',[IngredientController::class, 'view_ingredient_by_food_id']);
 Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']);
-Route::delete('food_ingredients/{id}',[IngredientController::class, 'delete_ingredient']);
+Route::delete('food_ingredients/{id}',[IngredientController::class, 'delete_ingredients_by_food_id']);
 
 Route::get('workout_plan',[WorkoutController::class, 'view_workout_plan']);
 Route::post('workout_plan',[WorkoutController::class, 'post_workout_plan']);
