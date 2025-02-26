@@ -89,4 +89,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(WorkoutPlan::class);
     }
+
+    public function meals()
+    {
+        return $this->hasMany(Meals::class);
+    }
 }
