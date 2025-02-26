@@ -57,6 +57,6 @@ Route::get('user_physique',[UserPhysiqueController::class, 'view_user_physique']
 Route::post('user_physique',[UserPhysiqueController::class, 'post_user_physique']);
 Route::put('user_physique',[UserPhysiqueController::class, 'update_user_physique']);
 
-Route::get('meals',[MealsController::class, 'view_meals_by_user_id']);
+Route::get('meals',[MealsController::class, 'view_meals_by_user_token']);
 Route::post('meals',[MealsController::class, 'post_meals']);
 Route::delete('meals/{id}',[MealsController::class, 'delete_meals_by_food_id']);
