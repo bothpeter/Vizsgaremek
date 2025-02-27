@@ -215,8 +215,8 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border: none;
     border-radius: 50%;
     background-color: #FC282C;
@@ -228,7 +228,6 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .close-btn:hover {
     background-color: rgb(198, 19, 19);
 }

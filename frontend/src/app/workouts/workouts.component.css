@@ -152,10 +152,10 @@
 
 .close-btn {
     position: absolute;
-    top: 8px;
-    right: 23px;
-    width: 40px;
-    height: 40px;
+    top: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
     border: none;
     border-radius: 50%;
     background-color: #FC282C;
@@ -450,7 +450,7 @@ h4 {
 }
 
 .workout-cover:hover span {
-    color: rgb(36, 31, 31);
+    color: rgb(17, 15, 15);
 }
 
 .fa-filter{
