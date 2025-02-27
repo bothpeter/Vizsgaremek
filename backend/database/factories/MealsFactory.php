@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class MealsFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->randomNumber(1),
+            'id' => $this->faker->randomNumber(),
+            'user_id' => User::factory(),
             'food_id' => $this->faker->randomNumber(1),
             'date' => $this->faker->date(),
         ];

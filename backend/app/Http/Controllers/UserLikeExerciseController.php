@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meals;
-use App\Models\User;
 use App\Models\UserLikeExercise;
-use App\Models\UserLikeFood;
-use App\Models\UserPhysique;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;

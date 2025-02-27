@@ -3,11 +3,11 @@
 namespace Tests\Unit;
 
 use App\Models\User;
-use App\Models\UserLikeExercise;
+use App\Models\UserLikeFood;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-class UserLikeExerciseTest extends BaseTestCase
+class UserLikeFoodTest extends BaseTestCase
 {
     use RefreshDatabase;
 
@@ -17,34 +17,34 @@ class UserLikeExerciseTest extends BaseTestCase
         $this->artisan('migrate');
     }
 
-    public function test_view_user_like_exercise()
+    public function test_view_user_like_food()
     {
         $user = User::factory()->create();
         $token = $user->createToken('TestToken')->plainTextToken;
-        
-        $exercise = UserLikeExercise::factory()->create(['user_id' => $user->id]);
+
+        $food = UserLikeFood::factory()->create(['user_id' => $user->id]);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/user_like_exercise');
+        ])->getJson('/api/user_like_food');
 
         $response->assertStatus(200)
             ->assertJson([
                 'status' => 200,
-                'userLikeExercise' => [$exercise->toArray()],
+                'UserLikeFood' => [$food->toArray()],
             ]);
     }
 
-    public function test_post_user_like_exercise()
+    public function test_post_user_like_food()
     {
         $user = User::factory()->create();
         $this->actingAs($user, 'sanctum');
 
         $data= [
-            'exercise_id' => 1,
+            'food_id' => 1,
         ];
 
-        $response = $this->postJson('/api/user_like_exercise', $data);
+        $response = $this->postJson('/api/user_like_food', $data);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -52,29 +52,29 @@ class UserLikeExerciseTest extends BaseTestCase
                 'message' => 'Data uploaded',
                 'data' => true
             ]);
-        $this->assertDatabaseHas('user_like_exercises', $data);
+        $this->assertDatabaseHas('user_like_foods', $data);
     }
 
-    public function test_delete_user_like_exercise()
+    public function test_delete_user_like_food()
     {
         $user = User::factory()->create();
         $this->actingAs($user, 'sanctum');
 
-        $exercise = UserLikeExercise::factory()->create(['user_id' => $user->id, 'exercise_id' => 1]);
+        $food = UserLikeFood::factory()->create(['user_id' => $user->id, 'food_id' => 1]);
 
-        $response = $this->deleteJson('/api/user_like_exercise/' . $exercise->exercise_id);
+        $response = $this->deleteJson('/api/user_like_food/' . $food->food_id);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Exercise deleted',
+                'message' => 'Food deleted',
             ]);
 
-        $this->assertDatabaseMissing('user_like_exercises', ['exercise_id' => $exercise->exercise_id, 'user_id' => $user->id]);
+        $this->assertDatabaseMissing('user_like_foods', ['food_id' => $food->food_id, 'user_id' => $user->id]);
 
-        $response = $this->deleteJson('/api/user_like_exercise/' . $exercise->exercise_id);
+        $response = $this->deleteJson('/api/user_like_food/' . $food->food_id);
         $response->assertStatus(404)
             ->assertJson([
-                'message' => 'Exercise not found',
+                'message' => 'Food not found',
             ]);
     }
 }

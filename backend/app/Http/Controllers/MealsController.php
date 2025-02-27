@@ -29,13 +29,7 @@ class MealsController extends Controller implements HasMiddleware
             ->delete();
         
         $meals = Meals::where('user_id', $user->id)->get();
-
-        if ($meals->isEmpty()) {
-            return response()->json([
-                'status' => 404,
-                'message' => 'No meals found'
-            ], 404);
-        }
+        
         $data = [
             'status' => 200,
             'Meals' => $meals
