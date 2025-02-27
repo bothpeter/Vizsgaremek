@@ -3,12 +3,11 @@ import { FoodService } from '../services/food.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { sortFoodsPipe } from '../pipes/sort-foods.pipe';
 
 @Component({
     selector: 'app-recipes',
     standalone: true,
-    imports: [CommonModule, FormsModule, sortFoodsPipe],
+    imports: [CommonModule, FormsModule],
     templateUrl: './recipes.component.html',
     styleUrls: ['./recipes.component.css'],
 })
@@ -18,6 +17,7 @@ export class RecipesComponent implements OnInit {
     selectedFood: any = null;
     selectedType: string = 'all';
     showPopup: boolean = false;
+    searchQuery: string = '';
 
     showAddFoodPopup: boolean = false;
     newFood: any = {
@@ -219,5 +219,13 @@ export class RecipesComponent implements OnInit {
         if (file) {
             this.newFood.imgFile = file;
         }
+    }
+
+    get filteredFoods(): any[] {
+        return this.foods.filter((food) => {
+            const typeMatch = this.selectedType === 'all' || food.type === this.selectedType;
+            const nameMatch = food.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+            return typeMatch && nameMatch;
+        });
     }
 }

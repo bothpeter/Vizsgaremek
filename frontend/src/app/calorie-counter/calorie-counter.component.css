@@ -324,6 +324,7 @@
     position: absolute;
     width: 10px;
     height: 10px;
+    border-radius: 2px;
     background-color: #ffcc00;
     animation: confetti-fall 3s linear forwards;
     top: -10px;
@@ -332,7 +333,7 @@
 
 @keyframes confetti-fall {
     0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
+    100% { transform: translateY(calc(100vh + 10px)) rotate(360deg); }
 }
 
 .progress-fill {
@@ -421,51 +422,4 @@
 .delete-btn:hover {
     background-color: #FC282C;
     color: #000;
-}
-
-.light-beams {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.light-beam {
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 100vh;
-    background: linear-gradient(
-        to top,
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0.8)
-    );
-    clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-    transform-origin: bottom;
-    animation: lightBeamAnimation 5s ease-in-out forwards;
-}
-
-@keyframes lightBeamAnimation {
-    0% {
-        transform: scaleY(0);
-        width: 0;
-        opacity: 0;
-    }
-    20% {
-        width: var(--max-width);
-        opacity: 1;
-    }
-    80% {
-        width: var(--max-width);
-        opacity: 1;
-    }
-    100% {
-        transform: scaleY(1);
-        width: 0;
-        opacity: 0;
-    }
 }

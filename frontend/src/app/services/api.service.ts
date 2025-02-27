@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -12,7 +13,8 @@ export class ApiService {
     constructor(private http: HttpClient) { }
 
     private getHeaders(): HttpHeaders {
-        const authToken = localStorage.getItem('authToken');
+        const authToken = this.getAuthToken();
+
         return new HttpHeaders({
             Authorization: `Bearer ${authToken}`,
         });
@@ -46,5 +48,16 @@ export class ApiService {
         return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, {
             headers: this.getHeaders(),
         });
+    }
+
+    getAuthToken(): string | null {
+        const encodedToken = localStorage.getItem('authToken');
+        if (encodedToken) {
+            const decodedToken = atob(encodedToken); // Decode from base64
+            console.log('Decoded Token:', decodedToken);
+            return decodedToken;
+
+        }
+        return null;
     }
 }

@@ -12,9 +12,14 @@
                 <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
+        <div class="search-container">
+            <label><i class="fas fa-search"></i>Keresés:</label>
+            <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés étel neve alapján" />
+        </div>
     </div>
+    
 
-    <div class="card" *ngFor="let food of foods | sortFoods: selectedType" (click)="openPopup(food)">
+    <div class="card" *ngFor="let food of filteredFoods" (click)="openPopup(food)">
         <div class="add-meal-button" (click)="toggleMeal(food); $event.stopPropagation()">
             <i class="fas" [ngClass]="{'fa-plus': !food.isAddedToMeal, 'fa-check': food.isAddedToMeal, 'added': food.isAddedToMeal}"></i>
         </div>

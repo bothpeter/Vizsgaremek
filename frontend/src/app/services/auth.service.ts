@@ -5,18 +5,24 @@ import { ApiService } from './api.service';
 @Injectable({
     providedIn: 'root',
 })
-
 export class AuthService {
     private isLoggedIn = false;
 
     constructor(private router: Router, private apiService: ApiService) { }
 
     getAuthToken(): string | null {
-        return localStorage.getItem('authToken');
+        const encodedToken = localStorage.getItem('authToken');
+        if (encodedToken) {
+            const decodedToken = atob(encodedToken); // Decode from base64
+            console.log('Decoded Token:', decodedToken);
+            return decodedToken;
+        }
+        return null;
     }
 
     login(token: string, userId: string, userName: string, userEmail: string) {
         this.isLoggedIn = true;
+        console.log('Encoded Token:', token);
         localStorage.setItem('authToken', token);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userName', userName);
@@ -53,7 +59,6 @@ export class AuthService {
     deleteUser(): void {
         const authToken = this.getAuthToken();
         if (authToken) {
-            
             this.apiService.delete('user').subscribe({
                 next: () => {
                     console.log('User deleted successfully.');
@@ -64,7 +69,7 @@ export class AuthService {
                     alert('Felhasználó törlése sikertelen!');
                 },
             });
-            
+
             this.isLoggedIn = false;
             localStorage.removeItem('authToken');
             localStorage.removeItem('userId');
