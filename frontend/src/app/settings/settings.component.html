@@ -73,7 +73,7 @@
                     <label><i class="fas fa-camera"></i>Profilkép</label>
                     <div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
                         <label for="image" class="file-upload-label">
-                            <span *ngIf="!selectedFile">Húzd ide a képet, vagy kattints a feltöltéshez</span>
+                            <span *ngIf="!selectedFile"><i class="fas fa-upload"></i>Húzd ide a képet, vagy kattints a feltöltéshez</span>
                             <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
                             <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
                         </label>

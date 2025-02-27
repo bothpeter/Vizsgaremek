@@ -104,7 +104,7 @@
                     <label for="image">Kép:</label>
                     <div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
                         <label for="image" class="file-upload-label">
-                            <span *ngIf="!newExercise.imgFile">Húzd ide a képet, vagy kattints a feltöltéshez</span>
+                            <span *ngIf="!newExercise.imgFile"><i class="fas fa-upload"></i>Húzd ide a képet, vagy kattints a feltöltéshez</span>
                             <span *ngIf="newExercise.imgFile">{{ newExercise.imgFile.name }}</span>
                             <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
                         </label>

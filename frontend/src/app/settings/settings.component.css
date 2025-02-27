@@ -212,3 +212,9 @@ button:disabled {
 input[type="file"] {
     display: none;
 }
+
+.fa-upload{
+    color: #FC282C !important;
+    margin-right: 10px;
+    font-size: 18px !important;
+}

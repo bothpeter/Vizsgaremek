@@ -558,3 +558,8 @@ input[type="file"] {
     margin-right: 10px;
 }
 
+.fa-upload{
+    color: #FC282C;
+    margin-right: 10px;
+    font-size: 18px;
+}
