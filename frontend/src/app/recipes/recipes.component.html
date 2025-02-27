@@ -1,7 +1,7 @@
 <div class="food-cards">
     <div class="sorting-container">
         <div class="sorting-dropdown">
-            <label>Szűrés típus szerint:</label>
+            <label><i class="fas fa-filter"></i>Szűrés típus szerint:</label>
             <div class="custom-select">
                 <select id="foodType" (change)="changeType($any($event.target).value)">
                     <option value="all">Összes</option>
@@ -9,7 +9,7 @@
                     <option value="ebed">Ebéd</option>
                     <option value="vacsora">Vacsora</option>
                 </select>
-                <span class="custom-arrow">▼</span>
+                <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
     </div>

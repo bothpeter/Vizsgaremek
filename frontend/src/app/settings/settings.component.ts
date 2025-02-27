@@ -161,4 +161,17 @@ export class SettingsComponent implements OnInit {
             this.authService.deleteUser();
         }
     }
+
+    onDragOver(event: DragEvent): void {
+        event.preventDefault();
+    }
+
+    onDrop(event: DragEvent): void {
+        event.preventDefault();
+        const file = event.dataTransfer?.files[0];
+        if (file) {
+            this.selectedFile = file;
+            this.userPhysique.progress_picture = file;
+        }
+    }
 }

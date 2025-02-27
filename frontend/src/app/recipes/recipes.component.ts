@@ -38,7 +38,7 @@ export class RecipesComponent implements OnInit {
     ngOnInit(): void {
         this.fetchFoods();
         this.fetchLikedFoods();
-        this.fetchMeals(); // Fetch meals on initialization
+        this.fetchMeals();
     }
 
     fetchFoods(): void {
@@ -77,10 +77,8 @@ export class RecipesComponent implements OnInit {
 
         this.foodService.getMeals().subscribe({
             next: (data) => {
-                // Extract the food IDs from the Meals array
                 const mealFoodIds = data.Meals.map((meal: any) => meal.food_id);
 
-                // Update the isAddedToMeal property for each food item
                 this.foods.forEach((food) => {
                     food.isAddedToMeal = mealFoodIds.includes(food.food_id);
                 });
@@ -107,7 +105,7 @@ export class RecipesComponent implements OnInit {
             return;
         }
 
-        const date = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        const date = new Date().toISOString().split('T')[0];
         this.foodService.toggleMeal(food.food_id, date, food.isAddedToMeal).subscribe({
             next: () => {
                 food.isAddedToMeal = !food.isAddedToMeal;

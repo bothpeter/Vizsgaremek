@@ -5,37 +5,42 @@
         <form (ngSubmit)="saveUserData()" #settingsForm="ngForm">
             <div class="settings-grid">
                 <div class="form-group">
-                    <label for="name">Felhasználónév</label>
+                    <label for="name"><i class="fas fa-user"></i>Felhasználónév</label>
                     <input id="name" name="name" [(ngModel)]="userName" required placeholder="Add meg a neved" />
                 </div>
+
                 <div class="form-group">
-                    <label for="email">E-mail</label>
+                    <label for="email"><i class="fas fa-envelope"></i>E-mail</label>
                     <input id="email" name="email" [(ngModel)]="userEmail" required placeholder="Add meg az e-mail címed" />
                     <div *ngIf="emailError" class="error-message">{{ emailError }}</div>
                 </div>
+
                 <div class="form-group">
-                    <label for="height">Magasság (cm)</label>
+                    <label for="height"><i class="fas fa-ruler-vertical"></i>Magasság (cm)</label>
                     <input id="height" name="height" [(ngModel)]="userPhysique.height" type="number" required placeholder="Add meg a magasságod" />
                 </div>
+
                 <div class="form-group">
-                    <label for="weight">Súly (kg)</label>
+                    <label for="weight"><i class="fas fa-weight"></i>Súly (kg)</label>
                     <input id="weight" name="weight" [(ngModel)]="userPhysique.weight" type="number" required placeholder="Add meg a súlyod" />
                 </div>
+
                 <div class="form-group">
-                    <label for="age">Életkor</label>
+                    <label for="age"><i class="fas fa-birthday-cake"></i>Életkor</label>
                     <input id="age" name="age" [(ngModel)]="userPhysique.age" type="number" required placeholder="Add meg az életkorod" />
                 </div>
+
                 <div class="form-group">
-                    <label for="gender">Nem</label>
+                    <label for="gender"><i class="fas fa-venus-mars"></i>Nem</label>
                     <select id="gender" name="gender" [(ngModel)]="userPhysique.gender" required>
                         <option value="" disabled selected>Válaszd ki a nemedet</option>
                         <option value="ferfi">Férfi</option>
                         <option value="no">Nő</option>
                     </select>
                 </div>
-    
+
                 <div class="form-group">
-                    <label for="activityLevel">Aktivitás szintje</label>
+                    <label for="activityLevel"><i class="fas fa-running"></i>Aktivitás szintje</label>
                     <select id="activityLevel" name="activityLevel" [(ngModel)]="userPhysique.activity_level" required>
                         <option value="" disabled selected>Válaszd ki az aktivitási szintedet</option>
                         <option value="sedentary">Inaktív</option>
@@ -45,8 +50,9 @@
                         <option value="veryActive">Nagyon aktív</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="goal">Cél</label>
+                    <label for="goal"><i class="fas fa-bullseye"></i>Cél</label>
                     <select id="goal" name="goal" [(ngModel)]="userPhysique.goal" required>
                         <option value="" disabled selected>Válaszd ki a célodat</option>
                         <option value="maintain">Súly fenntartása</option>
@@ -54,22 +60,32 @@
                         <option value="gain">Hízás</option>
                     </select>
                 </div>
-    
+
                 <div class="form-group">
-                    <label for="progress_picture">Profilkép</label>
-                    <input id="progress_picture" name="progress_picture" type="file" (change)="onFileSelected($event)" accept="image/*" />
-                </div>
-                <div class="form-group">
-                    <label>Felhasználó törlése:</label>
+                    <label><i class="fas fa-trash"></i>Felhasználó törlése</label>
                     <div class="delete-user-section">
-                        <button class="delete-button" (click)="confirmDeleteUser()">Fiók törlése</button>
+                        <button class="delete-button" (click)="confirmDeleteUser()">
+                            <i class="fas fa-trash"></i>Fiók törlése
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group full-row">
+                    <label><i class="fas fa-camera"></i>Profilkép</label>
+                    <div class="file-upload-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+                        <label for="image" class="file-upload-label">
+                            <span *ngIf="!selectedFile">Húzd ide a képet, vagy kattints a feltöltéshez</span>
+                            <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
+                            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
+                        </label>
                     </div>
                 </div>
             </div>
-    
-            <button type="submit" [disabled]="!settingsForm.form.valid">Mentés</button>
+
+            <button type="submit" [disabled]="!settingsForm.form.valid">
+                <i class="fas fa-save"></i>Mentés
+            </button>
         </form>
-    
+
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
     </div>

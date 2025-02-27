@@ -1,14 +1,14 @@
 <div class="workout-cards">
     <div class="sorting-container">
         <div class="sorting-dropdown">
-            <label for="workoutType">Szűrés típus szerint:</label>
+            <label><i class="fas fa-filter"></i>Szűrés típus szerint:</label>
             <div class="custom-select">
                 <select id="workoutType" (change)="changeType($any($event.target).value)">
                     <option value="all">Összes</option>
                     <option value="Edzőtermi edzés">Edzőtermi edzés</option>
                     <option value="Saját testsúlyos edzés.">Saját testsúlyos edzés</option>
                 </select>
-                <span class="custom-arrow">▼</span>
+                <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
     </div>

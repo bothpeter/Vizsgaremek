@@ -86,6 +86,8 @@
 
 .food-card-content {
     padding: 16px;
+    position: relative;
+    min-height: 100px;
 }
 
 .food-card-content h3 {
@@ -95,7 +97,10 @@
 }
 
 .food-card-content p {
-    margin: 4px 0;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    margin: 0;
     font-size: 1em;
     color: #b0b0b0;
 }

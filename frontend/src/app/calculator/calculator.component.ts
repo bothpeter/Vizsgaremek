@@ -47,6 +47,8 @@ export class CalculatorComponent implements OnInit {
                     this.calorieHeight = userPhysique.height.toString();
                     this.calorieAge = userPhysique.age.toString();
                     this.calorieGender = userPhysique.gender === 'ferfi' ? 'male' : 'female';
+                    this.activityLevel = userPhysique.activity_level.toString();
+                    this.goal = userPhysique.goal.toString();
                 }
             },
             error: (error) => {

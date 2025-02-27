@@ -1,7 +1,7 @@
 <div class="exercise-cards">
     <div class="sorting-container">
         <div class="sorting-dropdown">
-            <label>Szűrés izomcsoport szerint:</label>
+            <label><i class="fas fa-filter"></i>Szűrés izomcsoport szerint:</label>
             <div class="custom-select">
                 <select id="muscleGroup" (change)="changeMuscleGroup($any($event.target).value)">
                     <option value="all">Összes</option>
@@ -11,18 +11,18 @@
                     <option value="Hát">Hát</option>
                     <option value="Has">Has</option>
                 </select>
-                <span class="custom-arrow">▼</span>
+                <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
         <div class="sorting-dropdown">
-            <label>Szűrés kategória szerint:</label>
+            <label><i class="fas fa-filter"></i>Szűrés kategória szerint:</label>
             <div class="custom-select">
                 <select id="exerciseType" (change)="changeType($any($event.target).value)">
                     <option value="all">Összes</option>
                     <option value="edzotermi edzes">Edzőtermi edzés</option>
                     <option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
                 </select>
-                <span class="custom-arrow">▼</span>
+                <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
     </div>
