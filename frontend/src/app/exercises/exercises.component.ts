@@ -3,12 +3,11 @@ import { ExerciseService } from '../services/exercise.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SortExercisesPipe } from '../pipes/sort-exercises.pipe';
 
 @Component({
     selector: 'app-exercises',
     standalone: true,
-    imports: [CommonModule, FormsModule, SortExercisesPipe],
+    imports: [CommonModule, FormsModule],
     templateUrl: './exercises.component.html',
     styleUrls: ['./exercises.component.css'],
 })
@@ -19,6 +18,7 @@ export class ExercisesComponent implements OnInit {
     selectedType: string = 'all';
     selectedMuscleGroup: string = 'all';
     showPopup: boolean = false;
+    searchQuery = '';
 
     showAddExercisePopup: boolean = false;
     newExercise: any = {
@@ -150,5 +150,18 @@ export class ExercisesComponent implements OnInit {
         if (file) {
             this.newExercise.imgFile = file;
         }
+    }
+
+    get filteredExercises() {
+        return this.exercises.filter(exercise => {
+            const matchesSearch = exercise.exercise_name.toLowerCase().includes(this.searchQuery.toLowerCase());
+            const matchesMuscleGroup = this.selectedMuscleGroup === 'all' || exercise.muscle_group === this.selectedMuscleGroup;
+            const matchesType = this.selectedType === 'all' || exercise.type === this.selectedType;
+            return matchesSearch && matchesMuscleGroup && matchesType;
+        });
+    }
+    
+    clearSearch() {
+        this.searchQuery = '';
     }
 }

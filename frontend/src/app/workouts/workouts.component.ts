@@ -3,12 +3,11 @@ import { WorkoutService } from '../services/workout.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SortWorkoutsPipe } from '../pipes/sort-workouts.pipe';
 
 @Component({
     selector: 'app-workouts',
     standalone: true,
-    imports: [CommonModule, FormsModule, SortWorkoutsPipe],
+    imports: [CommonModule, FormsModule],
     templateUrl: './workouts.component.html',
     styleUrls: ['./workouts.component.css'],
 })
@@ -19,6 +18,7 @@ export class WorkoutsComponent implements OnInit {
     selectedType: string = 'all';
     selectedWorkout: any = null;
     showPopup: boolean = false;
+    searchQuery = '';
 
     showAddWorkoutPopup: boolean = false;
     newWorkout: any = {
@@ -137,5 +137,17 @@ export class WorkoutsComponent implements OnInit {
         if (this.newWorkout.exercises.length > 1) {
             this.newWorkout.exercises.splice(index, 1);
         }
+    }
+
+    get filteredWorkouts() {
+        return this.workouts.filter(workout => {
+            const matchesSearch = workout.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+            const matchesType = this.selectedType === 'all' || workout.type === this.selectedType;
+            return matchesSearch && matchesType;
+        });
+    }
+
+    clearSearch() {
+        this.searchQuery = '';
     }
 }

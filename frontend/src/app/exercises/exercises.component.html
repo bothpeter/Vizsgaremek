@@ -25,10 +25,18 @@
                 <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
+        <div class="search-container">
+            <label><i class="fas fa-search"></i>Keresés:</label>
+            <div class="search-input-wrapper">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés..." />
+                <button type="button" class="clear-button" (click)="clearSearch()" *ngIf="searchQuery">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="card" *ngFor="let exercise of exercises | sortExercises: selectedType : selectedMuscleGroup"
-        (click)="openPopup(exercise)">
+    <div class="card" *ngFor="let exercise of filteredExercises" (click)="openPopup(exercise)">
         <div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">
             <i class="fas fa-heart" [ngClass]="{'liked': exercise.isLiked}"></i>
         </div>
@@ -40,6 +48,7 @@
         </div>
     </div>
 </div>
+
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
     <div class="popup-content" (click)="$event.stopPropagation()">

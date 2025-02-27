@@ -11,9 +11,18 @@
                 <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
         </div>
+        <div class="search-container">
+            <label><i class="fas fa-search"></i>Keresés:</label>
+            <div class="search-input-wrapper">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés..." />
+                <button type="button" class="clear-button" (click)="clearSearch()" *ngIf="searchQuery">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="card" *ngFor="let workout of workouts | sortWorkouts: selectedType" (click)="openPopup(workout)">
+    <div class="card" *ngFor="let workout of filteredWorkouts" (click)="openPopup(workout)">
         <div class="workout-cover">
             <span>{{ workout.title }}</span>
         </div>
@@ -22,6 +31,7 @@
         </div>
     </div>
 </div>
+
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
     <div class="popup-content" (click)="$event.stopPropagation()">

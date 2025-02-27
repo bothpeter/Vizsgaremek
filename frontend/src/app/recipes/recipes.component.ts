@@ -228,4 +228,8 @@ export class RecipesComponent implements OnInit {
             return typeMatch && nameMatch;
         });
     }
+
+    clearSearch() {
+        this.searchQuery = '';
+    }
 }

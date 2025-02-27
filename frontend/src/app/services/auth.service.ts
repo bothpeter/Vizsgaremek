@@ -14,7 +14,6 @@ export class AuthService {
         const encodedToken = localStorage.getItem('authToken');
         if (encodedToken) {
             const decodedToken = atob(encodedToken); // Decode from base64
-            console.log('Decoded Token:', decodedToken);
             return decodedToken;
         }
         return null;

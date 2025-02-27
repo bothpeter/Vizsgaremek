@@ -14,7 +14,12 @@
         </div>
         <div class="search-container">
             <label><i class="fas fa-search"></i>Keresés:</label>
-            <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés étel neve alapján" />
+            <div class="search-input-wrapper">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés..." />
+                <button type="button" class="clear-button" (click)="clearSearch()" *ngIf="searchQuery">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
     </div>
     

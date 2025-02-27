@@ -11,7 +11,7 @@
     align-items: center;
     gap: 10px;
     background-color: #1e1e1e;
-    padding: 12px 20px;
+    padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -148,7 +148,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 1100;
 }
 
 .popup-content {
@@ -326,6 +326,15 @@
         width: 50px;
         height: 50px;
         font-size: 30px;
+    }
+
+    .sorting-dropdown {
+        flex: 1 1 100%; /* Make dropdown full-width on smaller screens */
+        width: unset;
+    }
+
+    .sorting-container{
+        flex-direction: column;
     }
 }
 
@@ -541,12 +550,10 @@ input[type="file"] {
 
 .add-meal-button .fa-check {
     color: #4CAF50;
-    /* Green color for checkmark */
 }
 
 .add-meal-button .added {
     transform: rotate(360deg);
-    /* Spin animation */
 }
 
 .popup-bottom .fas,
@@ -558,26 +565,26 @@ input[type="file"] {
 .fa-filter {
     margin-right: 10px;
     font-size: 18px;
-    color: #FC282C;
 }
 
 .fa-search {
     margin-right: 10px;
     font-size: 18px;
-    color: #FC282C;
 }
 
 .fa-upload{
     margin-right: 10px;
     font-size: 18px;
+    color: #FC282C;
 }
 
 .search-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     background-color: #1e1e1e;
-    padding: 12px 20px;
+    padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -604,8 +611,42 @@ input:focus{
 .search-container label {
     display: flex;
     align-items: center;
-    gap: 5px; /* Adjust the gap as needed */
     font-weight: bold;
     color: #fff;
     font-size: 1.1em;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #0f0f0f;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.clear-button {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    background-color: #FC282C;
+}
+
+.clear-button:hover {
+    background-color: rgb(198, 19, 19);
 }
