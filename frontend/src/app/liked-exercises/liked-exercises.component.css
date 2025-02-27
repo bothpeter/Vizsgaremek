@@ -259,6 +259,36 @@
     .popup-top{
         gap: 0;
     }
+
+    .popup-top {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .popup-right img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 16px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .close-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+    }
+
+    .popup-left {
+        width: 90%;
+    }
+
+    .exercise-cards{
+        padding-left: 0;
+        padding-right: 10px;
+    }
 }
 
 

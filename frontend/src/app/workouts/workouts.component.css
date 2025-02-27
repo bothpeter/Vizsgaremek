@@ -231,14 +231,28 @@ h4 {
         width: 100%;
     }
 
-    .sorting-container {
-        margin-bottom: 0;
-    }
-
     .close-btn {
         width: 50px;
         height: 50px;
         font-size: 25px;
+    }
+
+    .sorting-container {
+        margin-bottom: 0;
+    }
+    
+    .sorting-dropdown {
+        flex: 1 1 100%;
+        width: unset;
+        justify-content: center;
+    }
+
+    .sorting-container{
+        flex-direction: column;
+    }
+
+    .add-workout-button::before {
+        display: none;
     }
 }
 
@@ -485,6 +499,7 @@ h4 {
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
+    height: 39px;
 }
 
 input:focus{

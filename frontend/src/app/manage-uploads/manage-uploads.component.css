@@ -652,19 +652,9 @@
     100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 1024px) {
-
-    .food-card,
-    .exercise-card,
-    .workout-card,
-    .diet-card {
-        flex: 1 1 calc(50% - 32px);
-        max-width: calc(50% - 32px);
-    }
-}
 
 @media (max-width: 768px) {
-
+    /* Cards */
     .food-card,
     .exercise-card,
     .workout-card,
@@ -673,8 +663,86 @@
         max-width: 100%;
     }
 
+    /* Section Title */
     .section-title {
         font-size: 1.5em;
+    }
+
+    /* Popup Content */
+    .popup-content {
+        width: 90%; /* Increase width for smaller screens */
+        max-width: 90%; /* Allow more space for content */
+        padding: 16px; /* Reduce padding for smaller screens */
+    }
+
+    /* Food Popup */
+    .food-popup-top,
+    .exercise-popup-top,
+    .diet-popup-top {
+        flex-direction: column; /* Stack top sections vertically */
+        gap: 10px; /* Reduce gap between items */
+    }
+
+    .food-popup-right,
+    .exercise-popup-right,
+    .diet-popup-right {
+        justify-content: center; /* Center images on smaller screens */
+    }
+
+    .food-popup-right img,
+    .exercise-popup-right img,
+    .diet-popup-right img {
+        max-width: 100%; /* Allow images to take full width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Nutrition and Exercise Details */
+    .nutrition-row,
+    .exercise-details-row {
+        flex-direction: column; /* Stack items vertically */
+        gap: 8px; /* Reduce gap between items */
+    }
+
+    .nutrition-item,
+    .exercise-details-item {
+        flex: 1 1 100%; /* Full width for items */
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Workout Exercises */
+    .workout-exercise-card {
+        padding: 12px; /* Reduce padding for smaller screens */
+    }
+
+    .workout-exercise-header {
+        flex-direction: column; /* Stack header items vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    /* Diet Popup */
+    .diet-popup-bottom ul {
+        padding-left: 0; /* Remove default padding */
+    }
+
+    .diet-popup-bottom li {
+        padding: 8px; /* Reduce padding for smaller screens */
+    }
+
+    /* Close Button */
+    .close-btn {
+        width: 35px; /* Reduce size for smaller screens */
+        height: 35px;
+        font-size: 20px; /* Reduce font size */
+    }
+
+    /* Uploads Container */
+    .uploads-container {
+        height: auto; /* Allow container to grow with content */
+        padding: 0;
+    }
+
+    .cards{
+        padding: 0;
     }
 }
 

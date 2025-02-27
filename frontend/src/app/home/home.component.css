@@ -45,8 +45,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 .hero .cta-button:hover {
@@ -101,7 +102,7 @@
 }
 
 .feature:hover {
-    transform: translateY(-10px);
+    transform: translateY(-100px);
 }
 
 .feature i {
@@ -121,3 +122,189 @@
     color: #b0b0b0;
 }
 
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
+              transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.animate-right {
+  transform: translateX(40px);
+}
+
+.animate-on-scroll.animate-left {
+  transform: translateX(-40px);
+}
+
+.animate-on-scroll.animate-scale {
+  transform: scale(0.85);
+}
+
+.animate-on-scroll.animate-rotate {
+  transform: rotate(-8deg) scale(0.9);
+}
+
+.animate-on-scroll.animate-flip {
+  transform: perspective(1000px) rotateY(20deg);
+}
+
+.animate-on-scroll.animate-rise {
+  transform: translateY(60px) scale(0.95);
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1) rotate(0) rotateY(0);
+}
+
+.features-grid .feature {
+  transition-delay: calc(var(--animation-order) * 0.12s);
+}
+
+.feature {
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FC282C, transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  opacity: 0;
+}
+
+.feature.animated:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(252, 40, 44, 0.2);
+  border: 1px solid rgba(252, 40, 44, 0.3);
+}
+
+.feature.animated:hover::before {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+.feature.animated:hover i {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ----- Hero Section Animations ----- */
+.hero h1 {
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero h2 {
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s,
+              opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.3s,
+              opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+}
+
+.hero .cta-button {
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.45s,
+              opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.45s,
+              background-color 0.3s ease, 
+              box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(252, 40, 44, 0.4);
+}
+
+.hero .cta-button:hover {
+  box-shadow: 0 8px 20px rgba(252, 40, 44, 0.6);
+  transform: translateY(-2px) scale(1.05);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-12px); }
+  50% { transform: translateY(-6px); }
+  75% { transform: translateY(-10px); }
+}
+
+.logo {
+  animation: float 8s ease-in-out infinite;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+.parallax-section {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+section h3 {
+  position: relative;
+  padding-bottom: 15px;
+}
+
+section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #FC282C, transparent);
+  transition: width 0.6s ease;
+}
+
+section h3.animated::after {
+  width: 120px;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(to right, #FC282C, #ff6b6e);
+  z-index: 9999;
+  transition: width 0.1s;
+}
+
+@media (max-width: 768px) {
+  .animate-on-scroll {
+    transition-duration: 0.6s;
+  }
+}

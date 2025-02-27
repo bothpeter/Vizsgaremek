@@ -234,6 +234,10 @@
         font-size: 25px;
     }
 
+    .add-diet-button::before {
+        display: none;
+    }
+
 }
 
 .add-diet-button {

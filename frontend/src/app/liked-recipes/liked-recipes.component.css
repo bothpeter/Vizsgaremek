@@ -287,6 +287,16 @@
     .popup-left {
         width: 90%;
     }
+
+    .food-cards{
+        padding-left: 0;
+        padding-right: 10px;
+    }
+
+    .popup-content{
+        padding: 10px;
+        width: 90%;
+    }
 }
 
 .no-liked-foods {
