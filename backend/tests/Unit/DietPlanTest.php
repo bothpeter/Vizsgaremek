@@ -4,10 +4,10 @@ namespace Tests\Unit;
 
 use App\Models\DietPlan;
 use App\Models\User;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DietPlanTest extends BaseTestCase
+class DietPlanTest extends TestCase
 {
     use RefreshDatabase;
 

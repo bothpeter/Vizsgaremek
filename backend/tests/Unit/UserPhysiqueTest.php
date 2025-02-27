@@ -5,9 +5,9 @@ namespace Tests\Unit;
 use App\Models\User;
 use App\Models\UserPhysique;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\TestCase;
 
-class UserPhysiqueTest extends BaseTestCase
+class UserPhysiqueTest extends TestCase
 {
     use RefreshDatabase;
 

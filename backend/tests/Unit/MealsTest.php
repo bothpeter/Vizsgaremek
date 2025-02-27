@@ -5,9 +5,9 @@ namespace Tests\Unit;
 use App\Models\Meals;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\TestCase;
 
-class MealsTest extends BaseTestCase
+class MealsTest extends TestCase
 {
     use RefreshDatabase;
 

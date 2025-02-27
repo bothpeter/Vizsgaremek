@@ -5,9 +5,9 @@ namespace Tests\Unit;
 use App\Models\FoodIngredients;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\TestCase;
 
-class FoodIngredientsTest extends BaseTestCase
+class FoodIngredientsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -63,7 +63,7 @@ class FoodIngredientsTest extends BaseTestCase
                     "fat" => 0.2,
                     "protein" => 0.3,
                     "carb" => 13.8,
-                    "user_id" => 1,
+                    "user_id" => $user->id,
                     "ingredient_id" => 1
                 ]
             ]);

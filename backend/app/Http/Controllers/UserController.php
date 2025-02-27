@@ -45,11 +45,6 @@ class UserController extends Controller implements HasMiddleware
                 'message' => 'Data updated',
                 'data' => $user
             ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User physique not found'
-            ], 404);
         }
     }
 
