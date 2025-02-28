@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
-use Illuminate\Testing\Fluent\AssertableJson;
 
 class UserTest extends TestCase
 {
