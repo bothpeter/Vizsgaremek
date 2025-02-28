@@ -93,11 +93,11 @@ ul {
     display: none;
     background-color: #0f0f0f;
     position: absolute;
-    top: -58.5px;
+    top: 424px;
     right: 0;
     left: 0;
     padding: 34px 21.5px;
-    border-radius: 0px 10px 0px 0px;
+    border-radius: 0px 0px 10px 0px;
 }
 
 .toggle-btn i {
@@ -116,7 +116,7 @@ ul {
         background-color: #0f0f0f;
         height: auto;
         border-radius: 0px 10px 10px 0px;
-        top: 145px;
+        top: 200px;
     }
 
     .toggle-btn-container {
@@ -124,7 +124,7 @@ ul {
     }
 
     .vertical-nav-container.show {
-        top: 145px;
+        top: 200px;
         left: 0;
     }
 
@@ -150,7 +150,7 @@ ul {
         left: 0;
         right: auto;
         position: fixed;
-        top: 100px;
+        top: 628px;
         display: block;
     }
 
