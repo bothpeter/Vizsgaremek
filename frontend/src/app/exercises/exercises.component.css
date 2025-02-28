@@ -371,6 +371,20 @@
     .popup-content h2{
         width: 80%;
     }
+
+    .grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width{
+        margin-top: 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-form {
+        display: grid;
+    }
 }
 
 .add-exercise-button {
@@ -422,7 +436,6 @@
 }
 
 .grid-form {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }

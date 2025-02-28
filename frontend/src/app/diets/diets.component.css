@@ -279,6 +279,19 @@
         width: 80%;
     }
 
+    .grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .add-food-btn {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-form {
+        display: grid;
+    }
 }
 
 .add-diet-button {
@@ -368,7 +381,6 @@
 }
 
 .grid-form {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }

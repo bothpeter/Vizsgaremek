@@ -181,7 +181,7 @@
     border-radius: 12px;
     width: 80%;
     max-width: 60%;
-    max-height: 90vh;
+    max-height: 80vh;
     color: #fff;
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
@@ -364,13 +364,18 @@
         width: 80%;
     }
 
+    .popup-left h3 {
+        width: 80%;
+    }
+
     .grid-form {
         grid-template-columns: 1fr;
     }
 
-    .popup-left h3 {
-        width: 80%;
+    .add-ingredient-btn {
+        width: 100% !important;
     }
+
 }
 
 .add-food-button {
@@ -546,8 +551,13 @@ input[type="file"] {
     cursor: not-allowed;
 }
 
+@media (min-width: 768px){
+    .grid-form{
+        display: grid;
+    }
+}
+
 .grid-form {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
