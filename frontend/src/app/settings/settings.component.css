@@ -167,6 +167,15 @@ button:disabled {
     .settings-grid {
         grid-template-columns: 1fr;
     }
+
+    .settings-container{
+        padding: 15px;
+    }
+
+    .container{
+        padding-left: 0;
+        padding-right: 10px;
+    }
 }
 
 .full-row {

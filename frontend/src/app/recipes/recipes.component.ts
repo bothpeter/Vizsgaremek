@@ -18,6 +18,7 @@ export class RecipesComponent implements OnInit {
     selectedType: string = 'all';
     showPopup: boolean = false;
     searchQuery: string = '';
+    loading: boolean = false;
 
     showAddFoodPopup: boolean = false;
     newFood: any = {
@@ -42,9 +43,16 @@ export class RecipesComponent implements OnInit {
     }
 
     fetchFoods(): void {
+        this.loading = true;
         this.foodService.getFoods().subscribe({
-            next: (data) => (this.foods = data.food),
-            error: (error) => console.error('Error fetching food:', error),
+            next: (data) => {
+                this.loading = false;
+                this.foods = data.food;
+            },
+            error: (error) => {
+                console.error('Error fetching food:', error);
+                this.loading = false;
+            }
         });
     }
 
@@ -54,7 +62,9 @@ export class RecipesComponent implements OnInit {
                 this.showPopup = true;
                 this.ingredients = data.ingredients;
             },
-            error: (error) => console.error('Error fetching ingredients:', error),
+            error: (error) => {
+                console.error('Error fetching ingredients:', error);
+            }
         });
     }
 

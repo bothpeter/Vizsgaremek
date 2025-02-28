@@ -23,6 +23,9 @@
         </div>
     </div>
     
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
 
     <div class="card" *ngFor="let food of filteredFoods" (click)="openPopup(food)">
         <div class="add-meal-button" (click)="toggleMeal(food); $event.stopPropagation()">

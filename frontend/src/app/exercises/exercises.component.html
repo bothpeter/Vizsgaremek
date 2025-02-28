@@ -35,6 +35,10 @@
             </div>
         </div>
     </div>
+    
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
 
     <div class="card" *ngFor="let exercise of filteredExercises" (click)="openPopup(exercise)">
         <div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">

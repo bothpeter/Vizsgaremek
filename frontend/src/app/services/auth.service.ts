@@ -60,7 +60,6 @@ export class AuthService {
         if (authToken) {
             this.apiService.delete('user').subscribe({
                 next: () => {
-                    console.log('User deleted successfully.');
                     alert('Felhasználó sikeresen törölve!');
                 },
                 error: (error) => {

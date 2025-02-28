@@ -22,6 +22,7 @@ export class CalorieCounterComponent implements OnInit {
 
     showPopup: boolean = false;
     showPhysiquePopup: boolean = false;
+    showUnauthenticatedPopup: boolean = false;
     
     isGoalReached: boolean = false;
     
@@ -38,6 +39,11 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     fetchUserPhysique(): void {
+        if (!this.apiService.getAuthToken()) {
+            this.showUnauthenticatedPopup = true;
+            
+            return;
+        };
         this.apiService.get('user_physique').subscribe({
             next: (res: any) => {
                 if (res.status === 200 && res.UserPhysique.length > 0) {

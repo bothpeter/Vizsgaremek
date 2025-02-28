@@ -8,6 +8,16 @@
     </div>
 </div>
 
+<div *ngIf="showUnauthenticatedPopup" class="popup">
+    <div class="popup-content">
+        <h2 class="missing-data-h2">Jelentkezz be</h2>
+        <p>A kalóriaszámláló használatához be kell jelentkeznie!</p>
+        <button routerLink="/login" class="settings-button">
+            <i class="fas fa-cog"></i> Bejelentkezés
+        </button>
+    </div>
+</div>
+
 <div *ngIf="!showPhysiquePopup" class="calorie-counter-container">
     <h1>Napi kalóriaszámláló</h1>
     <div class="calorie-progress">

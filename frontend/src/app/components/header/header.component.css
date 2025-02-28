@@ -104,7 +104,7 @@ header nav ul li.login-button::after {
     border-radius: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
     .login-button {
         padding: 15px 22px;
         margin-right: 10px;

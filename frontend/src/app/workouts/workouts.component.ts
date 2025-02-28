@@ -19,6 +19,7 @@ export class WorkoutsComponent implements OnInit {
     selectedWorkout: any = null;
     showPopup: boolean = false;
     searchQuery = '';
+    loading: boolean = false;
 
     showAddWorkoutPopup: boolean = false;
     newWorkout: any = {
@@ -38,15 +39,27 @@ export class WorkoutsComponent implements OnInit {
 
     fetchExercises(): void {
         this.workoutService.getExercises().subscribe({
-            next: (data) => (this.exercises = data.exercise),
-            error: (error) => console.error('Error fetching exercises:', error),
+            next: (data) => {
+                this.exercises = data.exercise;
+            },
+            error: (error) => {
+                console.error('Error fetching exercises:', error);
+                this.loading = false;
+            }
         });
     }
-
+    
     fetchWorkouts(): void {
+        this.loading = true;
         this.workoutService.getWorkouts().subscribe({
-            next: (data) => (this.workouts = data.workout_plan),
-            error: (error) => console.error('Error fetching workouts:', error),
+            next: (data) => {
+                this.loading = false;
+                this.workouts = data.workout_plan;
+            },
+            error: (error) => {
+                console.error('Error fetching workouts:', error);
+                this.loading = false;
+            }
         });
     }
 

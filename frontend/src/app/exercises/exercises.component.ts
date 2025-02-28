@@ -19,6 +19,7 @@ export class ExercisesComponent implements OnInit {
     selectedMuscleGroup: string = 'all';
     showPopup: boolean = false;
     searchQuery = '';
+    loading: boolean = false;
 
     showAddExercisePopup: boolean = false;
     newExercise: any = {
@@ -37,9 +38,16 @@ export class ExercisesComponent implements OnInit {
     }
 
     fetchExercises(): void {
+        this.loading = true;
         this.exerciseService.getExercises().subscribe({
-            next: (data) => (this.exercises = data.exercise),
-            error: (error) => console.error('Error fetching exercises:', error),
+            next: (data) => {
+                this.loading = false
+                this.exercises = data.exercise;
+            },
+            error: (error) => {
+                this.loading = false;
+                console.error('Error fetching exercises:', error);
+            }
         });
     }
 
