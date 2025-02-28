@@ -23,9 +23,9 @@ export class CalorieCounterComponent implements OnInit {
     showPopup: boolean = false;
     showPhysiquePopup: boolean = false;
     showUnauthenticatedPopup: boolean = false;
-    
+
     isGoalReached: boolean = false;
-    
+
     confettiPieces: ConfettiPiece[] = [];
     showConfetti: boolean = false;
     progressWidth: number = 0;
@@ -41,9 +41,9 @@ export class CalorieCounterComponent implements OnInit {
     fetchUserPhysique(): void {
         if (!this.apiService.getAuthToken()) {
             this.showUnauthenticatedPopup = true;
-            
             return;
         };
+
         this.apiService.get('user_physique').subscribe({
             next: (res: any) => {
                 if (res.status === 200 && res.UserPhysique.length > 0) {
@@ -168,8 +168,6 @@ export class CalorieCounterComponent implements OnInit {
                 this.totalCaloriesConsumed -= deletedMeal.calorie;
 
                 this.progressWidth = (this.totalCaloriesConsumed / this.userPhysique?.daily_calorie_intake) * 100;
-
-                console.log('Meal deleted successfully');
             },
             error: (error) => {
                 console.error('Error deleting meal:', error);

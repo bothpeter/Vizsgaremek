@@ -38,6 +38,10 @@ export class ManageUploadsComponent implements OnInit {
 
     loading: boolean = false;
 
+    meals: any[] = [];
+    likedFoods: any[] = [];
+    likedExercises: any[] = [];
+
     constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private apiService: ApiService) { }
 
     ngOnInit(): void {
@@ -47,6 +51,39 @@ export class ManageUploadsComponent implements OnInit {
         this.fetchDiets();
         this.fetchWorkouts();
     }
+
+    fetchMeals(): void {
+        this.foodService.getMeals().subscribe({
+            next: (res: any) => {
+                this.meals = res.Meals;
+            },
+            error: (error) => {
+                console.error('Error fetching meals:', error);
+            }
+        });
+    }
+
+    fetchLikedFoods(): void {
+        this.foodService.getLikedFoods().subscribe({
+            next: (res: any) => {
+                this.likedFoods = res.UserLikeFood;
+            },
+            error: (error) => {
+                console.error('Error fetching liked foods:', error);
+            }
+        });
+    }
+
+    fetchLikedExercises(): void {
+            this.exerciseService.getLikedExercises().subscribe({
+                next: (res: any) => {
+                    this.likedExercises = res.userLikeExercise;
+                },
+                error: (error) => {
+                    console.error('Error fetching liked exercises:', error);
+                },
+            });
+        }
 
     fetchFoods(): void {
         const userId = localStorage.getItem('userId');
@@ -177,13 +214,13 @@ export class ManageUploadsComponent implements OnInit {
         this.selectedDiet = diet;
         this.fetchDietFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
     }
-    
+
     closeDietPopup(): void {
         this.showDietPopup = false;
         this.selectedDiet = null;
         this.foods = [];
     }
-    
+
     fetchDietFoods(foodIds: number[]): void {
         this.foodService.getFoods().subscribe({
             next: (data) => {
@@ -215,6 +252,24 @@ export class ManageUploadsComponent implements OnInit {
                     },
                     error: (error) => console.error('Error deleting food ingredients:', error),
                 });
+
+                this.apiService.delete(`meals/${foodId}`).subscribe({
+                    next: () => {
+                        this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
+                    },
+                    error: (error) => {
+                        console.error('Error deleting meal:', error);
+                    },
+                });
+
+                this.apiService.delete(`user_like_food/${foodId}`).subscribe({
+                    next: () => {
+                        this.likedFoods = this.likedFoods.filter((likedFood) => likedFood.food_id !== foodId);
+                    },
+                    error: (error) => {
+                        console.error('Error deleting liked food:', error);
+                    },
+                });
             },
             error: (error) => console.error('Error deleting food:', error),
         });
@@ -225,6 +280,16 @@ export class ManageUploadsComponent implements OnInit {
             next: () => {
                 this.uploadedExercises = this.uploadedExercises.filter(exercise => exercise.exercise_id !== exerciseId);
                 this.allUploads = this.allUploads.filter(item => item.exercise_id !== exerciseId);
+
+                this.apiService.delete(`user_like_exercise/${exerciseId}`).subscribe({
+                    next: () => {
+                        this.likedExercises = this.likedExercises.filter((likedExercise) => likedExercise.exercise_id !== exerciseId);
+                    },
+                    error: (error) => {
+                        console.error('Error deleting liked exercise:', error);
+                    }
+                });
+
             },
             error: (error) => console.error('Error deleting exercise:', error),
         });
@@ -239,7 +304,7 @@ export class ManageUploadsComponent implements OnInit {
             error: (error) => console.error('Error deleting workout:', error),
         });
     }
-    
+
     deleteDiet(dietId: number): void {
         this.apiService.delete(`diet_plan/${dietId}`).subscribe({
             next: () => {

@@ -6,6 +6,10 @@ header {
     justify-content: space-between;
     font-size: 18px;
     font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #0f0f0f;
 }
 
 nav {
@@ -104,12 +108,17 @@ header nav ul li.login-button::after {
     border-radius: 20px;
 }
 
-@media (max-width: 1120px) {
-    .login-button {
-        padding: 15px 22px;
-        margin-right: 10px;
-    }
+.nav-links li.active::after {
+    width: 75% !important;
+}
 
+
+.nav-links li:hover::after,
+.nav-links li:focus-within::after {
+    width: 75%;
+}
+
+@media (max-width: 1120px) {
     .hamburger {
         display: flex;
     }
@@ -120,17 +129,20 @@ header nav ul li.login-button::after {
         position: absolute;
         top: 65px;
         right: 0;
-        background-color: #1e1e1e;
+        background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.95));
+        backdrop-filter: blur(15px);
         width: 100%;
         align-items: center;
-        padding: 10px 0;
+        padding: 20px 0;
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
         opacity: 0;
-        box-shadow: 0px 8px 10px -1px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         z-index: 1000;
         pointer-events: none;
+        border-radius: 0 0 15px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-links.active {
@@ -141,14 +153,33 @@ header nav ul li.login-button::after {
 
     .nav-links li {
         opacity: 0;
-        transform: translateY(-10px);
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        padding: 10px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    li::after {
+        display: none;
     }
 
     .nav-links.active li {
         opacity: 1;
         transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .nav-links li:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+    }
+
+    .login-button {
+        padding: 14px 16px;
     }
 
     .logo {

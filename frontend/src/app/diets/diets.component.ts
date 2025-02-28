@@ -21,6 +21,8 @@ export class DietsComponent implements OnInit {
     selectedFood: any = null;
     showPopup: boolean = false;
     showFoodPopup: boolean = false;
+    loading: boolean = false;
+    searchQuery = '';
 
     showAddDietPopup: boolean = false;
     newDiet: any = {
@@ -37,9 +39,16 @@ export class DietsComponent implements OnInit {
     }
 
     fetchDiets(): void {
+        this.loading = true;
         this.dietService.getDiets().subscribe({
-            next: (data) => (this.diets = data.workout_plan),
-            error: (error) => console.error('Error fetching diets:', error),
+            next: (data) => {
+                this.diets = data.workout_plan;
+                this.loading = false;
+            },
+            error: (error) => {
+                console.error('Error fetching diets:', error);
+                this.loading = false;
+            }
         });
     }
 
@@ -155,5 +164,16 @@ export class DietsComponent implements OnInit {
         if (this.newDiet.foods.length > 1) {
             this.newDiet.foods.splice(index, 1);
         }
+    }
+
+    get searchDiets() {
+        return this.diets.filter(diet => {
+            const matchesSearch = diet.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+            return matchesSearch;
+        });
+    }
+
+    clearSearch() {
+        this.searchQuery = '';
     }
 }

@@ -40,12 +40,13 @@
 
 .footer-heading::after {
     content: '';
-    display: block;
-    width: 50px;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
     height: 2px;
-    background-color: #FC282C;
-    margin: 10px auto 0;
-    border-radius: 10px;
+    background: linear-gradient(to right, transparent, #FC282C, transparent);
 }
 
 .footer-links {

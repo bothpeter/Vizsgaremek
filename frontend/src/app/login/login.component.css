@@ -108,3 +108,13 @@ button:disabled {
 .forgot-password{
     margin-top: 8px;
 }
+
+@media (max-width: 768px) {
+    .login-container{
+        padding: 16px;
+    }
+
+    .login-card{
+        padding: 25px;
+    }
+}

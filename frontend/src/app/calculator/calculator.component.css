@@ -124,9 +124,41 @@ button:disabled {
     width: 100%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .calorie-grid {
         grid-template-columns: 1fr;
     }
+
+    .calculator-container {
+        padding: 16px;
+    }
+
+    .bmi-calculator-card{
+        padding: 25px;
+    }
+
+    .calorie-calculator-card{
+        padding: 25px;
+    }
+}
+
+.h1-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.h1-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #FC282C, transparent);
 }
 

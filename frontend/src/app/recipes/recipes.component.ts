@@ -144,7 +144,7 @@ export class RecipesComponent implements OnInit {
             next: (response: any) => {
                 const newFoodId = response.food.food_id; // Get the ID of the new food
 
-                // Send ingredients for the new food item
+                // Send ingredients for the new food ite
                 this.newFood.ingredients.forEach((ingredient: any) => {
                     const ingredientPayload = {
                         food_id: newFoodId,
@@ -153,7 +153,6 @@ export class RecipesComponent implements OnInit {
                     };
 
                     this.foodService.addIngredient(ingredientPayload).subscribe({
-                        next: () => console.log('Ingredient added successfully'),
                         error: (error) => console.error('Error adding ingredient:', error),
                     });
                 });

@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 
 @Component({
     selector: 'app-header-logged-in',
-    imports: [RouterLink, CommonModule],
+    standalone: true,
+    imports: [RouterLink, RouterModule, CommonModule],
     templateUrl: './header-logged-in.component.html',
     styleUrls: ['./header-logged-in.component.css']
 })

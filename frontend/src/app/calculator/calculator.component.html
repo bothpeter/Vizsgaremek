@@ -1,25 +1,28 @@
+<section class="h1-container">
+    <h1>Kalkulátorok</h1>
+</section>
 <div class="calculator-container">
     <div class="bmi-calculator-card">
         <h2>BMI Kalkulátor</h2>
         <p class="subtitle">Add meg az adataidat és számold ki a BMI-det</p>
         <form (ngSubmit)="onSubmitBMI()" #bmiForm="ngForm">
             <div class="form-group">
-                <label for="weight"><i class="fas fa-weight"></i> Súly (kg)</label>
+                <label for="weight">Súly (kg)</label>
                 <input min="0" type="number" id="weight" name="weight" [(ngModel)]="weight" required #weightInput="ngModel" placeholder="Add meg a súlyodat" />
             </div>
 
             <div class="form-group">
-                <label for="height"><i class="fas fa-ruler-vertical"></i> Magasság (cm)</label>
+                <label for="height">Magasság (cm)</label>
                 <input min="0" type="number" id="height" name="height" [(ngModel)]="height" required #heightInput="ngModel" placeholder="Add meg a magasságodat" />
             </div>
 
             <div class="form-group">
-                <label for="age"><i class="fas fa-birthday-cake"></i> Életkor</label>
+                <label for="age">Életkor</label>
                 <input min="0" type="number" id="age" name="age" [(ngModel)]="age" required #ageInput="ngModel" placeholder="Add meg az életkorodat" />
             </div>
 
             <div class="form-group">
-                <label for="gender"><i class="fas fa-venus-mars"></i> Nem</label>
+                <label for="gender">Nem</label>
                 <select id="gender" name="gender" [(ngModel)]="gender" required #genderInput="ngModel">
                     <option value="" disabled selected>Válaszd ki a nemedet</option>
                     <option value="male">Férfi</option>
@@ -33,7 +36,7 @@
         </form>
 
         <div *ngIf="bmi !== null" class="result">
-            <h3><i class="fas fa-chart-line"></i> Az eredményed:</h3>
+            <h3>Az eredményed:</h3>
             <p><strong>BMI:</strong> {{ bmi }}</p>
             <p>{{ bmiCategory }}</p>
         </div>
@@ -45,11 +48,11 @@
         <form (ngSubmit)="onSubmitCalories()" #calorieForm="ngForm">
             <div class="calorie-grid">
                 <div class="form-group">
-                    <label for="calorieWeight"><i class="fas fa-weight"></i> Súly (kg)</label>
+                    <label for="calorieWeight">Súly (kg)</label>
                     <input min="0" type="number" id="calorieWeight" name="calorieWeight" [(ngModel)]="calorieWeight" required />
                 </div>
                 <div class="form-group">
-                    <label for="calorieGender"><i class="fas fa-venus-mars"></i> Nem</label>
+                    <label for="calorieGender">Nem</label>
                     <select id="calorieGender" name="calorieGender" [(ngModel)]="calorieGender" required>
                         <option value="" disabled selected>Válaszd ki a nemedet</option>
                         <option value="male">Férfi</option>
@@ -57,11 +60,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="calorieHeight"><i class="fas fa-ruler-vertical"></i> Magasság (cm)</label>
+                    <label for="calorieHeight">Magasság (cm)</label>
                     <input min="0" type="number" id="calorieHeight" name="calorieHeight" [(ngModel)]="calorieHeight" required />
                 </div>
                 <div class="form-group">
-                    <label for="activityLevel"><i class="fas fa-running"></i> Aktivitás szintje</label>
+                    <label for="activityLevel">Aktivitás szintje</label>
                     <select id="activityLevel" name="activityLevel" [(ngModel)]="activityLevel" required>
                         <option value="" disabled selected>Válaszd ki az aktivitási szintedet</option>
                         <option value="sedentary">Inaktív</option>
@@ -72,11 +75,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="calorieAge"><i class="fas fa-birthday-cake"></i> Életkor</label>
+                    <label for="calorieAge">Életkor</label>
                     <input min="0" type="number" id="calorieAge" name="calorieAge" [(ngModel)]="calorieAge" required />
                 </div>
                 <div class="form-group">
-                    <label for="goal"><i class="fas fa-bullseye"></i> Cél</label>
+                    <label for="goal">Cél</label>
                     <select id="goal" name="goal" [(ngModel)]="goal" required>
                         <option value="" disabled selected>Válaszd ki a célodat</option>
                         <option value="maintain">Súly fenntartása</option>
@@ -90,7 +93,7 @@
             </button>
         </form>
         <div *ngIf="calorieResult !== null" class="result">
-            <h3><i class="fas fa-utensils"></i> Napi Kalória Szükséglet:</h3>
+            <h3>Napi Kalória Szükséglet:</h3>
             <p>{{ calorieResult }} kcal</p>
         </div>
     </div>

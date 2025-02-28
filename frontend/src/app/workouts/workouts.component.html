@@ -1,4 +1,7 @@
 <div class="workout-cards">
+    <section class="h1-container">
+        <h1>Edzéstervek</h1>
+    </section>
     <div class="sorting-container">
         <div class="sorting-dropdown">
             <label><i class="fas fa-filter"></i>Szűrés típus szerint:</label>
@@ -14,7 +17,7 @@
         <div class="search-container">
             <label><i class="fas fa-search"></i>Keresés:</label>
             <div class="search-input-wrapper">
-                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés..." />
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés" />
                 <button type="button" class="clear-button" (click)="clearSearch()" *ngIf="searchQuery">
                     <i class="fas fa-times"></i>
                 </button>

@@ -1,5 +1,24 @@
 <div class="diet-cards">
-    <div class="card" *ngFor="let diet of diets" (click)="openPopup(diet)">
+    <section class="h1-container">
+        <h1>Étrendek</h1>
+    </section>
+
+    <div class="sorting-container">
+        <div class="search-container">
+            <label><i class="fas fa-search"></i>Keresés:</label>
+            <div class="search-input-wrapper">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Keresés" />
+                <button type="button" class="clear-button" (click)="clearSearch()" *ngIf="searchQuery">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    <div class="card" *ngFor="let diet of searchDiets" (click)="openPopup(diet)">
         <div class="diet-cover">
             <span>{{ diet.title }}</span>
         </div>

@@ -131,11 +131,34 @@
 .like-button i {
     font-size: 25px;
     color: #ccc;
-    transition: color 0.1s ease, transform 0.1s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-origin: center;
 }
 
 .like-button .liked {
     color: #FC282C;
+    animation: twitterHeart 0.6s ease-out forwards;
+}
+
+@keyframes twitterHeart {
+    0%, 100% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.2);
+    }
+    30% {
+        transform: scale(0.9);
+    }
+    45% {
+        transform: scale(1.1);
+    }
+    60% {
+        transform: scale(1.05);
+    }
+    75% {
+        transform: scale(1.02);
+    }
 }
 
 .popup {
@@ -335,6 +358,18 @@
 
     .add-food-button::before {
         display: none;
+    }
+
+    .popup-content h2{
+        width: 80%;
+    }
+
+    .grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .popup-left h3 {
+        width: 80%;
     }
 }
 
@@ -675,4 +710,24 @@ input:focus{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.h1-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.h1-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #FC282C, transparent);
 }

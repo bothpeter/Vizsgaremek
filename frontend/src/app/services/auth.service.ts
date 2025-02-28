@@ -21,7 +21,6 @@ export class AuthService {
 
     login(token: string, userId: string, userName: string, userEmail: string) {
         this.isLoggedIn = true;
-        console.log('Encoded Token:', token);
         localStorage.setItem('authToken', token);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userName', userName);

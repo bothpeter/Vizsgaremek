@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
     userEmail: string = '';
     userPhysique: any = null;
     errorMessage: string = '';
+    loading: boolean = false;
 
     constructor(private apiService: ApiService, private authService: AuthService) { }
 
@@ -27,15 +28,19 @@ export class UserComponent implements OnInit {
             return;
         }
 
+        this.loading = true;
         this.apiService.get('user_physique').subscribe({
             next: (res: any) => {
                 if (res.status === 200 && res.UserPhysique.length > 0) {
+                    this.loading = false;
                     this.userPhysique = res.UserPhysique[0];
                 } else {
+                    this.loading = false;
                     this.errorMessage = 'Nincs elérhető adat a felhasználó fizikumáról. A beállításokban tudod beállítani a fizikumodat.';
                 }
             },
             error: () => {
+                this.loading = false;
                 this.errorMessage = 'Hiba történt az adatok lekérése során.';
             }
         });

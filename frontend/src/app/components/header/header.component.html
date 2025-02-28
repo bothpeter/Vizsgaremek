@@ -7,12 +7,12 @@
             <span class="bar"></span>
         </div>
         <ul class="nav-links" [ngClass]="{ 'active': isMenuOpen }">
-            <li routerLink="/calculator" (click)="closeMenu()">Kalkulátor</li>
-            <li routerLink="/calorie-counter" (click)="closeMenu()">Kalóriaszámláló</li>
-            <li routerLink="/recipes" (click)="closeMenu()">Receptek</li>
-            <li routerLink="/exercises" (click)="closeMenu()">Gyakorlatok</li>
-            <li routerLink="/workouts" (click)="closeMenu()">Edzéstervek</li>
-            <li routerLink="/diets" (click)="closeMenu()">Étrendek</li>
+            <li routerLink="/calculator" routerLinkActive="active" (click)="closeMenu()">Kalkulátorok</li>
+            <li routerLink="/calorie-counter" routerLinkActive="active" (click)="closeMenu()">Kalóriaszámláló</li>
+            <li routerLink="/recipes" routerLinkActive="active" (click)="closeMenu()">Receptek</li>
+            <li routerLink="/exercises" routerLinkActive="active" (click)="closeMenu()">Gyakorlatok</li>
+            <li routerLink="/workouts" routerLinkActive="active" (click)="closeMenu()">Edzéstervek</li>
+            <li routerLink="/diets" routerLinkActive="active" (click)="closeMenu()">Étrendek</li>
         </ul>
         <ul>
             <li routerLink="/login" class="login-button" (click)="closeMenu()">Bejelentkezés</li>

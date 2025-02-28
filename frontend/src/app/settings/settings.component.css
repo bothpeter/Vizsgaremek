@@ -173,13 +173,12 @@ button:disabled {
     }
 
     .container{
-        padding-left: 0;
-        padding-right: 10px;
+        padding: 16px;
     }
 }
 
 .full-row {
-    grid-column: 1 / -1; /* Span from the first to the last column */
+    grid-column: 1 / -1;
 }
 
 .file-upload-container {

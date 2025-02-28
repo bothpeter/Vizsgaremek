@@ -1,18 +1,23 @@
 <div class="container">
     <div class="user-container">
+        <section class="h1-container">
+            <h1>Személyes adatok</h1>
+        </section>
         <div class="profile-header">
             <div class="profile-picture" [class.no-box-shadow]="userPhysique?.progress_picture">
                 <div *ngIf="!userPhysique?.progress_picture" class="default-icon">
                     <i class="fas fa-user"></i>
                 </div>
 
-                <img *ngIf="userPhysique?.progress_picture" [src]="userPhysique.progress_picture"
-                    alt="Profile Picture" />
+                <img *ngIf="userPhysique?.progress_picture" [src]="userPhysique.progress_picture"alt="Profile Picture" />
             </div>
             <div class="profile-info">
                 <h2>{{ userName }}</h2>
                 <p>{{ userEmail }}</p>
             </div>
+        </div>
+        <div *ngIf="loading" class="loading-spinner">
+            <div class="spinner"></div>
         </div>
 
         <div *ngIf="userPhysique; else noPhysique">
