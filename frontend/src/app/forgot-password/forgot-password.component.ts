@@ -25,8 +25,8 @@ export class ForgotPasswordComponent {
 
         this.apiService.post('forgot_password', payload).subscribe({
             next: () => {
-                this.loading = false;
                 localStorage.setItem('resetEmail', this.resetEmail);
+                this.loading = false;
                 this.router.navigateByUrl('/reset-password');
             },
             error: (error) => {
