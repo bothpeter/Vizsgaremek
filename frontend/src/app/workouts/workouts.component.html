@@ -25,10 +25,6 @@
         </div>
     </div>
 
-    <div *ngIf="loading" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
-
     <div class="card" *ngFor="let workout of filteredWorkouts" (click)="openPopup(workout)">
         <div class="workout-cover">
             <span>{{ workout.title }}</span>
@@ -39,6 +35,9 @@
     </div>
 </div>
 
+<div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+</div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
     <div class="popup-content" (click)="$event.stopPropagation()">

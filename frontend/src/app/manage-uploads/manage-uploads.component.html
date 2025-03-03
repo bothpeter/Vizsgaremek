@@ -2,10 +2,6 @@
     <h1>Feltöltések kezelése</h1>
 </section>
 <div class="uploads-container">
-    <div *ngIf="loading" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
-
     <div *ngIf="!loading  && allUploads.length === 0" class="no-uploads">
         <p>Nincsenek feltöltéseid.</p>
     </div>
@@ -92,6 +88,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
     </div>
 </div>
 

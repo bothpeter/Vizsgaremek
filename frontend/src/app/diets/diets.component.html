@@ -15,17 +15,18 @@
         </div>
     </div>
 
-    <div *ngIf="loading" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
     <div class="card" *ngFor="let diet of searchDiets" (click)="openPopup(diet)">
         <div class="diet-cover">
             <span>{{ diet.title }}</span>
         </div>
         <div class="card-content">
-            <p><strong>Kalória:</strong> {{ diet.kcal }} kcal</p>
+            <p><i class="fas fa-fire"></i> {{ diet.kcal }} kcal</p>
         </div>
     </div>
+</div>
+
+<div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
 </div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">

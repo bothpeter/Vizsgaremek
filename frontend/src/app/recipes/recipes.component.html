@@ -26,10 +26,6 @@
         </div>
     </div>
 
-    <div *ngIf="loading" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
-
     <div class="card" *ngFor="let food of filteredFoods" (click)="openPopup(food)">
         <div class="add-meal-button" (click)="toggleMeal(food); $event.stopPropagation()">
             <i class="fas"
@@ -50,6 +46,10 @@
             <p><i class="fas fa-fire"></i> {{ food.calorie }} kcal</p>
         </div>
     </div>
+</div>
+
+<div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
 </div>
 
 <div *ngIf="showPopup" class="popup" (click)="closePopup()">
