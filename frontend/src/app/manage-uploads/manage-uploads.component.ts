@@ -50,6 +50,9 @@ export class ManageUploadsComponent implements OnInit {
         this.fetchExercises();
         this.fetchDiets();
         this.fetchWorkouts();
+        this.fetchMeals();
+        this.fetchLikedFoods();
+        this.fetchLikedExercises();
     }
 
     fetchMeals(): void {
@@ -252,24 +255,28 @@ export class ManageUploadsComponent implements OnInit {
                     },
                     error: (error) => console.error('Error deleting food ingredients:', error),
                 });
-
-                this.apiService.delete(`meals/${foodId}`).subscribe({
-                    next: () => {
-                        this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
-                    },
-                    error: (error) => {
-                        console.error('Error deleting meal:', error);
-                    },
-                });
-
-                this.apiService.delete(`user_like_food/${foodId}`).subscribe({
-                    next: () => {
-                        this.likedFoods = this.likedFoods.filter((likedFood) => likedFood.food_id !== foodId);
-                    },
-                    error: (error) => {
-                        console.error('Error deleting liked food:', error);
-                    },
-                });
+    
+                if (this.meals.some(meal => meal.food_id === foodId)) {
+                    this.apiService.delete(`meals/${foodId}`).subscribe({
+                        next: () => {
+                            this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
+                        },
+                        error: (error) => {
+                            console.error('Error deleting meal:', error);
+                        },
+                    });
+                }
+    
+                if (this.likedFoods.some(likedFood => likedFood.food_id === foodId)) {
+                    this.apiService.delete(`user_like_food/${foodId}`).subscribe({
+                        next: () => {
+                            this.likedFoods = this.likedFoods.filter((likedFood) => likedFood.food_id !== foodId);
+                        },
+                        error: (error) => {
+                            console.error('Error deleting liked food:', error);
+                        },
+                    });
+                }
             },
             error: (error) => console.error('Error deleting food:', error),
         });
@@ -280,16 +287,17 @@ export class ManageUploadsComponent implements OnInit {
             next: () => {
                 this.uploadedExercises = this.uploadedExercises.filter(exercise => exercise.exercise_id !== exerciseId);
                 this.allUploads = this.allUploads.filter(item => item.exercise_id !== exerciseId);
-
-                this.apiService.delete(`user_like_exercise/${exerciseId}`).subscribe({
-                    next: () => {
-                        this.likedExercises = this.likedExercises.filter((likedExercise) => likedExercise.exercise_id !== exerciseId);
-                    },
-                    error: (error) => {
-                        console.error('Error deleting liked exercise:', error);
-                    }
-                });
-
+    
+                if (this.likedExercises.some(likedExercise => likedExercise.exercise_id === exerciseId)) {
+                    this.apiService.delete(`user_like_exercise/${exerciseId}`).subscribe({
+                        next: () => {
+                            this.likedExercises = this.likedExercises.filter((likedExercise) => likedExercise.exercise_id !== exerciseId);
+                        },
+                        error: (error) => {
+                            console.error('Error deleting liked exercise:', error);
+                        }
+                    });
+                }
             },
             error: (error) => console.error('Error deleting exercise:', error),
         });

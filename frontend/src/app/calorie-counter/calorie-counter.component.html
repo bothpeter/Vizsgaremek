@@ -47,14 +47,20 @@
     </div>
 
     <div *ngIf="!loading && meals.length === 0" class="no-meals">
-        <p>Nincsenek elfogyasztott ételek. Ételeket a recepteken lévő "+" gomb megnyomásával tudsz elfogyasztani.</p>
+        <p>Nincsenek elfogyasztott ételek. Ételeket a recepteken lévő <i class="fas fa-cookie-bite"></i> gomb megnyomásával tudsz elfogyasztani.</p>
     </div>
 
     <div class="card" *ngFor="let meal of meals" (click)="openPopup(meal)">
         <button class="delete-btn" (click)="deleteFood(meal.food_id); $event.stopPropagation()">
             <i class="fas fa-times"></i>
         </button>
-        <img [src]="meal.img" [alt]="meal.name" />
+
+        <div class="food-cover" *ngIf="!meal.img">
+            <span>{{ meal.name }}</span>
+        </div>
+
+        <img *ngIf="meal.img" [src]="meal.img" [alt]="meal.name" />
+
         <div class="card-content">
             <h3>{{ meal.name }}</h3>
             <p><i class="fas fa-fire"></i> {{ meal.calorie }} kcal</p>
@@ -74,7 +80,7 @@
                 <p class="description">{{ selectedFood.description }}</p>
             </div>
 
-            <div class="popup-right">
+            <div *ngIf="selectedFood.img" class="popup-right">
                 <img [src]="selectedFood.img" [alt]="selectedFood.name" />
             </div>
         </div>
