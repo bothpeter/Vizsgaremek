@@ -7,7 +7,6 @@ use App\Http\Requests\ResetPasswordRequest;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -116,18 +115,10 @@ class AuthController extends Controller
         $user = User::where('email', $attributes['email'])
                     ->first();
 
-        if (!$user) {
-            return response()->json(['error' => 'No Record Found', 'message' => 'Incorrect Email Address Provided'], 404);
-        }
-
         $resetRequest = PasswordReset::where('email', $user->email)->first();
 
         if (!$resetRequest) {
             return response()->json(['error' => 'An Error Occurred. Please Try again.', 'message' => 'No reset request found.'], 400);
-        }
-
-        if ($resetRequest->token != $request->token) {
-            return response()->json(['error' => 'An Error Occurred. Please Try again.', 'message' => 'Token mismatch.'], 400);
         }
 
         if ($resetRequest->expires_at->lt(now())) {
