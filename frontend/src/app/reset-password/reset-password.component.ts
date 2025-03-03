@@ -19,11 +19,13 @@ export class ResetPasswordComponent {
     password_confirmation: string = '';
     apiError: string = '';
     passwordError: string = '';
+    resendSuccess: string = '';
 
     constructor(private apiService: ApiService, private validationService: ValidationService, private router: Router) { }
 
     onSubmit() {
         this.apiError = '';
+        this.resendSuccess = '';
         this.passwordError = '';
 
         const passwordValidation = this.validationService.validatePassword(this.password);
@@ -51,6 +53,22 @@ export class ResetPasswordComponent {
                 } else {
                     this.apiError = 'A kód hibás vagy lejárt.';
                 }
+            }
+        });
+    }
+
+    resendCode() {
+        this.apiError = '';
+        this.resendSuccess = '';
+        const email = localStorage.getItem('resetEmail');
+        const payload = { email: email };
+
+        this.apiService.post('forgot_password', payload).subscribe({
+            next: () => {
+                this.resendSuccess = 'Az új kód sikeresen elküldve.';
+            },
+            error: (error) => {
+                this.apiError = 'Hiba történt a kérés során. Kérjük, próbáld újra később.', error;
             }
         });
     }
