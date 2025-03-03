@@ -46,7 +46,13 @@
             <h4>Ételek:</h4>
             <div class="food-cards">
                 <div class="card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
-                    <img [src]="food.img" [alt]="food.name" />
+
+                    <div class="food-cover" *ngIf="!food.img">
+                        <span>{{ food.name }}</span>
+                    </div>
+            
+                    <img *ngIf="food.img" [src]="food.img" [alt]="food.name" />
+
                     <div class="card-content">
                         <h3>{{ food.name }}</h3>
                         <p><i class="fas fa-fire"></i> {{ food.calorie }} kcal</p>
@@ -69,7 +75,7 @@
                 <p class="description">{{ selectedFood.description }}</p>
             </div>
 
-            <div class="popup-right">
+            <div *ngIf="selectedFood.img" class="popup-right">
                 <img [src]="selectedFood.img" [alt]="selectedFood.name" />
             </div>
         </div>

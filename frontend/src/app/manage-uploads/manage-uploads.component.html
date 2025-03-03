@@ -18,7 +18,13 @@
                     <button class="delete-btn" (click)="deleteFood(uploadedFood.food_id); $event.stopPropagation()">
                         <i class="fas fa-times"></i>
                     </button>
-                    <img [src]="uploadedFood.img" [alt]="uploadedFood.name" />
+
+                    <div class="food-cover" *ngIf="!uploadedFood.img">
+                        <span>{{ uploadedFood.name }}</span>
+                    </div>
+            
+                    <img *ngIf="uploadedFood.img" [src]="uploadedFood.img" [alt]="uploadedFood.name" />
+                    
                     <div class="food-card-content">
                         <h3>{{ uploadedFood.name }}</h3>
                         <p><i class="fas fa-fire"></i> {{ uploadedFood.calorie }} kcal</p>
@@ -36,7 +42,13 @@
                         (click)="deleteExercise(uploadedExercise.exercise_id); $event.stopPropagation()">
                         <i class="fas fa-times"></i>
                     </button>
-                    <img [src]="uploadedExercise.img" [alt]="uploadedExercise.exercise_name" />
+
+                    <div class="exercise-cover" *ngIf="!uploadedExercise.img">
+                        <span>{{ uploadedExercise.exercise_name }}</span>
+                    </div>
+            
+                    <img *ngIf="uploadedExercise.img" [src]="uploadedExercise.img" [alt]="uploadedExercise.name" />
+
                     <div class="exercise-card-content">
                         <h3>{{ uploadedExercise.exercise_name }}</h3>
                         <p><strong>Kategória:</strong> {{ uploadedExercise.type }}</p>
@@ -95,7 +107,7 @@
                 <p class="food-description">{{ selectedFood.description }}</p>
             </div>
 
-            <div class="food-popup-right">
+            <div *ngIf="selectedFood.img" class="food-popup-right">
                 <img [src]="selectedFood.img" [alt]="selectedFood.name" />
             </div>
         </div>
@@ -141,7 +153,7 @@
                 <p class="exercise-description">{{ selectedExercise.description }}</p>
             </div>
 
-            <div class="exercise-popup-right">
+            <div *ngIf="selectedExercise.img" class="exercise-popup-right">
                 <img [src]="selectedExercise.img" [alt]="selectedExercise.exercise_name" />
             </div>
         </div>

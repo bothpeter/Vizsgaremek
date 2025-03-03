@@ -57,7 +57,7 @@
 
                 <div *ngIf="exercise.isExpanded" class="exercise-details">
                     <p>{{ exercise.description }}</p>
-                    <img [src]="exercise.img" [alt]="exercise.exercise_name" />
+                    <img *ngIf="exercise.img" [src]="exercise.img" [alt]="exercise.exercise_name" />
                 </div>
             </div>
         </div>

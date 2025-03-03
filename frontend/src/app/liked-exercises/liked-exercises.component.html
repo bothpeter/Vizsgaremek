@@ -14,7 +14,13 @@
         <div class="like-button" (click)="toggleLike(exercise); $event.stopPropagation()">
             <i class="fas fa-heart" [ngClass]="{'liked': exercise.isLiked}"></i>
         </div>
-        <img [src]="exercise.img" [alt]="exercise.exercise_name" />
+
+        <div class="exercise-cover" *ngIf="!exercise.img">
+            <span>{{ exercise.exercise_name }}</span>
+        </div>
+
+        <img *ngIf="exercise.img" [src]="exercise.img" [alt]="exercise.name" />
+
         <div class="card-content">
             <h3>{{ exercise.exercise_name }}</h3>
             <p><strong>Kategória:</strong> {{ exercise.type }}</p>
@@ -35,7 +41,7 @@
                 <p class="description">{{ selectedExercise.description }}</p>
             </div>
 
-            <div class="popup-right">
+            <div *ngIf="selectedExercise.img" class="popup-right">
                 <img [src]="selectedExercise.img" [alt]="selectedExercise.exercise_name" />
             </div>
         </div>
