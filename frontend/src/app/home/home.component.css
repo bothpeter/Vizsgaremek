@@ -10,7 +10,7 @@
     align-items: center;
     color: #e0e0e0;
     text-align: center;
-    padding: 40px 0 80px 0;
+    padding: 120px 0 0 0;
     height: calc(100vh - 200px);
 }
 
@@ -274,5 +274,9 @@ section h3.animated::after {
 @media (max-width: 768px) {
     .animate-on-scroll {
         transition-duration: 0.6s;
+    }
+
+    .hero{
+        padding: 10px 0 80px 0;
     }
 }

@@ -111,7 +111,7 @@
     border-radius: 12px;
     width: 80%;
     max-width: 60%;
-    max-height: 90vh;
+    max-height: 80vh;
     color: #fff;
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
@@ -291,11 +291,6 @@
     .food-cards{
         padding-right: 16px;
         padding-left: 16px;
-    }
-
-    .popup-content{
-        padding: 10px;
-        width: 90%;
     }
 }
 
