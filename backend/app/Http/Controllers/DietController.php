@@ -4,29 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\DietPlan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 class DietController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth:sanctum', except: ['view_diet_plan'])
         ];
     }
 
-    public function view_diet_plan(){
+    public function view_diet_plan()
+    {
         $workout_plan = DietPlan::all();
 
         $data = [
-            'status' =>200,
-            'workout_plan'=> $workout_plan
+            'status' => 200,
+            'workout_plan' => $workout_plan
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function post_diet_plan(Request $request){
+    public function post_diet_plan(Request $request)
+    {
         $fields = $request->validate([
             'title' => 'required',
             'description' => 'required',

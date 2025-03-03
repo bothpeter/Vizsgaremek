@@ -6,41 +6,43 @@ use Illuminate\Http\Request;
 use App\Models\Exercise;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
 
 class ExerciseController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
-            new Middleware('auth:sanctum', except: ['view_exercises','view_exercise_by_exercise_id'])
+            new Middleware('auth:sanctum', except: ['view_exercises', 'view_exercise_by_exercise_id'])
         ];
     }
 
-    public function view_exercises(){
+    public function view_exercises()
+    {
         $exercise = Exercise::all();
 
         $data = [
-            'status' =>200,
-            'exercise'=> $exercise
+            'status' => 200,
+            'exercise' => $exercise
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function view_exercise_by_exercise_id($id){
-        $exercise = Exercise::where('exercise_id',$id)->get();
-        
-        if($exercise->isEmpty()){
+    public function view_exercise_by_exercise_id($id)
+    {
+        $exercise = Exercise::where('exercise_id', $id)->get();
+
+        if ($exercise->isEmpty()) {
             return response()->json(['message' => 'Exercise not found'], 404);
         }
         $data = [
-            'status' =>200,
-            'exercise'=> $exercise
+            'status' => 200,
+            'exercise' => $exercise
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function post_exercises(Request $request){
+    public function post_exercises(Request $request)
+    {
         $fields = $request->validate([
             'exercise_name' => 'required',
             'muscle_group' => 'required',
@@ -48,23 +50,22 @@ class ExerciseController extends Controller implements HasMiddleware
             'img' => 'image|nullable',
             'type' => 'required'
         ]);
-    
+
         if ($request->hasFile('img')) {
             $image = $request->file('img');
             $imageData = file_get_contents($image->getRealPath());
             $mimeType = $image->getClientMimeType();
             $fields['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
-    
+
         $exercise = $request->user()->exercise()->create($fields);
-    
+
         return response()->json([
             'status' => 200,
             'message' => 'Exercise uploaded',
             'exercise' => $exercise
         ], 200);
     }
-    
 
     public function delete_exercise(Request $request, $id)
     {

@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meals;
-use App\Models\User;
-use App\Models\UserLikeExercise;
 use App\Models\UserLikeFood;
-use App\Models\UserPhysique;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Validator;
 
 class UserLikeFoodController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth:sanctum')
         ];
     }
 
-    public function post_user_like_food(Request $request){
+    public function post_user_like_food(Request $request)
+    {
         $fields = $request->validate([
             'food_id' => 'required',
         ]);
@@ -34,15 +31,16 @@ class UserLikeFoodController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function view_user_like_food(Request $request){
+    public function view_user_like_food(Request $request)
+    {
         $user = $request->user();
         $userLikeFood = UserLikeFood::where('user_id', $user->id)->get();
 
         $data = [
-            'status' =>200,
-            'UserLikeFood'=> $userLikeFood
+            'status' => 200,
+            'UserLikeFood' => $userLikeFood
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
     public function delete_user_like_food(Request $request, $food_id)
@@ -57,5 +55,4 @@ class UserLikeFoodController extends Controller implements HasMiddleware
             return response()->json(['message' => 'Food not found'], 404);
         }
     }
-
 }

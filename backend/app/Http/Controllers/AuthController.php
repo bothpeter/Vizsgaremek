@@ -15,8 +15,9 @@ use App\Notifications\ResetPasswordNotification;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
-        
+    public function register(Request $request)
+    {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|unique:users',
             'email' => 'required|email|unique:users',
@@ -36,7 +37,8 @@ class AuthController extends Controller
         ];
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'login' => 'required',
             'password' => 'required'
@@ -49,8 +51,8 @@ class AuthController extends Controller
         $fields = $validator->validated();
 
         $user = User::where('email', $fields['login'])
-                    ->orWhere('name', $fields['login'])
-                    ->first();
+            ->orWhere('name', $fields['login'])
+            ->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response()->json(['message' => 'Bad credentials'], 401);
@@ -63,8 +65,9 @@ class AuthController extends Controller
             'token' => base64_encode($token->plainTextToken)
         ];
     }
-    
-    public function logout(Request $request){
+
+    public function logout(Request $request)
+    {
         $request->user()->tokens()->delete();
 
         return response()->json([
@@ -74,7 +77,7 @@ class AuthController extends Controller
 
     public function forgot(ForgotPasswordRequest $request): JsonResponse
     {
-    /** @var \App\Models\User $user */
+        /** @var \App\Models\User $user */
         $user = (User::query());
 
         $user = $user->where('email', $request->input('email'))->first();
@@ -104,8 +107,8 @@ class AuthController extends Controller
                 $resetPasswordToken
             )
         );
-    
-    return new JsonResponse(['message'=> 'Reset Password Token Sent to your Email Address']);
+
+        return new JsonResponse(['message' => 'Reset Password Token Sent to your Email Address']);
     }
 
     public function reset(ResetPasswordRequest $request): JsonResponse
@@ -113,7 +116,7 @@ class AuthController extends Controller
         $attributes = $request->validated();
 
         $user = User::where('email', $attributes['email'])
-                    ->first();
+            ->first();
 
         $resetRequest = PasswordReset::where('email', $user->email)->first();
 

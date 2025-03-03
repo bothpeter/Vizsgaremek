@@ -9,9 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class MealsController extends Controller implements HasMiddleware
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public static function middleware()
     {
         return [
@@ -27,9 +25,9 @@ class MealsController extends Controller implements HasMiddleware
         Meals::where('user_id', $user->id)
             ->whereDate('date', $yesterday)
             ->delete();
-        
+
         $meals = Meals::where('user_id', $user->id)->get();
-        
+
         $data = [
             'status' => 200,
             'Meals' => $meals

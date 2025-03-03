@@ -10,23 +10,26 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class WorkoutController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth:sanctum', except: ['view_workout_plan'])
         ];
     }
 
-    public function view_workout_plan(){
+    public function view_workout_plan()
+    {
         $workout_plan = WorkoutPlan::all();
 
         $data = [
-            'status' =>200,
-            'workout_plan'=> $workout_plan
+            'status' => 200,
+            'workout_plan' => $workout_plan
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function post_workout_plan(Request $request){
+    public function post_workout_plan(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'goodFor' => 'required',

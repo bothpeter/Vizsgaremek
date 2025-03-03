@@ -5,30 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
-use Nette\Schema\Expect;
 
 class FoodController extends Controller implements HasMiddleware
 {
 
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
-            new Middleware('auth:sanctum', except: ['view_foods','view_foods_by_id'])
+            new Middleware('auth:sanctum', except: ['view_foods', 'view_foods_by_id'])
         ];
     }
 
-    public function view_foods(){
+    public function view_foods()
+    {
         $food = Food::all();
 
         $data = [
-            'status' =>200,
-            'food'=> $food
+            'status' => 200,
+            'food' => $food
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function post_foods(Request $request){
+    public function post_foods(Request $request)
+    {
         $fields = $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -40,35 +41,36 @@ class FoodController extends Controller implements HasMiddleware
             'img' => 'image|nullable',
             'recipe' => 'nullable'
         ]);
-    
+
         if ($request->hasFile('img')) {
             $image = $request->file('img');
             $imageData = file_get_contents($image->getRealPath());
             $mimeType = $image->getClientMimeType();
             $fields['img'] = 'data:' . $mimeType . ';base64,' . base64_encode($imageData);
         }
-    
+
         $food = $request->user()->food()->create($fields);
-    
+
         return response()->json([
             'status' => 200,
             'message' => 'Food uploaded',
             'food' => $food
         ], 200);
     }
-    
 
-    public function view_foods_by_id($id){
-        $food = Food::where('food_id',$id)->get();
 
-        if($food->isEmpty()){
+    public function view_foods_by_id($id)
+    {
+        $food = Food::where('food_id', $id)->get();
+
+        if ($food->isEmpty()) {
             return response()->json(['message' => 'Food not found'], 404);
         }
         $data = [
-            'status' =>200,
-            'food'=> $food
+            'status' => 200,
+            'food' => $food
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
     public function delete_food(Request $request, $id)

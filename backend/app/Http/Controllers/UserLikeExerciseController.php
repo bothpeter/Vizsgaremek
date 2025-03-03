@@ -6,17 +6,18 @@ use App\Models\UserLikeExercise;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Validator;
 
 class UserLikeExerciseController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth:sanctum')
         ];
     }
 
-    public function post_user_like_exercise(Request $request){
+    public function post_user_like_exercise(Request $request)
+    {
         $fields = $request->validate([
             'exercise_id' => 'required',
         ]);
@@ -30,15 +31,16 @@ class UserLikeExerciseController extends Controller implements HasMiddleware
         ], 200);
     }
 
-    public function view_user_like_exercise(Request $request){
+    public function view_user_like_exercise(Request $request)
+    {
         $user = $request->user();
         $userLikeExercise = UserLikeExercise::where('user_id', $user->id)->get();
 
         $data = [
-            'status' =>200,
-            'userLikeExercise'=> $userLikeExercise
+            'status' => 200,
+            'userLikeExercise' => $userLikeExercise
         ];
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
     public function delete_user_like_exercise(Request $request, $exercise_id)

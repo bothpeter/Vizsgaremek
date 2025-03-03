@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meals;
 use App\Models\User;
-use App\Models\UserLikeExercise;
-use App\Models\UserLikeFood;
-use App\Models\UserPhysique;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -14,13 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller implements HasMiddleware
 {
-    public static function middleware(){
+    public static function middleware()
+    {
         return [
             new Middleware('auth:sanctum')
         ];
     }
 
-    public function update_user(Request $request){
+    public function update_user(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes',
             'email' => 'sometimes',
