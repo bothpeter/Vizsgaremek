@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -18,12 +19,6 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => {
             return import('./register/register.component').then((m) => m.RegisterComponent);
-        },
-    },
-    {
-        path: 'contacts',
-        loadComponent: () => {
-            return import('./contacts/contacts.component').then((m) => m.ContactsComponent);
         },
     },
     {
@@ -80,6 +75,7 @@ export const routes: Routes = [
             return import('./user/user.component').then((m) => m.UserComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
     {
         path: 'liked-recipes',
@@ -87,6 +83,7 @@ export const routes: Routes = [
             return import('./liked-recipes/liked-recipes.component').then((m) => m.LikedRecipesComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
     {
         path: 'liked-exercises',
@@ -94,6 +91,7 @@ export const routes: Routes = [
             return import('./liked-exercises/liked-exercises.component').then((m) => m.LikedExercisesComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
     {
         path: 'settings',
@@ -101,6 +99,7 @@ export const routes: Routes = [
             return import('./settings/settings.component').then((m) => m.SettingsComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
     {
         path: 'change-password',
@@ -108,6 +107,7 @@ export const routes: Routes = [
             return import('./change-password/change-password.component').then((m) => m.ChangePasswordComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
     {
         path: 'manage-uploads',
@@ -115,5 +115,6 @@ export const routes: Routes = [
             return import('./manage-uploads/manage-uploads.component').then((m) => m.ManageUploadsComponent);
         },
         data: { hideFooter: true, showVerticalNav: true },
+        canActivate: [AuthGuard],
     },
 ];
