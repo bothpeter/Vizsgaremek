@@ -81,8 +81,9 @@
                 </div>
             </div>
 
-            <button type="submit" [disabled]="!settingsForm.form.valid">
-                <i class="fas fa-save"></i>Mentés
+            <button type="submit" [disabled]="!settingsForm.form.valid || loading">
+                <span *ngIf="!loading"><i class="fas fa-save"></i>Mentés</span>
+                <div *ngIf="loading" class="button-spinner"></div>
             </button>
         </form>
 

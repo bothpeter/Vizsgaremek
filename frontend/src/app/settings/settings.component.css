@@ -125,6 +125,8 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    position: relative;
+    height: 42px;
 }
 
 button i {
@@ -133,13 +135,6 @@ button i {
 
 button:hover {
     background-color: rgb(198, 19, 19);
-}
-
-button:disabled {
-    background-color: #444;
-    color: black;
-    cursor: not-allowed;
-    transform: none;
 }
 
 .delete-button {
@@ -225,4 +220,33 @@ input[type="file"] {
     color: #FC282C !important;
     margin-right: 10px;
     font-size: 18px !important;
+}
+
+button:disabled {
+    background-color: #444;
+    color: black;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+button.loading {
+    padding: 10px;
 }

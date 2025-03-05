@@ -22,7 +22,10 @@
                 </div>
             </div>
 
-            <button type="submit" [disabled]="!loginForm.form.valid">Bejelentkezés</button>
+            <button type="submit" [disabled]="!loginForm.form.valid || loading">
+                <span *ngIf="!loading">Bejelentkezés</span>
+                <div *ngIf="loading" class="button-spinner"></div>
+            </button>
         </form>
         <div class="footer">
             <div>Nincs még fiókod? <strong routerLink="/register">Regisztrálj</strong></div>

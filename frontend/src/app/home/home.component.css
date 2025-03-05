@@ -4,14 +4,27 @@
     margin: 0 auto;
 }
 
-.hero {
+.hero-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: #e0e0e0;
     text-align: center;
     height: calc(100vh - 80px);
+}
+
+.hero {
+    padding: 60px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 200px;
 }
 
 .hero .logo {
@@ -73,6 +86,7 @@
     color: #b0b0b0;
     max-width: 800px;
     margin: 0 auto;
+    text-align: justify;
 }
 
 .features {
@@ -279,7 +293,7 @@ section h3.animated::after {
     }
 
     .hero{
-        padding: 10px 0 80px 0;
+        margin-bottom: 0;
     }
 
 }

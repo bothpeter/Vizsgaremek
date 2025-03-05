@@ -13,6 +13,7 @@ import { ApiService } from '../services/api.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+    loading: boolean = false;
     loginError: string = '';
     loginObj: Login = {
         login: '',
@@ -22,6 +23,7 @@ export class LoginComponent {
     constructor(private apiService: ApiService, private router: Router, private authService: AuthService) { }
 
     onSubmit() {
+        this.loading = true;
         this.loginError = '';
 
         this.apiService.post('login', this.loginObj).subscribe({
@@ -33,12 +35,14 @@ export class LoginComponent {
                     const authToken = res.token; // Decoded token from base64
                     this.authService.login(authToken, userId, userName, userEmail);
 
+                    this.loading = false;
                     this.router.navigateByUrl('/');
                 } else {
                     this.loginError = "Bejelentkezés sikertelen. Kérjük, próbálja újra.";
                 }
             },
             error: (error) => {
+                this.loading = false;
                 if (error.status === 401 && error.error.message === "Bad credentials") {
                     this.loginError = "Hibás email, név vagy jelszó.";
                 } else {

@@ -17,6 +17,7 @@ export class RegisterComponent {
     emailError: string = '';
     nameError: string = '';
     passwordError: string = '';
+    loading: boolean = false;
 
     registerObj: Register = {
         name: '',
@@ -28,26 +29,31 @@ export class RegisterComponent {
     constructor(private router: Router, private registerService: RegisterService, private validationService: ValidationService) { }
 
     onSubmit(): void {
+        this.loading = true;
         this.emailError = '';
         this.nameError = '';
         this.passwordError = '';
 
         if (!this.validationService.validateEmail(this.registerObj.email)) {
+            this.loading = false;
             this.emailError = 'Az e-mail cím érvénytelen formátumú.';
             return;
         }
 
         const passwordValidation = this.validationService.validatePassword(this.registerObj.password);
         if (!passwordValidation.isValid) {
+            this.loading = false;
             this.passwordError = passwordValidation.errorMessage;
             return;
         }
 
         this.registerService.register(this.registerObj).subscribe({
             next: () => {
+                this.loading = false;
                 this.router.navigateByUrl('/login');
             },
             error: (error) => {
+                this.loading = false;
                 if (error.name) {
                     this.nameError = 'Ez a felhasználónév már foglalt.';
                 }

@@ -79,17 +79,11 @@ button {
     cursor: pointer;
     transition: background-color 0.1s ease;
     box-sizing: border-box;
+    height: 42px;
 }
 
 button:hover {
     background-color: rgb(198, 19, 19);
-}
-
-button:disabled {
-    background-color: #444;
-    color: black;
-    cursor: not-allowed;
-    transform: none;
 }
 
 .footer {
@@ -114,3 +108,32 @@ button:disabled {
         padding: 25px;
     }
 }
+
+button:disabled {
+    background-color: #444;
+    color: black;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+button.loading {
+    padding: 10px;
+}
+

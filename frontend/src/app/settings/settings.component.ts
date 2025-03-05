@@ -27,6 +27,7 @@ export class SettingsComponent implements OnInit {
     selectedFile: File | null = null;
     errorMessage: string = '';
     successMessage: string = '';
+    loading: boolean = false;
 
     constructor(private apiService: ApiService, private validationService: ValidationService, private authService: AuthService) { }
 
@@ -95,6 +96,7 @@ export class SettingsComponent implements OnInit {
     }
 
     saveUserData(): void {
+        this.loading = true;
         this.emailError = '';
         if (!this.validationService.validateEmail(this.userEmail)) {
             this.emailError = 'Az e-mail cím érvénytelen formátumú.';
@@ -125,8 +127,8 @@ export class SettingsComponent implements OnInit {
         formData.append('age', this.userPhysique.age);
         formData.append('gender', this.userPhysique.gender);
         formData.append('daily_calorie_intake', dailyCalorieIntake.toString());
-        formData.append('activity_level', this.userPhysique.activity_level); // Send activity_level
-        formData.append('goal', this.userPhysique.goal); // Send goal
+        formData.append('activity_level', this.userPhysique.activity_level);
+        formData.append('goal', this.userPhysique.goal);
 
         const hasPhysiqueData = !!this.userPhysique.id;
         const apiEndpoint = 'user_physique';
@@ -134,6 +136,7 @@ export class SettingsComponent implements OnInit {
 
         this.apiService.postFormData(url, formData).subscribe({
             next: (res: any) => {
+                this.loading = false;
                 if (res.status === 200) {
                     this.successMessage = hasPhysiqueData
                         ? 'Fizikai adatok sikeresen frissítve!'
@@ -142,6 +145,7 @@ export class SettingsComponent implements OnInit {
                 }
             },
             error: () => {
+                this.loading = false;
                 this.errorMessage = 'Hiba történt a fizikai adatok mentése során.';
             }
         });

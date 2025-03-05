@@ -20,16 +20,19 @@ export class ResetPasswordComponent {
     apiError: string = '';
     passwordError: string = '';
     resendSuccess: string = '';
+    loading: boolean = false;
 
     constructor(private apiService: ApiService, private validationService: ValidationService, private router: Router) { }
 
     onSubmit() {
+        this.loading = true;
         this.apiError = '';
         this.resendSuccess = '';
         this.passwordError = '';
 
         const passwordValidation = this.validationService.validatePassword(this.password);
         if (!passwordValidation.isValid) {
+            this.loading = false;
             this.passwordError = passwordValidation.errorMessage;
             return;
         }
@@ -45,9 +48,11 @@ export class ResetPasswordComponent {
         this.apiService.post('reset_password', payload).subscribe({
             next: () => {
                 localStorage.removeItem('resetEmail');
+                this.loading = false;
                 this.router.navigateByUrl('/login');
             },
             error: (error) => {
+                this.loading = false;
                 if (error.status === 404 && error.error.message === "Token mismatch") {
                     this.apiError = 'Hiba történt a kérés során. Kérjük, próbáld újra később.';
                 } else {

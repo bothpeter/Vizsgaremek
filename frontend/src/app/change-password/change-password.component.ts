@@ -18,25 +18,24 @@ export class ChangePasswordComponent {
     password: string = '';
     password_confirmation: string = '';
     passwordError: string = '';
+    loading: boolean = false;
 
     constructor(private router: Router, private validationService: ValidationService, private apiService: ApiService, private authService: AuthService) { }
 
     onSubmit() {
+        this.loading = true;
         this.passwordError = '';
 
         if (this.password !== this.password_confirmation) {
+            this.loading = false;
             this.passwordError = 'A jelszavak nem egyeznek.';
             return;
         }
 
         const passwordValidation = this.validationService.validatePassword(this.password);
         if (!passwordValidation.isValid) {
+            this.loading = false;
             this.passwordError = passwordValidation.errorMessage;
-            return;
-        }
-
-        if (!this.authService.isAuthenticated()) {
-            alert('Kérjük, jelentkezzen be!');
             return;
         }
 
@@ -47,10 +46,14 @@ export class ChangePasswordComponent {
 
         this.apiService.put('user', payload).subscribe({
             next: () => {
+                this.loading = false;
                 alert('A jelszó sikeresen módosítva!');
                 this.router.navigateByUrl('/user');
             },
-            error: (error) => {this.passwordError = 'Hiba történt a jelszó módosítása során. Kérjük, próbáld újra később.', error;}
+            error: (error) => {
+                this.loading = false;
+                this.passwordError = 'Hiba történt a jelszó módosítása során. Kérjük, próbáld újra később.', error;
+            }
         });
     }
 
