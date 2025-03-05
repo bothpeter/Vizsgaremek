@@ -3,11 +3,12 @@ import { ExerciseService } from '../services/exercise.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
 
 @Component({
     selector: 'app-exercises',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LoginPopupComponent],
     templateUrl: './exercises.component.html',
     styleUrls: ['./exercises.component.css'],
 })
@@ -18,6 +19,7 @@ export class ExercisesComponent implements OnInit {
     selectedType: string = 'all';
     selectedMuscleGroup: string = 'all';
     showPopup: boolean = false;
+    showLoginPopup: boolean = false;
     searchQuery = '';
     loading: boolean = false;
 
@@ -69,7 +71,7 @@ export class ExercisesComponent implements OnInit {
 
     toggleLike(exercise: any): void {
         if (!this.authService.isAuthenticated()) {
-            alert('Kérjük, jelentkezzen be a kedveléshez!');
+            this.showLoginPopup = true;
             return;
         }
 
@@ -105,6 +107,10 @@ export class ExercisesComponent implements OnInit {
     }
 
     openAddExercisePopup(): void {
+        if (!this.authService.isAuthenticated()) {
+            this.showLoginPopup = true;
+            return;
+        }
         this.showAddExercisePopup = true;
     }
 
@@ -131,6 +137,14 @@ export class ExercisesComponent implements OnInit {
     closePopup(): void {
         this.showPopup = false;
         this.selectedExercise = null;
+    }
+
+    openLoginPopup(): void {
+        this.showLoginPopup = true;
+    }
+
+    closeLoginPopup(): void {
+        this.showLoginPopup = false;
     }
 
     changeType(type: string): void {

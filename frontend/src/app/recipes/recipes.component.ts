@@ -3,11 +3,12 @@ import { FoodService } from '../services/food.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
 
 @Component({
     selector: 'app-recipes',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LoginPopupComponent],
     templateUrl: './recipes.component.html',
     styleUrls: ['./recipes.component.css'],
 })
@@ -17,6 +18,7 @@ export class RecipesComponent implements OnInit {
     selectedFood: any = null;
     selectedType: string = 'all';
     showPopup: boolean = false;
+    showLoginPopup: boolean = false;
     searchQuery: string = '';
     loading: boolean = false;
 
@@ -99,7 +101,7 @@ export class RecipesComponent implements OnInit {
 
     toggleLike(food: any): void {
         if (!this.authService.isAuthenticated()) {
-            alert('Kérjük, jelentkezzen be a kedveléshez!');
+            this.openLoginPopup();
             return;
         }
 
@@ -111,7 +113,7 @@ export class RecipesComponent implements OnInit {
 
     toggleMeal(food: any): void {
         if (!this.authService.isAuthenticated()) {
-            alert('Kérjük, jelentkezzen be az étel hozzáadásához!');
+            this.openLoginPopup();
             return;
         }
 
@@ -144,7 +146,7 @@ export class RecipesComponent implements OnInit {
             next: (response: any) => {
                 const newFoodId = response.food.food_id; // Get the ID of the new food
 
-                // Send ingredients for the new food ite
+                // Send ingredients for the new food item
                 this.newFood.ingredients.forEach((ingredient: any) => {
                     const ingredientPayload = {
                         food_id: newFoodId,
@@ -165,6 +167,10 @@ export class RecipesComponent implements OnInit {
     }
 
     openAddFoodPopup(): void {
+        if (!this.authService.isAuthenticated()) {
+            this.openLoginPopup();
+            return;
+        }
         this.showAddFoodPopup = true;
     }
 
@@ -197,6 +203,14 @@ export class RecipesComponent implements OnInit {
         this.showPopup = false;
         this.selectedFood = null;
         this.ingredients = [];
+    }
+
+    openLoginPopup(): void {
+        this.showLoginPopup = true;
+    }
+
+    closeLoginPopup(): void {
+        this.showLoginPopup = false;
     }
 
     changeType(type: string): void {

@@ -2,34 +2,35 @@
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 0;
-    margin-bottom: 120px;
 }
 
 .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     color: #e0e0e0;
     text-align: center;
-    padding: 120px 0 0 0;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 80px);
 }
 
 .hero .logo {
     width: 200px;
-    height: auto;
     border-radius: 10%;
 }
 
 .hero h1 {
     font-size: 3rem;
-    margin-bottom: 10px;
     color: #e0e0e0;
+    margin: 0;
+    margin-top: 20px;
 }
 
 .hero h2 {
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin: 0;
     color: #e0e0e0;
+    margin-top: 10px;
 }
 
 .hero p {
@@ -48,6 +49,7 @@
     transition: background-color 0.3s ease;
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(252, 40, 44, 0.4);
+    margin-top: 40px;
 }
 
 .hero .cta-button:hover {
@@ -279,4 +281,5 @@ section h3.animated::after {
     .hero{
         padding: 10px 0 80px 0;
     }
+
 }

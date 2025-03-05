@@ -3,11 +3,12 @@ import { WorkoutService } from '../services/workout.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
 
 @Component({
     selector: 'app-workouts',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LoginPopupComponent],
     templateUrl: './workouts.component.html',
     styleUrls: ['./workouts.component.css'],
 })
@@ -18,6 +19,7 @@ export class WorkoutsComponent implements OnInit {
     selectedType: string = 'all';
     selectedWorkout: any = null;
     showPopup: boolean = false;
+    showLoginPopup: boolean = false;
     searchQuery = '';
     loading: boolean = false;
 
@@ -101,6 +103,10 @@ export class WorkoutsComponent implements OnInit {
     }
 
     openAddWorkoutPopup(): void {
+        if (!this.authService.isAuthenticated()) {
+            this.openLoginPopup();
+            return;
+        }
         this.showAddWorkoutPopup = true;
     }
 
@@ -130,6 +136,14 @@ export class WorkoutsComponent implements OnInit {
     closePopup(): void {
         this.showPopup = false;
         this.selectedWorkout = null;
+    }
+
+    openLoginPopup(): void {
+        this.showLoginPopup = true;
+    }
+
+    closeLoginPopup(): void {
+        this.showLoginPopup = false;
     }
 
     changeType(type: string): void {

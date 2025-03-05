@@ -3,11 +3,12 @@ import { DietService } from '../services/diet.service';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
 
 @Component({
     selector: 'app-diets',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LoginPopupComponent],
     templateUrl: './diets.component.html',
     styleUrls: ['./diets.component.css'],
 })
@@ -20,6 +21,7 @@ export class DietsComponent implements OnInit {
     selectedDiet: any = null;
     selectedFood: any = null;
     showPopup: boolean = false;
+    showLoginPopup: boolean = false;
     showFoodPopup: boolean = false;
     loading: boolean = false;
     searchQuery = '';
@@ -109,6 +111,10 @@ export class DietsComponent implements OnInit {
     }
 
     openAddDietPopup(): void {
+        if (!this.authService.isAuthenticated()) {
+            this.openLoginPopup();
+            return;
+        }
         this.showAddDietPopup = true;
     }
 
@@ -135,6 +141,14 @@ export class DietsComponent implements OnInit {
         this.showPopup = false;
         this.selectedDiet = null;
         this.foods = [];
+    }
+
+    openLoginPopup(): void {
+        this.showLoginPopup = true;
+    }
+
+    closeLoginPopup(): void {
+        this.showLoginPopup = false;
     }
 
     fetchFoods(foodIds: number[]): void {

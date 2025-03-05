@@ -63,6 +63,15 @@
     </div>
 </div>
 
+<div class="popup" *ngIf="showLoginPopup" (click)="closeLoginPopup()">
+    <div class="login-popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeLoginPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <app-login-popup></app-login-popup>
+    </div>
+</div>
+
 <button class="add-workout-button" (click)="openAddWorkoutPopup()">+</button>
 
 <div *ngIf="showAddWorkoutPopup" class="popup">

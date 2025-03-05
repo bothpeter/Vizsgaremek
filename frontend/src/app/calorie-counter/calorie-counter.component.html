@@ -1,20 +1,21 @@
 <div *ngIf="showPhysiquePopup" class="popup">
-    <div class="popup-content">
-        <h2 class="missing-data-h2">Hiányzó adatok</h2>
-        <p>A kalóriaszámláló használatához töltse ki a fizikai adatait!</p>
-        <button routerLink="/settings" class="settings-button">
-            <i class="fas fa-cog"></i> Adatok kitöltése
-        </button>
+    <div class="physique-popup-content">
+        <div class="missing-data-container">
+            <h2 class="missing-data-h2">Hiányzó adatok</h2>
+            <p>A kalóriaszámláló használatához töltse ki a fizikai adatait!</p>
+            <button routerLink="/settings" class="settings-button">
+                <i class="fas fa-cog"></i> Adatok kitöltése
+            </button>
+        </div>
     </div>
 </div>
 
-<div *ngIf="showUnauthenticatedPopup" class="popup">
-    <div class="popup-content">
-        <h2 class="missing-data-h2">Jelentkezz be</h2>
-        <p>A kalóriaszámláló használatához be kell jelentkeznie!</p>
-        <button routerLink="/login" class="settings-button">
-            <i class="fas fa-cog"></i> Bejelentkezés
+<div class="popup" *ngIf="showLoginPopup" (click)="closeLoginPopup()">
+    <div class="login-popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeLoginPopup()">
+            <i class="fas fa-times"></i>
         </button>
+        <app-login-popup></app-login-popup>
     </div>
 </div>
 
@@ -26,15 +27,11 @@
         </div>
         <p>{{ totalCaloriesConsumed }} / {{ userPhysique?.daily_calorie_intake }} kcal</p>
         <div *ngIf="showConfetti" class="confetti-container">
-            <div
-                *ngFor="let confetti of confettiPieces; let i = index"
-                class="confetti"
-                [ngStyle]="{
+            <div *ngFor="let confetti of confettiPieces; let i = index" class="confetti" [ngStyle]="{
                     'left': confetti.left,
                     'animation-delay': confetti.delay,
                     'background-color': confetti.color
-                }"
-            ></div>
+                }"></div>
         </div>
     </div>
 
@@ -47,7 +44,8 @@
     </div>
 
     <div *ngIf="!loading && meals.length === 0" class="no-meals">
-        <p>Nincsenek elfogyasztott ételek. Ételeket a recepteken lévő <i class="fas fa-cookie-bite"></i> gomb megnyomásával tudsz elfogyasztani.</p>
+        <p>Nincsenek elfogyasztott ételek. Ételeket a recepteken lévő <i class="fas fa-cookie-bite"></i> gomb
+            megnyomásával tudsz elfogyasztani.</p>
     </div>
 
     <div class="card" *ngFor="let meal of meals" (click)="openPopup(meal)">

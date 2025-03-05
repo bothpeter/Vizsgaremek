@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { ApiService } from '../services/api.service';
 import { forkJoin } from 'rxjs';
+import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
 
 @Component({
     selector: 'app-calorie-counter',
     standalone: true,
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule ,LoginPopupComponent],
     templateUrl: './calorie-counter.component.html',
     styleUrls: ['./calorie-counter.component.css'],
 })
@@ -22,7 +23,7 @@ export class CalorieCounterComponent implements OnInit {
 
     showPopup: boolean = false;
     showPhysiquePopup: boolean = false;
-    showUnauthenticatedPopup: boolean = false;
+    showLoginPopup: boolean = false;
 
     isGoalReached: boolean = false;
 
@@ -40,7 +41,7 @@ export class CalorieCounterComponent implements OnInit {
 
     fetchUserPhysique(): void {
         if (!this.apiService.getAuthToken()) {
-            this.showUnauthenticatedPopup = true;
+            this.showLoginPopup = true;
             return;
         };
 
@@ -136,6 +137,14 @@ export class CalorieCounterComponent implements OnInit {
         this.showPopup = false;
         this.selectedFood = null;
         this.ingredients = [];
+    }
+
+    openLoginPopup(): void {
+        this.showLoginPopup = true;
+    }
+
+    closeLoginPopup(): void {
+        this.showLoginPopup = false;
     }
 
     getRandomPosition(): string {

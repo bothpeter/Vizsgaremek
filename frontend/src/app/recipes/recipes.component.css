@@ -333,6 +333,10 @@
         max-width: 100%;
     }
 
+    .login-popup-content {
+        max-width: 100% !important;
+    }
+
     .card {
         width: 100%;
     }
@@ -789,4 +793,17 @@ input:focus{
 
 .food-cover:hover span {
     color: rgb(17, 15, 15);
+}
+
+.login-popup-content{
+    position: relative;
+    background-color: #1e1e1e;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 60%;
+    max-height: 80vh;
+    color: #fff;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }

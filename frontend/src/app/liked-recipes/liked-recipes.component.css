@@ -292,6 +292,10 @@
         padding-right: 16px;
         padding-left: 16px;
     }
+
+    .no-liked-foods {
+        text-align: center;
+    }
 }
 
 .no-liked-foods {
