@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-header-logged-in',
@@ -14,7 +15,7 @@ export class HeaderLoggedInComponent implements OnInit {
     isMenuOpen = false;
     profilePicture: string | null = null;
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.fetchProfilePicture();
@@ -27,8 +28,11 @@ export class HeaderLoggedInComponent implements OnInit {
                     this.profilePicture = response.UserPhysique[0].progress_picture;
                 }
             },
-            error: (error) => {
-                console.error('Error fetching profile picture:', error);
+            error: (res: any) => {
+                console.error('Error fetching profile picture:');
+                if (res.status === 401) {
+                    this.authService.logoutWithExpiredToken();
+                }
             }
         });
     }
