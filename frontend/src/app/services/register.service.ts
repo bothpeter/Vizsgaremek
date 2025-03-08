@@ -1,30 +1,45 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+export interface RegisterData {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+
+export interface RegisterError {
+    message?: string;
+    name?: string;
+    email?: string;
+    password?: string;
+}
 
 @Injectable({
     providedIn: 'root',
 })
-export class RegisterService {
 
+export class RegisterService {
     constructor(private apiService: ApiService) { }
 
-    register(userData: any): Observable<any> {
-        return new Observable((observer) => {
-            this.apiService.post('register', userData).subscribe({
-                next: (response) => {
-                    observer.next(response);
-                    observer.complete();
-                },
-                error: (error) => {
-                    if (error.status === 422 && error.error) {
-                        observer.error(error.error);
-                    } else {
-                        alert('Hiba történt a regisztráció során. Kérjük, próbáld újra később.');
-                        observer.error(new Error('Hiba történt a regisztráció során.'));
-                    }
+    register(userData: RegisterData): Observable<any> {
+        return this.apiService.post('register', userData).pipe(
+            map(response => response),
+            catchError(error => {
+                let errorResponse: RegisterError = {};
+
+                if (error.status === 422 && error.error) {
+                    errorResponse = error.error;
+                } else {
+                    errorResponse = {
+                        message: 'Hiba történt a regisztráció során. Kérjük, próbáld újra később.'
+                    };
                 }
-            });
-        });
+
+                return throwError(() => errorResponse);
+            })
+        );
     }
 }

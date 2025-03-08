@@ -30,60 +30,52 @@ export class LikedRecipesComponent implements OnInit {
     fetchLikedFoods(): void {
         this.loading = true;
         this.foodService.getLikedFoods().subscribe({
-            next: (res: any) => {
-                if (res.status === 200 && Array.isArray(res.UserLikeFood)) {
-                    if (res.UserLikeFood.length === 0) {
-                        this.loading = false;
-                        return;
-                    }
-                    
-                    const foodDetailsObservables = res.UserLikeFood.map((item: any) =>
-                        this.foodService.getFood(item.food_id)
-                    );
-
-                    forkJoin<any[]>(foodDetailsObservables).subscribe({
-                        next: (responses: any[]) => {
-                            responses.forEach((response: any) => {
-                                if (response.status === 200 && response.food && response.food.length > 0) {
-                                    const food = response.food[0];
-                                    this.likedFoods.push({ ...food, isLiked: true });
-                                } else {
-                                    console.error('Invalid food details response:', response);
-                                }
-                            });
-                            this.loading = false;
-                        },
-                        error: (error) => {
-                            console.error('Error fetching food details:', error);
-                            this.loading = false;
-                        }
-                    });
-                } else {
-                    console.error('Invalid liked foods response:', res);
-                    this.loading = false;
-                }
-            },
-            error: (error) => {
-                console.error('Error fetching liked foods:', error);
-                this.loading = false;
-            }
+            next: (res: any) => this.handleLikedFoodsResponse(res),
+            error: (error) => this.handleLikedFoodsError(error)
         });
     }
 
-    fetchFoodDetails(foodId: number): void {
-        this.foodService.getFood(foodId).subscribe({
-            next: (response: any) => {
-                if (response.status === 200 && response.food && response.food.length > 0) {
-                    const food = response.food[0];
-                    this.likedFoods.push({ ...food, isLiked: true });
-                } else {
-                    console.error('Invalid food details response:', response);
-                }
-            },
-            error: (error) => {
-                console.error('Error fetching food details:', error);
+    handleLikedFoodsResponse(res: any): void {
+        if (res.status === 200 && Array.isArray(res.UserLikeFood)) {
+            if (res.UserLikeFood.length === 0) {
+                this.loading = false;
+                return;
+            }
+
+            const foodDetailsObservables = res.UserLikeFood.map((item: any) =>
+                this.foodService.getFood(item.food_id)
+            );
+
+            forkJoin<any[]>(foodDetailsObservables).subscribe({
+                next: (responses: any[]) => this.handleFoodDetailsResponses(responses),
+                error: (error) => this.handleFoodDetailsError(error)
+            });
+        } else {
+            console.error('Invalid liked foods response:', res);
+            this.loading = false;
+        }
+    }
+
+    handleFoodDetailsResponses(responses: any[]): void {
+        responses.forEach((response: any) => {
+            if (response.status === 200 && response.food && response.food.length > 0) {
+                const food = response.food[0];
+                this.likedFoods.push({ ...food, isLiked: true });
+            } else {
+                console.error('Invalid food details response:', response);
             }
         });
+        this.loading = false;
+    }
+
+    handleLikedFoodsError(error: any): void {
+        console.error('Error fetching liked foods:', error);
+        this.loading = false;
+    }
+
+    handleFoodDetailsError(error: any): void {
+        console.error('Error fetching food details:', error);
+        this.loading = false;
     }
 
     toggleLike(food: any): void {

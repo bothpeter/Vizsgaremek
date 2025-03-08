@@ -27,44 +27,52 @@ export class LikedExercisesComponent implements OnInit {
     fetchLikedExercises(): void {
         this.loading = true;
         this.exerciseService.getLikedExercises().subscribe({
-            next: (res: any) => {
-                if (res.status === 200 && Array.isArray(res.userLikeExercise)) {
-                    if (res.userLikeExercise.length === 0) {
-                        this.loading = false;
-                        return;
-                    }
-
-                    const exerciseDetailsObservables = res.userLikeExercise.map((item: any) =>
-                        this.exerciseService.getExercise(item.exercise_id)
-                    );
-
-                    forkJoin<any[]>(exerciseDetailsObservables).subscribe({
-                        next: (responses: any[]) => {
-                            responses.forEach((response: any) => {
-                                if (response.status === 200 && response.exercise && response.exercise.length > 0) {
-                                    const exercise = response.exercise[0];
-                                    this.likedExercises.push({ ...exercise, isLiked: true });
-                                } else {
-                                    console.error('Invalid exercise details response:', response);
-                                }
-                            });
-                            this.loading = false;
-                        },
-                        error: (error) => {
-                            console.error('Error fetching exercise details:', error);
-                            this.loading = false;
-                        },
-                    });
-                } else {
-                    console.error('Invalid liked exercises response:', res);
-                    this.loading = false;
-                }
-            },
-            error: (error) => {
-                console.error('Error fetching liked exercises:', error);
-                this.loading = false;
-            },
+            next: (res: any) => this.handleLikedExercisesResponse(res),
+            error: (error) => this.handleLikedExercisesError(error)
         });
+    }
+
+    handleLikedExercisesResponse(res: any): void {
+        if (res.status === 200 && Array.isArray(res.userLikeExercise)) {
+            if (res.userLikeExercise.length === 0) {
+                this.loading = false;
+                return;
+            }
+
+            const exerciseDetailsObservables = res.userLikeExercise.map((item: any) =>
+                this.exerciseService.getExercise(item.exercise_id)
+            );
+
+            forkJoin<any[]>(exerciseDetailsObservables).subscribe({
+                next: (responses: any[]) => this.handleExerciseDetailsResponses(responses),
+                error: (error) => this.handleExerciseDetailsError(error)
+            });
+        } else {
+            console.error('Invalid liked exercises response:', res);
+            this.loading = false;
+        }
+    }
+
+    handleExerciseDetailsResponses(responses: any[]): void {
+        responses.forEach((response: any) => {
+            if (response.status === 200 && response.exercise && response.exercise.length > 0) {
+                const exercise = response.exercise[0];
+                this.likedExercises.push({ ...exercise, isLiked: true });
+            } else {
+                console.error('Invalid exercise details response:', response);
+            }
+        });
+        this.loading = false;
+    }
+
+    handleLikedExercisesError(error: any): void {
+        console.error('Error fetching liked exercises:', error);
+        this.loading = false;
+    }
+
+    handleExerciseDetailsError(error: any): void {
+        console.error('Error fetching exercise details:', error);
+        this.loading = false;
     }
 
     toggleLike(exercise: any): void {

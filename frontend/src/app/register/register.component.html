@@ -40,7 +40,7 @@
                         [class.invalid]="hasError('password', 'required') || hasError('password', 'invalid')"
                         (input)="onPasswordChange()" />
                     <button type="button" class="toggle-password-visibility" (click)="togglePasswordVisibility()"
-                        [attr.aria-label]="hidePassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'">
+                        [attr.aria-label]="hidePassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'" tabindex="-1">
                         <i class="fas" [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'"></i>
                     </button>
                 </div>
@@ -61,7 +61,7 @@
                         [class.invalid]="hasError('password_confirmation', 'required') || hasError('password_confirmation', 'mismatch')"
                         (input)="onPasswordChange()" />
                     <button type="button" class="toggle-password-visibility" (click)="toggleConfirmPasswordVisibility()"
-                        [attr.aria-label]="hideConfirmPassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'">
+                        [attr.aria-label]="hideConfirmPassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'" tabindex="-1">
                         <i class="fas" [ngClass]="hideConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
                     </button>
                 </div>

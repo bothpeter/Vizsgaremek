@@ -19,7 +19,7 @@
                         placeholder="Add meg a jelszavad" autocomplete="current-password"
                         [class.invalid]="hasError('password', 'required') || hasError('password', 'minlength')" />
                     <button type="button" class="toggle-password-visibility" (click)="togglePasswordVisibility()"
-                        [attr.aria-label]="hidePassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'">
+                        [attr.aria-label]="hidePassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'" tabindex="-1">
                         <i class="fas" [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'"></i>
                     </button>
                 </div>

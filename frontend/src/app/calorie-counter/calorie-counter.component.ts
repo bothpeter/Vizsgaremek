@@ -9,7 +9,7 @@ import { LoginPopupComponent } from '../components/login-popup/login-popup.compo
 @Component({
     selector: 'app-calorie-counter',
     standalone: true,
-    imports: [CommonModule, RouterModule ,LoginPopupComponent],
+    imports: [CommonModule, RouterModule, LoginPopupComponent],
     templateUrl: './calorie-counter.component.html',
     styleUrls: ['./calorie-counter.component.css'],
 })
@@ -62,45 +62,53 @@ export class CalorieCounterComponent implements OnInit {
     fetchMeals(): void {
         this.loading = true;
         this.foodService.getMeals().subscribe({
-            next: (res: any) => {
-                if (res.status === 200 && Array.isArray(res.Meals)) {
-                    if (res.Meals.length === 0) {
-                        this.loading = false;
-                        return;
-                    }
+            next: (res: any) => this.handleMealsResponse(res),
+            error: (error) => this.handleMealsError(error)
+        });
+    }
 
-                    const mealDetailsObservables = res.Meals.map((meal: any) =>
-                        this.foodService.getFood(meal.food_id)
-                    );
-
-                    forkJoin<any[]>(mealDetailsObservables).subscribe({
-                        next: (responses: any[]) => {
-                            responses.forEach((response: any) => {
-                                if (response.status === 200 && response.food && response.food.length > 0) {
-                                    const food = response.food[0];
-                                    this.meals.push({ ...food });
-                                } else {
-                                    console.error('Invalid food details response:', response);
-                                }
-                            });
-                            this.calculateTotalCalories();
-                            this.loading = false;
-                        },
-                        error: (error) => {
-                            console.error('Error fetching meal details:', error);
-                            this.loading = false;
-                        }
-                    });
-                } else {
-                    console.error('Invalid meals response:', res);
-                    this.loading = false;
-                }
-            },
-            error: (error) => {
-                console.error('Error fetching meals:', error);
+    handleMealsResponse(res: any): void {
+        if (res.status === 200 && Array.isArray(res.Meals)) {
+            if (res.Meals.length === 0) {
                 this.loading = false;
+                return;
+            }
+
+            const mealDetailsObservables = res.Meals.map((meal: any) =>
+                this.foodService.getFood(meal.food_id)
+            );
+
+            forkJoin<any[]>(mealDetailsObservables).subscribe({
+                next: (responses: any[]) => this.handleMealDetailsResponses(responses),
+                error: (error) => this.handleMealDetailsError(error)
+            });
+        } else {
+            console.error('Invalid meals response:', res);
+            this.loading = false;
+        }
+    }
+
+    handleMealDetailsResponses(responses: any[]): void {
+        responses.forEach((response: any) => {
+            if (response.status === 200 && response.food && response.food.length > 0) {
+                const food = response.food[0];
+                this.meals.push({ ...food });
+            } else {
+                console.error('Invalid food details response:', response);
             }
         });
+        this.calculateTotalCalories();
+        this.loading = false;
+    }
+
+    handleMealsError(error: any): void {
+        this.loading = false;
+        console.error('Error fetching meals:', error);
+    }
+
+    handleMealDetailsError(error: any): void {
+        this.loading = false;
+        console.error('Error fetching meal details:', error);
     }
 
     calculateTotalCalories(): void {
@@ -152,7 +160,7 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     getRandomDelay(): string {
-        return `${Math.random() * 2}s`;
+        return `${Math.random() * 2}s`
     }
 
     getRandomColor(): string {
@@ -161,7 +169,7 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     generateConfettiData(): void {
-        this.confettiPieces = Array(100).fill(null).map(() => ({
+        this.confettiPieces = Array(300).fill(null).map(() => ({
             left: `${Math.random() * 100}vw`,
             delay: `${Math.random() * 2}s`,
             color: this.getRandomColor(),
