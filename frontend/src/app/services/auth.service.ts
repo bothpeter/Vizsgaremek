@@ -124,11 +124,7 @@ export class AuthService {
     }
 
     logoutWithExpiredToken() {
-        this.isLoggedIn = false;
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userEmail');
+        this.clearAuthData();
         this.router.navigateByUrl('/login');
     }
 

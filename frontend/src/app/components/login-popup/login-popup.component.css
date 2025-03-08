@@ -161,11 +161,9 @@ button[type="submit"]:disabled {
 }
 
 @media (max-width: 768px) {
-    .login-container {
-        padding: 0 20px;
-    }
 
     .login-card {
-        padding: 2rem;
+        padding: 0.3rem;
+        padding-top: 40px;
     }
 }
