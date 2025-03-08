@@ -20,8 +20,11 @@ export class UserComponent implements OnInit {
     constructor(private apiService: ApiService, private authService: AuthService) { }
 
     ngOnInit(): void {
-        this.userName = localStorage.getItem('userName') || '';
-        this.userEmail = localStorage.getItem('userEmail') || '';
+        const userData = this.authService.getUserData();
+        if (userData) {
+            this.userName = userData.name || '';
+            this.userEmail = userData.email || '';
+        }
 
         if (!this.authService.isAuthenticated()) {
             this.errorMessage = 'Jelentkezz be, a profilod megtekintéséhez!';

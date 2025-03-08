@@ -2,61 +2,83 @@
     <div class="register-card">
         <h2>Regisztráció</h2>
         <p class="subtitle">Hozz létre egy fiókot a folytatáshoz</p>
-        <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="username">Felhasználónév</label>
-                <input type="text" id="username" name="username" [(ngModel)]="registerObj.name" required
-                    #usernameInput="ngModel" placeholder="Add meg a felhasználóneved" />
-                <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)"
-                    class="error-message">
+                <input type="text" id="username" formControlName="name" placeholder="Add meg a felhasználóneved"
+                    autocomplete="username"
+                    [class.invalid]="hasError('name', 'required') || hasError('name', 'taken')" />
+                <div *ngIf="hasError('name', 'required')" class="error-message">
                     A felhasználónév kötelező.
                 </div>
-                <div *ngIf="nameError" class="error-message">
-                    {{ nameError }}
+                <div *ngIf="hasError('name', 'taken')" class="error-message">
+                    Ez a felhasználónév már foglalt.
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail cím</label>
-                <input type="email" id="email" name="email" [(ngModel)]="registerObj.email" required
-                    #emailInput="ngModel" placeholder="Add meg az e-mail címed" />
-                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
-                    Az e-mail cím kötelező és érvényes formátumú kell legyen.
+                <input type="email" id="email" formControlName="email" placeholder="Add meg az e-mail címed"
+                    autocomplete="email"
+                    [class.invalid]="hasError('email', 'required') || hasError('email', 'email') || hasError('email', 'taken')" />
+                <div *ngIf="hasError('email', 'required')" class="error-message">
+                    Az e-mail cím kötelező.
                 </div>
-                <div *ngIf="emailError" class="error-message">
-                    {{ emailError }}
+                <div *ngIf="hasError('email', 'email')" class="error-message">
+                    Az e-mail cím érvénytelen formátumú.
+                </div>
+                <div *ngIf="hasError('email', 'taken')" class="error-message">
+                    Ez az e-mail cím már foglalt.
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password">Jelszó</label>
-                <input type="password" id="password" name="password" [(ngModel)]="registerObj.password" required
-                    #passwordInput="ngModel" placeholder="Add meg a jelszavad" (input)="onPasswordChange()" />
-                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
-                    class="error-message">
+                <div class="password-input-container">
+                    <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password"
+                        placeholder="Add meg a jelszavad" autocomplete="new-password"
+                        [class.invalid]="hasError('password', 'required') || hasError('password', 'invalid')"
+                        (input)="onPasswordChange()" />
+                    <button type="button" class="toggle-password-visibility" (click)="togglePasswordVisibility()"
+                        [attr.aria-label]="hidePassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'">
+                        <i class="fas" [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </button>
+                </div>
+                <div *ngIf="hasError('password', 'required')" class="error-message">
                     A jelszó kötelező.
                 </div>
-                <div *ngIf="passwordError" class="error-message">
-                    {{ passwordError }}
+                <div *ngIf="hasError('password', 'invalid')" class="error-message">
+                    {{ registerForm.get('password')?.errors?.['invalid'] }}
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="confirmPassword">Jelszó megerősítése</label>
-                <input type="password" id="confirmPassword" name="confirmPassword"
-                    [(ngModel)]="registerObj.password_confirmation" required #confirmPasswordInput="ngModel"
-                    placeholder="Erősítsd meg a jelszavad" (input)="onPasswordChange()" />
-                <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)"
-                    class="error-message">
+                <div class="password-input-container">
+                    <input [type]="hideConfirmPassword ? 'password' : 'text'" id="confirmPassword"
+                        formControlName="password_confirmation" placeholder="Erősítsd meg a jelszavad"
+                        autocomplete="new-password"
+                        [class.invalid]="hasError('password_confirmation', 'required') || hasError('password_confirmation', 'mismatch')"
+                        (input)="onPasswordChange()" />
+                    <button type="button" class="toggle-password-visibility" (click)="toggleConfirmPasswordVisibility()"
+                        [attr.aria-label]="hideConfirmPassword ? 'Jelszó mutatása' : 'Jelszó elrejtése'">
+                        <i class="fas" [ngClass]="hideConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                    </button>
+                </div>
+                <div *ngIf="hasError('password_confirmation', 'required')" class="error-message">
                     A jelszó megerősítése kötelező.
                 </div>
-                <div *ngIf="registerObj.password !== registerObj.password_confirmation" class="error-message">
+                <div *ngIf="hasError('password_confirmation', 'mismatch')" class="error-message">
                     A jelszavak nem egyeznek.
                 </div>
             </div>
 
+            <div *ngIf="registerError" class="register-error-message">
+                {{ registerError }}
+            </div>
+
             <button type="submit"
-                [disabled]="!registerForm.form.valid || registerObj.password !== registerObj.password_confirmation || loading">
+                [disabled]="registerForm.invalid || registerForm.value.password !== registerForm.value.password_confirmation || loading">
                 <span *ngIf="!loading">Regisztráció</span>
                 <div *ngIf="loading" class="button-spinner"></div>
             </button>

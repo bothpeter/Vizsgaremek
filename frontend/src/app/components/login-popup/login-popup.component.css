@@ -2,14 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .login-card {
     background-color: #1e1e1e;
-    border-radius: 12px;
     padding: 2.5rem;
     width: 100%;
-    max-width: 400px;
+    width: 400px;
     box-sizing: border-box;
 }
 
@@ -57,13 +57,45 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(252, 40, 44, 0.2);
 }
 
+input.invalid {
+    border-color: #FC282C;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password-visibility {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 5px;
+    width: auto;
+}
+
+.toggle-password-visibility:hover {
+    color: #ffffff;
+    background-color: transparent;
+}
+
 .error-message {
     color: #FC282C;
     font-size: 0.875rem;
     margin-top: 0.5rem;
 }
 
-button {
+.login-error-message {
+    color: #FC282C;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+button[type="submit"] {
     width: 100%;
     padding: 0.75rem;
     background-color: #FC282C;
@@ -75,17 +107,40 @@ button {
     cursor: pointer;
     transition: background-color 0.1s ease;
     box-sizing: border-box;
+    position: relative;
+    height: 42px;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background-color: rgb(198, 19, 19);
 }
 
-button:disabled {
+button[type="submit"]:disabled {
     background-color: #444;
     color: black;
     cursor: not-allowed;
-    transform: none;
+}
+
+.button-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .footer {
@@ -101,19 +156,16 @@ button:disabled {
     cursor: pointer;
 }
 
-.forgot-password{
+.forgot-password {
     margin-top: 8px;
 }
 
 @media (max-width: 768px) {
-    .login-container{
-        padding: 0;
-        padding-top: 40px;
-        padding-bottom: 40px;
+    .login-container {
+        padding: 0 20px;
     }
 
-    .login-card{
-        padding: 0;
+    .login-card {
+        padding: 2rem;
     }
 }
-

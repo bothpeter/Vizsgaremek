@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,14 +10,27 @@ import { CommonModule } from '@angular/common';
     styleUrl: './vertical-nav-user.component.css',
     standalone: true
 })
-export class VerticalNavUserComponent {
-    constructor(private authService: AuthService) { }
+export class VerticalNavUserComponent implements OnInit {
+    userName: string = '';
 
-    username = localStorage.getItem('userName');
+    constructor(
+        private authService: AuthService,
+    ) { }
+
+    ngOnInit(): void {
+        const userData = this.authService.getUserData();
+        if (userData) {
+            this.userName = userData.name || '';
+        }
+    }
+
     isMenuOpen = false;
 
     onLogout() {
-        this.authService.logout();
+        this.authService.logout().subscribe({
+            next: () => { },
+            error: (error) => { console.error('Logout error:', error); }
+        });
     }
 
     toggleMenu(event?: Event) {
@@ -38,11 +51,9 @@ export class VerticalNavUserComponent {
         if (this.isMenuOpen && window.innerWidth <= 768) {
             const navElement = document.querySelector('.vertical-nav-container');
             const toggleBtn = document.querySelector('.toggle-btn');
-
             if (navElement && toggleBtn) {
                 const clickedInside = navElement.contains(event.target as Node) ||
                     toggleBtn.contains(event.target as Node);
-
                 if (!clickedInside) {
                     this.isMenuOpen = false;
                 }

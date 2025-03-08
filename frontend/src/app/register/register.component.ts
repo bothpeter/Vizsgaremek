@@ -1,85 +1,114 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterService } from '../services/register.service';
 import { ValidationService } from '../services/validation.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [FormsModule, CommonModule, RouterLink],
+    imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink],
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css'],
 })
 
 export class RegisterComponent {
-    emailError: string = '';
-    nameError: string = '';
-    passwordError: string = '';
     loading: boolean = false;
+    registerError: string = '';
+    hidePassword: boolean = true;
+    hideConfirmPassword: boolean = true;
+    registerForm: FormGroup;
 
-    registerObj: Register = {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-    };
-
-    constructor(private router: Router, private registerService: RegisterService, private validationService: ValidationService) { }
-
-    onSubmit(): void {
-        this.loading = true;
-        this.emailError = '';
-        this.nameError = '';
-        this.passwordError = '';
-
-        if (!this.validationService.validateEmail(this.registerObj.email)) {
-            this.loading = false;
-            this.emailError = 'Az e-mail cím érvénytelen formátumú.';
-            return;
-        }
-
-        const passwordValidation = this.validationService.validatePassword(this.registerObj.password);
-        if (!passwordValidation.isValid) {
-            this.loading = false;
-            this.passwordError = passwordValidation.errorMessage;
-            return;
-        }
-
-        this.registerService.register(this.registerObj).subscribe({
-            next: () => {
-                this.loading = false;
-                this.router.navigateByUrl('/login');
-            },
-            error: (error) => {
-                this.loading = false;
-                if (error.name) {
-                    this.nameError = 'Ez a felhasználónév már foglalt.';
-                }
-                if (error.email) {
-                    this.emailError = 'Ez az e-mail cím már foglalt.';
-                }
-            },
+    constructor(
+        private router: Router,
+        private registerService: RegisterService,
+        private validationService: ValidationService,
+        private fb: FormBuilder
+    ) {
+        this.registerForm = this.fb.group({
+            name: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required]],
+            password_confirmation: ['', [Validators.required]]
         });
     }
 
-    onPasswordChange(): void {
-        if (this.registerObj.password === this.registerObj.password_confirmation) {
-            this.passwordError = '';
+    onSubmit(): void {
+        if (this.registerForm.invalid || this.registerForm.value.password !== this.registerForm.value.password_confirmation) {
+            this.markFormGroupTouched(this.registerForm);
+            return;
         }
-        const passwordValidation = this.validationService.validatePassword(this.registerObj.password);
+
+        const passwordValidation = this.validationService.validatePassword(this.registerForm.value.password);
         if (!passwordValidation.isValid) {
-            this.passwordError = passwordValidation.errorMessage;
+            return;
+        }
+
+        this.loading = true;
+        this.registerError = '';
+
+        const registerObj = {
+            name: this.registerForm.value.name,
+            email: this.registerForm.value.email,
+            password: this.registerForm.value.password,
+            password_confirmation: this.registerForm.value.password_confirmation
+        };
+
+        this.registerService.register(registerObj)
+            .pipe(finalize(() => this.loading = false))
+            .subscribe({
+                next: () => {
+                    this.router.navigateByUrl('/login');
+                },
+                error: (error) => {
+                    if (error.name) {
+                        this.registerForm.get('name')?.setErrors({ taken: true });
+                    }
+                    if (error.email) {
+                        this.registerForm.get('email')?.setErrors({ taken: true });
+                    }
+                    this.registerError = error.message || "Regisztráció sikertelen. Kérjük, próbálja újra.";
+                },
+            });
+    }
+
+    onPasswordChange(): void {
+        const password = this.registerForm.get('password')?.value;
+        const confirmPassword = this.registerForm.get('password_confirmation')?.value;
+
+        if (password !== confirmPassword) {
+            this.registerForm.get('password_confirmation')?.setErrors({ mismatch: true });
         } else {
-            this.passwordError = '';
+            this.registerForm.get('password_confirmation')?.setErrors(null);
+        }
+
+        const passwordValidation = this.validationService.validatePassword(password);
+        if (!passwordValidation.isValid) {
+            this.registerForm.get('password')?.setErrors({ invalid: passwordValidation.errorMessage });
         }
     }
-}
 
-export interface Register {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
+    togglePasswordVisibility(): void {
+        this.hidePassword = !this.hidePassword;
+    }
+
+    toggleConfirmPasswordVisibility(): void {
+        this.hideConfirmPassword = !this.hideConfirmPassword;
+    }
+
+    private markFormGroupTouched(formGroup: FormGroup): void {
+        Object.values(formGroup.controls).forEach(control => {
+            control.markAsTouched();
+            if ((control as any).controls) {
+                this.markFormGroupTouched(control as FormGroup);
+            }
+        });
+    }
+
+    hasError(controlName: string, errorName: string): boolean {
+        const control = this.registerForm.get(controlName);
+        return !!control && control.touched && control.hasError(errorName);
+    }
 }

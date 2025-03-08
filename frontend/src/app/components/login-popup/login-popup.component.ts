@@ -1,65 +1,90 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+
+import { AuthService, LoginCredentials } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login-popup',
-    imports: [CommonModule, FormsModule, RouterLink],
+    standalone: true,
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
     templateUrl: './login-popup.component.html',
     styleUrl: './login-popup.component.css'
 })
-
 export class LoginPopupComponent {
     showLoginPopup: boolean = false;
-
+    loading: boolean = false;
     loginError: string = '';
-    loginObj: Login = {
-        login: '',
-        password: ''
-    };
+    loginForm: FormGroup;
+    hidePassword: boolean = true;
 
-    constructor(private apiService: ApiService, private router: Router, private authService: AuthService) { }
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+        private fb: FormBuilder
+    ) {
+        this.loginForm = this.fb.group({
+            login: ['', [Validators.required]],
+            password: ['', [Validators.required]]
+        });
+    }
 
-    onSubmit() {
+    onSubmit(): void {
+        if (this.loginForm.invalid) {
+            this.markFormGroupTouched(this.loginForm);
+            return;
+        }
+
+        const credentials: LoginCredentials = {
+            login: this.loginForm.value.login,
+            password: this.loginForm.value.password
+        };
+
+        this.loading = true;
         this.loginError = '';
 
-        this.apiService.post('login', this.loginObj).subscribe({
-            next: (res: any) => {
-                if (res.token != null) {
-                    const userId = res.user.id;
-                    const userName = res.user.name;
-                    const userEmail = res.user.email;
-                    const authToken = res.token; // Decoded token from base64
-                    this.authService.login(authToken, userId, userName, userEmail);
-
+        this.authService.attemptLogin(credentials)
+            .pipe(finalize(() => this.loading = false))
+            .subscribe({
+                next: () => {
+                    this.closeLoginPopup();
                     this.router.navigateByUrl('/');
-                } else {
-                    this.loginError = "Bejelentkezés sikertelen. Kérjük, próbálja újra.";
+                },
+                error: (error) => {
+                    this.loginError = error.message || "Bejelentkezés sikertelen. Kérjük, próbálja újra.";
                 }
-            },
-            error: (error) => {
-                if (error.status === 401 && error.error.message === "Bad credentials") {
-                    this.loginError = "Hibás email, név vagy jelszó.";
-                } else {
-                    this.loginError = "Hiba történt a bejelentkezés során. Kérjük, próbáld újra később.";
-                }
+            });
+    }
+
+    private markFormGroupTouched(formGroup: FormGroup): void {
+        Object.values(formGroup.controls).forEach(control => {
+            control.markAsTouched();
+            if ((control as any).controls) {
+                this.markFormGroupTouched(control as FormGroup);
             }
         });
     }
 
+    hasError(controlName: string, errorName: string): boolean {
+        const control = this.loginForm.get(controlName);
+        return !!control && control.touched && control.hasError(errorName);
+    }
+
+    togglePasswordVisibility(): void {
+        this.hidePassword = !this.hidePassword;
+    }
+
     openLoginPopup(): void {
         this.showLoginPopup = true;
+        this.loginForm.reset();
+        this.loginError = '';
     }
 
     closeLoginPopup(): void {
         this.showLoginPopup = false;
+        this.loginForm.reset();
+        this.loginError = '';
     }
-}
-
-export interface Login {
-    login: string;
-    password: string;
 }

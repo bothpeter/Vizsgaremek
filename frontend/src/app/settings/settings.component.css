@@ -137,27 +137,6 @@ button:hover {
     background-color: rgb(198, 19, 19);
 }
 
-.delete-button {
-    list-style-type: none;
-    cursor: pointer;
-    padding: 13px;
-    margin: 5px 0;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.1s ease, color 0.1s ease;
-    color: black;
-    text-decoration: none;
-    background-color: #FC282C;
-    font-weight: bold;
-    gap: 8px;
-}
-
-.delete-button:hover {
-    background-color: #cc0000;
-}
-
 @media (max-width: 600px) {
     .settings-grid {
         grid-template-columns: 1fr;
@@ -169,6 +148,10 @@ button:hover {
 
     .container{
         padding: 16px;
+    }
+
+    .delete-button {
+        width: 100% !important;
     }
 }
 
@@ -249,4 +232,34 @@ button:disabled {
 
 button.loading {
     padding: 10px;
+}
+
+.delete-user-section {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.delete-button {
+    width: 170px;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 13px;
+    margin: 5px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.1s ease, color 0.1s ease;
+    color: black;
+    text-decoration: none;
+    background-color: #FC282C;
+    font-weight: bold;
+    gap: 8px;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
 }

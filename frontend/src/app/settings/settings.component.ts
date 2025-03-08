@@ -32,8 +32,11 @@ export class SettingsComponent implements OnInit {
     constructor(private apiService: ApiService, private validationService: ValidationService, private authService: AuthService) { }
 
     ngOnInit(): void {
-        this.userName = localStorage.getItem('userName') || '';
-        this.userEmail = localStorage.getItem('userEmail') || '';
+        const userData = this.authService.getUserData();
+        if (userData) {
+            this.userName = userData.name || '';
+            this.userEmail = userData.email || '';
+        }
         this.fetchUserPhysique();
     }
 
@@ -108,8 +111,7 @@ export class SettingsComponent implements OnInit {
         this.apiService.put('user', { name: this.userName, email: this.userEmail }).subscribe({
             next: (res: any) => {
                 if (res.status === 200) {
-                    localStorage.setItem('userName', this.userName);
-                    localStorage.setItem('userEmail', this.userEmail);
+                    localStorage.setItem('userData', JSON.stringify({ name: this.userName, email: this.userEmail }));
                     this.successMessage = 'Felhasználói adatok sikeresen frissítve!';
                 }
             },
@@ -162,7 +164,12 @@ export class SettingsComponent implements OnInit {
     confirmDeleteUser(): void {
         const confirmation = confirm('Biztosan törölni szeretnéd a fiókod? Ez a művelet nem visszavonható!');
         if (confirmation) {
-            this.authService.deleteUser();
+            this.authService.deleteUser().subscribe({
+                next: () => { },
+                error: (error) => {
+                    this.errorMessage = error.message || 'Felhasználó törlése sikertelen!';
+                }
+            });
         }
     }
 
