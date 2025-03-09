@@ -66,6 +66,61 @@
     color: #FC282C;
     transition: color 0.3s ease;
 }
+
+.diet-food-cards .diet-card {
+    position: relative;
+    width: 300px;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.diet-food-cards .diet-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    border-color: #FC282C;
+}
+
+.diet-food-cards .diet-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(252, 40, 44, 0.1) 0%, transparent 50%, rgba(252, 40, 44, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.diet-food-cards .diet-card:hover::after {
+    opacity: 1;
+}
+
+.diet-food-cards .diet-card .card-content {
+    padding: 16px;
+    transition: transform 0.3s ease;
+}
+
+.diet-food-cards .diet-card img, .diet-food-cards .diet-card .exercise-cover {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.diet-food-cards .diet-card:hover img, .diet-food-cards .diet-card:hover .exercise-cover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.diet-food-cards .diet-card .card-content p strong {
+    color: #FC282C;
+    transition: color 0.3s ease;
+}
 .popup {
     position: fixed;
     top: 0;
@@ -97,7 +152,7 @@
 .popup-content {
     position: relative;
     background-color: #1e1e1e;
-    padding: 24px;
+    padding: 32px;
     border-radius: 12px;
     width: 80%;
     max-width: 60%;
@@ -261,7 +316,7 @@
     padding: 10px 16px;
     border-radius: 12px;
     color: #fff;
-    background: linear-gradient(20deg, #222, #1a1a1a);
+    background-color: #1e1e1e;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-left: 2px solid #FC282C;
@@ -270,20 +325,30 @@
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     width: 45px;
     height: 45px;
     border: none;
     border-radius: 50%;
     background-color: #FC282C;
-    color: #000;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    z-index: 999;
+}
+
+.close-btn:hover {
+    transform: scale(1.05);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
 }
 
 .close-btn:hover {
@@ -653,6 +718,8 @@
     padding: 16px;
 }
 
+
+
 .diet-cover {
     width: 100%;
     height: 140px;
@@ -785,6 +852,10 @@
         margin-top: 16px;
     }
 
+    .nutrition-row {
+        flex-wrap: wrap;
+    }
+
     .nutrition-item {
         flex: 1 1 calc(50% - 8px);
     }
@@ -872,6 +943,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 25px;
     z-index: 500;
+    transition: all 0.2s ease;
 
     transform-origin: center;
     transform: translateZ(0);
@@ -881,6 +953,10 @@
 .delete-btn:hover {
     background-color: #FC282C;
     color: #000;
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
 }
 
 .popup-bottom .fas, .fa-fire {

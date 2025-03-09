@@ -225,7 +225,7 @@
 .popup-content {
     position: relative;
     background-color: #1e1e1e;
-    padding: 24px;
+    padding: 32px;
     border-radius: 12px;
     width: 80%;
     max-width: 60%;
@@ -318,20 +318,29 @@
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     width: 45px;
     height: 45px;
     border: none;
     border-radius: 50%;
     background-color: #FC282C;
-    color: #000;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.05);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
 }
 
 .close-btn:hover {
