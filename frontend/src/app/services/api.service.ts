@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiService {
-    private baseUrl = 'http://192.168.1.97:8000/api';
+    private baseUrl = 'http://127.0.0.1:8000/api';
 
     constructor(private http: HttpClient) { }
 

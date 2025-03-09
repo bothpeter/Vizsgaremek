@@ -88,7 +88,7 @@ export class AuthService {
 
     private storeAuthData(token: string, user: User): void {
         localStorage.setItem(this.tokenKey, token);
-        const userData = { name: user.name, email: user.email };
+        const userData = {id: user.id, name: user.name, email: user.email};
         localStorage.setItem(this.userKey, JSON.stringify(userData));
     }
 

@@ -5,6 +5,7 @@ import { ExerciseService } from '../services/exercise.service';
 import { DietService } from '../services/diet.service';
 import { WorkoutService } from '../services/workout.service';
 import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-manage-uploads',
@@ -42,10 +43,16 @@ export class ManageUploadsComponent implements OnInit {
     likedFoods: any[] = [];
     likedExercises: any[] = [];
 
-    constructor(private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private apiService: ApiService) { }
+    userId: string = '';
+
+    constructor(private authService: AuthService, private foodService: FoodService, private exerciseService: ExerciseService, private dietService: DietService, private workoutService: WorkoutService, private apiService: ApiService) { }
 
     ngOnInit(): void {
         this.loading = true;
+        const userData = this.authService.getUserData();
+        if (userData) {
+            this.userId = userData.id || '';
+        }
         this.fetchFoods();
         this.fetchExercises();
         this.fetchDiets();
@@ -89,10 +96,9 @@ export class ManageUploadsComponent implements OnInit {
         }
 
     fetchFoods(): void {
-        const userId = localStorage.getItem('userId');
         this.foodService.getFoods().subscribe({
             next: (data) => {
-                this.uploadedFoods = data.food.filter((food: any) => food.user_id == userId);
+                this.uploadedFoods = data.food.filter((food: any) => food.user_id == this.userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedFoods];
                 this.foods = data.food;
                 this.checkLoadingComplete();
@@ -126,10 +132,9 @@ export class ManageUploadsComponent implements OnInit {
     }
 
     fetchExercises(): void {
-        const userId = localStorage.getItem('userId');
         this.exerciseService.getExercises().subscribe({
             next: (data) => {
-                this.uploadedExercises = data.exercise.filter((exercise: any) => exercise.user_id == userId);
+                this.uploadedExercises = data.exercise.filter((exercise: any) => exercise.user_id == this.userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedExercises];
                 this.exercises = data.exercise;
                 this.checkLoadingComplete();
@@ -152,10 +157,9 @@ export class ManageUploadsComponent implements OnInit {
     }
 
     fetchWorkouts(): void {
-        const userId = localStorage.getItem('userId');
         this.workoutService.getWorkouts().subscribe({
             next: (data) => {
-                this.uploadedWorkouts = data.workout_plan.filter((workout: any) => workout.user_id == userId);
+                this.uploadedWorkouts = data.workout_plan.filter((workout: any) => workout.user_id == this.userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedWorkouts];
                 this.workouts = data.workout_plan;
                 this.checkLoadingComplete();
@@ -198,10 +202,9 @@ export class ManageUploadsComponent implements OnInit {
     }
 
     fetchDiets(): void {
-        const userId = localStorage.getItem('userId');
         this.dietService.getDiets().subscribe({
             next: (data) => {
-                this.uploadedDiets = data.workout_plan.filter((diet: any) => diet.user_id == userId);
+                this.uploadedDiets = data.workout_plan.filter((diet: any) => diet.user_id == this.userId);
                 this.allUploads = [...this.allUploads, ...this.uploadedDiets];
                 this.diets = data.workout_plan;
                 this.checkLoadingComplete();
