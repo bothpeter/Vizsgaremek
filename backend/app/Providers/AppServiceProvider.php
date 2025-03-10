@@ -22,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         set_time_limit(3600);
-        DB::statement("SET GLOBAL max_allowed_packet = 100000000;");
+        DB::statement("SET GLOBAL max_allowed_packet = 10485760;");
     }
 }
