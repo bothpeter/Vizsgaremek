@@ -21,9 +21,9 @@ class MealsController extends Controller implements HasMiddleware
     {
         $user = $request->user();
 
-        $yesterday = now()->subDay()->toDateString();
+        $today = now()->toDateString();
         Meals::where('user_id', $user->id)
-            ->whereDate('date', $yesterday)
+            ->whereDate('date','!=',$today)
             ->delete();
 
         $meals = Meals::where('user_id', $user->id)->get();
