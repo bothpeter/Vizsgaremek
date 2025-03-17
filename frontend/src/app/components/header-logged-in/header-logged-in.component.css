@@ -52,7 +52,7 @@ li::after {
     bottom: 0;
     left: 0;
     width: 0%;
-    height: 2px;
+    height: 3px;
     background-color: #FC282C;
     transition: 0.2s ease;
     border-radius: 10px;
@@ -149,7 +149,7 @@ header nav ul li.user-icon::after {
 
 
 .nav-links li.active::after {
-    width: 75% !important;
+    width: 100% !important;
 }
 
 

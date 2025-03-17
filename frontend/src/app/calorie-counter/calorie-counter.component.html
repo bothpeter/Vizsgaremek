@@ -23,7 +23,7 @@
     <h1>Napi kalóriaszámláló</h1>
     <div class="calorie-progress">
         <div class="progress-bar">
-            <div class="progress-fill" [style.width.%]="progressWidth"></div>
+            <div class="progress-fill" [class.goal-reached]="isGoalReached" [style.width.%]="progressWidth"></div>
         </div>
         <p>{{ totalCaloriesConsumed }} / {{ userPhysique?.daily_calorie_intake }} kcal</p>
         <div *ngIf="showConfetti" class="confetti-container">
@@ -32,6 +32,32 @@
                     'animation-delay': confetti.delay,
                     'background-color': confetti.color
                 }"></div>
+        </div>
+    </div>
+
+    <div class="nutrition-summary">
+        <h3>Tápanyag összegzés</h3>
+        <div class="nutrition-row">
+            <div class="nutrition-item">
+                <i class="fas fa-fire"></i>
+                <div class="nutrition-label">Kalória</div>
+                <div class="nutrition-value">{{ totalCaloriesConsumed }} kcal</div>
+            </div>
+            <div class="nutrition-item">
+                <i class="fas fa-drumstick-bite"></i>
+                <div class="nutrition-label">Fehérje</div>
+                <div class="nutrition-value">{{ totalProtein.toFixed(1) }} g</div>
+            </div>
+            <div class="nutrition-item">
+                <i class="fas fa-cheese"></i>
+                <div class="nutrition-label">Zsír</div>
+                <div class="nutrition-value">{{ totalFat.toFixed(1) }} g</div>
+            </div>
+            <div class="nutrition-item">
+                <i class="fas fa-bread-slice"></i>
+                <div class="nutrition-label">Szénhidrát</div>
+                <div class="nutrition-value">{{ totalCarbs.toFixed(1) }} g</div>
+            </div>
         </div>
     </div>
 

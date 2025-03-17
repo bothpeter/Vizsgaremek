@@ -129,7 +129,7 @@
         <h2>Új étrend hozzáadása</h2>
         <form (ngSubmit)="addDiet()" class="grid-form" #addDietForm="ngForm">
             <div class="form-group">
-                <label for="title">Név:</label>
+                <label for="title">Étrend neve:</label>
                 <input id="title" [(ngModel)]="newDiet.title" name="title" required />
             </div>
             <div class="form-group">

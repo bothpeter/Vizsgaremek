@@ -82,7 +82,7 @@
         <h2>Új edzésterv hozzáadása</h2>
         <form (ngSubmit)="addWorkout()" class="grid-form" #addWorkoutForm="ngForm">
             <div class="form-group">
-                <label for="title">Cím:</label>
+                <label for="title">Edzésterv neve:</label>
                 <input id="title" [(ngModel)]="newWorkout.title" name="title" required />
             </div>
             <div class="form-group">

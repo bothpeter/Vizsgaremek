@@ -22,8 +22,8 @@
             <div class="custom-select">
                 <select id="exerciseType" (change)="changeType($any($event.target).value)">
                     <option value="all">Összes</option>
-                    <option value="edzotermi edzes">Edzőtermi edzés</option>
-                    <option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
+                    <option value="Edzőtermi edzés">Edzőtermi edzés</option>
+                    <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
                 </select>
                 <span class="custom-arrow"><i class="fas fa-chevron-down"></i></span>
             </div>
@@ -144,8 +144,8 @@
                 <div class="form-group">
                     <label for="type">Kategória:</label>
                     <select id="type" [(ngModel)]="newExercise.type" name="type" required>
-                        <option value="edzotermi edzes">Edzőtermi edzés</option>
-                        <option value="sajat testsulyos edzes">Saját testsúlyos edzés</option>
+                        <option value="Edzőtermi edzés">Edzőtermi edzés</option>
+                        <option value="Saját testsúlyos edzés">Saját testsúlyos edzés</option>
                     </select>
                 </div>
                 <div class="form-group full-width">

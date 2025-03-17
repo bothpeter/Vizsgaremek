@@ -33,6 +33,10 @@ export class CalculatorComponent implements OnInit {
     }
 
     fetchUserPhysique(): void {
+        if (!this.apiService.getAuthToken()) {
+            return;
+        };
+
         this.apiService.get('user_physique').subscribe({
             next: (response: any) => {
                 if (response.status === 200 && response.UserPhysique.length > 0) {

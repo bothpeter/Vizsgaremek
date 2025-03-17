@@ -18,6 +18,9 @@ export class CalorieCounterComponent implements OnInit {
     meals: any[] = [];
     ingredients: any[] = [];
     totalCaloriesConsumed: number = 0;
+    totalProtein: number = 0;
+    totalFat: number = 0;
+    totalCarbs: number = 0;
     selectedFood: any = null;
     loading: boolean = false;
 
@@ -60,6 +63,10 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     fetchMeals(): void {
+        if (!this.apiService.getAuthToken()) {
+            return;
+        };
+
         this.loading = true;
         this.foodService.getMeals().subscribe({
             next: (res: any) => this.handleMealsResponse(res),
@@ -97,7 +104,7 @@ export class CalorieCounterComponent implements OnInit {
                 console.error('Invalid food details response:', response);
             }
         });
-        this.calculateTotalCalories();
+        this.calculateTotalNutrition();
         this.loading = false;
     }
 
@@ -111,8 +118,19 @@ export class CalorieCounterComponent implements OnInit {
         console.error('Error fetching meal details:', error);
     }
 
-    calculateTotalCalories(): void {
-        this.totalCaloriesConsumed = this.meals.reduce((total, meal) => total + meal.calorie, 0);
+    calculateTotalNutrition(): void {
+        this.totalCaloriesConsumed = 0;
+        this.totalProtein = 0;
+        this.totalFat = 0;
+        this.totalCarbs = 0;
+
+        this.meals.forEach(meal => {
+            this.totalCaloriesConsumed += meal.calorie || 0;
+            this.totalProtein += meal.protein || 0;
+            this.totalFat += meal.fat || 0;
+            this.totalCarbs += meal.carb || 0;
+        });
+
         this.progressWidth = (this.totalCaloriesConsumed / this.userPhysique?.daily_calorie_intake) * 100;
 
         if (this.totalCaloriesConsumed >= this.userPhysique?.daily_calorie_intake && !this.isGoalReached) {
@@ -169,7 +187,7 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     generateConfettiData(): void {
-        this.confettiPieces = Array(300).fill(null).map(() => ({
+        this.confettiPieces = Array(100).fill(null).map(() => ({
             left: `${Math.random() * 100}vw`,
             delay: `${Math.random() * 2}s`,
             color: this.getRandomColor(),
@@ -179,19 +197,14 @@ export class CalorieCounterComponent implements OnInit {
     deleteFood(foodId: number): void {
         this.apiService.delete(`meals/${foodId}`).subscribe({
             next: () => {
-                const deletedMeal = this.meals.find((meal) => meal.food_id === foodId);
                 this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
-
-                this.totalCaloriesConsumed -= deletedMeal.calorie;
-
-                this.progressWidth = (this.totalCaloriesConsumed / this.userPhysique?.daily_calorie_intake) * 100;
+                this.calculateTotalNutrition();
             },
             error: (error) => {
                 console.error('Error deleting meal:', error);
             },
         });
     }
-
 }
 
 interface ConfettiPiece {

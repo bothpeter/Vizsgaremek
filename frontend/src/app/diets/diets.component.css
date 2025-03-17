@@ -574,7 +574,12 @@
 }
 
 .diet-cover:hover span {
-    color: rgb(36, 31, 31);
+    color: rgb(17, 15, 15);
+}
+
+.popup-content h2{
+    color: #FC282C;
+    margin-top: 0;
 }
 
 .loading-spinner {
