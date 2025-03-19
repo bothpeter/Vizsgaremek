@@ -101,8 +101,14 @@ export class SettingsComponent implements OnInit {
     saveUserData(): void {
         this.loading = true;
         this.emailError = '';
+        this.successMessage = '';
+        this.errorMessage = '';
+        let userDataUpdated = false;
+        let physiqueDataUpdated = false;
+
         if (!this.validationService.validateEmail(this.userEmail)) {
             this.emailError = 'Az e-mail cím érvénytelen formátumú.';
+            this.loading = false;
             return;
         }
 
@@ -112,11 +118,13 @@ export class SettingsComponent implements OnInit {
             next: (res: any) => {
                 if (res.status === 200) {
                     localStorage.setItem('userData', JSON.stringify({ name: this.userName, email: this.userEmail }));
+                    userDataUpdated = true;
                     this.successMessage = 'Felhasználói adatok sikeresen frissítve!';
                 }
             },
             error: () => {
                 this.errorMessage = 'Hiba történt a felhasználói adatok mentése során.';
+                this.loading = false;
             }
         });
 
@@ -140,15 +148,20 @@ export class SettingsComponent implements OnInit {
             next: (res: any) => {
                 this.loading = false;
                 if (res.status === 200) {
-                    this.successMessage = hasPhysiqueData
-                        ? 'Fizikai adatok sikeresen frissítve!'
-                        : 'Fizikai adatok sikeresen létrehozva!';
+                    physiqueDataUpdated = true;
+                    this.successMessage = 'Fizikai adatok sikeresen frissítve!';
+                    if (userDataUpdated && physiqueDataUpdated) {
+                        this.successMessage = 'Felhasználói és fizikai adatok sikeresen frissítve!';
+                    }
                     this.fetchUserPhysique();
                 }
             },
             error: () => {
                 this.loading = false;
                 this.errorMessage = 'Hiba történt a fizikai adatok mentése során.';
+                if(userDataUpdated === false && physiqueDataUpdated === false) {
+                    this.errorMessage = 'Hiba történt a felhasználói és fizikai adatok mentése során.';
+                }
             }
         });
     }

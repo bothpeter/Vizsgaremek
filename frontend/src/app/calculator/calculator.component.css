@@ -18,6 +18,13 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: cardPopIn 0.3s ease;
+    opacity: 1;
+}
+
+.bmi-calculator-card h2{
+    margin: 0;
 }
 
 .calorie-calculator-card {
@@ -29,6 +36,24 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: cardPopIn 0.3s ease;
+    opacity: 1;
+}
+
+.calorie-calculator-card h2{
+    margin: 0;
+}
+
+@keyframes cardPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 h2 {
@@ -99,6 +124,7 @@ button {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    font-weight: bold;
     transition: background-color 0.1s ease;
     box-sizing: border-box;
 }
@@ -163,3 +189,111 @@ button:disabled {
     background: linear-gradient(to right, transparent, #FC282C, transparent);
 }
 
+.result {
+    margin-top: 16px;
+    padding: 1.5rem;
+    border-radius: 8px;
+    animation: cardPopIn 0.3s ease;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+@keyframes cardPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.result h3 {
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.result h3::before {
+    content: '✓';
+    color: #FC282C;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.result .bmi-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.result .bmi-category {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.result .category-underweight {
+    background-color: #2C7CB0;
+    color: white;
+}
+
+.result .category-normal {
+    background-color: #28a745;
+    color: white;
+}
+
+.result .category-overweight {
+    background-color: #ffc107;
+    color: black;
+}
+
+.result .category-obese {
+    background-color: #dc3545;
+    color: white;
+}
+
+.result .calorie-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0.5rem 0;
+}
+
+.result .calorie-info {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.result-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-details .detail-item {
+    text-align: center;
+    flex: 1;
+}
+
+.result-details .detail-label {
+    color: #a0a0a0;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.result-details .detail-value {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+}

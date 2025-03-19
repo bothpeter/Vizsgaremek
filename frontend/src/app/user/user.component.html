@@ -21,7 +21,7 @@
             <div class="spinner"></div>
         </div>
 
-        <div *ngIf="userPhysique; else noPhysique">
+        <div class="data-container" *ngIf="userPhysique; else noPhysique">
             <h3>Fizikai Adatok:</h3>
             <div class="info-card">
                 <div class="info-item">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="info-item">
                     <i class="fas fa-utensils"></i>
-                    <p><strong>Napi kalória bevitel:</strong> {{ userPhysique.daily_calorie_intake }} kcal</p>
+                    <p><strong>Napi kalória szükséglet:</strong> {{ userPhysique.daily_calorie_intake }} kcal</p>
                 </div>
             </div>
         </div>

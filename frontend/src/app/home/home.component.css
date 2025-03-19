@@ -62,7 +62,7 @@
     transition: background-color 0.3s ease;
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(252, 40, 44, 0.4);
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .hero .cta-button:hover {

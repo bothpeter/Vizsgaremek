@@ -45,7 +45,21 @@
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: cardPopIn 0.3s ease;
+    opacity: 1;
 }
+
+@keyframes cardPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 
 .card:hover {
     transform: translateY(-5px) scale(1.02);
@@ -75,7 +89,6 @@
     padding: 16px;
     transition: transform 0.3s ease;
 }
-
 
 .card img, .exercise-cover {
     transition: transform 0.3s ease, filter 0.3s ease;
@@ -110,7 +123,7 @@
 }
 
 .card-content p {
-    margin: 4px 0;
+    margin: 0;
     font-size: 1em;
     color: #b0b0b0;
 }
@@ -377,7 +390,7 @@
     border-radius: 50%;
     background-color: #FC282C;
     color: #000;
-    font-size: 2.5em;
+    font-size: 1.5em;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -396,7 +409,7 @@
     font-size: 1rem;
     color: #000;
     background-color: #FC282C;
-    padding: 21px 20px;
+    padding: 20px;
     border-radius: 30px;
     opacity: 0;
     transition: all 0.3s ease;
