@@ -92,6 +92,7 @@
     background-color: #0f0f0f;
     padding: 60px 0;
     text-align: center;
+    margin-bottom: 100px;
 }
 
 .features h3 {
@@ -175,6 +176,7 @@
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
     position: relative;
+
 }
 
 .feature::before {

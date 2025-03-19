@@ -114,15 +114,19 @@
         <div class="food-popup-bottom">
             <div class="nutrition-row">
                 <div class="nutrition-item">
+                    <i class="fas fa-fire"></i>
                     <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-egg"></i>
                     <strong>Fehérje:</strong> {{ selectedFood.protein }} g
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-cheese"></i>
                     <strong>Zsír:</strong> {{ selectedFood.fat }} g
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-bread-slice"></i>
                     <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
                 </div>
             </div>
@@ -177,10 +181,10 @@
         </button>
         <h3 class="workout-popup-title">{{ selectedWorkout.title }}</h3>
         <p class="workout-highlight">{{ selectedWorkout.goodFor }}</p>
-        <p class="workout-highlight">{{ selectedWorkout.description }}</p>
+        <p class="workout-description">{{ selectedWorkout.description }}</p>
 
         <div class="workout-exercises">
-            <h4>Gyakorlatok:</h4>
+            <h4><i class="fas fa-list"></i> Gyakorlatok:</h4>
             <div *ngFor="let exercise of selectedWorkout.exercises" class="workout-exercise-card"
                 (click)="toggleExerciseDetails(exercise)">
                 <div class="workout-exercise-header">{{ exercise.exercise_name }} - {{ exercise.muscle_group }}</div>
@@ -200,16 +204,16 @@
             <i class="fas fa-times"></i>
         </button>
 
-        <div class="diet-popup-top">
-            <div class="diet-popup-left">
-                <h3>{{ selectedDiet.title }}</h3>
+        <div>
+            <div>
+                <h3 class="diet-h3">{{ selectedDiet.title }}</h3>
                 <p class="diet-description">{{ selectedDiet.description }}</p>
-                <p class="diet-description"><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
+                <p class="all-calories"><i class="fas fa-fire"></i><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
             </div>
         </div>
 
         <div class="diet-popup-bottom">
-            <h4>Ételek:</h4>
+            <h4><i class="fas fa-utensils"></i>Ételek:</h4>
             <div class="diet-food-cards">
                 <div class="diet-card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
                     <img [src]="food.img" [alt]="food.name" />

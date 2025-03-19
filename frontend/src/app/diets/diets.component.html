@@ -35,16 +35,16 @@
             <i class="fas fa-times"></i>
         </button>
 
-        <div class="popup-top">
-            <div class="popup-left">
-                <h3>{{ selectedDiet.title }}</h3>
-                <p class="description">{{ selectedDiet.description }}</p>
-                <p class="description"><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
+        <div>
+            <div>
+                <h3 class="diet-h3">{{ selectedDiet.title }}</h3>
+                <p class="diet-description">{{ selectedDiet.description }}</p>
+                <p class="all-calories"><i class="fas fa-fire"></i><strong>Összes Kalória:</strong> {{ selectedDiet.kcal }} kcal</p>
             </div>
         </div>
 
-        <div class="popup-bottom">
-            <h4>Ételek:</h4>
+        <div class="diet-foods">
+            <h4><i class="fas fa-utensils"></i>Ételek:</h4>
             <div class="food-cards">
                 <div class="card" *ngFor="let food of foods" (click)="openFoodPopup(food)">
 
@@ -84,15 +84,19 @@
         <div class="popup-bottom">
             <div class="nutrition-row">
                 <div class="nutrition-item">
+                    <i class="fas fa-fire"></i>
                     <strong>Kalória:</strong> {{ selectedFood.calorie }} kcal
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-egg"></i>
                     <strong>Fehérje:</strong> {{ selectedFood.protein }} g
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-cheese"></i>
                     <strong>Zsír:</strong> {{ selectedFood.fat }} g
                 </div>
                 <div class="nutrition-item">
+                    <i class="fas fa-bread-slice"></i>
                     <strong>Szénhidrát:</strong> {{ selectedFood.carb }} g
                 </div>
             </div>

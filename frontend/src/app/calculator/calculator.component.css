@@ -235,28 +235,27 @@ button:disabled {
     text-align: center;
     font-size: 1.2rem;
     padding: 0.5rem;
-    border-radius: 4px;
-    margin: 0.5rem 0 1rem 0;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: black;
 }
 
 .result .category-underweight {
     background-color: #2C7CB0;
-    color: white;
 }
 
 .result .category-normal {
     background-color: #28a745;
-    color: white;
 }
 
 .result .category-overweight {
     background-color: #ffc107;
-    color: black;
 }
 
 .result .category-obese {
     background-color: #dc3545;
-    color: white;
 }
 
 .result .calorie-value {

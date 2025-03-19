@@ -197,6 +197,61 @@
     margin-top: 15px;
 }
 
+.diet-description{
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1em;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diet-h3{
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.5px;
+    width: 80%;
+}
+
+.diet-foods h4{
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.diet-foods h4 i{
+    color: #FC282C;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+
+.all-calories{
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1em;
+    text-align: center;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.all-calories strong {
+    color: #FC282C;
+}
+
 .popup-right {
     flex: 1;
     display: flex;
@@ -224,7 +279,7 @@
 }
 
 .nutrition-item {
-    background-color: #1e1e1e;
+    background-color: #252525;
     padding: 8px 16px;
     border-radius: 12px;
     color: #fff;
@@ -269,7 +324,7 @@
     padding: 10px 16px;
     border-radius: 12px;
     color: #fff;
-    background-color: #1e1e1e;
+    background-color: #252525;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-left: 2px solid #FC282C;

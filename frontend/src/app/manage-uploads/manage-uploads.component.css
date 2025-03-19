@@ -284,7 +284,7 @@
 }
 
 .nutrition-item {
-    background-color: #1e1e1e;
+    background-color: #252525;
     padding: 8px 16px;
     border-radius: 12px;
     color: #fff;
@@ -324,12 +324,17 @@
     gap: 5px;
 }
 
+.food-popup-bottom .fas {
+    color: #FC282C;
+    margin-right: 5px;
+}
+
 .food-popup-bottom li,
 .food-popup-bottom .recipe {
     padding: 10px 16px;
     border-radius: 12px;
     color: #fff;
-    background-color: #1e1e1e;
+    background-color: #252525;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-left: 2px solid #FC282C;
@@ -458,7 +463,7 @@
 }
 
 .exercise-details-item {
-    background-color: #1e1e1e;
+    background-color: #252525;
     padding: 8px 16px;
     border-radius: 12px;
     color: #fff;
@@ -510,30 +515,54 @@
 }
 
 .workout-popup-title {
-    margin-top: 0;
-    color: #FC282C;
-    font-size: 1.75em;
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.5px;
+    width: 80%;
 }
 
-.workout-highlight {
-    background-color: #2a2a2a;
-    padding: 12px 20px;
-    border-radius: 8px;
+.workout-highlight, .workout-description {
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
     color: #fff;
-    margin: 10px 0;
     font-size: 1.1em;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .workout-exercises {
     margin-top: 20px;
 }
 
+.workout-exercises h4 {
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.workout-exercises h4 i {
+    color: #FC282C;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
 .workout-exercise-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 10px 0;
     padding: 16px 16px;
     border-radius: 8px;
-    background-color: #2e2e2e;
+    background-color: #252525;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
 
@@ -661,16 +690,43 @@
     flex: 1;
 }
 
-.diet-popup-left h3 {
+
+.diet-h3 {
     margin: 0;
-    font-size: 1.75em;
-    color: #FC282C;
+    font-size: 1.8em;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.5px;
+    width: 80%;
 }
 
-.diet-popup-left .diet-description {
-    font-size: 1em;
-    color: #b0b0b0;
-    margin-top: 8px;
+.diet-description{
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1em;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.all-calories{
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1em;
+    text-align: center;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.all-calories strong {
+    color: #FC282C;
 }
 
 .diet-popup-right {
@@ -694,10 +750,18 @@
 
 .diet-popup-bottom h4 {
     margin: 0;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.25em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.diet-popup-bottom h4 i{
     color: #FC282C;
+    margin-right: 10px;
+    font-size: 1.1em;
 }
 
 .diet-popup-bottom ul {

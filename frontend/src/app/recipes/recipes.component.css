@@ -317,7 +317,7 @@
 }
 
 .nutrition-item {
-    background-color: #1e1e1e;
+    background-color: #252525;
     padding: 8px 16px;
     border-radius: 12px;
     color: #fff;
@@ -362,7 +362,7 @@
     padding: 10px 16px;
     border-radius: 12px;
     color: #fff;
-    background-color: #1e1e1e;
+    background-color: #252525;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-left: 2px solid #FC282C;

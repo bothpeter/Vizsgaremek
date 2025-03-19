@@ -37,6 +37,31 @@ export class WorkoutsComponent implements OnInit {
     ngOnInit(): void {
         this.fetchExercises();
         this.fetchWorkouts();
+        this.addEscapeListener();
+    }
+
+    ngOnDestroy(): void {
+        this.removeEscapeListener();
+    }
+
+    addEscapeListener(): void {
+        document.addEventListener('keydown', this.handleEscapeKey.bind(this));
+    }
+
+    removeEscapeListener(): void {
+        document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
+    }
+
+    handleEscapeKey(event: KeyboardEvent): void {
+        if (event.key === 'Escape') {
+            if (this.showPopup) {
+                this.closePopup();
+            } else if (this.showLoginPopup) {
+                this.closeLoginPopup();
+            } else if (this.showAddWorkoutPopup) {
+                this.closeAddWorkoutPopup();
+            }
+        }
     }
 
     fetchExercises(): void {
@@ -153,7 +178,7 @@ export class WorkoutsComponent implements OnInit {
     toggleExerciseDetails(exercise: any): void {
         exercise.isExpanded = !exercise.isExpanded;
     }
-
+    
     addExercise(): void {
         if (this.newWorkout.exercises.length < 5) {
             this.newWorkout.exercises.push({ exercise_id: null });

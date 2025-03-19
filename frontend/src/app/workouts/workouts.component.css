@@ -149,6 +149,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1100;
+    backdrop-filter: blur(5px);
 }
 
 .popup-content {
@@ -165,31 +166,37 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.title {
-    margin-top: 0;
-    color: #FC282C;
-    font-size: 1.75em;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: scale(0.9);
     }
-
+    
     to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
-.highlight {
-    background-color: #2a2a2a;
-    padding: 12px 20px;
-    border-radius: 8px;
+.title {
+    margin: 0;
+    font-size: 1.8em;
     color: #fff;
-    margin: 10px 0;
+    position: relative;
+    letter-spacing: 0.5px;
+    width: 80%;
+}
+
+.highlight, .description {
+    background-color: #252525;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: #fff;
     font-size: 1.1em;
+    flex: 1 1 calc(25% - 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .close-btn {
@@ -229,11 +236,13 @@
 }
 
 .exercise-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 10px 0;
     padding: 16px 16px;
     border-radius: 8px;
-    background-color: #2e2e2e;
+    background-color: #252525;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
 
@@ -264,9 +273,19 @@
 }
 
 h4 {
-    color: #FC282C;
-    font-size: 1.3em;
+    margin: 0;
+    margin-top: 30px;
     margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+h4 i {
+    color: #FC282C;
+    margin-right: 10px;
+    font-size: 1.1em;
 }
 
 .popup-content h2{
@@ -506,7 +525,7 @@ h4 {
 .workout-cover {
     width: 100%;
     height: 140px;
-    background: linear-gradient(45deg, #1e1e1e, #2a2a2a); /* Alap gradient háttér */
+    background: linear-gradient(45deg, #1e1e1e, #2a2a2a);
     display: flex;
     align-items: center;
     justify-content: center;
