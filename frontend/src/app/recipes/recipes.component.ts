@@ -15,6 +15,7 @@ import { LoginPopupComponent } from '../components/login-popup/login-popup.compo
 export class RecipesComponent implements OnInit {
     foods: any[] = [];
     ingredients: any[] = [];
+    uploaderData: any = null;
     selectedFood: any = null;
     selectedType: string = 'all';
     showPopup: boolean = false;
@@ -42,6 +43,17 @@ export class RecipesComponent implements OnInit {
         this.fetchFoods();
         this.fetchLikedFoods();
         this.fetchMeals();
+    }
+
+    fetchUploaderData(): void {
+        this.foodService.getUploaderData().subscribe({
+            next: (data) => {
+                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedFood.user_id);
+                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                console.log('Filtered uploader data:', this.uploaderData);
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
     }
 
     fetchFoods(): void {
@@ -196,6 +208,7 @@ export class RecipesComponent implements OnInit {
 
     openPopup(food: any): void {
         this.selectedFood = food;
+        this.fetchUploaderData();
         this.fetchIngredients(food.food_id);
     }
 

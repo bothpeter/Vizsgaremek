@@ -83,6 +83,7 @@
         opacity: 0;
         transform: scale(0.95) translateY(10px);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -119,11 +120,13 @@
 }
 
 
-.card img, .exercise-cover {
+.card img,
+.exercise-cover {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.card:hover img, .card:hover .exercise-cover {
+.card:hover img,
+.card:hover .exercise-cover {
     transform: scale(1.05);
     filter: brightness(1.1);
 }
@@ -204,21 +207,28 @@
 }
 
 @keyframes HeartAnim {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     15% {
         transform: scale(1.2);
     }
+
     30% {
         transform: scale(0.9);
     }
+
     45% {
         transform: scale(1.1);
     }
+
     60% {
         transform: scale(1.05);
     }
+
     75% {
         transform: scale(1.02);
     }
@@ -431,7 +441,7 @@
     .card {
         width: 100%;
     }
-    
+
     .close-btn {
         width: 50px;
         height: 50px;
@@ -441,14 +451,14 @@
     .sorting-container {
         margin-bottom: 0;
     }
-    
+
     .sorting-dropdown {
         flex: 1 1 100%;
         width: unset;
         justify-content: center;
     }
 
-    .sorting-container{
+    .sorting-container {
         flex-direction: column;
     }
 
@@ -456,7 +466,7 @@
         display: none;
     }
 
-    .popup-content h2{
+    .popup-content h2 {
         width: 80%;
     }
 
@@ -472,7 +482,7 @@
         width: 100% !important;
     }
 
-    .login-popup-content{
+    .login-popup-content {
         width: 80%;
     }
 
@@ -659,8 +669,8 @@ input[type="file"] {
     cursor: not-allowed;
 }
 
-@media (min-width: 768px){
-    .grid-form{
+@media (min-width: 768px) {
+    .grid-form {
         display: grid;
     }
 }
@@ -730,7 +740,7 @@ input[type="file"] {
     font-size: 18px;
 }
 
-.fa-upload{
+.fa-upload {
     margin-right: 10px;
     font-size: 18px;
     color: #FC282C;
@@ -762,7 +772,7 @@ input[type="file"] {
     height: 39px;
 }
 
-input:focus{
+input:focus {
     border-color: #FC282C;
     box-shadow: 0 0 0 3px rgba(252, 40, 44, 0.2)
 }
@@ -832,8 +842,13 @@ input:focus{
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .h1-container h1 {
@@ -859,7 +874,8 @@ input:focus{
 .food-cover {
     width: 100%;
     height: 200px;
-    background: linear-gradient(45deg, #1e1e1e, #2a2a2a); /* Alap gradient háttér */
+    background: linear-gradient(45deg, #1e1e1e, #2a2a2a);
+    /* Alap gradient háttér */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -902,7 +918,7 @@ input:focus{
     color: rgb(17, 15, 15);
 }
 
-.login-popup-content{
+.login-popup-content {
     position: relative;
     background-color: #1e1e1e;
     padding: 24px;
@@ -913,4 +929,41 @@ input:focus{
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-picture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #FC282C;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-right: 10px;
+}
+
+.default-icon .fa-user {
+    color: #1e1e1e !important;
+    margin-right: 0 !important;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.uploader {
+    display: flex;
+    align-items: center;
+}
+
+.uploader-h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }

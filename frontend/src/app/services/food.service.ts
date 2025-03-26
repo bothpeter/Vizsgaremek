@@ -36,6 +36,10 @@ export class FoodService {
         return this.apiService.get(`food_ingredients/${foodId}`);
     }
 
+    getUploaderData(): Observable<any> {
+        return this.apiService.get(`user`);
+    }
+
     addIngredient(payload: any): Observable<any> {
         return this.apiService.post('food_ingredients', payload);
     }
