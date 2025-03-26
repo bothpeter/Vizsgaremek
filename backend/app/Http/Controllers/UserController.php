@@ -14,14 +14,14 @@ class UserController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum', except:['get_user'])
+            new Middleware('auth:sanctum', except: ['get_user'])
         ];
     }
 
     public function get_user()
     {
         $users = User::with('physique')->get();
-    
+
         $data = [
             'status' => 200,
             'users' => $users->map(function ($user) {
@@ -32,10 +32,10 @@ class UserController extends Controller implements HasMiddleware
                 ];
             }),
         ];
-    
+
         return response()->json($data);
     }
-    
+
 
     public function update_user(Request $request)
     {

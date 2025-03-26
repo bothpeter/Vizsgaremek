@@ -21,8 +21,9 @@ class MealsTest extends TestCase
     {
         $user = User::factory()->create();
         $token = $user->createToken('TestToken')->plainTextToken;
+        $date = now()->toDateString();
 
-        $meals = Meals::factory()->create(['user_id' => $user->id]);
+        $meals = Meals::factory()->create(['user_id' => $user->id, 'date' => $date]);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
