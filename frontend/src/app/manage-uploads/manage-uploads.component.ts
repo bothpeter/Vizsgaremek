@@ -52,6 +52,7 @@ export class ManageUploadsComponent implements OnInit {
         const userData = this.authService.getUserData();
         if (userData) {
             this.userId = userData.id || '';
+            console.log('User ID:', this.userId);
         }
         this.fetchFoods();
         this.fetchExercises();

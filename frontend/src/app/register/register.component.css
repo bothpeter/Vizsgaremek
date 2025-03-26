@@ -133,6 +133,14 @@ button[type="submit"]:hover {
     .register-card {
         padding: 25px;
     }
+
+    .footer strong {
+        font-weight: 800;
+    }
+
+    .error-message{
+        font-weight: 800;
+    }
 }
 
 button[type="submit"]:disabled {

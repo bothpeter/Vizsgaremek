@@ -187,4 +187,12 @@ button[type="submit"]:disabled {
     .login-card {
         padding: 25px;
     }
+
+    .footer strong {
+        font-weight: 800;
+    }
+
+    .error-message{
+        font-weight: 800;
+    }
 }

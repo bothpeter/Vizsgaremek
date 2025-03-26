@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
     styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+    userId: string = '';
     userName: string = '';
     userEmail: string = '';
     userPhysique: any = {
@@ -34,6 +35,7 @@ export class SettingsComponent implements OnInit {
     ngOnInit(): void {
         const userData = this.authService.getUserData();
         if (userData) {
+            this.userId = userData.id || '';
             this.userName = userData.name || '';
             this.userEmail = userData.email || '';
         }
@@ -114,10 +116,10 @@ export class SettingsComponent implements OnInit {
 
         const dailyCalorieIntake = this.calculateDailyCalorieIntake();
 
-        this.apiService.put('user', { name: this.userName, email: this.userEmail }).subscribe({
+        this.apiService.put('user', {id: this.userId, name: this.userName, email: this.userEmail }).subscribe({
             next: (res: any) => {
                 if (res.status === 200) {
-                    localStorage.setItem('userData', JSON.stringify({ name: this.userName, email: this.userEmail }));
+                    localStorage.setItem('userData', JSON.stringify({id: this.userId, name: this.userName, email: this.userEmail }));
                     userDataUpdated = true;
                     this.successMessage = 'Felhasználói adatok sikeresen frissítve!';
                 }

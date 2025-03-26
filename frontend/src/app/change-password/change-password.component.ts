@@ -58,7 +58,6 @@ export class ChangePasswordComponent {
             .pipe(finalize(() => this.loading = false))
             .subscribe({
                 next: () => {
-                    alert('A jelszó sikeresen módosítva!');
                     this.router.navigateByUrl('/user');
                 },
                 error: (error) => {
