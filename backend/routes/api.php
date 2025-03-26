@@ -15,6 +15,7 @@ use App\Http\Controllers\WorkoutController;
 
 Route::put('/user',[UserController::class, 'update_user'])->middleware('auth:sanctum');
 Route::delete('/user',[UserController::class, 'delete_user'])->middleware('auth:sanctum');
+Route::get('/user',[UserController::class, 'get_user']);
 
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);

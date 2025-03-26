@@ -72,24 +72,26 @@
         <h2>User</h2>
         <hr>
         <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgotten password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user" class="text">Url to update user endpoint : http://127.0.0.1:8000/api/user</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user" class="text">Url to delete user endpoint : http://127.0.0.1:8000/api/user</a>
-        </div>
-        <hr>
-        <div class="highlighted-div">
-        <h2>Exercise</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
+                <hr>
+                <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
+                    <hr>
+                    <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgotten password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
+                        <hr>
+                        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
+                        <hr>
+                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to update user endpoint : http://127.0.0.1:8000/api/user</a>
+                        <hr>
+                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to delete user endpoint : http://127.0.0.1:8000/api/user</a>
+                        <hr>
+                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to get user name,picture endpoint : http://127.0.0.1:8000/api/user</a>
+                    </div>
+                    <hr>
+                    <div class="highlighted-div">
+                        <h2>Exercise</h2>
+                        <hr>
+                        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
         <hr>
         <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/1</a>
         <hr>
