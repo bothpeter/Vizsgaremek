@@ -16,6 +16,7 @@ import { LoginPopupComponent } from '../components/login-popup/login-popup.compo
 export class WorkoutsComponent implements OnInit {
     workouts: any[] = [];
     exercises: any[] = [];
+    uploaderData: any = null;
     selectedType: string = 'all';
     selectedWorkout: any = null;
     showPopup: boolean = false;
@@ -64,6 +65,17 @@ export class WorkoutsComponent implements OnInit {
         }
     }
 
+    fetchUploaderData(): void {
+        this.workoutService.getUploaderData().subscribe({
+            next: (data) => {
+                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedWorkout.user_id);
+                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                this.showPopup = true;
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
+    }
+
     fetchExercises(): void {
         this.workoutService.getExercises().subscribe({
             next: (data) => {
@@ -75,7 +87,7 @@ export class WorkoutsComponent implements OnInit {
             }
         });
     }
-    
+
     fetchWorkouts(): void {
         this.loading = true;
         this.workoutService.getWorkouts().subscribe({
@@ -96,7 +108,7 @@ export class WorkoutsComponent implements OnInit {
             .map((id) => {
                 const exercise = this.exercises.find((ex) => ex.exercise_id === id);
                 if (exercise) {
-                    exercise.isExpanded = false; // Initialize isExpanded property
+                    exercise.isExpanded = false;
                 }
                 return exercise;
             })
@@ -155,7 +167,7 @@ export class WorkoutsComponent implements OnInit {
             ...workout,
             exercises: this.getWorkoutExercises(workout),
         };
-        this.showPopup = true;
+        this.fetchUploaderData();
     }
 
     closePopup(): void {
@@ -178,7 +190,7 @@ export class WorkoutsComponent implements OnInit {
     toggleExerciseDetails(exercise: any): void {
         exercise.isExpanded = !exercise.isExpanded;
     }
-    
+
     addExercise(): void {
         if (this.newWorkout.exercises.length < 5) {
             this.newWorkout.exercises.push({ exercise_id: null });

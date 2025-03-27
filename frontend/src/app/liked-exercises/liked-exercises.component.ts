@@ -13,6 +13,7 @@ import { forkJoin } from 'rxjs';
 })
 export class LikedExercisesComponent implements OnInit {
     likedExercises: any[] = [];
+    uploaderData: any = null;
     selectedExercise: any = null;
     showPopup: boolean = false;
     errorMessage: string = '';
@@ -22,6 +23,17 @@ export class LikedExercisesComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchLikedExercises();
+    }
+
+    fetchUploaderData(): void {
+        this.exerciseService.getUploaderData().subscribe({
+            next: (data) => {
+                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedExercise.user_id);
+                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                this.showPopup = true;
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
     }
 
     fetchLikedExercises(): void {
@@ -93,7 +105,7 @@ export class LikedExercisesComponent implements OnInit {
 
     openPopup(exercise: any): void {
         this.selectedExercise = exercise;
-        this.showPopup = true;
+        this.fetchUploaderData();
     }
 
     closePopup(): void {

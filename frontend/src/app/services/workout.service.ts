@@ -17,6 +17,10 @@ export class WorkoutService {
         return this.apiService.post('workout_plan', payload);
     }
 
+    getUploaderData(): Observable<any> {
+        return this.apiService.get(`user`);
+    }
+
     getExercises(): Observable<any> {
         return this.apiService.get('exercise');
     }

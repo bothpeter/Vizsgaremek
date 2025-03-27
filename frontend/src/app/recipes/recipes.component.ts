@@ -50,7 +50,6 @@ export class RecipesComponent implements OnInit {
             next: (data) => {
                 const filteredUsers = data.users.filter((user: any) => user.id === this.selectedFood.user_id);
                 this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
-                console.log('Filtered uploader data:', this.uploaderData);
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });

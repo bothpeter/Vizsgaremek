@@ -18,6 +18,7 @@ export class DietsComponent implements OnInit {
     ingredients: any[] = [];
     allFoods: any[] = [];
     foods: any[] = [];
+    uploaderData: any = null;
     selectedDiet: any = null;
     selectedFood: any = null;
     showPopup: boolean = false;
@@ -38,6 +39,17 @@ export class DietsComponent implements OnInit {
     ngOnInit(): void {
         this.fetchDiets();
         this.fetchAllFoods();
+    }
+
+    fetchUploaderData(): void {
+        this.dietService.getUploaderData().subscribe({
+            next: (data) => {
+                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedDiet.user_id);
+                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                this.showPopup = true;
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
     }
 
     fetchDiets(): void {
@@ -134,7 +146,7 @@ export class DietsComponent implements OnInit {
     openPopup(diet: any): void {
         this.selectedDiet = diet;
         this.fetchFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
-        this.showPopup = true;
+        this.fetchUploaderData();
     }
 
     closePopup(): void {

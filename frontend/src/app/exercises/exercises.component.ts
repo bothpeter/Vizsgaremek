@@ -16,6 +16,7 @@ import { LoginPopupComponent } from '../components/login-popup/login-popup.compo
 export class ExercisesComponent implements OnInit {
     exercises: any[] = [];
     selectedExercise: any = null;
+    uploaderData: any = null;
     selectedType: string = 'all';
     selectedMuscleGroup: string = 'all';
     showPopup: boolean = false;
@@ -37,6 +38,17 @@ export class ExercisesComponent implements OnInit {
     ngOnInit(): void {
         this.fetchExercises();
         this.fetchLikedExercises();
+    }
+
+    fetchUploaderData(): void {
+        this.exerciseService.getUploaderData().subscribe({
+            next: (data) => {
+                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedExercise.user_id);
+                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                this.showPopup = true;
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
     }
 
     fetchExercises(): void {
@@ -131,7 +143,7 @@ export class ExercisesComponent implements OnInit {
 
     openPopup(exercise: any): void {
         this.selectedExercise = exercise;
-        this.showPopup = true;
+        this.fetchUploaderData();
     }
 
     closePopup(): void {

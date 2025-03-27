@@ -21,6 +21,10 @@ export class ExerciseService {
         return this.apiService.get('user_like_exercise');
     }
 
+    getUploaderData(): Observable<any> {
+        return this.apiService.get(`user`);
+    }
+
     toggleLike(exerciseId: number, isLiked: boolean): Observable<any> {
         const endpoint = `user_like_exercise/${exerciseId}`;
         return isLiked
