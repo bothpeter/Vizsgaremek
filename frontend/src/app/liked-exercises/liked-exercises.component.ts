@@ -18,19 +18,19 @@ export class LikedExercisesComponent implements OnInit {
     showPopup: boolean = false;
     errorMessage: string = '';
     loading: boolean = false;
+    selectedExerciseUploader: any = null;
 
     constructor(private exerciseService: ExerciseService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchLikedExercises();
     }
 
     fetchUploaderData(): void {
         this.exerciseService.getUploaderData().subscribe({
             next: (data) => {
-                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedExercise.user_id);
-                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
-                this.showPopup = true;
+                this.uploaderData = data.users;
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });
@@ -105,7 +105,12 @@ export class LikedExercisesComponent implements OnInit {
 
     openPopup(exercise: any): void {
         this.selectedExercise = exercise;
-        this.fetchUploaderData();
+        if (this.uploaderData) {
+            this.selectedExerciseUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedExercise.user_id
+            );
+        }
+        this.showPopup = true;
     }
 
     closePopup(): void {

@@ -23,6 +23,7 @@ export class ExercisesComponent implements OnInit {
     showLoginPopup: boolean = false;
     searchQuery = '';
     loading: boolean = false;
+    selectedExerciseUploader: any = null;
 
     showAddExercisePopup: boolean = false;
     newExercise: any = {
@@ -36,6 +37,7 @@ export class ExercisesComponent implements OnInit {
     constructor(private exerciseService: ExerciseService, private authService: AuthService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchExercises();
         this.fetchLikedExercises();
     }
@@ -43,9 +45,7 @@ export class ExercisesComponent implements OnInit {
     fetchUploaderData(): void {
         this.exerciseService.getUploaderData().subscribe({
             next: (data) => {
-                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedExercise.user_id);
-                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
-                this.showPopup = true;
+                this.uploaderData = data.users;
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });
@@ -143,7 +143,12 @@ export class ExercisesComponent implements OnInit {
 
     openPopup(exercise: any): void {
         this.selectedExercise = exercise;
-        this.fetchUploaderData();
+        if (this.uploaderData) {
+            this.selectedExerciseUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedExercise.user_id
+            );
+        }
+        this.showPopup = true;
     }
 
     closePopup(): void {

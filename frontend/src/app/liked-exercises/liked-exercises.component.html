@@ -57,14 +57,12 @@
             </div>
             <div class="uploader">
                 <div class="profile-picture">
-                    <div *ngIf="!uploaderData?.progress_picture" class="default-icon">
+                    <div *ngIf="!selectedExerciseUploader.progress_picture" class="default-icon">
                         <i class="fas fa-user"></i>
                     </div>
-    
-                    <img *ngIf="uploaderData?.progress_picture" [src]="uploaderData.progress_picture"
-                        alt="Profile Picture" />
+                    <img *ngIf="selectedExerciseUploader.progress_picture" [src]="selectedExerciseUploader.progress_picture" alt="Profile Picture" />
                 </div>
-                <h3>Készítette: {{uploaderData.name}}</h3>
+                <h3>Készítette: {{ selectedExerciseUploader.name }}</h3>
             </div>
         </div>
     </div>

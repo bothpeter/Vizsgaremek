@@ -23,6 +23,7 @@ export class WorkoutsComponent implements OnInit {
     showLoginPopup: boolean = false;
     searchQuery = '';
     loading: boolean = false;
+    selectedWorkoutUploader: any = null;
 
     showAddWorkoutPopup: boolean = false;
     newWorkout: any = {
@@ -36,41 +37,15 @@ export class WorkoutsComponent implements OnInit {
     constructor(private workoutService: WorkoutService, private authService: AuthService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchExercises();
         this.fetchWorkouts();
-        this.addEscapeListener();
-    }
-
-    ngOnDestroy(): void {
-        this.removeEscapeListener();
-    }
-
-    addEscapeListener(): void {
-        document.addEventListener('keydown', this.handleEscapeKey.bind(this));
-    }
-
-    removeEscapeListener(): void {
-        document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
-    }
-
-    handleEscapeKey(event: KeyboardEvent): void {
-        if (event.key === 'Escape') {
-            if (this.showPopup) {
-                this.closePopup();
-            } else if (this.showLoginPopup) {
-                this.closeLoginPopup();
-            } else if (this.showAddWorkoutPopup) {
-                this.closeAddWorkoutPopup();
-            }
-        }
     }
 
     fetchUploaderData(): void {
         this.workoutService.getUploaderData().subscribe({
             next: (data) => {
-                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedWorkout.user_id);
-                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
-                this.showPopup = true;
+                this.uploaderData = data.users;
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });
@@ -167,7 +142,14 @@ export class WorkoutsComponent implements OnInit {
             ...workout,
             exercises: this.getWorkoutExercises(workout),
         };
-        this.fetchUploaderData();
+
+        if (this.uploaderData) {
+            this.selectedWorkoutUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedWorkout.user_id
+            );
+        }
+
+        this.showPopup = true;
     }
 
     closePopup(): void {

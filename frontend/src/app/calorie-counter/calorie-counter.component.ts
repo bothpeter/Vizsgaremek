@@ -17,12 +17,14 @@ export class CalorieCounterComponent implements OnInit {
     userPhysique: any = null;
     meals: any[] = [];
     ingredients: any[] = [];
+    uploaderData: any = null;
     totalCaloriesConsumed: number = 0;
     totalProtein: number = 0;
     totalFat: number = 0;
     totalCarbs: number = 0;
     selectedFood: any = null;
     loading: boolean = false;
+    selectedFoodUploader: any = null;
 
     showPopup: boolean = false;
     showPhysiquePopup: boolean = false;
@@ -37,9 +39,19 @@ export class CalorieCounterComponent implements OnInit {
     constructor(private foodService: FoodService, private apiService: ApiService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchUserPhysique();
         this.fetchMeals();
         this.generateConfettiData();
+    }
+
+    fetchUploaderData(): void {
+        this.foodService.getUploaderData().subscribe({
+            next: (data) => {
+                this.uploaderData = data.users;
+            },
+            error: (error) => console.error('Error fetching uploader data:', error),
+        });
     }
 
     fetchUserPhysique(): void {
@@ -156,6 +168,13 @@ export class CalorieCounterComponent implements OnInit {
 
     openPopup(food: any): void {
         this.selectedFood = food;
+        
+        if (this.uploaderData) {
+            this.selectedFoodUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedFood.user_id
+            );
+        }
+
         this.fetchIngredients(food.food_id);
     }
 

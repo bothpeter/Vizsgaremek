@@ -26,6 +26,8 @@ export class DietsComponent implements OnInit {
     showFoodPopup: boolean = false;
     loading: boolean = false;
     searchQuery = '';
+    selectedDietUploader: any = null;
+    selectedFoodUploader: any = null;
 
     showAddDietPopup: boolean = false;
     newDiet: any = {
@@ -37,6 +39,7 @@ export class DietsComponent implements OnInit {
     constructor(private dietService: DietService, private authService: AuthService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchDiets();
         this.fetchAllFoods();
     }
@@ -44,9 +47,7 @@ export class DietsComponent implements OnInit {
     fetchUploaderData(): void {
         this.dietService.getUploaderData().subscribe({
             next: (data) => {
-                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedDiet.user_id);
-                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
-                this.showPopup = true;
+                this.uploaderData = data.users;
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });
@@ -145,8 +146,15 @@ export class DietsComponent implements OnInit {
 
     openPopup(diet: any): void {
         this.selectedDiet = diet;
+        
+        if (this.uploaderData) {
+            this.selectedDietUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedDiet.user_id
+            );
+        }
+        
         this.fetchFoods([diet.food1_id, diet.food2_id, diet.food3_id]);
-        this.fetchUploaderData();
+        this.showPopup = true;
     }
 
     closePopup(): void {
@@ -171,6 +179,13 @@ export class DietsComponent implements OnInit {
 
     openFoodPopup(food: any): void {
         this.selectedFood = food;
+        
+        if (this.uploaderData) {
+            this.selectedFoodUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedFood.user_id
+            );
+        }
+    
         this.fetchIngredients(food.food_id);
     }
 

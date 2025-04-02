@@ -38,7 +38,6 @@
 }
 
 .cards .food-card:hover, .cards .exercise-card:hover, .cards .workout-card:hover, .cards .diet-card:hover {
-    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
     border-color: #FC282C;
 }
@@ -70,11 +69,6 @@
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.cards .food-card:hover img, .cards .exercise-card:hover img, .cards .workout-card:hover img, .cards .diet-card:hover img, .cards .food-card:hover .exercise-cover, .cards .exercise-card:hover .exercise-cover, .cards .workout-card:hover .exercise-cover, .cards .diet-card:hover .exercise-cover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
-
 .cards .food-card .card-content p strong, .cards .exercise-card .card-content p strong, .cards .workout-card .card-content p strong, .cards .diet-card .card-content p strong {
     color: #FC282C;
     transition: color 0.3s ease;
@@ -90,13 +84,7 @@
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.diet-food-cards .diet-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
-    border-color: #FC282C;
-}
+}   
 
 .diet-food-cards .diet-card::after {
     content: '';
@@ -123,11 +111,6 @@
 
 .diet-food-cards .diet-card img, .diet-food-cards .diet-card .exercise-cover {
     transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.diet-food-cards .diet-card:hover img, .diet-food-cards .diet-card:hover .exercise-cover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
 }
 
 .diet-food-cards .diet-card .card-content p strong {
@@ -840,7 +823,7 @@
 }
 
 .diet-cover:hover span {
-    color: rgb(36, 31, 31);
+    color: rgb(17, 15, 15);
 }
 
 .section-title {

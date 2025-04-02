@@ -22,6 +22,7 @@ export class RecipesComponent implements OnInit {
     showLoginPopup: boolean = false;
     searchQuery: string = '';
     loading: boolean = false;
+    selectedFoodUploader: any = null;
 
     showAddFoodPopup: boolean = false;
     newFood: any = {
@@ -40,16 +41,16 @@ export class RecipesComponent implements OnInit {
     constructor(private foodService: FoodService, private authService: AuthService) { }
 
     ngOnInit(): void {
+        this.fetchUploaderData();
         this.fetchFoods();
-        this.fetchLikedFoods();
         this.fetchMeals();
+        this.fetchLikedFoods();
     }
 
     fetchUploaderData(): void {
         this.foodService.getUploaderData().subscribe({
             next: (data) => {
-                const filteredUsers = data.users.filter((user: any) => user.id === this.selectedFood.user_id);
-                this.uploaderData = filteredUsers.length > 0 ? filteredUsers[0] : null;
+                this.uploaderData = data.users;
             },
             error: (error) => console.error('Error fetching uploader data:', error),
         });
@@ -204,10 +205,15 @@ export class RecipesComponent implements OnInit {
             ingredients: [{ ingredient_name: '', amount: '' }],
         };
     }
-
     openPopup(food: any): void {
         this.selectedFood = food;
-        this.fetchUploaderData();
+    
+        if (this.uploaderData) {
+            this.selectedFoodUploader = this.uploaderData.find(
+                (user: any) => user.id === this.selectedFood.user_id
+            );
+        }
+    
         this.fetchIngredients(food.food_id);
     }
 
