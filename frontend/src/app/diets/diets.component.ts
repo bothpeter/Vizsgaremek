@@ -28,6 +28,7 @@ export class DietsComponent implements OnInit {
     searchQuery = '';
     selectedDietUploader: any = null;
     selectedFoodUploader: any = null;
+    selectedFoodIngredients: any[] = [];
 
     showAddDietPopup: boolean = false;
     newDiet: any = {
@@ -40,6 +41,7 @@ export class DietsComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchUploaderData();
+        this.fetchIngredients();
         this.fetchDiets();
         this.fetchAllFoods();
     }
@@ -74,13 +76,14 @@ export class DietsComponent implements OnInit {
         });
     }
 
-    fetchIngredients(foodId: number): void {
-        this.dietService.getIngredients(foodId).subscribe({
+    fetchIngredients(): void {
+        this.dietService.getIngredients().subscribe({
             next: (data) => {
-                this.showFoodPopup = true;
-                this.ingredients = data.ingredients
+                this.ingredients = data.ingredients;
             },
-            error: (error) => console.error('Error fetching ingredients:', error),
+            error: (error) => {
+                console.error('Error fetching ingredients:', error);
+            }
         });
     }
 
@@ -179,20 +182,24 @@ export class DietsComponent implements OnInit {
 
     openFoodPopup(food: any): void {
         this.selectedFood = food;
-        
+    
         if (this.uploaderData) {
             this.selectedFoodUploader = this.uploaderData.find(
                 (user: any) => user.id === this.selectedFood.user_id
             );
         }
+
+        this.selectedFoodIngredients = this.ingredients.filter(
+            (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
+        );
+
     
-        this.fetchIngredients(food.food_id);
+        this.showFoodPopup = true;
     }
 
     closeFoodPopup(): void {
         this.showFoodPopup = false;
         this.selectedFood = null;
-        this.ingredients = [];
     }
 
     addFood(): void {

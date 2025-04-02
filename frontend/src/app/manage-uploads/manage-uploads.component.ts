@@ -19,6 +19,7 @@ export class ManageUploadsComponent implements OnInit {
     exercises: any[] = [];
     workouts: any[] = [];
     diets: any[] = [];
+    selectedFoodIngredients: any[] = [];
 
     allUploads: any[] = [];
 
@@ -53,6 +54,7 @@ export class ManageUploadsComponent implements OnInit {
         if (userData) {
             this.userId = userData.id || '';
         }
+        this.fetchIngredients();
         this.fetchFoods();
         this.fetchExercises();
         this.fetchDiets();
@@ -85,15 +87,15 @@ export class ManageUploadsComponent implements OnInit {
     }
 
     fetchLikedExercises(): void {
-            this.exerciseService.getLikedExercises().subscribe({
-                next: (res: any) => {
-                    this.likedExercises = res.userLikeExercise;
-                },
-                error: (error) => {
-                    console.error('Error fetching liked exercises:', error);
-                },
-            });
-        }
+        this.exerciseService.getLikedExercises().subscribe({
+            next: (res: any) => {
+                this.likedExercises = res.userLikeExercise;
+            },
+            error: (error) => {
+                console.error('Error fetching liked exercises:', error);
+            },
+        });
+    }
 
     fetchFoods(): void {
         this.foodService.getFoods().subscribe({
@@ -110,19 +112,26 @@ export class ManageUploadsComponent implements OnInit {
         });
     }
 
-    fetchIngredients(foodId: number): void {
-        this.foodService.getIngredients(foodId).subscribe({
+    fetchIngredients(): void {
+        this.foodService.getIngredients().subscribe({
             next: (data) => {
-                this.showFoodPopup = true;
                 this.ingredients = data.ingredients;
             },
-            error: (error) => console.error('Error fetching ingredients:', error),
+            error: (error) => {
+                console.error('Error fetching ingredients:', error);
+            }
         });
     }
 
     openFoodPopup(food: any): void {
         this.selectedFood = food;
-        this.fetchIngredients(food.food_id);
+    
+        this.selectedFoodIngredients = this.ingredients.filter(
+            (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
+        );
+
+    
+        this.showFoodPopup = true;
     }
 
     closeFoodPopup(): void {
@@ -249,80 +258,113 @@ export class ManageUploadsComponent implements OnInit {
     }
 
     deleteFood(foodId: number): void {
+        const foodToDelete = this.uploadedFoods.find(food => food.food_id === foodId);
+        const mealToDelete = this.meals.find(meal => meal.food_id === foodId);
+        const likedFoodToDelete = this.likedFoods.find(likedFood => likedFood.food_id === foodId);
+
+        this.uploadedFoods = this.uploadedFoods.filter(food => food.food_id !== foodId);
+        this.allUploads = this.allUploads.filter(item => item.food_id !== foodId);
+        this.meals = this.meals.filter(meal => meal.food_id !== foodId);
+        this.likedFoods = this.likedFoods.filter(likedFood => likedFood.food_id !== foodId);
+
         this.apiService.delete(`food/${foodId}`).subscribe({
-            next: () => {
-                this.apiService.delete(`food_ingredients/${foodId}`).subscribe({
-                    next: () => {
-                        this.uploadedFoods = this.uploadedFoods.filter(food => food.food_id !== foodId);
-                        this.allUploads = this.allUploads.filter(item => item.food_id !== foodId);
-                    },
-                    error: (error) => console.error('Error deleting food ingredients:', error),
-                });
-    
-                if (this.meals.some(meal => meal.food_id === foodId)) {
-                    this.apiService.delete(`meals/${foodId}`).subscribe({
-                        next: () => {
-                            this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
-                        },
-                        error: (error) => {
-                            console.error('Error deleting meal:', error);
-                        },
-                    });
+            error: (error) => {
+                console.error('Error deleting food:', error);
+                if (foodToDelete) {
+                    this.uploadedFoods = [...this.uploadedFoods, foodToDelete];
+                    this.allUploads = [...this.allUploads, foodToDelete];
                 }
-    
-                if (this.likedFoods.some(likedFood => likedFood.food_id === foodId)) {
-                    this.apiService.delete(`user_like_food/${foodId}`).subscribe({
-                        next: () => {
-                            this.likedFoods = this.likedFoods.filter((likedFood) => likedFood.food_id !== foodId);
-                        },
-                        error: (error) => {
-                            console.error('Error deleting liked food:', error);
-                        },
-                    });
-                }
-            },
-            error: (error) => console.error('Error deleting food:', error),
+            }
         });
+
+        this.apiService.delete(`food_ingredients/${foodId}`).subscribe({
+            error: (error) => console.error('Error deleting food ingredients:', error)
+        });
+
+        if (mealToDelete) {
+            this.apiService.delete(`meals/${foodId}`).subscribe({
+                error: (error) => {
+                    console.error('Error deleting meal:', error);
+                    if (mealToDelete) {
+                        this.meals = [...this.meals, mealToDelete];
+                    }
+                }
+            });
+        }
+
+        if (likedFoodToDelete) {
+            this.apiService.delete(`user_like_food/${foodId}`).subscribe({
+                error: (error) => {
+                    console.error('Error deleting liked food:', error);
+                    if (likedFoodToDelete) {
+                        this.likedFoods = [...this.likedFoods, likedFoodToDelete];
+                    }
+                }
+            });
+        }
     }
 
     deleteExercise(exerciseId: number): void {
+        const exerciseToDelete = this.uploadedExercises.find(ex => ex.exercise_id === exerciseId);
+        const likedExerciseToDelete = this.likedExercises.find(ex => ex.exercise_id === exerciseId);
+
+        this.uploadedExercises = this.uploadedExercises.filter(ex => ex.exercise_id !== exerciseId);
+        this.allUploads = this.allUploads.filter(item => item.exercise_id !== exerciseId);
+        this.likedExercises = this.likedExercises.filter(ex => ex.exercise_id !== exerciseId);
+
         this.apiService.delete(`exercise/${exerciseId}`).subscribe({
-            next: () => {
-                this.uploadedExercises = this.uploadedExercises.filter(exercise => exercise.exercise_id !== exerciseId);
-                this.allUploads = this.allUploads.filter(item => item.exercise_id !== exerciseId);
-    
-                if (this.likedExercises.some(likedExercise => likedExercise.exercise_id === exerciseId)) {
-                    this.apiService.delete(`user_like_exercise/${exerciseId}`).subscribe({
-                        next: () => {
-                            this.likedExercises = this.likedExercises.filter((likedExercise) => likedExercise.exercise_id !== exerciseId);
-                        },
-                        error: (error) => {
-                            console.error('Error deleting liked exercise:', error);
-                        }
-                    });
+            error: (error) => {
+                console.error('Error deleting exercise:', error);
+                if (exerciseToDelete) {
+                    this.uploadedExercises = [...this.uploadedExercises, exerciseToDelete];
+                    this.allUploads = [...this.allUploads, exerciseToDelete];
                 }
-            },
-            error: (error) => console.error('Error deleting exercise:', error),
+            }
         });
+
+        if (likedExerciseToDelete) {
+            this.apiService.delete(`user_like_exercise/${exerciseId}`).subscribe({
+                error: (error) => {
+                    console.error('Error deleting liked exercise:', error);
+                    if (likedExerciseToDelete) {
+                        this.likedExercises = [...this.likedExercises, likedExerciseToDelete];
+                    }
+                }
+            });
+        }
     }
 
     deleteWorkout(workoutId: number): void {
+        const workoutToDelete = this.uploadedWorkouts.find(w => w.id === workoutId);
+
+        this.uploadedWorkouts = this.uploadedWorkouts.filter(w => w.id !== workoutId);
+        this.allUploads = this.allUploads.filter(item => item.id !== workoutId);
+
         this.apiService.delete(`workout_plan/${workoutId}`).subscribe({
-            next: () => {
-                this.uploadedWorkouts = this.uploadedWorkouts.filter(workout => workout.id !== workoutId);
-                this.allUploads = this.allUploads.filter(item => item.id !== workoutId);
-            },
-            error: (error) => console.error('Error deleting workout:', error),
+            error: (error) => {
+                console.error('Error deleting workout:', error);
+                if (workoutToDelete) {
+                    this.uploadedWorkouts = [...this.uploadedWorkouts, workoutToDelete];
+                    this.allUploads = [...this.allUploads, workoutToDelete];
+                }
+            }
         });
     }
 
     deleteDiet(dietId: number): void {
+        const dietToDelete = this.uploadedDiets.find(d => d.id === dietId);
+
+        this.uploadedDiets = this.uploadedDiets.filter(d => d.id !== dietId);
+        this.allUploads = this.allUploads.filter(item => item.id !== dietId);
+
         this.apiService.delete(`diet_plan/${dietId}`).subscribe({
-            next: () => {
-                this.uploadedDiets = this.uploadedDiets.filter(diet => diet.id !== dietId);
-                this.allUploads = this.allUploads.filter(item => item.id !== dietId);
-            },
-            error: (error) => console.error('Error deleting diet:', error),
+            error: (error) => {
+                console.error('Error deleting diet:', error);
+                if (dietToDelete) {
+                    this.uploadedDiets = [...this.uploadedDiets, dietToDelete];
+                    this.allUploads = [...this.allUploads, dietToDelete];
+                }
+            }
         });
     }
 }

@@ -88,18 +88,29 @@ export class LikedExercisesComponent implements OnInit {
     }
 
     toggleLike(exercise: any): void {
-        this.exerciseService.toggleLike(exercise.exercise_id, exercise.isLiked).subscribe({
-            next: () => {
-                exercise.isLiked = !exercise.isLiked;
-                if (!exercise.isLiked) {
-                    this.likedExercises = this.likedExercises.filter(
-                        (item) => item.exercise_id !== exercise.exercise_id
-                    );
-                }
-            },
+        const wasLiked = exercise.isLiked;
+        exercise.isLiked = !wasLiked;
+
+        if (wasLiked) {
+            this.likedExercises = this.likedExercises.filter(
+                item => item.exercise_id !== exercise.exercise_id
+            );
+        } else {
+            this.likedExercises = [...this.likedExercises, exercise];
+        }
+
+        this.exerciseService.toggleLike(exercise.exercise_id, wasLiked).subscribe({
             error: (error) => {
                 console.error('Error toggling like:', error);
-            },
+                exercise.isLiked = wasLiked;
+                if (wasLiked) {
+                    this.likedExercises = [...this.likedExercises, exercise];
+                } else {
+                    this.likedExercises = this.likedExercises.filter(
+                        item => item.exercise_id !== exercise.exercise_id
+                    );
+                }
+            }
         });
     }
 

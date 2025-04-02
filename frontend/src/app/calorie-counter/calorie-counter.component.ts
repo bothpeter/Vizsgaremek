@@ -25,6 +25,7 @@ export class CalorieCounterComponent implements OnInit {
     selectedFood: any = null;
     loading: boolean = false;
     selectedFoodUploader: any = null;
+    selectedFoodIngredients: any[] = [];
 
     showPopup: boolean = false;
     showPhysiquePopup: boolean = false;
@@ -40,6 +41,7 @@ export class CalorieCounterComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchUploaderData();
+        this.fetchIngredients();
         this.fetchUserPhysique();
         this.fetchMeals();
         this.generateConfettiData();
@@ -154,11 +156,10 @@ export class CalorieCounterComponent implements OnInit {
         }
     }
 
-    fetchIngredients(foodId: number): void {
-        this.foodService.getIngredients(foodId).subscribe({
-            next: (data: any) => {
+    fetchIngredients(): void {
+        this.foodService.getIngredients().subscribe({
+            next: (data) => {
                 this.ingredients = data.ingredients;
-                this.showPopup = true;
             },
             error: (error) => {
                 console.error('Error fetching ingredients:', error);
@@ -168,20 +169,23 @@ export class CalorieCounterComponent implements OnInit {
 
     openPopup(food: any): void {
         this.selectedFood = food;
-        
+    
         if (this.uploaderData) {
             this.selectedFoodUploader = this.uploaderData.find(
                 (user: any) => user.id === this.selectedFood.user_id
             );
         }
 
-        this.fetchIngredients(food.food_id);
-    }
+        this.selectedFoodIngredients = this.ingredients.filter(
+            (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
+        );
 
+    
+        this.showPopup = true;
+    }
     closePopup(): void {
         this.showPopup = false;
         this.selectedFood = null;
-        this.ingredients = [];
     }
 
     openLoginPopup(): void {
@@ -214,13 +218,17 @@ export class CalorieCounterComponent implements OnInit {
     }
 
     deleteFood(foodId: number): void {
+        const mealToDelete = this.meals.find(meal => meal.food_id === foodId);
+        this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
+        this.calculateTotalNutrition();
+
         this.apiService.delete(`meals/${foodId}`).subscribe({
-            next: () => {
-                this.meals = this.meals.filter((meal) => meal.food_id !== foodId);
-                this.calculateTotalNutrition();
-            },
             error: (error) => {
                 console.error('Error deleting meal:', error);
+                if (mealToDelete) {
+                    this.meals = [...this.meals, mealToDelete];
+                    this.calculateTotalNutrition();
+                }
             },
         });
     }

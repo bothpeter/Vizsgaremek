@@ -87,14 +87,16 @@ export class ExercisesComponent implements OnInit {
             return;
         }
 
-        this.exerciseService
-            .toggleLike(exercise.exercise_id, exercise.isLiked)
-            .subscribe({
-                next: () => (exercise.isLiked = !exercise.isLiked),
-                error: (error) => console.error('Error toggling like:', error),
-            });
-    }
+        const wasLiked = exercise.isLiked;
+        exercise.isLiked = !wasLiked;
 
+        this.exerciseService.toggleLike(exercise.exercise_id, wasLiked).subscribe({
+            error: (error) => {
+                console.error('Error toggling like:', error);
+                exercise.isLiked = wasLiked;
+            }
+        });
+    }
     addExercise(): void {
         if (!this.authService.isAuthenticated()) {
             alert('Kérjük, jelentkezzen be, a gyakorlat hozzáadásához!');
@@ -199,7 +201,7 @@ export class ExercisesComponent implements OnInit {
             return matchesSearch && matchesMuscleGroup && matchesType;
         });
     }
-    
+
     clearSearch() {
         this.searchQuery = '';
     }

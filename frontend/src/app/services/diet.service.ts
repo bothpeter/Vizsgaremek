@@ -25,7 +25,7 @@ export class DietService {
         return this.apiService.get(`user`);
     }
 
-    getIngredients(foodId: number): Observable<any> {
-        return this.apiService.get(`food_ingredients/${foodId}`);
+    getIngredients(): Observable<any> {
+        return this.apiService.get(`food_ingredients`);
     }
 }

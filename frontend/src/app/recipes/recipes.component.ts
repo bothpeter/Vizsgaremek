@@ -23,6 +23,7 @@ export class RecipesComponent implements OnInit {
     searchQuery: string = '';
     loading: boolean = false;
     selectedFoodUploader: any = null;
+    selectedFoodIngredients: any[] = [];
 
     showAddFoodPopup: boolean = false;
     newFood: any = {
@@ -42,6 +43,7 @@ export class RecipesComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchUploaderData();
+        this.fetchIngredients();
         this.fetchFoods();
         this.fetchMeals();
         this.fetchLikedFoods();
@@ -70,10 +72,9 @@ export class RecipesComponent implements OnInit {
         });
     }
 
-    fetchIngredients(foodId: number): void {
-        this.foodService.getIngredients(foodId).subscribe({
+    fetchIngredients(): void {
+        this.foodService.getIngredients().subscribe({
             next: (data) => {
-                this.showPopup = true;
                 this.ingredients = data.ingredients;
             },
             error: (error) => {
@@ -116,10 +117,15 @@ export class RecipesComponent implements OnInit {
             this.openLoginPopup();
             return;
         }
-
-        this.foodService.toggleLike(food.food_id, food.isLiked).subscribe({
-            next: () => (food.isLiked = !food.isLiked),
-            error: (error) => console.error('Error toggling like:', error),
+    
+        const wasLiked = food.isLiked;
+        food.isLiked = !wasLiked;
+    
+        this.foodService.toggleLike(food.food_id, wasLiked).subscribe({
+            error: (error) => {
+                console.error('Error toggling like:', error);
+                food.isLiked = wasLiked;
+            }
         });
     }
 
@@ -128,13 +134,16 @@ export class RecipesComponent implements OnInit {
             this.openLoginPopup();
             return;
         }
-
+    
+        const wasAddedToMeal = food.isAddedToMeal;
+        food.isAddedToMeal = !wasAddedToMeal;
+    
         const date = new Date().toISOString().split('T')[0];
-        this.foodService.toggleMeal(food.food_id, date, food.isAddedToMeal).subscribe({
-            next: () => {
-                food.isAddedToMeal = !food.isAddedToMeal;
-            },
-            error: (error) => console.error('Error toggling meal:', error),
+        this.foodService.toggleMeal(food.food_id, date, wasAddedToMeal).subscribe({
+            error: (error) => {
+                console.error('Error toggling meal:', error);
+                food.isAddedToMeal = wasAddedToMeal;
+            }
         });
     }
 
@@ -213,14 +222,18 @@ export class RecipesComponent implements OnInit {
                 (user: any) => user.id === this.selectedFood.user_id
             );
         }
+
+        this.selectedFoodIngredients = this.ingredients.filter(
+            (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
+        );
+
     
-        this.fetchIngredients(food.food_id);
+        this.showPopup = true;
     }
 
     closePopup(): void {
         this.showPopup = false;
         this.selectedFood = null;
-        this.ingredients = [];
     }
 
     openLoginPopup(): void {

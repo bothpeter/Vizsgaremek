@@ -21,11 +21,13 @@ export class LikedRecipesComponent implements OnInit {
     errorMessage: string = '';
     loading: boolean = false;
     selectedFoodUploader: any = null;
+    selectedFoodIngredients: any[] = [];
 
     constructor(private foodService: FoodService) { }
 
     ngOnInit(): void {
         this.fetchUploaderData();
+        this.fetchIngredients();
         this.fetchLikedFoods();
     }
 
@@ -90,23 +92,31 @@ export class LikedRecipesComponent implements OnInit {
     }
 
     toggleLike(food: any): void {
-        this.foodService.toggleLike(food.food_id, food.isLiked).subscribe({
-            next: () => {
-                food.isLiked = !food.isLiked;
-                if (!food.isLiked) {
-                    this.likedFoods = this.likedFoods.filter((item) => item.food_id !== food.food_id);
-                }
-            },
+        const wasLiked = food.isLiked;
+        food.isLiked = !wasLiked;
+
+        if (wasLiked) {
+            this.likedFoods = this.likedFoods.filter(item => item.food_id !== food.food_id);
+        } else {
+            this.likedFoods = [...this.likedFoods, food];
+        }
+
+        this.foodService.toggleLike(food.food_id, wasLiked).subscribe({
             error: (error) => {
                 console.error('Error toggling like:', error);
+                food.isLiked = wasLiked;
+                if (wasLiked) {
+                    this.likedFoods = [...this.likedFoods, food];
+                } else {
+                    this.likedFoods = this.likedFoods.filter(item => item.food_id !== food.food_id);
+                }
             }
         });
     }
 
-    fetchIngredients(foodId: number): void {
-        this.foodService.getIngredients(foodId).subscribe({
-            next: (data: any) => {
-                this.showPopup = true;
+    fetchIngredients(): void {
+        this.foodService.getIngredients().subscribe({
+            next: (data) => {
                 this.ingredients = data.ingredients;
             },
             error: (error) => {
@@ -115,19 +125,26 @@ export class LikedRecipesComponent implements OnInit {
         });
     }
 
+
     openPopup(food: any): void {
         this.selectedFood = food;
+
         if (this.uploaderData) {
             this.selectedFoodUploader = this.uploaderData.find(
                 (user: any) => user.id === this.selectedFood.user_id
             );
         }
-        this.fetchIngredients(food.food_id);
+
+        this.selectedFoodIngredients = this.ingredients.filter(
+            (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
+        );
+
+
+        this.showPopup = true;
     }
 
     closePopup(): void {
         this.showPopup = false;
         this.selectedFood = null;
-        this.ingredients = [];
     }
 }
