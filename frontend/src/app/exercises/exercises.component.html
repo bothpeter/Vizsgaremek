@@ -74,6 +74,12 @@
                 <p class="description">{{ selectedExercise.description }}</p>
             </div>
 
+            <div class="popup-actions">
+                <div class="like-button" (click)="toggleLike(selectedExercise); $event.stopPropagation()">
+                    <i class="fas fa-heart" [ngClass]="{'liked': selectedExercise.isLiked}"></i>
+                </div>
+            </div>
+
             <div *ngIf="selectedExercise.img" class="popup-right">
                 <img [src]="selectedExercise.img" [alt]="selectedExercise.exercise_name" />
             </div>

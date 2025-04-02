@@ -64,6 +64,16 @@
                 <p class="description">{{ selectedFood.description }}</p>
             </div>
 
+            <div class="popup-actions">
+                <div class="add-meal-button" (click)="toggleMeal(selectedFood); $event.stopPropagation()">
+                    <i class="fas"
+                        [ngClass]="{'fa-cookie-bite': !selectedFood.isAddedToMeal, 'fa-check': selectedFood.isAddedToMeal, 'added': selectedFood.isAddedToMeal}"></i>
+                </div>
+                <div class="like-button" (click)="toggleLike(selectedFood); $event.stopPropagation()">
+                    <i class="fas fa-heart" [ngClass]="{'liked': selectedFood.isLiked}"></i>
+                </div>
+            </div>
+
             <div *ngIf="selectedFood.img" class="popup-right">
                 <img [src]="selectedFood.img" [alt]="selectedFood.name" />
             </div>
