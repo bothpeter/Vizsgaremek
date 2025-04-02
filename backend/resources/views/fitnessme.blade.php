@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,21 +36,24 @@
         }
 
         .highlighted-div {
-            
+
             box-shadow: 0 10px 20px rgb(247, 242, 242), 0 4px 6px rgb(247, 242, 242);
             border-radius: 8px;
             width: 90%;
             max-width: 500px;
             padding: 30px;
-            color: white; /* Laravel primary color */
+            color: white;
+            /* Laravel primary color */
             font-size: 20px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
+
         .text {
             color: white;
         }
+
         .highlighted-div:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(241, 3, 3, 0.2), 0 6px 10px rgba(241, 3, 3, 0.2);
@@ -62,124 +66,128 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="center">
     </div>
-        
+
     <div class="content">
         <div class="highlighted-div">
-        <h2>User</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
+            <h2>User</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/register" class="text">Url for register endpoint : http://127.0.0.1:8000/api/register</a>
             <hr>
             <a href="http://127.0.0.1:8000/api/login" class="text">Url for login endpoint : http://127.0.0.1:8000/api/login</a>
-                <hr>
-                <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
-                    <hr>
-                    <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgotten password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
-                        <hr>
-                        <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
-                        <hr>
-                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to update user endpoint : http://127.0.0.1:8000/api/user</a>
-                        <hr>
-                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to delete user endpoint : http://127.0.0.1:8000/api/user</a>
-                        <hr>
-                        <a href="http://127.0.0.1:8000/api/user" class="text">Url to get user name,picture endpoint : http://127.0.0.1:8000/api/user</a>
-                    </div>
-                    <hr>
-                    <div class="highlighted-div">
-                        <h2>Exercise</h2>
-                        <hr>
-                        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/1</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for add exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/1</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/logout" class="text">Url for logout endpoint : http://127.0.0.1:8000/api/logout</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/forgot_password" class="text">Url to report forgotten password endpoint : http://127.0.0.1:8000/api/forgot_password</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/reset_password" class="text">Url to reset password endpoint : http://127.0.0.1:8000/api/reset_password</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user" class="text">Url to update user endpoint : http://127.0.0.1:8000/api/user</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user" class="text">Url to delete user endpoint : http://127.0.0.1:8000/api/user</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user" class="text">Url to get user name,picture endpoint : http://127.0.0.1:8000/api/user</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>Food</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food" class="text">Url for food endpoint : http://127.0.0.1:8000/api/food</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id : http://127.0.0.1:8000/api/food/1</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food" class="text">Url for add food endpoint : http://127.0.0.1:8000/api/food</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for delete food endpoint by food id : http://127.0.0.1:8000/api/food/1</a>
+            <h2>Exercise</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/1</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/exercise" class="text">Url for add exercise endpoint : http://127.0.0.1:8000/api/exercise</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/exercise/1" class="text">Url for delete exercise by exercise id endpoint : http://127.0.0.1:8000/api/exercise/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>Food ingredients</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for add food ingredients endpoint : http://127.0.0.1:8000/api/food_ingredients</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by food id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
+            <h2>Food</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food" class="text">Url for food endpoint : http://127.0.0.1:8000/api/food</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for food endpoint by id : http://127.0.0.1:8000/api/food/1</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food" class="text">Url for add food endpoint : http://127.0.0.1:8000/api/food</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food/1" class="text">Url for delete food endpoint by food id : http://127.0.0.1:8000/api/food/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>Workout Plan</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint : http://127.0.0.1:8000/api/workout_plan</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for add workout plan endpoint : http://127.0.0.1:8000/api/workout_plan</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts endpoint by workout id : http://127.0.0.1:8000/api/workout_plan/1</a>
+            <h2>Food ingredients</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for food ingredients endpoint : http://127.0.0.1:8000/api/food_ingredients</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for food ingredients by food id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food_ingredients" class="text">Url for add food ingredients endpoint : http://127.0.0.1:8000/api/food_ingredients</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/food_ingredients/1" class="text">Url for delete food ingredients by food id endpoint : http://127.0.0.1:8000/api/food_ingredients/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>Diet Plan</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint : http://127.0.0.1:8000/api/diet_plan</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for add diet plan endpoint : http://127.0.0.1:8000/api/diet_plan</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/diet_plan/1" class="text">Url for delete diets endpoint by diet id : http://127.0.0.1:8000/api/diet_plan/1</a>
+            <h2>Workout Plan</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for workouts endpoint : http://127.0.0.1:8000/api/workout_plan</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/workout_plan" class="text">Url for add workout plan endpoint : http://127.0.0.1:8000/api/workout_plan</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/workout_plan/1" class="text">Url for delete workouts endpoint by workout id : http://127.0.0.1:8000/api/workout_plan/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>User liked foods</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint : http://127.0.0.1:8000/api/user_like_food</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for add liked foods endpoint : http://127.0.0.1:8000/api/user_like_food</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for delete liked foods endpoint by id : http://127.0.0.1:8000/api/user_like_food/1</a>
+            <h2>Diet Plan</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for diets endpoint : http://127.0.0.1:8000/api/diet_plan</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/diet_plan" class="text">Url for add diet plan endpoint : http://127.0.0.1:8000/api/diet_plan</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/diet_plan/1" class="text">Url for delete diets endpoint by diet id : http://127.0.0.1:8000/api/diet_plan/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>User liked exercises</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint : http://127.0.0.1:8000/api/user_like_exercise</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for add liked exercises endpoint : http://127.0.0.1:8000/api/user_like_exercise</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for delete liked exercises endpoint by id : http://127.0.0.1:8000/api/user_like_exercise/1</a>
+            <h2>User liked foods</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for liked foods endpoint : http://127.0.0.1:8000/api/user_like_food</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_food" class="text">Url for add liked foods endpoint : http://127.0.0.1:8000/api/user_like_food</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_food/1" class="text">Url for delete liked foods endpoint by id : http://127.0.0.1:8000/api/user_like_food/1</a>
         </div>
         <hr>
         <div class="highlighted-div">
-        <h2>User physique</h2>
+            <h2>User liked exercises</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for liked exercises endpoint : http://127.0.0.1:8000/api/user_like_exercise</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_exercise" class="text">Url for add liked exercises endpoint : http://127.0.0.1:8000/api/user_like_exercise</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_like_exercise/1" class="text">Url for delete liked exercises endpoint by id : http://127.0.0.1:8000/api/user_like_exercise/1</a>
+        </div>
         <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for add user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for update user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
+        <div class="highlighted-div">
+            <h2>User physique</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for add user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/user_physique" class="text">Url for update user physique endpoint : http://127.0.0.1:8000/api/user_physique</a>
         </div>
         <div class="highlighted-div">
-        <h2>Meals</h2>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for view meals by user token endpoint : http://127.0.0.1:8000/api/meals</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/meals" class="text">Url for post meals endpoint : http://127.0.0.1:8000/api/meals</a>
-        <hr>
-        <a href="http://127.0.0.1:8000/api/meals/1" class="text">Url for delete meals by user food endpoint : http://127.0.0.1:8000/api/meals/1</a>
+            <h2>Meals</h2>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/meals" class="text">Url for view meals by user token endpoint : http://127.0.0.1:8000/api/meals</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/meals" class="text">Url for post meals endpoint : http://127.0.0.1:8000/api/meals</a>
+            <hr>
+            <a href="http://127.0.0.1:8000/api/meals/1" class="text">Url for delete meals by user food endpoint : http://127.0.0.1:8000/api/meals/1</a>
         </div>
     </div>
 </body>
+
 </html>

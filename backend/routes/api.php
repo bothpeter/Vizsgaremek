@@ -34,6 +34,7 @@ Route::get('food/{id}',[FoodController::class, 'view_foods_by_id']);
 Route::post('food',[FoodController::class, 'post_foods']);
 Route::delete('food/{id}',[FoodController::class, 'delete_food']);
 
+Route::get('food_ingredients', [IngredientController::class, 'view_ingredients']);
 Route::get('food_ingredients/{id}',[IngredientController::class, 'view_ingredient_by_food_id']);
 Route::post('food_ingredients',[IngredientController::class, 'post_ingredients']);
 Route::delete('food_ingredients/{id}',[IngredientController::class, 'delete_ingredients_by_food_id']);

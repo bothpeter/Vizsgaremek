@@ -16,6 +16,17 @@ class IngredientController extends Controller implements HasMiddleware
         ];
     }
 
+    public function view_ingredients(){
+        
+        $ingredients = FoodIngredients::all();
+
+        $data = [
+            'status' => 200,
+            'ingredients' => $ingredients
+        ];
+        return response()->json($data, 200);
+    }
+
     public function post_ingredients(Request $request)
     {
         $fields = $request->validate([

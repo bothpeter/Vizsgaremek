@@ -17,6 +17,18 @@ class FoodIngredientsTest extends TestCase
         $this->artisan('migrate');
     }
 
+    public function test_view_ingredients(){
+        FoodIngredients::factory()->create();
+
+        $response = $this->getJson('/api/food_ingredients');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'status' => 200,
+                'ingredients' => true,
+            ]);
+    }
+
     public function test_view_ingredient_by_food_id()
     {
         $ingredient = FoodIngredients::factory()->create();
