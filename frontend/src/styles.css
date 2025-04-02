@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body{
+html,
+body {
     margin: 0;
     padding: 0;
     background-color: #0f0f0f;
@@ -9,8 +10,30 @@ html, body{
     height: 100%;
 }
 
-*{
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    padding-right: 0 !important;
+}
+
+* {
     font-family: Inter, sans-serif;
     outline: none;
+}
+
+.scroll-lock {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+}
+
+html.scroll-lock-fix {
+    margin-right: var(--scrollbar-width);
+}
+
+body.scroll-lock {
+    padding-right: var(--scrollbar-width);
 }
 
