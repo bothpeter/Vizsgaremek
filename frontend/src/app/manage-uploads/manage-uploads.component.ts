@@ -125,19 +125,19 @@ export class ManageUploadsComponent implements OnInit {
 
     openFoodPopup(food: any): void {
         this.selectedFood = food;
+        console.log('Selected food:', this.selectedFood);
     
         this.selectedFoodIngredients = this.ingredients.filter(
             (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
         );
+        console.log('Selected food ingredients:', this.selectedFoodIngredients);
 
-    
         this.showFoodPopup = true;
     }
 
     closeFoodPopup(): void {
         this.showFoodPopup = false;
         this.selectedFood = null;
-        this.ingredients = [];
     }
 
     fetchExercises(): void {
