@@ -10,30 +10,7 @@ body {
     height: 100%;
 }
 
-html {
-    scrollbar-gutter: stable;
-}
-
-body {
-    padding-right: 0 !important;
-}
-
 * {
     font-family: Inter, sans-serif;
     outline: none;
 }
-
-.scroll-lock {
-    overflow: hidden !important;
-    position: fixed;
-    width: 100%;
-}
-
-html.scroll-lock-fix {
-    margin-right: var(--scrollbar-width);
-}
-
-body.scroll-lock {
-    padding-right: var(--scrollbar-width);
-}
-

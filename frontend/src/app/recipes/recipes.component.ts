@@ -4,7 +4,6 @@ import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginPopupComponent } from '../components/login-popup/login-popup.component';
-import { ScrollLockService } from '../services/scroll-lock.service';
 
 @Component({
     selector: 'app-recipes',
@@ -40,7 +39,7 @@ export class RecipesComponent implements OnInit {
         ingredients: [{ ingredient_name: '', amount: '' }],
     };
 
-    constructor(private foodService: FoodService, private authService: AuthService, private scrollLock: ScrollLockService) { }
+    constructor(private foodService: FoodService, private authService: AuthService) { }
 
     ngOnInit(): void {
         this.fetchUploaderData();
@@ -48,10 +47,6 @@ export class RecipesComponent implements OnInit {
         this.fetchFoods();
         this.fetchMeals();
         this.fetchLikedFoods();
-    }
-
-    ngOnDestroy(): void {
-        this.scrollLock.unlockScroll();
     }
 
     fetchUploaderData(): void {
@@ -232,12 +227,10 @@ export class RecipesComponent implements OnInit {
             (ingredient: any) => ingredient.food_id === this.selectedFood.food_id
         );
 
-        this.scrollLock.lockScroll();
         this.showPopup = true;
     }
 
     closePopup(): void {
-        this.scrollLock.unlockScroll();
         this.showPopup = false;
         this.selectedFood = null;
     }
